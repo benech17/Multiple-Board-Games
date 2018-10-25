@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 
 public abstract class Piece {
-    private ArrayList<Cote> cotes;
+    private ArrayList<Side> sides;
 
-    public Piece(ArrayList<Cote> cotes) {
-        this.cotes = cotes;
+    public Piece(ArrayList<Side> sides) {
+        this.sides = sides;
     }
 
-    public ArrayList<Cote> getCotes() {
-        return cotes;
+    public ArrayList<Side> getSides() {
+        return sides;
     }
 
 }
