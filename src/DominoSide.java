@@ -8,4 +8,5 @@ public class DominoSide extends Side {
     public int getValue() {
         return value;
     }
+
 }

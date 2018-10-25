@@ -1,4 +1,4 @@
 public abstract class Board {
-    abstract void toString();
-    abstract void display();
+    public abstract String toString();
+    public abstract void display();
 }

@@ -10,4 +10,14 @@ public class DominoesBoard extends Board {
     public ArrayList<DominoTile> getArray() {
         return array;
     }
+
+    @Override
+    public String toString() {
+        return null;
+    }
+
+    @Override
+    public void display() {
+        return;
+    }
 }
