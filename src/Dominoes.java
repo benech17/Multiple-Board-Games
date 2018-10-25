@@ -1,4 +1,4 @@
-public class Dominoes extends Piece {
+public class Dominoes extends Game {
     private DominoesBoard board;
 
     public Dominoes(DominoesBoard board) {
