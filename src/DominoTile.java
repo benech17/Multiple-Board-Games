@@ -32,15 +32,32 @@ public class DominoTile extends Piece {
         return (DominoSide) getSides().get(1);
     }
 
+    public void invertSides() {
+        DominoSide tmp = getLeftSide();
+        getSides().set(0, getRightSide());
+        getSides().set(1, tmp);
+    }
+
     /**
      * Returns the side matching with a side from the given domino tile
      * @param t
      * @return
      */
-    public DominoSide getMatchingSide(DominoSide side) {
-        for (Side s : getAvailableSides()) {
-            if (s.equals(side))
-                return (DominoSide) s;
+    public DominoSide getMatchingSide(DominoSide side, boolean left) {
+        if (left) {
+            if (getLeftSide().equals(side)) {
+                invertSides();
+                return getRightSide();
+            }
+            if (getRightSide().equals(side))
+                return getRightSide();
+        } else {
+            if (getRightSide().equals(side)) {
+                invertSides();
+                return getLeftSide();
+            }
+            if (getLeftSide().equals(side))
+                return getLeftSide();
         }
         return null;
     }

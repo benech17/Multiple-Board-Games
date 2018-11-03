@@ -61,9 +61,8 @@ public class DominoesBoard extends Board {
             return true;
         }
         DominoSide match;
-        if (left) match = t.getMatchingSide(getLeftEndSide());
-        else match = t.getMatchingSide(getRightEndSide());
-        System.out.println(t.getMatchingSide(getRightEndSide()));
+        if (left) match = t.getMatchingSide(getLeftEndSide(), left);
+        else match = t.getMatchingSide(getRightEndSide(), left);
         if (match != null) {
             if (left) {
                 tiles.add(0, t);
@@ -97,6 +96,8 @@ public class DominoesBoard extends Board {
         System.out.println(board.addDominoTile(d2, false));
         System.out.println(board);
         System.out.println(board.addDominoTile(d3, true));
+        System.out.println(board);
+        System.out.println(board.addDominoTile(new DominoTile(2, 6), true));
         System.out.println(board);
     }
 
