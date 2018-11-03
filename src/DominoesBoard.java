@@ -15,32 +15,64 @@ public class DominoesBoard extends Board {
         return tiles;
     }
 
-    public DominoTile getHead() {
+    public DominoTile getLeftEnd() throws EmptyBoardException {
+        if (tiles.isEmpty())
+            throw new EmptyBoardException();
         return tiles.get(0);
     }
 
-    public DominoTile getTail() {
+
+
+    public DominoTile getRightEnd() throws EmptyBoardException {
+        if (tiles.isEmpty())
+            throw new EmptyBoardException();
         return tiles.get(tiles.size() - 1);
     }
 
-    public boolean addDominoTile(DominoTile t) {
+    /**
+     *
+     * @return the outward-facing value on the left end of the board
+     * @throws EmptyBoardException
+     */
+    public DominoSide getLeftEndSide() throws EmptyBoardException {
+        return  getLeftEnd().getLeftSide();
+    }
+
+    /**
+     *
+     * @return the outward-facing value on the right end of the board
+     * @throws EmptyBoardException
+     */
+    public DominoSide getRightEndSide() throws EmptyBoardException {
+        return getRightEnd().getRightSide();
+    }
+
+    /**
+     * Adds the provided domino tile to the specified end of the board
+     * @param t
+     * @param left
+     * @return true if the domino tile was added, if not, false
+     */
+    public boolean addDominoTile(DominoTile t, boolean left) {
         if (t == null)
             return false;
         if (tiles.size() == 0) {
             tiles.add(t);
             return true;
         }
-        DominoSide match = getHead().getMatchingSide(t);
+        DominoSide match;
+        if (left) match = t.getMatchingSide(getLeftEndSide());
+        else match = t.getMatchingSide(getRightEndSide());
+        System.out.println(t.getMatchingSide(getRightEndSide()));
         if (match != null) {
-            tiles.add(0, t);
-            getHead().removeAvailableSide(match);
-            t.removeAvailableSide(match);
-            return true;
-        }
-        match = getTail().getMatchingSide(t);
-        if (match != null) {
-            tiles.add(t);
-            getTail().removeAvailableSide(match);
+            if (left) {
+                tiles.add(0, t);
+                getLeftEnd().removeAvailableSide(match);
+            }
+            else {
+                tiles.add(t);
+                getRightEnd().removeAvailableSide(match);
+            }
             t.removeAvailableSide(match);
             return true;
         }
@@ -61,10 +93,13 @@ public class DominoesBoard extends Board {
         DominoTile d2 = new DominoTile(2, 4);
         DominoTile d3 = new DominoTile(2, 1);
         DominoesBoard board = new DominoesBoard();
-        System.out.println(board.addDominoTile(d1));
-        System.out.println(board.addDominoTile(d2));
+        System.out.println(board.addDominoTile(d1, true));
+        System.out.println(board.addDominoTile(d2, false));
         System.out.println(board);
-        System.out.println(board.addDominoTile(d3));
+        System.out.println(board.addDominoTile(d3, true));
         System.out.println(board);
+    }
+
+    private class EmptyBoardException extends RuntimeException {
     }
 }

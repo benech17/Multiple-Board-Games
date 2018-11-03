@@ -24,16 +24,23 @@ public class DominoTile extends Piece {
         return (1 <= value1 && value1 <= 6) && (1 <= value2 && value2 <= 6);
     }
 
+    public DominoSide getLeftSide() {
+        return (DominoSide) getSides().get(0);
+    }
+
+    public DominoSide getRightSide() {
+        return (DominoSide) getSides().get(1);
+    }
+
     /**
      * Returns the side matching with a side from the given domino tile
      * @param t
      * @return
      */
-    public DominoSide getMatchingSide(DominoTile t) {
-        for (Side s1 : t.getAvailableSides()) {
-            for (Side s2 : getAvailableSides()) {
-                if (s2.equals(s1)) return (DominoSide) s2;
-            }
+    public DominoSide getMatchingSide(DominoSide side) {
+        for (Side s : getAvailableSides()) {
+            if (s.equals(side))
+                return (DominoSide) s;
         }
         return null;
     }
@@ -49,15 +56,15 @@ public class DominoTile extends Piece {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "[" + getSides().get(0) + "|" + getSides().get(1) + "]";
     }
 
     public static void main(String[] args) {
         DominoTile d1 = new DominoTile(1, 6);
         DominoTile d2 = new DominoTile(6, 4);
-        System.out.println(d1.getMatchingSide(d2)); // Sides match
+        //System.out.println(d1.getMatchingSide(d2)); // Sides match
         DominoTile d3 = new DominoTile(3, 3);
-        System.out.println(d2.getMatchingSide(d3)); // Sides don't match
+        //System.out.println(d2.getMatchingSide(d3)); // Sides don't match
     }
 
 
