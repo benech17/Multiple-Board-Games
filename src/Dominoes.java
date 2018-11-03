@@ -6,11 +6,11 @@ public class Dominoes extends Game {
     }
 
     public void addFirst(DominoTile d) {
-        board.getArray().add(0, d);
+        board.getTiles().add(0, d);
     }
 
     public void addLast(DominoTile d) {
-        board.getArray().add(board.getArray().size() - 1, d);
+        board.getTiles().add(board.getTiles().size() - 1, d);
     }
 
     @Override
