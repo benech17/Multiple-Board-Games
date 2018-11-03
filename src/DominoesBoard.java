@@ -63,6 +63,8 @@ public class DominoesBoard extends Board {
         DominoesBoard board = new DominoesBoard();
         System.out.println(board.addDominoTile(d1));
         System.out.println(board.addDominoTile(d2));
+        System.out.println(board);
         System.out.println(board.addDominoTile(d3));
+        System.out.println(board);
     }
 }
