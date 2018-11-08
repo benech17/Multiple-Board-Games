@@ -21,8 +21,6 @@ public class DominoesBoard extends Board {
         return tiles.get(0);
     }
 
-
-
     public DominoTile getRightEnd() throws EmptyBoardException {
         if (tiles.isEmpty())
             throw new EmptyBoardException();
@@ -56,7 +54,7 @@ public class DominoesBoard extends Board {
     public boolean addDominoTile(DominoTile t, boolean left) {
         if (t == null)
             return false;
-        if (tiles.size() == 0) {
+        if (tiles.isEmpty()) {
             tiles.add(t);
             return true;
         }

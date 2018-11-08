@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="556.0067312421418">DominoSide</node>
+    <node x="117.07041863515087" y="278.136521213155">Side</node>
+    <node x="252.29467990132508" y="1497.381496171407">Board</node>
+    <node x="1315.9656163250272" y="0.0">Test</node>
+    <node x="284.135992385605" y="911.2712226737831">DominoesBoard</node>
+    <node x="350.62295289665536" y="43.55151320803509">Piece</node>
+    <node x="0.0" y="1597.381496171407">Player</node>
+    <node x="792.1489564164631" y="171.84621966475623">DominoTile</node>
+    <node x="475.283072557032" y="1597.381496171407">Deck</node>
+    <node x="854.0915221989522" y="794.0058369333692">Dominoes</node>
+    <node x="608.876153419413" y="1597.381496171407">DominoesDeck</node>
+    <node x="1292.6508476231188" y="1130.3079666299705">Game</node>
+    <node x="193.28307255703206" y="1609.381496171407">DominoesPlayer</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Test" target="DominoTile">
+      <point x="2.791608245430325" y="4.148122877163246" />
+      <point x="2.791608245430325" y="4.148122877163303" />
+    </edge>
+    <edge source="DominoesBoard" target="DominoTile">
+      <point x="-12.287874769267376" y="0.0" />
+      <point x="-12.287874769267432" y="0.0" />
+    </edge>
+    <edge source="DominoTile" target="Side">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="DominoesPlayer" target="Player">
+      <point x="0.0" y="-5.0" />
+      <point x="0.0" y="-5.0" />
+    </edge>
+    <edge source="DominoesBoard" target="DominoSide">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Piece" target="Side">
+      <point x="0.0" y="-6.083709860296608" />
+      <point x="-8.776864858817078" y="0.0" />
+    </edge>
+    <edge source="DominoTile" target="Piece">
+      <point x="-1.8031579735359173" y="4.663541714456301" />
+      <point x="-1.8031579735359315" y="4.663541714456301" />
+    </edge>
+    <edge source="DominoSide" target="Side">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="DominoesDeck" target="Deck">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Dominoes" target="DominoesBoard">
+      <point x="1.6316953322018435" y="4.726263888408141" />
+      <point x="1.6316953322018293" y="4.726263888408141" />
+    </edge>
+    <edge source="DominoTile" target="DominoSide">
+      <point x="1.7786957937063903" y="4.672926414298786" />
+      <point x="1.7786957937063903" y="4.672926414298772" />
+    </edge>
+    <edge source="Dominoes" target="DominoTile">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Dominoes" target="Game">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="DominoesBoard" target="Board">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.4658914728682175" x="349.7003962467129" y="763.4898020951698" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>Project Files</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
