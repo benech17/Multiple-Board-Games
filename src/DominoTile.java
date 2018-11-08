@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class DominoTile extends Piece {
+public class DominoTile extends Tile {
     public DominoTile(int value1, int value2) {
         super(initSides(value1, value2));
     }
@@ -32,7 +32,7 @@ public class DominoTile extends Piece {
         return (DominoSide) getSides().get(1);
     }
 
-    public void invertSides() {
+    public void flip() {
         DominoSide tmp = getLeftSide();
         getSides().set(0, getRightSide());
         getSides().set(1, tmp);
@@ -46,14 +46,14 @@ public class DominoTile extends Piece {
     public DominoSide getMatchingSide(DominoSide side, boolean left) {
         if (left) {
             if (getLeftSide().equals(side)) {
-                invertSides();
+                flip();
                 return getRightSide();
             }
             if (getRightSide().equals(side))
                 return getRightSide();
         } else {
             if (getRightSide().equals(side)) {
-                invertSides();
+                flip();
                 return getLeftSide();
             }
             if (getLeftSide().equals(side))

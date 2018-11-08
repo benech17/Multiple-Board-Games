@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-public abstract class Piece {
+public abstract class Tile {
     private ArrayList<Side> sides;
     private ArrayList<Side> availableSides;
 
-    public Piece(ArrayList<Side> sides) {
+    public Tile(ArrayList<Side> sides) {
         this.sides = sides;
         availableSides = new ArrayList<>();
         for (Side s : sides) {
