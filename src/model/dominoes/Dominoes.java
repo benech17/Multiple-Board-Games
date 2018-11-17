@@ -1,3 +1,7 @@
+package model.dominoes;
+
+import model.core.gameplay.Game;
+
 public class Dominoes extends Game {
     private DominoesBoard board;
 

@@ -1,3 +1,7 @@
+package model.dominoes;
+
+import model.core.card.side.Side;
+
 import java.util.Objects;
 
 public class DominoSide extends Side {

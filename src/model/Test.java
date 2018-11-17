@@ -1,3 +1,7 @@
+package model;
+
+import model.dominoes.DominoTile;
+
 public class Test {
     public static void main(String[] args) {
         DominoTile dominoTile = null;

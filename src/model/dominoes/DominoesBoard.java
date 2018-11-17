@@ -1,3 +1,7 @@
+package model.dominoes;
+
+import model.core.board.Board;
+
 import java.util.ArrayList;
 
 public class DominoesBoard extends Board {
@@ -64,13 +68,13 @@ public class DominoesBoard extends Board {
         if (match != null) {
             if (left) {
                 tiles.add(0, t);
-                getLeftEnd().removeAvailableSide(match);
+                //getLeftEnd().removeAvailableSide(match);
             }
             else {
                 tiles.add(t);
-                getRightEnd().removeAvailableSide(match);
+                //getRightEnd().removeAvailableSide(match);
             }
-            t.removeAvailableSide(match);
+            //t.removeAvailableSide(match);
             return true;
         }
         return false;

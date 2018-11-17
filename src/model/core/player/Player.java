@@ -1,3 +1,5 @@
+package model.core.player;
+
 public abstract class Player {
     private String name;
     private int age;

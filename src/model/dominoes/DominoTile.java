@@ -1,3 +1,8 @@
+package model.dominoes;
+
+import model.core.card.side.Side;
+import model.core.card.tile.Tile;
+
 import java.util.ArrayList;
 
 public class DominoTile extends Tile {
@@ -15,10 +20,9 @@ public class DominoTile extends Tile {
     }
 
     /**
-     * Checks if the digits for each side are valid
-     * @param value1
-     * @param value2
-     * @return
+     * @param value1 the first digit
+     * @param value2 the second digit
+     * @return true iff the digits for each side are valid
      */
     private static boolean validSides(int value1, int value2) {
         return (1 <= value1 && value1 <= 6) && (1 <= value2 && value2 <= 6);
@@ -32,16 +36,18 @@ public class DominoTile extends Tile {
         return (DominoSide) getSides().get(1);
     }
 
+    /**
+     * Exchanges both sides
+     */
     public void flip() {
-        DominoSide tmp = getLeftSide();
-        getSides().set(0, getRightSide());
-        getSides().set(1, tmp);
+        rotate(1);
     }
 
     /**
-     * Returns the side matching with a side from the given domino tile
-     * @param t
-     * @return
+     * @param side the side of a domino tile
+     * @param left specifies the end of the board used to put the
+     *             domino tile
+     * @return the side matching with a side from the given domino tile
      */
     public DominoSide getMatchingSide(DominoSide side, boolean left) {
         if (left) {
@@ -67,9 +73,9 @@ public class DominoTile extends Tile {
      * @param s
      * @return
      */
-    public void removeAvailableSide(Side s) {
+    /*public void removeAvailableSide(Side s) {
         getAvailableSides().remove(s);
-    }
+    }*/
 
     @Override
     public String toString() {
