@@ -11,6 +11,10 @@ public abstract class Board {
     protected HashMap<Coordinate, Stack<Card>> map;
     protected HashMap<Direction, Coordinate> adjacentCoordinates;
 
+    public HashMap<Coordinate, Stack<Card>> getMap() {
+        return map;
+    }
+
     public HashMap<Direction, Coordinate> getAdjacentCoordinates(Coordinate c) {
         adjacentCoordinates = new HashMap<>();
         int column = c.getColumn();

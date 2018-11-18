@@ -20,6 +20,10 @@ public class Coordinate {
         return column;
     }
 
+    public Coordinate add(Coordinate c) {
+        return new Coordinate(row + c.getRow(), column + c.getColumn());
+    }
+
     @Override
     public String toString() {
         return "Coordinate{" +

@@ -9,44 +9,17 @@ import java.util.HashMap;
 import java.util.Stack;
 
 public class DominoesBoard extends Board {
+    private Coordinate leftEnd, rightEnd; // left and right ends of the board
 
-    public DominoesBoard() {
+    public DominoesBoard(DominoTile t) {
         map = new HashMap<>();
+        // We put the first domino tile at the center of the map
+        leftEnd = new Coordinate(0, 0);
+        rightEnd = leftEnd;
+        Stack<Card> s = new Stack<>();
+        s.push(t);
+        map.put(leftEnd, s);
     }
-
-    public HashMap<Coordinate, Stack<Card>> getTiles() {
-        return map;
-    }
-
-    /*public DominoTile getLeftEnd() throws EmptyBoardException {
-        if (map.isEmpty())
-            throw new EmptyBoardException();
-        return map.get(0);
-    }*/
-
-    /*public DominoTile getRightEnd() throws EmptyBoardException {
-        if (map.isEmpty())
-            throw new EmptyBoardException();
-        return map.get(map.size() - 1);
-    }*/
-
-    /**
-     *
-     * @return the outward-facing value on the left end of the board
-     * @throws EmptyBoardException
-     */
-    /*public DominoSide getLeftEndSide() throws EmptyBoardException {
-        return  getLeftEnd().getLeftSide();
-    }*/
-
-    /**
-     *
-     * @return the outward-facing value on the right end of the board
-     * @throws EmptyBoardException
-     */
-    /*public DominoSide getRightEndSide() throws EmptyBoardException {
-        return getRightEnd().getRightSide();
-    }*/
 
     /**
      * Adds the domino tile in the board at the specified position
@@ -57,25 +30,30 @@ public class DominoesBoard extends Board {
     public boolean addDominoTile(DominoTile t, Coordinate c) {
         if (t == null)
             return false;
-        if (map.isEmpty()) {
-            // If the map is empty we put the first domino tile at the center
-            addCardToMap(new Coordinate(0, 0), t);
-            return true;
-        }
         HashMap<Direction, Coordinate> neighbors = getAdjacentCoordinates(c);
         if (neighbors.get(Direction.LEFT) != null) {
             if(t.sidesMatch((DominoTile) getStackCard(neighbors.get(Direction.LEFT)).peek(), Direction.LEFT)) {
                 addCardToMap(c, t);
+                rightEnd = c;
                 return true;
             }
         }
         if (neighbors.get(Direction.RIGHT) != null) {
             if (t.sidesMatch((DominoTile) getStackCard(neighbors.get(Direction.RIGHT)).peek(), Direction.RIGHT)) {
                 addCardToMap(c, t);
+                leftEnd = c;
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean addToLeftEnd(DominoTile t) {
+        return addDominoTile(t, leftEnd.add(new Coordinate(0, -1)));
+    }
+
+    public boolean addToRightEnd(DominoTile t) {
+        return addDominoTile(t, rightEnd.add(new Coordinate(0, 1)));
     }
 
     @Override
@@ -91,20 +69,18 @@ public class DominoesBoard extends Board {
         DominoTile d1 = new DominoTile(1, 6);
         DominoTile d2 = new DominoTile(2, 4);
         DominoTile d3 = new DominoTile(2, 1);
-        DominoesBoard board = new DominoesBoard();
+        DominoesBoard board = new DominoesBoard(d1);
         System.out.println(board);
 
-        System.out.println(board.addDominoTile(d1, new Coordinate(0, 0)));
-        System.out.println(board);
         System.out.println(board.addDominoTile(d2, new Coordinate(0, 1)));
         System.out.println(board);
-        System.out.println(board.addDominoTile(d3, new Coordinate(0, -1)));
+        System.out.println(board.addToLeftEnd(d3));
         System.out.println(board);
-        System.out.println(board.addDominoTile(new DominoTile(2, 6), new Coordinate(0, 1)));
+        System.out.println(board.addToRightEnd(new DominoTile(2, 6)));
+        System.out.println(board.leftEnd);
+        System.out.println(board.rightEnd);
+
         System.out.println(board);
 
-    }
-
-    private class EmptyBoardException extends RuntimeException {
     }
 }
