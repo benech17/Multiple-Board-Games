@@ -7,7 +7,8 @@ import java.util.Objects;
 public class DominoSide extends Side {
     private int value;
 
-    public DominoSide(int value) {
+    public DominoSide(int value, DominoTile parent) {
+        super(parent, null);
         this.value = value;
     }
 
@@ -38,8 +39,4 @@ public class DominoSide extends Side {
         return Objects.hash(value);
     }
 
-    @Override
-    protected DominoSide clone() throws CloneNotSupportedException {
-        return (DominoSide) super.clone();
-    }
 }

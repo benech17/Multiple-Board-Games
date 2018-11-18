@@ -2,36 +2,31 @@ package model.core.card.tile;
 
 import model.core.card.Card;
 import model.core.card.side.Side;
+import model.core.enums.Direction;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+
 
 public abstract class Tile extends Card {
-    private ArrayList<Side> sides;
-    //private ArrayList<Side> availableSides; // do we need that?
+    protected HashMap<Direction, Side> sides = new HashMap<>();
 
-    public Tile(ArrayList<Side> sides) {
-        super("Tile", true); // Domino tile is hidden by default
-        this.sides = sides;
-        /*availableSides = new ArrayList<>();
-        for (Side s : sides) {
-            try {
-                availableSides.add(s.clone());
-            } catch (CloneNotSupportedException e) {}
-        }*/
+    public Tile() {
+        super("Tile", true);
     }
 
-    public ArrayList<Side> getSides() {
+    public HashMap<Direction, Side> getSides() {
         return sides;
     }
 
-    /*public ArrayList<Side> getAvailableSides() {
-        return availableSides;
-    }*/
-
     public void rotate(int distance) {
-        Collections.rotate(sides, distance);
-        //Collections.rotate(availableSides, distance);
+        ArrayList<Side> sideList = new ArrayList<>(sides.values());
+        Collections.rotate(sideList, distance);
+        Iterator<Side> iterator = sideList.iterator();
+        for (Direction d : sides.keySet())
+            sides.put(d, iterator.next());
     }
 
     @Override

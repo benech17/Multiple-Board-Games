@@ -11,10 +11,10 @@ public class DominoesBoard extends Board {
     private Coordinate leftEnd, rightEnd; // left and right ends of the board
 
     public DominoesBoard(DominoTile t) {
-        map = new HashMap<>();
-        // We put the first domino tile at the center of the map
         leftEnd = new Coordinate(0, 0);
         rightEnd = leftEnd;
+        // We put the first domino tile at the center of the map
+        map = new HashMap<>();
         map.put(leftEnd, t);
     }
 

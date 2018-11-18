@@ -1,19 +1,21 @@
 package model.dominoes;
 
 import model.core.enums.Direction;
-import model.core.card.side.Side;
 import model.core.card.tile.Tile;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+
 
 public class DominoTile extends Tile {
     public DominoTile(int leftValue, int rightValue) {
-        super(initSides(leftValue, rightValue));
+        sides = new HashMap<>();
+        sides.put(Direction.LEFT, new DominoSide(leftValue, this));
+        sides.put(Direction.RIGHT, new DominoSide(rightValue, this));
         setName(leftValue, rightValue);
     }
 
     private void setName(int leftValue, int rightValue) {
-        String s = "";
+        String s;
         if (leftValue == rightValue)
             s = "double " + leftValue;
         else
@@ -21,30 +23,12 @@ public class DominoTile extends Tile {
         setName(s);
     }
 
-    private static ArrayList<Side> initSides(int value1, int value2) {
-        if (!validSides(value1, value2))
-            throw new RuntimeException();
-        ArrayList<Side> sides = new ArrayList<>();
-        sides.add(new DominoSide(value1));
-        sides.add(new DominoSide(value2));
-        return sides;
-    }
-
-    /**
-     * @param value1 the first digit
-     * @param value2 the second digit
-     * @return true iff the digits for each side are valid
-     */
-    private static boolean validSides(int value1, int value2) {
-        return (1 <= value1 && value1 <= 6) && (1 <= value2 && value2 <= 6);
-    }
-
     public DominoSide getLeftSide() {
-        return (DominoSide) getSides().get(0);
+        return (DominoSide) sides.get(Direction.LEFT);
     }
 
     public DominoSide getRightSide() {
-        return (DominoSide) getSides().get(1);
+        return (DominoSide) sides.get(Direction.RIGHT);
     }
 
     /**
@@ -85,18 +69,13 @@ public class DominoTile extends Tile {
         return false;
     }
 
-    /**
-     * Removes a side from the list of available sides
-     * @param s
-     * @return
-     */
     /*public void removeAvailableSide(Side s) {
         getAvailableSides().remove(s);
     }*/
 
     @Override
     public String toString() {
-        return "[" + getSides().get(0) + "|" + getSides().get(1) + "]";
+        return "[" + getSides().get(Direction.LEFT) + "|" + getSides().get(Direction.RIGHT) + "]";
     }
 
     public static void main(String[] args) {
@@ -104,6 +83,7 @@ public class DominoTile extends Tile {
         DominoTile d2 = new DominoTile(6, 4);
         //System.out.println(d1.getMatchingSide(d2)); // Sides match
         DominoTile d3 = new DominoTile(3, 3);
+        System.out.println(d1);
         //System.out.println(d2.getMatchingSide(d3)); // Sides don't match
     }
 

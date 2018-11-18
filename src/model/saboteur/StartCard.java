@@ -6,7 +6,11 @@ import model.core.enums.Direction;
 
 import java.util.HashMap;
 
-public abstract class SaboteurTile extends Tile {
-    public SaboteurTile() {
+public class StartCard extends SaboteurTile {
+
+    public StartCard() {
+        super();
+        setName("Start Card");
+        setHidden(false);
     }
 }
