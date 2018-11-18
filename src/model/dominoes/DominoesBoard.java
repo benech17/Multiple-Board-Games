@@ -1,81 +1,79 @@
 package model.dominoes;
 
 import model.core.board.Board;
+import model.core.board.Coordinate;
+import model.core.enums.Direction;
+import model.core.card.Card;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Stack;
 
 public class DominoesBoard extends Board {
-    private ArrayList<DominoTile> tiles;
-
-    public DominoesBoard(ArrayList<DominoTile> tiles) {
-        this.tiles = tiles;
-    }
 
     public DominoesBoard() {
-        this(new ArrayList<>());
+        map = new HashMap<>();
     }
 
-    public ArrayList<DominoTile> getTiles() {
-        return tiles;
+    public HashMap<Coordinate, Stack<Card>> getTiles() {
+        return map;
     }
 
-    public DominoTile getLeftEnd() throws EmptyBoardException {
-        if (tiles.isEmpty())
+    /*public DominoTile getLeftEnd() throws EmptyBoardException {
+        if (map.isEmpty())
             throw new EmptyBoardException();
-        return tiles.get(0);
-    }
+        return map.get(0);
+    }*/
 
-    public DominoTile getRightEnd() throws EmptyBoardException {
-        if (tiles.isEmpty())
+    /*public DominoTile getRightEnd() throws EmptyBoardException {
+        if (map.isEmpty())
             throw new EmptyBoardException();
-        return tiles.get(tiles.size() - 1);
-    }
+        return map.get(map.size() - 1);
+    }*/
 
     /**
      *
      * @return the outward-facing value on the left end of the board
      * @throws EmptyBoardException
      */
-    public DominoSide getLeftEndSide() throws EmptyBoardException {
+    /*public DominoSide getLeftEndSide() throws EmptyBoardException {
         return  getLeftEnd().getLeftSide();
-    }
+    }*/
 
     /**
      *
      * @return the outward-facing value on the right end of the board
      * @throws EmptyBoardException
      */
-    public DominoSide getRightEndSide() throws EmptyBoardException {
+    /*public DominoSide getRightEndSide() throws EmptyBoardException {
         return getRightEnd().getRightSide();
-    }
+    }*/
 
     /**
-     * Adds the provided domino tile to the specified end of the board
-     * @param t
-     * @param left
-     * @return true if the domino tile was added, if not, false
+     * Adds the domino tile in the board at the specified position
+     * @param t the domino tile to put in the board
+     * @param c the coordinate of the specified position
+     * @return
      */
-    public boolean addDominoTile(DominoTile t, boolean left) {
+    public boolean addDominoTile(DominoTile t, Coordinate c) {
         if (t == null)
             return false;
-        if (tiles.isEmpty()) {
-            tiles.add(t);
+        if (map.isEmpty()) {
+            // If the map is empty we put the first domino tile at the center
+            addCardToMap(new Coordinate(0, 0), t);
             return true;
         }
-        DominoSide match;
-        if (left) match = t.getMatchingSide(getLeftEndSide(), left);
-        else match = t.getMatchingSide(getRightEndSide(), left);
-        if (match != null) {
-            if (left) {
-                tiles.add(0, t);
-                //getLeftEnd().removeAvailableSide(match);
+        HashMap<Direction, Coordinate> neighbors = getAdjacentCoordinates(c);
+        if (neighbors.get(Direction.LEFT) != null) {
+            if(t.sidesMatch((DominoTile) getStackCard(neighbors.get(Direction.LEFT)).peek(), Direction.LEFT)) {
+                addCardToMap(c, t);
+                return true;
             }
-            else {
-                tiles.add(t);
-                //getRightEnd().removeAvailableSide(match);
+        }
+        if (neighbors.get(Direction.RIGHT) != null) {
+            if (t.sidesMatch((DominoTile) getStackCard(neighbors.get(Direction.RIGHT)).peek(), Direction.RIGHT)) {
+                addCardToMap(c, t);
+                return true;
             }
-            //t.removeAvailableSide(match);
-            return true;
         }
         return false;
     }
@@ -83,8 +81,8 @@ public class DominoesBoard extends Board {
     @Override
     public String toString() {
         String s = "";
-        for (DominoTile t : tiles) {
-            s += t.toString();
+        for (Stack<Card> cards : map.values()) {
+            s += cards.peek();
         }
         return s;
     }
@@ -94,13 +92,17 @@ public class DominoesBoard extends Board {
         DominoTile d2 = new DominoTile(2, 4);
         DominoTile d3 = new DominoTile(2, 1);
         DominoesBoard board = new DominoesBoard();
-        System.out.println(board.addDominoTile(d1, true));
-        System.out.println(board.addDominoTile(d2, false));
         System.out.println(board);
-        System.out.println(board.addDominoTile(d3, true));
+
+        System.out.println(board.addDominoTile(d1, new Coordinate(0, 0)));
         System.out.println(board);
-        System.out.println(board.addDominoTile(new DominoTile(2, 6), true));
+        System.out.println(board.addDominoTile(d2, new Coordinate(0, 1)));
         System.out.println(board);
+        System.out.println(board.addDominoTile(d3, new Coordinate(0, -1)));
+        System.out.println(board);
+        System.out.println(board.addDominoTile(new DominoTile(2, 6), new Coordinate(0, 1)));
+        System.out.println(board);
+
     }
 
     private class EmptyBoardException extends RuntimeException {

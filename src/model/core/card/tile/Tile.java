@@ -1,15 +1,17 @@
 package model.core.card.tile;
 
+import model.core.card.Card;
 import model.core.card.side.Side;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public abstract class Tile {
+public abstract class Tile extends Card {
     private ArrayList<Side> sides;
     //private ArrayList<Side> availableSides; // do we need that?
 
     public Tile(ArrayList<Side> sides) {
+        super("DominoTile", true); // Domino tile is hidden by default
         this.sides = sides;
         /*availableSides = new ArrayList<>();
         for (Side s : sides) {

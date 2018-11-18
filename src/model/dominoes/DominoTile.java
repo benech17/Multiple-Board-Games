@@ -1,5 +1,6 @@
 package model.dominoes;
 
+import model.core.enums.Direction;
 import model.core.card.side.Side;
 import model.core.card.tile.Tile;
 
@@ -44,28 +45,34 @@ public class DominoTile extends Tile {
     }
 
     /**
-     * @param side the side of a domino tile
-     * @param left specifies the end of the board used to put the
-     *             domino tile
-     * @return the side matching with a side from the given domino tile
+     * Returns true if the current instance of DominoTile and the domino
+     * tile t have a side in common. Flips the current instance if necessary
+     * according to the direction d.
+     * @param t a domino tile adjacent to the current domino tile
+     * @param d the position of the domino tile t with respect to the current
+     *          domino tile
+     * @return true if the current domino tile and the domino tile t share the
+     * same side
      */
-    public DominoSide getMatchingSide(DominoSide side, boolean left) {
-        if (left) {
-            if (getLeftSide().equals(side)) {
+    public boolean sidesMatch(DominoTile t, Direction d) {
+        if (t == null) return false;
+        if (d.equals(Direction.LEFT)) {
+            if (getLeftSide().equals(t.getRightSide()))
+                return true;
+            if (getRightSide().equals(t.getRightSide())) {
                 flip();
-                return getRightSide();
+                return true;
             }
-            if (getRightSide().equals(side))
-                return getRightSide();
-        } else {
-            if (getRightSide().equals(side)) {
-                flip();
-                return getLeftSide();
-            }
-            if (getLeftSide().equals(side))
-                return getLeftSide();
         }
-        return null;
+        if (d.equals(Direction.RIGHT)) {
+            if (getRightSide().equals(t.getLeftSide()))
+                return true;
+            if (getLeftSide().equals(t.getRightSide())) {
+                flip();
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
