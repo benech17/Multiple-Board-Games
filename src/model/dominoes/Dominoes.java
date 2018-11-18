@@ -1,6 +1,6 @@
 package model.dominoes;
 
-import model.core.gamemanager.GameManager;
+import controller.GameManager;
 
 public class Dominoes extends GameManager {
     private DominoesBoard board;

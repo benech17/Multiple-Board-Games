@@ -1,4 +1,4 @@
-package model.core.gamemanager;
+package controller;
 
 public abstract class GameManager {
 
