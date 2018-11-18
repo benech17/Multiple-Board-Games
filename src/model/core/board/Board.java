@@ -18,14 +18,10 @@ public abstract class Board {
         adjacentCoordinates = new HashMap<>();
         int column = c.getColumn();
         int row = c.getRow();
-        for (Direction d : Direction.values()) {
-            adjacentCoordinates.put(d, null);
-        }
         Coordinate top = new Coordinate(row + 1, column);
         Coordinate bottom = new Coordinate(row - 1, column);
         Coordinate left = new Coordinate(row, column - 1);
         Coordinate right = new Coordinate(row, column + 1);
-        // TODO simplify that code
         if (coordinateExists(top))
             adjacentCoordinates.put(Direction.TOP, top);
         if (coordinateExists(bottom))
