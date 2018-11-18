@@ -1,6 +1,6 @@
 package model.dominoes;
 
-import model.core.card.side.Side;
+import model.core.card.tile.Side;
 
 import java.util.Objects;
 

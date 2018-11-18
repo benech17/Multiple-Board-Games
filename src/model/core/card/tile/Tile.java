@@ -1,7 +1,6 @@
 package model.core.card.tile;
 
 import model.core.card.Card;
-import model.core.card.side.Side;
 import model.core.enums.Direction;
 
 import java.util.ArrayList;

@@ -1,8 +1,6 @@
-package model.core.card.side;
+package model.core.card.tile;
 
-import model.core.card.tile.Tile;
-
-public abstract class Side implements Cloneable {
+public abstract class Side {
     private Tile parent;
     private Side nextSide;
 
@@ -25,10 +23,5 @@ public abstract class Side implements Cloneable {
 
     public void setNextSide(Side nextSide) {
         this.nextSide = nextSide;
-    }
-
-    @Override
-    protected Side clone() throws CloneNotSupportedException {
-        return (Side) super.clone();
     }
 }

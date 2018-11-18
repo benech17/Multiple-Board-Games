@@ -1,16 +1,16 @@
 package model.core.board;
 
-import model.core.card.Card;
+import model.core.card.tile.Tile;
 import model.core.enums.Direction;
 
 import java.util.HashMap;
 
 public abstract class Board {
 
-    protected HashMap<Coordinate, Card> map;
+    protected HashMap<Coordinate, Tile> map;
     protected HashMap<Direction, Coordinate> adjacentCoordinates;
 
-    public HashMap<Coordinate, Card> getMap() {
+    public HashMap<Coordinate, Tile> getMap() {
         return map;
     }
 
@@ -42,15 +42,26 @@ public abstract class Board {
      * @param c coordinate in the map
      * @return the card at the coordinate c
      */
-    protected Card getCard(Coordinate c) throws NoSuchCoordinateException {
-        Card s = map.get(c);
-        if (s == null)
+    protected Tile getTileAt(Coordinate c) throws NoSuchCoordinateException {
+        Tile t = map.get(c);
+        if (t == null)
             throw new NoSuchCoordinateException();
-        return s;
+        return t;
     }
 
-    protected void addCardToMap(Coordinate c, Card card) {
-        map.put(c, card);
+    protected void addTileToMap(Coordinate c, Tile tile) {
+        /*adjacentCoordinates = getAdjacentCoordinates(c);
+        Coordinate neighbor;
+        for (Direction d : adjacentCoordinates.keySet()) {
+            neighbor = adjacentCoordinates.get(d);
+            if (coordinateExists(neighbor)) {
+                // Connects the tile with a surrounding tile
+                // Add a method connect(Tile t) in class Tile ?
+                getTileAt(neighbor).getSides()
+                tile.getSides().get(d).setNextSide();
+            }
+        }*/
+        map.put(c, tile);
     }
 
     public abstract String toString();

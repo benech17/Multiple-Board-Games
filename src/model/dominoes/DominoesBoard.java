@@ -29,15 +29,17 @@ public class DominoesBoard extends Board {
             return false;
         HashMap<Direction, Coordinate> neighbors = getAdjacentCoordinates(c);
         if (neighbors.get(Direction.LEFT) != null) {
-            if(t.sidesMatch((DominoTile) getCard(neighbors.get(Direction.LEFT)), Direction.LEFT)) {
-                addCardToMap(c, t);
+            if(t.sidesMatch((DominoTile) getTileAt(neighbors.get(Direction.LEFT)), Direction.LEFT)) {
+                // Connects the side of the domino tile t with the domino tile to its left
+                t.getLeftSide().setNextSide(((DominoTile) getTileAt(neighbors.get(Direction.LEFT))).getRightSide());
+                addTileToMap(c, t);
                 rightEnd = c;
                 return true;
             }
         }
         if (neighbors.get(Direction.RIGHT) != null) {
-            if (t.sidesMatch((DominoTile) getCard(neighbors.get(Direction.RIGHT)), Direction.RIGHT)) {
-                addCardToMap(c, t);
+            if (t.sidesMatch((DominoTile) getTileAt(neighbors.get(Direction.RIGHT)), Direction.RIGHT)) {
+                addTileToMap(c, t);
                 leftEnd = c;
                 return true;
             }

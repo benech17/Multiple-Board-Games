@@ -11,15 +11,19 @@ public class DominoTile extends Tile {
         sides = new HashMap<>();
         sides.put(Direction.LEFT, new DominoSide(leftValue, this));
         sides.put(Direction.RIGHT, new DominoSide(rightValue, this));
-        setName(leftValue, rightValue);
+        setName();
     }
 
-    private void setName(int leftValue, int rightValue) {
+    public boolean isDouble() {
+        return getLeftSide().getValue() == getRightSide().getValue();
+    }
+
+    private void setName() {
         String s;
-        if (leftValue == rightValue)
-            s = "double " + leftValue;
+        if (isDouble())
+            s = "double " + getLeftSide().getValue();
         else
-            s = leftValue + "-" + rightValue;
+            s = getLeftSide().getValue() + "-" + getRightSide().getValue();
         setName(s);
     }
 

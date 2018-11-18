@@ -1,6 +1,6 @@
 package model.saboteur;
 
-import model.core.card.side.Side;
+import model.core.card.tile.Side;
 
 public class SaboteurSide extends Side {
     // True if the side is connected with the other sides of the parent tile
