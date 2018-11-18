@@ -7,8 +7,18 @@ import model.core.card.tile.Tile;
 import java.util.ArrayList;
 
 public class DominoTile extends Tile {
-    public DominoTile(int value1, int value2) {
-        super(initSides(value1, value2));
+    public DominoTile(int leftValue, int rightValue) {
+        super(initSides(leftValue, rightValue));
+        setName(leftValue, rightValue);
+    }
+
+    private void setName(int leftValue, int rightValue) {
+        String s = "";
+        if (leftValue == rightValue)
+            s = "double " + leftValue;
+        else
+            s = leftValue + "-" + rightValue;
+        setName(s);
     }
 
     private static ArrayList<Side> initSides(int value1, int value2) {

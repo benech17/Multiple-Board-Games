@@ -6,7 +6,6 @@ import model.core.enums.Direction;
 import model.core.card.Card;
 
 import java.util.HashMap;
-import java.util.Stack;
 
 public class DominoesBoard extends Board {
     private Coordinate leftEnd, rightEnd; // left and right ends of the board
@@ -16,9 +15,7 @@ public class DominoesBoard extends Board {
         // We put the first domino tile at the center of the map
         leftEnd = new Coordinate(0, 0);
         rightEnd = leftEnd;
-        Stack<Card> s = new Stack<>();
-        s.push(t);
-        map.put(leftEnd, s);
+        map.put(leftEnd, t);
     }
 
     /**
@@ -32,14 +29,14 @@ public class DominoesBoard extends Board {
             return false;
         HashMap<Direction, Coordinate> neighbors = getAdjacentCoordinates(c);
         if (neighbors.get(Direction.LEFT) != null) {
-            if(t.sidesMatch((DominoTile) getStackCard(neighbors.get(Direction.LEFT)).peek(), Direction.LEFT)) {
+            if(t.sidesMatch((DominoTile) getCard(neighbors.get(Direction.LEFT)), Direction.LEFT)) {
                 addCardToMap(c, t);
                 rightEnd = c;
                 return true;
             }
         }
         if (neighbors.get(Direction.RIGHT) != null) {
-            if (t.sidesMatch((DominoTile) getStackCard(neighbors.get(Direction.RIGHT)).peek(), Direction.RIGHT)) {
+            if (t.sidesMatch((DominoTile) getCard(neighbors.get(Direction.RIGHT)), Direction.RIGHT)) {
                 addCardToMap(c, t);
                 leftEnd = c;
                 return true;
@@ -59,8 +56,8 @@ public class DominoesBoard extends Board {
     @Override
     public String toString() {
         String s = "";
-        for (Stack<Card> cards : map.values()) {
-            s += cards.peek();
+        for (Card c : map.values()) {
+            s += c;
         }
         return s;
     }

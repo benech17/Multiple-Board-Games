@@ -11,7 +11,7 @@ public abstract class Tile extends Card {
     //private ArrayList<Side> availableSides; // do we need that?
 
     public Tile(ArrayList<Side> sides) {
-        super("DominoTile", true); // Domino tile is hidden by default
+        super("Tile", true); // Domino tile is hidden by default
         this.sides = sides;
         /*availableSides = new ArrayList<>();
         for (Side s : sides) {

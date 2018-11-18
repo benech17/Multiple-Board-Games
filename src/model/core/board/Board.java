@@ -4,14 +4,13 @@ import model.core.card.Card;
 import model.core.enums.Direction;
 
 import java.util.HashMap;
-import java.util.Stack;
 
 public abstract class Board {
 
-    protected HashMap<Coordinate, Stack<Card>> map;
+    protected HashMap<Coordinate, Card> map;
     protected HashMap<Direction, Coordinate> adjacentCoordinates;
 
-    public HashMap<Coordinate, Stack<Card>> getMap() {
+    public HashMap<Coordinate, Card> getMap() {
         return map;
     }
 
@@ -43,29 +42,19 @@ public abstract class Board {
     }
 
     /**
-     * Get the stack of cards at the given position
+     * Get the card at the given position
      * @param c coordinate in the map
-     * @return the stack of card at the coordinate c
+     * @return the card at the coordinate c
      */
-    protected Stack<Card> getStackCard(Coordinate c) throws NoSuchCoordinateException {
-        Stack<Card> s = map.get(c);
+    protected Card getCard(Coordinate c) throws NoSuchCoordinateException {
+        Card s = map.get(c);
         if (s == null)
             throw new NoSuchCoordinateException();
         return s;
     }
 
     protected void addCardToMap(Coordinate c, Card card) {
-        Stack<Card> s;
-        try {
-            s = getStackCard(c);
-        } catch (NoSuchCoordinateException e) {
-            // In the situation where the coordinate doesn't exist yet
-            s = new Stack<>();
-            s.push(card);
-            map.put(c, s);
-            return;
-        }
-        s.push(card);
+        map.put(c, card);
     }
 
     public abstract String toString();
