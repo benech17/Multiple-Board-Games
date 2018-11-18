@@ -2,11 +2,9 @@ package model.saboteur;
 
 import model.core.board.Board;
 import model.core.board.Coordinate;
-import model.core.card.Card;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 
 public class SaboteurBoard extends Board {
     // Number of cards between the start card and goal card
