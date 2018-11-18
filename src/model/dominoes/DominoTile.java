@@ -67,7 +67,7 @@ public class DominoTile extends Tile {
         if (d.equals(Direction.RIGHT)) {
             if (getRightSide().equals(t.getLeftSide()))
                 return true;
-            if (getLeftSide().equals(t.getRightSide())) {
+            if (getLeftSide().equals(t.getLeftSide())) {
                 flip();
                 return true;
             }
