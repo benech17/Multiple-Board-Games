@@ -1,8 +1,8 @@
 package model.dominoes;
 
-import model.core.gameplay.Game;
+import model.core.gamemanager.GameManager;
 
-public class Dominoes extends Game {
+public class Dominoes extends GameManager {
     private DominoesBoard board;
 
     public Dominoes(DominoesBoard board) {
