@@ -34,7 +34,7 @@ public abstract class SaboteurTile extends Tile {
                 //System.out.println(t);
                 System.out.println(t.getClass());
 
-                if (t.getName().equals("Treasure Card"))
+                if (t instanceof TreasureCard)
                     return true;
 
                 if (visitedTiles.contains(t))
