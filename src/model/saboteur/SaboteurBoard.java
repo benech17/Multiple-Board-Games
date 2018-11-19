@@ -11,13 +11,17 @@ import java.util.HashMap;
 public class SaboteurBoard extends Board {
     // Number of cards between the start card and goal card
     protected final int DISTANCE = 7;
+    private StartCard startCard;
 
     public SaboteurBoard() {
         map = new HashMap<>();
-        StartCard startCard = new StartCard();
-        addTileToMap(new Coordinate(0, 0), startCard);
+        putStartCard();
         putGoalCards();
+    }
 
+    private void putStartCard() {
+        startCard = new StartCard();
+        addTileToMap(new Coordinate(0, 0), startCard);
     }
 
     /**
@@ -28,10 +32,15 @@ public class SaboteurBoard extends Board {
         goalCards.add(new TreasureCard());
         goalCards.add(new StoneCard());
         goalCards.add(new StoneCard());
+
         Collections.shuffle(goalCards);
         addTileToMap(new Coordinate(0, DISTANCE + 1), goalCards.get(0));
         addTileToMap(new Coordinate(2, DISTANCE + 1), goalCards.get(1));
         addTileToMap(new Coordinate(-2, DISTANCE + 1), goalCards.get(2));
+    }
+
+    private boolean treasureReached() {
+        return startCard.treasureReached();
     }
 
     @Override
@@ -44,5 +53,6 @@ public class SaboteurBoard extends Board {
     public static void main(String[] args) {
         SaboteurBoard board = new SaboteurBoard();
         System.out.println(board);
+        System.out.println(board.treasureReached());
     }
 }
