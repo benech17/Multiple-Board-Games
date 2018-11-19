@@ -19,14 +19,14 @@ public class SaboteurBoard extends Board {
         map = new HashMap<>();
         putStartCard();
         putGoalCards();
-        StartCard c = new StartCard();
+        TestCard c = new TestCard();
         addTileToMap(new Coordinate(0, 1), c);
         startCard.getSides().get(Direction.RIGHT).setNextSide(c.getSides().get(Direction.LEFT));
 
         c.getSides().get(Direction.LEFT).setNextSide(startCard.getSides().get(Direction.RIGHT));
         c.getSides().get(Direction.RIGHT).setNextSide(treasureCard.getSides().get(Direction.LEFT));
 
-        treasureCard.getSides().get(Direction.LEFT).setNextSide(c.getSides().get(Direction.LEFT));
+        treasureCard.getSides().get(Direction.LEFT).setNextSide(c.getSides().get(Direction.RIGHT));
     }
 
     private void putStartCard() {
@@ -50,7 +50,7 @@ public class SaboteurBoard extends Board {
         */
         // For debugging
         treasureCard = new TreasureCard();
-        addTileToMap(new Coordinate(0, DISTANCE + 1), treasureCard);
+        addTileToMap(new Coordinate(0, 2), treasureCard);
     }
 
     private boolean treasureReached() {

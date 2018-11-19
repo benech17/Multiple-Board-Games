@@ -32,6 +32,7 @@ public abstract class SaboteurTile extends Tile {
             if (queue.peek() != null) {
                 SaboteurTile t = queue.poll();
                 //System.out.println(t);
+                System.out.println(t.getClass());
 
                 if (t.getName().equals("Treasure Card"))
                     return true;
@@ -41,7 +42,7 @@ public abstract class SaboteurTile extends Tile {
 
                 visitedTiles.add(t);
 
-                for (Side child : sides.values()) {
+                for (Side child : t.sides.values()) {
                     if (child.getNextSide() == null) continue;
                     SaboteurTile childTile = (SaboteurTile) child.getNextSide().getParent();
                     queue.add(childTile);
