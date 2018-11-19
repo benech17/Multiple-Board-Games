@@ -30,10 +30,6 @@ public abstract class SaboteurTile extends Tile {
         Queue<SaboteurTile> visitedTiles = new LinkedList<>();
         toVisit.add(this); // Push current node to the queue
         while (!toVisit.isEmpty()) {
-            /* Handle the case where the current tile is null
-             * This happens when a card has been removed from
-             * the board using a bomb card
-             */
             if (toVisit.peek() != null) {
                 // Pop the next tile to visit
                 SaboteurTile t = toVisit.poll();
@@ -55,6 +51,10 @@ public abstract class SaboteurTile extends Tile {
                     toVisit.add(childTile);
                 }
             } else {
+                /* Handle the case where the current tile is null
+                 * This happens when a card has been removed from
+                 * the board using a bomb card
+                 */
                 toVisit.remove();
             }
         }
