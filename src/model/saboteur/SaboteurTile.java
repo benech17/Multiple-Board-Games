@@ -1,5 +1,6 @@
 package model.saboteur;
 
+import model.core.card.Card;
 import model.core.card.tile.Side;
 import model.core.card.tile.Tile;
 import model.core.enums.Direction;
@@ -30,8 +31,9 @@ public abstract class SaboteurTile extends Tile {
         while (!queue.isEmpty()) {
             if (queue.peek() != null) {
                 SaboteurTile t = queue.poll();
+                //System.out.println(t);
 
-                if (t instanceof GoalCard)
+                if (t.getName().equals("Treasure Card"))
                     return true;
 
                 if (visitedTiles.contains(t))
@@ -53,5 +55,10 @@ public abstract class SaboteurTile extends Tile {
 
     public boolean isHasPath() {
         return hasPath;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
