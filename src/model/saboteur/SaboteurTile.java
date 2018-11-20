@@ -1,11 +1,9 @@
 package model.saboteur;
 
-import model.core.card.Card;
 import model.core.card.tile.Side;
 import model.core.card.tile.Tile;
 import model.core.enums.Direction;
 
-import java.util.ArrayDeque;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -15,6 +13,10 @@ public abstract class SaboteurTile extends Tile {
 
     public SaboteurTile(boolean hasPath) {
         this.hasPath = hasPath;
+    }
+
+    public boolean sidesMatch(SaboteurTile t, Direction d) {
+        return true;
     }
 
     /**

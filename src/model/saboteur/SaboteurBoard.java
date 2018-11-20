@@ -34,6 +34,24 @@ public class SaboteurBoard extends Board {
         addTileToMap(new Coordinate(0, 0), startCard);
     }
 
+    public boolean putCardAt(Coordinate c) {
+        if (coordinateExists(c))
+            return false;
+        SaboteurTile saboteurTile = getTileAt(c);
+        adjacentCoordinates = getAdjacentCoordinates(c);
+        for (Coordinate coord : adjacentCoordinates.values()) {
+            SaboteurTile t = (SaboteurTile) getTileAt(coord);
+            for (Direction d : t.getSides().keySet()) {
+                switch (d) {
+                    case TOP:
+                        if ((SaboteurTile) t.getSides().get(Direction.BOTTOM)
+                }
+            }
+
+        }
+        return true;
+    }
+
     /**
      * Puts the shuffled goal cards on the board
      */

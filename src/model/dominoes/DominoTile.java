@@ -54,21 +54,22 @@ public class DominoTile extends Tile {
      */
     public boolean sidesMatch(DominoTile t, Direction d) {
         if (t == null) return false;
-        if (d.equals(Direction.LEFT)) {
-            if (getLeftSide().equals(t.getRightSide()))
-                return true;
-            if (getRightSide().equals(t.getRightSide())) {
-                flip();
-                return true;
-            }
-        }
-        if (d.equals(Direction.RIGHT)) {
-            if (getRightSide().equals(t.getLeftSide()))
-                return true;
-            if (getLeftSide().equals(t.getLeftSide())) {
-                flip();
-                return true;
-            }
+        switch (d) {
+            case LEFT:
+                if (getLeftSide().equals(t.getRightSide()))
+                    return true;
+                if (getRightSide().equals(t.getRightSide())) {
+                    flip();
+                    return true;
+                }
+                break;
+            case RIGHT:
+                if (getRightSide().equals(t.getLeftSide()))
+                    return true;
+                if (getLeftSide().equals(t.getLeftSide())) {
+                    flip();
+                    return true;
+                }
         }
         return false;
     }

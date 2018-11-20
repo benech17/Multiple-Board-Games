@@ -13,4 +13,5 @@ public class GoalCard extends SaboteurTile {
         sides.put(Direction.RIGHT, new SaboteurSide(this, true));
     }
 
+
 }

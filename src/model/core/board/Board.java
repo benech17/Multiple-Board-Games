@@ -3,6 +3,7 @@ package model.core.board;
 import model.core.card.tile.Tile;
 import model.core.enums.Direction;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public abstract class Board {
