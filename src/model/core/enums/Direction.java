@@ -1,5 +1,6 @@
 package model.core.enums;
 
+// Directions put in clock-wise order
 public enum Direction {
-    TOP, BOTTOM, LEFT, RIGHT
+    TOP, RIGHT, BOTTOM, LEFT
 }

@@ -74,10 +74,6 @@ public class DominoTile extends Tile {
         return false;
     }
 
-    /*public void removeAvailableSide(Side s) {
-        getAvailableSides().remove(s);
-    }*/
-
     @Override
     public String toString() {
         return "[" + getLeftSide().toString() + "|" + getRightSide().toString() + "]";
