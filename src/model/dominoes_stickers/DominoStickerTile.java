@@ -64,13 +64,12 @@ public class DominoStickerTile extends Tile {
     private boolean aux(Supplier<DominoStickerSide> firstSide,
                         Supplier<DominoStickerSide> secondSide,
                         Supplier<DominoStickerSide> otherSide) {
-        if (firstSide.get() == null) {
+        if (firstSide.get() == null)
             rotate90();
-        }
         System.out.println(firstSide.get());
-        if (firstSide.get().equals(otherSide.get())) {
+        System.out.println(otherSide.get());
+        if (firstSide.get().equals(otherSide.get()))
             return true;
-        }
         if (secondSide.get().equals(otherSide.get())) {
             flip();
             return true;
@@ -112,9 +111,9 @@ public class DominoStickerTile extends Tile {
         DominoStickerTile d1 = new DominoStickerTile(Shape.HEART, Color.RED, Shape.CRESCENT, Color.GREEN);
         DominoStickerTile d2 = new DominoStickerTile(Shape.HEART, Color.BLUE, Shape.HEART, Color.RED);
         System.out.println(d1);
-        System.out.println(d1.sidesMatch(d2, Direction.TOP));
-        System.out.println(d1.getTopSide());
-        System.out.println(d2.getRightSide().equals(d1.getTopSide()));
+        System.out.println(d1.sidesMatch(d2, Direction.LEFT));
+        //System.out.println(d1.getTopSide());
+        //System.out.println(d2.getRightSide().equals(d1.getTopSide()));
     }
 
 
