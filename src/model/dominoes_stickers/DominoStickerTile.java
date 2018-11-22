@@ -1,39 +1,43 @@
 package model.dominoes_stickers;
 
 import model.core.card.tile.Tile;
+import model.core.enums.Color;
 import model.core.enums.Direction;
+import model.core.enums.Shape;
 import model.dominoes.DominoSide;
 
 import java.util.HashMap;
 
 
 public class DominoStickerTile extends Tile {
-    public DominoStickerTile(int leftValue, int rightValue) {
+    public DominoStickerTile(Shape leftShape, Color leftColor, Shape rightShape, Color rightColor) {
         sides = new HashMap<>();
-        //sides.put(Direction.LEFT, new DominoSide(leftValue, this));
-        //sides.put(Direction.RIGHT, new DominoSide(rightValue, this));
+        sides.put(Direction.TOP, null);
+        sides.put(Direction.BOTTOM, null);
+        sides.put(Direction.LEFT, new DominoStickerSide(leftShape, leftColor, this));
+        sides.put(Direction.RIGHT, new DominoStickerSide(rightShape, rightColor, this));
         setName();
     }
 
     public boolean isDouble() {
-        return getLeftSide().getValue() == getRightSide().getValue();
+        return getLeftSide().equals(getRightSide());
     }
 
     private void setName() {
         String s;
         if (isDouble())
-            s = "double " + getLeftSide().getValue();
+            s = "double " + getLeftSide().toString();
         else
-            s = getLeftSide().getValue() + "-" + getRightSide().getValue();
+            s = getLeftSide().toString() + "-" + getRightSide().toString();
         setName(s);
     }
 
-    public DominoSide getLeftSide() {
-        return (DominoSide) sides.get(Direction.LEFT);
+    public DominoStickerSide getLeftSide() {
+        return (DominoStickerSide) sides.get(Direction.LEFT);
     }
 
-    public DominoSide getRightSide() {
-        return (DominoSide) sides.get(Direction.RIGHT);
+    public DominoStickerSide getRightSide() {
+        return (DominoStickerSide) sides.get(Direction.RIGHT);
     }
 
     /**
@@ -81,16 +85,12 @@ public class DominoStickerTile extends Tile {
 
     @Override
     public String toString() {
-        return "[" + getSides().get(Direction.LEFT) + "|" + getSides().get(Direction.RIGHT) + "]";
+        return "[" + getLeftSide().toString() + "|" + getRightSide().toString() + "]";
     }
 
     public static void main(String[] args) {
-        DominoStickerTile d1 = new DominoStickerTile(1, 6);
-        DominoStickerTile d2 = new DominoStickerTile(6, 4);
-        //System.out.println(d1.getMatchingSide(d2)); // Sides match
-        DominoStickerTile d3 = new DominoStickerTile(3, 3);
+        DominoStickerTile d1 = new DominoStickerTile(Shape.HEART, Color.RED, Shape.CRESCENT, Color.GREEN);
         System.out.println(d1);
-        //System.out.println(d2.getMatchingSide(d3)); // Sides don't match
     }
 
 

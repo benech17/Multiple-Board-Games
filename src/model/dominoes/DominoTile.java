@@ -80,7 +80,7 @@ public class DominoTile extends Tile {
 
     @Override
     public String toString() {
-        return "[" + getSides().get(Direction.LEFT) + "|" + getSides().get(Direction.RIGHT) + "]";
+        return "[" + getLeftSide().toString() + "|" + getRightSide().toString() + "]";
     }
 
     public static void main(String[] args) {

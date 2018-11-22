@@ -11,7 +11,7 @@ public class DominoStickerSide extends Side {
     private final Shape shape;
     private final Color color;
 
-    public DominoStickerSide(Shape shape, Color color, DominoTile parent) {
+    public DominoStickerSide(Shape shape, Color color, DominoStickerTile parent) {
         super(parent, null);
         this.shape = shape;
         this.color = color;
