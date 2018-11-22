@@ -37,15 +37,15 @@ public class SaboteurBoard extends Board {
     public boolean putCardAt(Coordinate c) {
         if (coordinateExists(c))
             return false;
-        SaboteurTile saboteurTile = getTileAt(c);
+        SaboteurTile saboteurTile = (SaboteurTile) getTileAt(c);
         adjacentCoordinates = getAdjacentCoordinates(c);
         for (Coordinate coord : adjacentCoordinates.values()) {
             SaboteurTile t = (SaboteurTile) getTileAt(coord);
             for (Direction d : t.getSides().keySet()) {
-                switch (d) {
+                /*switch (d) {
                     case TOP:
-                        if ((SaboteurTile) t.getSides().get(Direction.BOTTOM)
-                }
+                        if ((SaboteurTile) t.getSides().get(Direction.BOTTOM);
+                }*/
             }
 
         }

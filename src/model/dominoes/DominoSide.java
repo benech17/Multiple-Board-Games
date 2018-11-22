@@ -5,7 +5,7 @@ import model.core.card.tile.Side;
 import java.util.Objects;
 
 public class DominoSide extends Side {
-    private int value;
+    private final int value;
 
     public DominoSide(int value, DominoTile parent) {
         super(parent, null);
