@@ -1,16 +1,18 @@
 package model.dominoes_stickers;
 
+import model.core.card.tile.Side;
 import model.core.card.tile.Tile;
 import model.core.enums.Color;
 import model.core.enums.Direction;
 import model.core.enums.Shape;
 
-import java.util.HashMap;
+import java.util.EnumMap;
+import java.util.function.Supplier;
 
 
 public class DominoStickerTile extends Tile {
     public DominoStickerTile(Shape leftShape, Color leftColor, Shape rightShape, Color rightColor) {
-        sides = new HashMap<>();
+        sides = new EnumMap<>(Direction.class);
         sides.put(Direction.TOP, null);
         sides.put(Direction.BOTTOM, null);
         sides.put(Direction.LEFT, new DominoStickerSide(leftShape, leftColor, this));
@@ -58,6 +60,24 @@ public class DominoStickerTile extends Tile {
         rotate(2);
     }
 
+    // TODO Add doc
+    private boolean aux(Supplier<DominoStickerSide> firstSide,
+                        Supplier<DominoStickerSide> secondSide,
+                        Supplier<DominoStickerSide> otherSide) {
+        if (firstSide.get() == null) {
+            rotate90();
+        }
+        System.out.println(firstSide.get());
+        if (firstSide.get().equals(otherSide.get())) {
+            return true;
+        }
+        if (secondSide.get().equals(otherSide.get())) {
+            flip();
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Returns true if the current instance of DominoTile and the domino
      * tile t have a side in common. Flips the current instance if necessary
@@ -72,43 +92,13 @@ public class DominoStickerTile extends Tile {
         if (t == null) return false;
         switch (d) {
             case TOP:
-                if (getTopSide() == null)
-                    rotate90();
-                if (getTopSide().equals(t.getBottomSide()))
-                    return true;
-                if (getBottomSide().equals(t.getBottomSide())) {
-                    flip();
-                    return true;
-                }
+                return aux(this::getTopSide, this::getBottomSide, t::getBottomSide);
             case BOTTOM:
-                if (getBottomSide() == null)
-                    rotate90();
-                if (getBottomSide().equals(t.getTopSide()))
-                    return true;
-                if (getTopSide().equals(t.getBottomSide())) {
-                    flip();
-                    return true;
-                }
+                return aux(this::getBottomSide, this::getTopSide, t::getTopSide);
             case LEFT:
-                if (getLeftSide() == null)
-                    rotate90();
-                if (getLeftSide().equals(t.getRightSide()))
-                    return true;
-                if (getRightSide().equals(t.getRightSide())) {
-                    flip();
-                    return true;
-                }
-                break;
+                return aux(this::getLeftSide, this::getRightSide, t::getRightSide);
             case RIGHT:
-                if (getRightSide() == null)
-                    rotate90();
-                if (getRightSide().equals(t.getLeftSide()))
-                    return true;
-                if (getLeftSide().equals(t.getLeftSide())) {
-                    flip();
-                    return true;
-                }
-                break;
+                return aux(this::getRightSide, this::getLeftSide, t::getLeftSide);
         }
         return false;
     }
@@ -120,7 +110,11 @@ public class DominoStickerTile extends Tile {
 
     public static void main(String[] args) {
         DominoStickerTile d1 = new DominoStickerTile(Shape.HEART, Color.RED, Shape.CRESCENT, Color.GREEN);
+        DominoStickerTile d2 = new DominoStickerTile(Shape.HEART, Color.BLUE, Shape.HEART, Color.RED);
         System.out.println(d1);
+        System.out.println(d1.sidesMatch(d2, Direction.TOP));
+        System.out.println(d1.getTopSide());
+        System.out.println(d2.getRightSide().equals(d1.getTopSide()));
     }
 
 

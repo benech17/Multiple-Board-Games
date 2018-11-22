@@ -3,20 +3,17 @@ package model.core.card.tile;
 import model.core.card.Card;
 import model.core.enums.Direction;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 
 
 public abstract class Tile extends Card {
-    protected HashMap<Direction, Side> sides = new HashMap<>();
+    protected EnumMap<Direction, Side> sides;
 
     public Tile() {
         super("Tile", true);
     }
 
-    public HashMap<Direction, Side> getSides() {
+    public EnumMap<Direction, Side> getSides() {
         return sides;
     }
 

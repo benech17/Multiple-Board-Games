@@ -1,14 +1,15 @@
 package model.dominoes;
 
+import model.core.card.tile.Side;
 import model.core.enums.Direction;
 import model.core.card.tile.Tile;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 
 
 public class DominoTile extends Tile {
     public DominoTile(int leftValue, int rightValue) {
-        sides = new HashMap<>();
+        sides = new EnumMap<>(Direction.class);
         sides.put(Direction.LEFT, new DominoSide(leftValue, this));
         sides.put(Direction.RIGHT, new DominoSide(rightValue, this));
         setName();
