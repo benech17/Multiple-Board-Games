@@ -20,7 +20,7 @@ public abstract class SaboteurTile extends Tile {
     }
 
     /**
-     * Performs a Breadth-First Search on the graph structure
+     * Performs a Breadth-First Search on the tree data structure
      * starting from the current instance of SaboteurTile
      *
      * @return true if a treasure has been reached
@@ -54,8 +54,6 @@ public abstract class SaboteurTile extends Tile {
                 }
             } else {
                 /* Handle the case where the current tile is null
-                 * This happens when a card has been removed from
-                 * the board using a bomb card
                  */
                 toVisit.remove();
             }

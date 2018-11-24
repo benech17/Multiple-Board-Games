@@ -1,6 +1,5 @@
 package model.dominoes_stickers;
 
-import model.core.card.tile.Side;
 import model.core.card.tile.Tile;
 import model.core.enums.Color;
 import model.core.enums.Direction;
@@ -11,12 +10,15 @@ import java.util.function.Supplier;
 
 
 public class DominoStickerTile extends Tile {
+    private boolean vertical;
+
     public DominoStickerTile(Shape leftShape, Color leftColor, Shape rightShape, Color rightColor) {
         sides = new EnumMap<>(Direction.class);
         sides.put(Direction.TOP, null);
         sides.put(Direction.BOTTOM, null);
         sides.put(Direction.LEFT, new DominoStickerSide(leftShape, leftColor, this));
         sides.put(Direction.RIGHT, new DominoStickerSide(rightShape, rightColor, this));
+        vertical = true;
         setName();
     }
 
@@ -49,8 +51,14 @@ public class DominoStickerTile extends Tile {
         return (DominoStickerSide) sides.get(Direction.RIGHT);
     }
 
+    public boolean isVertical() {
+        return vertical;
+    }
+
     public void rotate90() {
         rotate(1);
+        // Change orientation
+        vertical = !vertical;
     }
 
     /**
@@ -66,8 +74,6 @@ public class DominoStickerTile extends Tile {
                         Supplier<DominoStickerSide> otherSide) {
         if (firstSide.get() == null)
             rotate90();
-        System.out.println(firstSide.get());
-        System.out.println(otherSide.get());
         if (firstSide.get().equals(otherSide.get()))
             return true;
         if (secondSide.get().equals(otherSide.get())) {
