@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 
-public abstract class SaboteurTile extends Tile {
+public abstract class SaboteurTile extends Tile<SaboteurSide> {
     private boolean hasPath;
 
     public SaboteurTile(boolean hasPath) {
@@ -46,7 +46,7 @@ public abstract class SaboteurTile extends Tile {
 
                 visitedTiles.add(t);
 
-                for (Side child : t.sides.values()) {
+                for (SaboteurSide child : t.sides.values()) {
                     if (child.getNextSide() == null)
                         continue;
                     SaboteurTile childTile = (SaboteurTile) child.getNextSide().getParent();

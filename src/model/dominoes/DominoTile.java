@@ -4,7 +4,7 @@ import model.core.enums.Direction;
 import model.core.card.tile.Tile;
 
 
-public class DominoTile extends Tile {
+public class DominoTile extends Tile<DominoSide> {
     public DominoTile(int leftValue, int rightValue) {
         sides.put(Direction.LEFT, new DominoSide(leftValue, this));
         sides.put(Direction.RIGHT, new DominoSide(rightValue, this));
@@ -22,14 +22,6 @@ public class DominoTile extends Tile {
         else
             s = getLeftSide().getValue() + "-" + getRightSide().getValue();
         setName(s);
-    }
-
-    public DominoSide getLeftSide() {
-        return (DominoSide) sides.get(Direction.LEFT);
-    }
-
-    public DominoSide getRightSide() {
-        return (DominoSide) sides.get(Direction.RIGHT);
     }
 
     /**
@@ -84,6 +76,4 @@ public class DominoTile extends Tile {
         System.out.println(d1);
         //System.out.println(d2.getMatchingSide(d3)); // Sides don't match
     }
-
-
 }

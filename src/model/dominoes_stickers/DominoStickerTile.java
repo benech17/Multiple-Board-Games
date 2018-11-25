@@ -9,7 +9,7 @@ import java.util.EnumMap;
 import java.util.function.Supplier;
 
 
-public class DominoStickerTile extends Tile {
+public class DominoStickerTile extends Tile<DominoStickerSide> {
     private boolean vertical;
 
     public DominoStickerTile(Shape leftShape, Color leftColor, Shape rightShape, Color rightColor) {
@@ -36,7 +36,7 @@ public class DominoStickerTile extends Tile {
     }
 
     public DominoStickerSide getTopSide() {
-        return (DominoStickerSide) sides.get(Direction.TOP);
+        return sides.get(Direction.TOP);
     }
 
     public DominoStickerSide getBottomSide() {
@@ -55,6 +55,9 @@ public class DominoStickerTile extends Tile {
         return vertical;
     }
 
+    /**
+     * Rotates by 90° clockwise the domino tile
+     */
     public void rotate90() {
         rotate(1);
         // Change orientation
