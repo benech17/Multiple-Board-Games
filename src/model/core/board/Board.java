@@ -59,7 +59,7 @@ public abstract class Board<T> {
      * @param c coordinate in the map
      * @return the card at the coordinate c
      */
-    protected T getTileAt(Coordinate c) throws NoSuchCoordinateException {
+    protected T getTileAt(Coordinate c) {
         if (!coordinateExists(c))
             throw new NoSuchCoordinateException();
          return map.get(c.getRow()).get(c.getColumn());
