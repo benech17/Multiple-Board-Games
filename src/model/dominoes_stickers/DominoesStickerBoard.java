@@ -8,14 +8,15 @@ import model.core.enums.Shape;
 import model.dominoes.DominoTile;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 
-public class DominoesStickerBoard extends Board {
+public class DominoesStickerBoard extends Board<DominoStickerSide> {
 
     public DominoesStickerBoard(DominoStickerTile t) {
         // We put the first domino tile at the center of the map
         super(50, 50);
-        addTileToMap(new Coordinate(0, 0), t);
+
+        addTileToMap(new Coordinate(0, 0), t.getLeftSide());
+        addTileToMap(new Coordinate(0, 1), t.getRightSide());
     }
 
     /**
@@ -39,7 +40,7 @@ public class DominoesStickerBoard extends Board {
         String s = "";
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < height; j++) {
-                s += map.get(i).get(j);
+                s += ((map.get(i).get(j) == null)?"XX":map.get(i).get(j)) + " ";
             }
             s += "\n";
         }

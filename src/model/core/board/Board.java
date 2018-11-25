@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class Board {
+public abstract class Board<T> {
 
-    protected List<List<Tile>> map;
+    protected List<List<T>> map;
     protected int height, length;
     protected HashMap<Direction, Coordinate> adjacentCoordinates;
 
@@ -25,7 +25,7 @@ public abstract class Board {
         }
     }
 
-    public List<List<Tile>> getMap() {
+    public List<List<T>> getMap() {
         return map;
     }
 
@@ -59,13 +59,13 @@ public abstract class Board {
      * @param c coordinate in the map
      * @return the card at the coordinate c
      */
-    protected Tile getTileAt(Coordinate c) throws NoSuchCoordinateException {
+    protected T getTileAt(Coordinate c) throws NoSuchCoordinateException {
         if (!coordinateExists(c))
             throw new NoSuchCoordinateException();
          return map.get(c.getRow()).get(c.getColumn());
     }
 
-    protected void addTileToMap(Coordinate c, Tile tile) {
+    protected void addTileToMap(Coordinate c, T tile) {
         /*adjacentCoordinates = getAdjacentCoordinates(c);
         Coordinate neighbor;
         for (Direction d : adjacentCoordinates.keySet()) {
@@ -82,6 +82,7 @@ public abstract class Board {
 
     public abstract String toString();
 
-    private class NoSuchCoordinateException extends RuntimeException {
-    }
+}
+
+class NoSuchCoordinateException extends RuntimeException {
 }

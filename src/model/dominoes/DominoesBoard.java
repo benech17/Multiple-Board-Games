@@ -7,7 +7,7 @@ import model.core.enums.Direction;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class DominoesBoard extends Board {
+public class DominoesBoard extends Board<DominoTile> {
     private Coordinate leftEnd, rightEnd; // left and right ends of the board
 
     public DominoesBoard(DominoTile t) {

@@ -3,7 +3,6 @@ package model.dominoes_stickers;
 import model.core.card.tile.Side;
 import model.core.enums.Color;
 import model.core.enums.Shape;
-import model.dominoes.DominoTile;
 
 import java.util.Objects;
 

@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 
-public class SaboteurBoard extends Board {
+public class SaboteurBoard extends Board<SaboteurTile> {
     // Number of cards between the start card and goal card
     protected final int DISTANCE = 1; // should be 7
     private StartCard startCard;

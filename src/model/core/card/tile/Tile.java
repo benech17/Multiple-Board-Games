@@ -11,6 +11,7 @@ public abstract class Tile extends Card {
 
     public Tile() {
         super("Tile", true);
+        sides = new EnumMap<>(Direction.class);
     }
 
     public EnumMap<Direction, Side> getSides() {
