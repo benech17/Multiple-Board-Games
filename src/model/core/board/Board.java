@@ -55,7 +55,8 @@ public abstract class Board<T> {
     }
 
     /**
-     * Get the card at the given position
+     * Get the card at the given position if it exists
+     * and throws a NoSuchCoordinateException otherwise
      * @param c coordinate in the map
      * @return the card at the coordinate c
      */
