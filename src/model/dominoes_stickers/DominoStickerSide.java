@@ -6,6 +6,7 @@ import model.core.enums.Shape;
 
 import java.util.Objects;
 
+
 public class DominoStickerSide extends Side {
     private final Shape shape;
     private final Color color;

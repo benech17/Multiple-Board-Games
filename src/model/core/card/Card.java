@@ -1,5 +1,6 @@
 package model.core.card;
 
+
 public abstract class Card {
     private String name;
     private boolean hidden;

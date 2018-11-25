@@ -1,5 +1,6 @@
 package model.core.card.tile;
 
+
 public abstract class Side {
     private Tile parent;
     private Side nextSide;

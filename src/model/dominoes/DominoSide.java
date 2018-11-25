@@ -1,8 +1,8 @@
 package model.dominoes;
 
 import model.core.card.tile.Side;
-
 import java.util.Objects;
+
 
 public class DominoSide extends Side {
     private final int value;
@@ -23,6 +23,7 @@ public class DominoSide extends Side {
 
     /**
      * Two domino sides are equal if they share the same value
+     *
      * @param o
      * @return
      */

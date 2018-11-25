@@ -35,22 +35,6 @@ public class DominoStickerTile extends Tile<DominoStickerSide> {
         setName(s);
     }
 
-    public DominoStickerSide getTopSide() {
-        return sides.get(Direction.TOP);
-    }
-
-    public DominoStickerSide getBottomSide() {
-        return (DominoStickerSide) sides.get(Direction.BOTTOM);
-    }
-
-    public DominoStickerSide getLeftSide() {
-        return (DominoStickerSide) sides.get(Direction.LEFT);
-    }
-
-    public DominoStickerSide getRightSide() {
-        return (DominoStickerSide) sides.get(Direction.RIGHT);
-    }
-
     public boolean isVertical() {
         return vertical;
     }

@@ -1,6 +1,5 @@
 package model.saboteur;
 
-import model.core.card.tile.Side;
 import model.core.card.tile.Tile;
 import model.core.enums.Direction;
 
@@ -8,6 +7,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 
+/**
+ * TODO: Implement Iterable? in the abstract class Tile?
+ */
 public abstract class SaboteurTile extends Tile<SaboteurSide> {
     private boolean hasPath;
 
@@ -15,6 +17,12 @@ public abstract class SaboteurTile extends Tile<SaboteurSide> {
         this.hasPath = hasPath;
     }
 
+    /**
+     * TODO
+     * @param t
+     * @param d
+     * @return
+     */
     public boolean sidesMatch(SaboteurTile t, Direction d) {
         return true;
     }

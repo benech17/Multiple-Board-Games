@@ -1,11 +1,11 @@
 package model.core.board;
 
-import model.core.card.tile.Tile;
 import model.core.enums.Direction;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+
 
 public abstract class Board<T> {
 
@@ -57,13 +57,14 @@ public abstract class Board<T> {
     /**
      * Get the card at the given position if it exists
      * and throws a NoSuchCoordinateException otherwise
+     *
      * @param c coordinate in the map
      * @return the card at the coordinate c
      */
     protected T getTileAt(Coordinate c) {
         if (!coordinateExists(c))
             throw new NoSuchCoordinateException();
-         return map.get(c.getRow()).get(c.getColumn());
+        return map.get(c.getRow()).get(c.getColumn());
     }
 
     protected void addTileToMap(Coordinate c, T tile) {
