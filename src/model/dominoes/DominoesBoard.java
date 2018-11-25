@@ -5,17 +5,21 @@ import model.core.board.Coordinate;
 import model.core.enums.Direction;
 import model.core.card.Card;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class DominoesBoard extends Board {
     private Coordinate leftEnd, rightEnd; // left and right ends of the board
 
     public DominoesBoard(DominoTile t) {
+        super(1, 1);
+        map = new LinkedList<>();
+        map.add(new LinkedList<>());
         leftEnd = new Coordinate(0, 0);
         rightEnd = leftEnd;
         // We put the first domino tile at the center of the map
-        map = new HashMap<>();
-        map.put(leftEnd, t);
+        map.get(0).add(t);
     }
 
     /**
@@ -32,15 +36,13 @@ public class DominoesBoard extends Board {
             if(t.sidesMatch((DominoTile) getTileAt(neighbors.get(Direction.LEFT)), Direction.LEFT)) {
                 // Connects the side of the domino tile t with the domino tile to its left
                 t.getLeftSide().setNextSide(((DominoTile) getTileAt(neighbors.get(Direction.LEFT))).getRightSide());
-                addTileToMap(c, t);
-                rightEnd = c;
+                map.get(0).add(t);
                 return true;
             }
         }
         if (neighbors.get(Direction.RIGHT) != null) {
             if (t.sidesMatch((DominoTile) getTileAt(neighbors.get(Direction.RIGHT)), Direction.RIGHT)) {
-                addTileToMap(c, t);
-                leftEnd = c;
+                map.get(0).add(0, t);
                 return true;
             }
         }
@@ -58,8 +60,8 @@ public class DominoesBoard extends Board {
     @Override
     public String toString() {
         String s = "";
-        for (Card c : map.values()) {
-            s += c;
+        for (int j = 0; j < map.get(0).size(); j++) {
+            s += map.get(0).get(j);
         }
         return s;
     }
@@ -76,8 +78,6 @@ public class DominoesBoard extends Board {
         System.out.println(board.addToLeftEnd(d3));
         System.out.println(board);
         System.out.println(board.addToRightEnd(new DominoTile(2, 6)));
-        System.out.println(board.leftEnd);
-        System.out.println(board.rightEnd);
 
         System.out.println(board);
 

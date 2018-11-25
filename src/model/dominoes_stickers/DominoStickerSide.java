@@ -27,10 +27,7 @@ public class DominoStickerSide extends Side {
 
     @Override
     public String toString() {
-        return "DominoStickerSide{" +
-                "shape=" + shape +
-                ", color=" + color +
-                '}';
+        return color.name().charAt(0) + "" + shape.name().charAt(0);
     }
 
     /**

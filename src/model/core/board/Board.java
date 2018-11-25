@@ -3,15 +3,29 @@ package model.core.board;
 import model.core.card.tile.Tile;
 import model.core.enums.Direction;
 
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 public abstract class Board {
 
-    protected HashMap<Coordinate, Tile> map;
+    protected List<List<Tile>> map;
+    protected int height, length;
     protected HashMap<Direction, Coordinate> adjacentCoordinates;
 
-    public HashMap<Coordinate, Tile> getMap() {
+    public Board(int height, int length) {
+        this.height = height;
+        this.length = length;
+        this.map = new LinkedList<>();
+        for (int i = 0; i < length; i++) {
+            map.add(new LinkedList<>());
+            for (int j = 0; j < height; j++) {
+                map.get(i).add(null);
+            }
+        }
+    }
+
+    public List<List<Tile>> getMap() {
         return map;
     }
 
@@ -35,7 +49,9 @@ public abstract class Board {
     }
 
     protected boolean coordinateExists(Coordinate c) {
-        return map.get(c) != null;
+        int x = c.getColumn();
+        int y = c.getRow();
+        return (0 <= x && x < length && 0 <= y && y < height);
     }
 
     /**
@@ -44,10 +60,9 @@ public abstract class Board {
      * @return the card at the coordinate c
      */
     protected Tile getTileAt(Coordinate c) throws NoSuchCoordinateException {
-        Tile t = map.get(c);
-        if (t == null)
+        if (!coordinateExists(c))
             throw new NoSuchCoordinateException();
-        return t;
+         return map.get(c.getRow()).get(c.getColumn());
     }
 
     protected void addTileToMap(Coordinate c, Tile tile) {
@@ -62,7 +77,7 @@ public abstract class Board {
                 tile.getSides().get(d).setNextSide();
             }
         }*/
-        map.put(c, tile);
+        map.get(c.getRow()).set(c.getColumn(), tile);
     }
 
     public abstract String toString();

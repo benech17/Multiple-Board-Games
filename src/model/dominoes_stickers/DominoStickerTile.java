@@ -110,13 +110,18 @@ public class DominoStickerTile extends Tile {
 
     @Override
     public String toString() {
-        return "[" + getLeftSide().toString() + "|" + getRightSide().toString() + "]";
+        if (vertical)
+            return "[" + getLeftSide().toString() + "|" + getRightSide().toString() + "]";
+        else
+            return  getTopSide() + "\n" + getBottomSide();
     }
 
     public static void main(String[] args) {
         DominoStickerTile d1 = new DominoStickerTile(Shape.HEART, Color.RED, Shape.CRESCENT, Color.GREEN);
+        d1.rotate90();
         DominoStickerTile d2 = new DominoStickerTile(Shape.HEART, Color.BLUE, Shape.HEART, Color.RED);
         System.out.println(d1);
+        System.out.println(d2);
         System.out.println(d1.sidesMatch(d2, Direction.LEFT));
         //System.out.println(d1.getTopSide());
         //System.out.println(d2.getRightSide().equals(d1.getTopSide()));

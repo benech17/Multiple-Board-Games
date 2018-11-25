@@ -7,6 +7,7 @@ import model.core.enums.Direction;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 
 public class SaboteurBoard extends Board {
@@ -16,7 +17,7 @@ public class SaboteurBoard extends Board {
     private TreasureCard treasureCard;
 
     public SaboteurBoard() {
-        map = new HashMap<>();
+        super(5, 9);
         putStartCard();
         putGoalCards();
         TestCard c = new TestCard();
