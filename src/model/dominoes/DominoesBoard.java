@@ -3,9 +3,7 @@ package model.dominoes;
 import model.core.board.Board;
 import model.core.board.Coordinate;
 import model.core.enums.Direction;
-import model.core.card.Card;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -13,7 +11,7 @@ public class DominoesBoard extends Board {
     private Coordinate leftEnd, rightEnd; // left and right ends of the board
 
     public DominoesBoard(DominoTile t) {
-        super(1, 1);
+        super(1, 1); // à revoir
         map = new LinkedList<>();
         map.add(new LinkedList<>());
         leftEnd = new Coordinate(0, 0);
@@ -35,14 +33,17 @@ public class DominoesBoard extends Board {
         if (neighbors.get(Direction.LEFT) != null) {
             if(t.sidesMatch((DominoTile) getTileAt(neighbors.get(Direction.LEFT)), Direction.LEFT)) {
                 // Connects the side of the domino tile t with the domino tile to its left
+                // Useless in fact
                 t.getLeftSide().setNextSide(((DominoTile) getTileAt(neighbors.get(Direction.LEFT))).getRightSide());
                 map.get(0).add(t);
+                rightEnd = c;
                 return true;
             }
         }
         if (neighbors.get(Direction.RIGHT) != null) {
             if (t.sidesMatch((DominoTile) getTileAt(neighbors.get(Direction.RIGHT)), Direction.RIGHT)) {
                 map.get(0).add(0, t);
+                leftEnd = c;
                 return true;
             }
         }
