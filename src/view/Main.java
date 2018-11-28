@@ -49,7 +49,6 @@ public class Main extends JFrame{
 	DominoGommetteButton.setBounds(200,200,400,150);
 	DominoGommetteButton.setLocation(700,350);  //150+150 donc 50 espaces
 	mainMenu.getContentPane().add(DominoGommetteButton);
-	//DominoGommetteButton.setIcon(new ImageIcon("doG.jpeg"));
 
 	Bouton PuzzleButton=new Bouton("Puzzle");
 	PuzzleButton.setBounds(200,200,400,150);
@@ -73,11 +72,11 @@ public class Main extends JFrame{
 		mainMenuPrincipal.setVisible(false);
 		d.DominoScreen();
 		}
-		});*/
+		});
      
     }
 
-    public class Panneau extends JPanel {
+   /* public class Panneau extends JPanel {
 
 	private final Image img;
 
@@ -90,7 +89,7 @@ public class Main extends JFrame{
 	    g.drawImage(img, 0,0, this);
 	            
 	}
-    }
+    }*/
 
 
     public class Bouton extends JButton {
