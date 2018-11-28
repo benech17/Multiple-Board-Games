@@ -102,7 +102,7 @@ public class Main extends JFrame{
 	    super(str);
 	    this.name = str;
 	    try {
-		img = ImageIO.read(new File("images/menuJeu"+n+".jpeg"));
+		img = ImageIO.read(new File("assets/images/menuJeu"+n+".jpeg"));
 		n++;
 	    } catch (IOException e) {
 		e.printStackTrace();
