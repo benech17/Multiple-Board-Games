@@ -62,30 +62,24 @@ public abstract class Tile<S extends Side> extends Card implements Node {
         Queue<Node> toVisit = new LinkedList<>();
         // Queue of visited tiles
         Queue<Node> visitedTiles = new LinkedList<>();
-        toVisit.add(startNode); // Push current node to the queue
+        toVisit.add(startNode); // Push the current node to the queue
         while (!toVisit.isEmpty()) {
             if (toVisit.peek() != null) {
                 // Pop the next tile to visit
                 Node t = toVisit.poll();
-
-                // Condition to stop the search
-                if (isGoal.apply(t)) {
+                // We've found the goal, the job is done
+                if (isGoal.apply(t))
                     return true;
-                }
-
                 // This tile has already been visited, we skip it
                 if (visitedTiles.contains(t))
                     continue;
-
                 visitedTiles.add(t);
-
                 for (Node child : t.getAdjacentNodes().values()) {
                     if (child != null)
                         toVisit.add(child);
                 }
             } else {
-                /* Handle the case where the current tile is null
-                 */
+                // Handle the case where the current tile is null
                 toVisit.remove();
             }
         }
