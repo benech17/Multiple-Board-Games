@@ -68,17 +68,8 @@ public abstract class Board<T> {
     }
 
     protected void addTileToMap(Coordinate c, T tile) {
-        /*adjacentCoordinates = getAdjacentCoordinates(c);
-        Coordinate neighbor;
-        for (Direction d : adjacentCoordinates.keySet()) {
-            neighbor = adjacentCoordinates.get(d);
-            if (coordinateExists(neighbor)) {
-                // Connects the tile with a surrounding tile
-                // Add a method connect(Tile t) in class Tile ?
-                getTileAt(neighbor).getSides()
-                tile.getSides().get(d).setNextSide();
-            }
-        }*/
+        if (!coordinateExists(c))
+            throw new NoSuchCoordinateException();
         map.get(c.getRow()).set(c.getColumn(), tile);
     }
 

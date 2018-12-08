@@ -11,8 +11,8 @@ import java.util.function.Function;
  */
 public interface Node {
     /**
-     * Get the map of adjacent (children) nodes
-     * @return the nodes adjacent to the current node
+     * Get the children nodes
+     * @return the children nodes
      */
     EnumMap<Direction, Node> getAdjacentNodes();
 

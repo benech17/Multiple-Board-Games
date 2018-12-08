@@ -95,6 +95,8 @@ public abstract class Tile<S extends Side> extends Card implements Node {
     public boolean isLeaf() {
         /* If the current node is a leaf then it has only one adjacent
             node which isn't null */
+        // Is that true for all the games ? Might be overrided
+        // Moreover the puzzle doesn't need a tree
         return getAdjacentNodes().size() == 1;
     }
 
