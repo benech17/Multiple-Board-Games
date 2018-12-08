@@ -3,11 +3,8 @@ package model.dominoes_stickers;
 import model.core.board.Board;
 import model.core.board.Coordinate;
 import model.core.enums.Color;
-import model.core.enums.Direction;
 import model.core.enums.Shape;
-import model.dominoes.DominoTile;
 
-import java.util.HashMap;
 
 public class DominoesStickerBoard extends Board<DominoStickerSide> {
 
@@ -25,13 +22,26 @@ public class DominoesStickerBoard extends Board<DominoStickerSide> {
      * @param c the coordinate of the specified position
      * @return
      */
-    public boolean addDominoTile(DominoTile t, Coordinate c) {
-        if (t == null)
+    public boolean addDominoTile(DominoStickerTile t, Coordinate c) {
+        /*if (t == null)
             return false;
         HashMap<Direction, Coordinate> neighbors = getAdjacentCoordinates(c);
-        if (neighbors.get(Direction.TOP) != null) {
-
+        if (neighbors.get(Direction.LEFT) != null) {
+            if(t.sidesMatch(getTileAt(neighbors.get(Direction.LEFT)), Direction.LEFT)) {
+                // Connects the side of the domino tile t with the domino tile to its left
+                // Useless in fact
+                t.getLeftSide().setNextSide((getTileAt(neighbors.get(Direction.LEFT))).getRightSide());
+                map.get(0).add(t);
+                return true;
+            }
         }
+        if (neighbors.get(Direction.RIGHT) != null) {
+            if (t.sidesMatch(getTileAt(neighbors.get(Direction.RIGHT)), Direction.RIGHT)) {
+                map.get(0).add(0, t);
+                return true;
+            }
+        }
+        */
         return false;
     }
 

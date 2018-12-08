@@ -8,7 +8,12 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 
+/**
+ * At the end this game of dominoes should be implemented as
+ * a subset of the more general game of dominoes in 2d
+ */
 public class DominoesBoard extends Board<DominoTile> {
+    // These coordinates should be removed
     private Coordinate leftEnd, rightEnd; // left and right ends of the board
 
     public DominoesBoard(DominoTile t) {

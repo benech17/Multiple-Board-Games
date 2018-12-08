@@ -17,13 +17,30 @@ public class DominoStickerTile extends Tile<DominoStickerSide> {
         sides.put(Direction.TOP, null);
         sides.put(Direction.BOTTOM, null);
         sides.put(Direction.LEFT, new DominoStickerSide(leftShape, leftColor, this));
+        // sides.put(Direction.LEFT, new DominoStickerTile(leftShape, leftColor);
         sides.put(Direction.RIGHT, new DominoStickerSide(rightShape, rightColor, this));
         vertical = true;
         setName();
     }
 
+    /**
+     * We'd like to make a DominoStickerTile made of two DominoStickerTiles
+     * @return
+     */
+    /*public DominoStickerTile(Shape shape, Color color) {
+        sides = new EnumMap<>(Direction.class);
+        for (Direction d : Direction.values()) {
+            sides.put(d, new DominoStickerSide(shape, color, this));
+        }
+        vertical = true;
+        setName();
+    }*/
+
     public boolean isDouble() {
-        return getLeftSide().equals(getRightSide());
+        if (vertical)
+            return getLeftSide().equals(getRightSide());
+        else
+            return getTopSide().equals(getBottomSide());
     }
 
     private void setName() {
@@ -72,8 +89,8 @@ public class DominoStickerTile extends Tile<DominoStickerSide> {
 
     /**
      * Returns true if the current instance of DominoTile and the domino
-     * tile t have a side in common. Flips the current instance if necessary
-     * according to the direction d.
+     * tile t have a side in common. Flips or rotate the current instance
+     * if necessary according to the direction d.
      * @param t a domino tile adjacent to the current domino tile
      * @param d the position of the domino tile t with respect to the current
      *          domino tile
@@ -93,6 +110,11 @@ public class DominoStickerTile extends Tile<DominoStickerSide> {
                 return aux(this::getRightSide, this::getLeftSide, t::getLeftSide);
         }
         return false;
+    }
+
+    public void connectTile(DominoStickerTile tile) {
+
+
     }
 
     @Override
