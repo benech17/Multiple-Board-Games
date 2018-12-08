@@ -2,11 +2,11 @@ package model.core.enums;
 
 
 public enum Color {
-    RED (204, 0, 0),
-    GREEN (0, 204, 0),
-    BLUE (0, 0, 204),
-    ORANGE (255, 128, 0),
-    YELLOW (255, 255, 0);
+    RED(204, 0, 0),
+    GREEN(0, 204, 0),
+    BLUE(0, 0, 204),
+    ORANGE(255, 128, 0),
+    YELLOW(255, 255, 0);
 
     private final int red, green, blue;
 

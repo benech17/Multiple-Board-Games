@@ -35,6 +35,7 @@ public class SaboteurBoard extends Board<SaboteurTile> {
         addTileToMap(new Coordinate(0, 0), startCard);
     }
 
+    // TODO
     public boolean putCardAt(Coordinate c) {
         if (coordinateExists(c))
             return false;
@@ -89,5 +90,7 @@ public class SaboteurBoard extends Board<SaboteurTile> {
         System.out.println(board.startCard.getSides().get(Direction.RIGHT));
         System.out.println(board.treasureCard.getSides().get(Direction.LEFT));
         System.out.println(board.treasureReached());
+        System.out.println(board.getTileAt(new Coordinate(0, 2)).getAdjacentNodes());
+        System.out.println(board.getTileAt(new Coordinate(0, 2)).isLeaf());
     }
 }

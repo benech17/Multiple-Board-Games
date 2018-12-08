@@ -3,9 +3,6 @@ package model.saboteur;
 import model.core.card.tile.Tile;
 import model.core.enums.Direction;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 
 /**
  * TODO: Implement Iterable? in the abstract class Tile?
@@ -27,13 +24,17 @@ public abstract class SaboteurTile extends Tile<SaboteurSide> {
         return true;
     }
 
+    public boolean treasureReached() {
+        return findGoal(this, node -> (node instanceof TreasureCard));
+    }
+
     /**
      * Performs a Breadth-First Search on the tree data structure
      * starting from the current instance of SaboteurTile
      *
      * @return true if a treasure has been reached
      */
-    public boolean treasureReached() {
+    /*public boolean treasureReached() {
         // Queue of tiles to visit
         Queue<SaboteurTile> toVisit = new LinkedList<>();
         // Queue of visited tiles
@@ -61,13 +62,13 @@ public abstract class SaboteurTile extends Tile<SaboteurSide> {
                     toVisit.add(childTile);
                 }
             } else {
-                /* Handle the case where the current tile is null
-                 */
+                *//* Handle the case where the current tile is null
+                 *//*
                 toVisit.remove();
             }
         }
         return false;
-    }
+    }*/
 
     public boolean isHasPath() {
         return hasPath;
