@@ -57,12 +57,12 @@ public abstract class Tile<S extends Side> extends Card implements Node {
             sides.put(d, iterator.next());
     }
 
-    public boolean findGoal(Node startNode, Function<Node, Boolean> isGoal) {
+    public boolean findGoal(Function<Node, Boolean> isGoal) {
         // Queue of tiles to visit
         Queue<Node> toVisit = new LinkedList<>();
         // Queue of visited tiles
         Queue<Node> visitedTiles = new LinkedList<>();
-        toVisit.add(startNode); // Push the current node to the queue
+        toVisit.add(this); // Push the current node to the queue
         while (!toVisit.isEmpty()) {
             if (toVisit.peek() != null) {
                 // Pop the next tile to visit

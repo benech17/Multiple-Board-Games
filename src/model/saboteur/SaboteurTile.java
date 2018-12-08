@@ -25,7 +25,7 @@ public abstract class SaboteurTile extends Tile<SaboteurSide> {
     }
 
     public boolean treasureReached() {
-        return findGoal(this, node -> (node instanceof TreasureCard));
+        return findGoal(node -> (node instanceof TreasureCard));
     }
 
     /**

@@ -18,12 +18,12 @@ public interface Node {
 
     /**
      * Performs a Breadth-First Search on the tree data structure
-     * starting from the node startNode
+     * starting from the current node
      *
      * @return true if we found a node verifying a special condition given by
      * the function isGoal
      */
-    boolean findGoal(Node startNode, Function<Node, Boolean> isGoal);
+    boolean findGoal(Function<Node, Boolean> isGoal);
 
     /**
      * Checks if the current node is a leaf or not:
