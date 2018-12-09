@@ -7,12 +7,12 @@ import java.util.*;
 import java.util.function.Function;
 
 
-public abstract class Tile<S extends Side> extends Card implements Node {
+public abstract class AbstractTile<S extends Side> extends Card implements Node, Turnable {
     protected EnumMap<Direction, S> sides;
     protected EnumMap<Direction, Node> adjacentNodes;
 
-    public Tile() {
-        super("Tile", true);
+    public AbstractTile() {
+        super("AbstractTile", true);
         sides = new EnumMap<>(Direction.class);
         adjacentNodes = new EnumMap<>(Direction.class);
     }
@@ -49,6 +49,7 @@ public abstract class Tile<S extends Side> extends Card implements Node {
         return sides.get(Direction.RIGHT);
     }
 
+    @Override
     public void rotate(int distance) {
         ArrayList<S> sideList = new ArrayList<>(sides.values());
         Collections.rotate(sideList, distance);
@@ -57,6 +58,7 @@ public abstract class Tile<S extends Side> extends Card implements Node {
             sides.put(d, iterator.next());
     }
 
+    @Override
     public boolean findGoal(Function<Node, Boolean> isGoal) {
         // Queue of tiles to visit
         Queue<Node> toVisit = new LinkedList<>();

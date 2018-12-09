@@ -2,19 +2,19 @@ package model.core.card.tile;
 
 
 public abstract class Side {
-    private Tile parent;
+    private AbstractTile parent;
     private Side nextSide;
 
-    public Side(Tile parent, Side nextSide) {
+    public Side(AbstractTile parent, Side nextSide) {
         this.parent = parent;
         this.nextSide = nextSide;
     }
 
-    public Tile getParent() {
+    public AbstractTile getParent() {
         return parent;
     }
 
-    public void setParent(Tile parent) {
+    public void setParent(AbstractTile parent) {
         this.parent = parent;
     }
 

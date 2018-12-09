@@ -1,6 +1,6 @@
 package model.dominoes_stickers;
 
-import model.core.card.tile.Tile;
+import model.core.card.tile.AbstractTile;
 import model.core.enums.Color;
 import model.core.enums.Direction;
 import model.core.enums.Shape;
@@ -9,7 +9,7 @@ import java.util.EnumMap;
 import java.util.function.Supplier;
 
 
-public class DominoStickerTile extends Tile<DominoStickerSide> {
+public class DominoStickerTile extends AbstractTile<DominoStickerSide> {
     private boolean vertical;
 
     public DominoStickerTile(Shape leftShape, Color leftColor, Shape rightShape, Color rightColor) {

@@ -1,13 +1,13 @@
 package model.saboteur;
 
-import model.core.card.tile.Tile;
+import model.core.card.tile.AbstractTile;
 import model.core.enums.Direction;
 
 
 /**
- * TODO: Implement Iterable? in the abstract class Tile?
+ * TODO: Implement Iterable? in the abstract class AbstractTile?
  */
-public abstract class SaboteurTile extends Tile<SaboteurSide> {
+public abstract class SaboteurTile extends AbstractTile<SaboteurSide> {
     private boolean hasPath;
 
     public SaboteurTile(boolean hasPath) {

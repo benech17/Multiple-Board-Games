@@ -1,10 +1,10 @@
 package model.dominoes;
 
 import model.core.enums.Direction;
-import model.core.card.tile.Tile;
+import model.core.card.tile.AbstractTile;
 
 
-public class DominoTile extends Tile<DominoSide> {
+public class DominoTile extends AbstractTile<DominoSide> {
     public DominoTile(int leftValue, int rightValue) {
         sides.put(Direction.LEFT, new DominoSide(leftValue, this));
         sides.put(Direction.RIGHT, new DominoSide(rightValue, this));

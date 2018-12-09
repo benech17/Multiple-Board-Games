@@ -1,11 +1,8 @@
 package model.dominoes;
 
-import model.core.player.Player;
+import model.core.player.AbstractPlayer;
 
-public class DominoesPlayer extends Player {
+public abstract class DominoesPlayer extends AbstractPlayer {
 
-    public boolean isYounger(Player p) {
-        return getAge() < p.getAge();
-    }
 
 }

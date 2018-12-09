@@ -1,4 +1,8 @@
 package model.core.deck;
 
-public abstract class Deck {
+import java.util.Queue;
+
+public interface Deck<T> {
+    Queue<T> getCards();
+    void shuffle();
 }
