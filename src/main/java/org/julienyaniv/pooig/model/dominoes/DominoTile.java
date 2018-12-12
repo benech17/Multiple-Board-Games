@@ -84,12 +84,4 @@ public class DominoTile extends AbstractTile<DominoSide> implements Comparable<D
         return "[" + getLeftSide().toString() + "|" + getRightSide().toString() + "]";
     }
 
-    public static void main(String[] args) {
-        DominoTile d1 = new DominoTile(1, 6);
-        DominoTile d2 = new DominoTile(6, 4);
-        //System.out.println(d1.getMatchingSide(d2)); // Sides match
-        DominoTile d3 = new DominoTile(3, 3);
-        System.out.println(d1);
-        //System.out.println(d2.getMatchingSide(d3)); // Sides don't match
-    }
 }
