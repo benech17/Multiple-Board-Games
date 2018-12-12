@@ -17,7 +17,7 @@ public class DominoesBoard extends Board<DominoTile> {
     private Coordinate leftEnd, rightEnd; // left and right ends of the board
 
     public DominoesBoard(DominoTile t) {
-        super(1, 1); // à revoir
+        super(1, 10); // à revoir
         map = new LinkedList<>();
         map.add(new LinkedList<>());
         leftEnd = new Coordinate(0, 0);
@@ -34,6 +34,7 @@ public class DominoesBoard extends Board<DominoTile> {
      * @return
      */
     public boolean addDominoTile(DominoTile t, Coordinate c) {
+        System.out.println(t + " " + c);
         if (t == null)
             return false;
         HashMap<Direction, Coordinate> neighbors = getAdjacentCoordinates(c);

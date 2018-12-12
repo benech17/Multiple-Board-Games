@@ -4,15 +4,31 @@ import org.julienyaniv.pooig.model.core.card.tile.AbstractTile;
 import org.julienyaniv.pooig.model.core.enums.Direction;
 
 
-public class DominoTile extends AbstractTile<DominoSide> {
+public class DominoTile extends AbstractTile<DominoSide> implements Comparable<DominoTile> {
+    private final int weight;
     public DominoTile(int leftValue, int rightValue) {
         sides.put(Direction.LEFT, new DominoSide(leftValue, this));
         sides.put(Direction.RIGHT, new DominoSide(rightValue, this));
+        weight = rightValue + leftValue;
         setName();
     }
 
     public boolean isDouble() {
         return getLeftSide().getValue() == getRightSide().getValue();
+    }
+
+    /**
+     *
+     * @return the sum of the values of the two sides
+     */
+    public int getWeight() {
+        return weight;
+    }
+
+    public int compareTo(DominoTile o) {
+        if (o == null)
+            throw new NullPointerException();
+        return Integer.compare(weight, o.weight);
     }
 
     private void setName() {
