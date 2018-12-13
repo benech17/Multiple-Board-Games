@@ -3,7 +3,7 @@ package org.julienyaniv.pooig.model.core.board;
 import java.util.Objects;
 
 public class Coordinate {
-    private int row, column;
+    private final int row, column; // Immutable coordinates
 
 
     public Coordinate(int row, int column) {

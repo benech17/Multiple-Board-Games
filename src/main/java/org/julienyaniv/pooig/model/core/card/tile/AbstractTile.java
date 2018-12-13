@@ -7,6 +7,13 @@ import java.util.*;
 import java.util.function.Function;
 
 
+/**
+ * Default implementation of a tile
+ * In the future make several implementation of a tile that implement
+ * different behaviours (using interfaces)
+ *
+ * @param <S>
+ */
 public abstract class AbstractTile<S extends Side> extends Card implements Node, Turnable {
     protected EnumMap<Direction, S> sides;
     protected EnumMap<Direction, Node> adjacentNodes;
