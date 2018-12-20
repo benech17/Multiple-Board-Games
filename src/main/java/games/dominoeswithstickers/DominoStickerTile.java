@@ -97,7 +97,7 @@ public class DominoStickerTile extends AbstractTile<DominoStickerSide> {
      * @return true if the current domino tile and the domino tile t share the
      * same side
      */
-    public boolean sidesMatch(DominoStickerTile t, Direction d) {
+    public boolean fitsWith(DominoStickerTile t, Direction d) {
         if (t == null) return false;
         switch (d) {
             case TOP:
@@ -131,7 +131,7 @@ public class DominoStickerTile extends AbstractTile<DominoStickerSide> {
         DominoStickerTile d2 = new DominoStickerTile(Shape.HEART, Color.BLUE, Shape.HEART, Color.RED);
         System.out.println(d1);
         System.out.println(d2);
-        System.out.println(d1.sidesMatch(d2, Direction.LEFT));
+        System.out.println(d1.fitsWith(d2, Direction.LEFT));
         //System.out.println(d1.getTopSide());
         //System.out.println(d2.getRightSide().equals(d1.getTopSide()));
     }

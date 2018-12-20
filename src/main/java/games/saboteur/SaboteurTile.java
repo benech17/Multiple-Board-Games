@@ -21,7 +21,7 @@ public abstract class SaboteurTile extends AbstractTile<SaboteurSide> {
      * @param d
      * @return
      */
-    public boolean sidesMatch(SaboteurTile t, Direction d) {
+    public boolean fitsWith(SaboteurTile t, Direction d) {
         return true;
     }
 

@@ -39,7 +39,7 @@ public class DominoesBoard extends Board<DominoTile> {
             return false;
         HashMap<Direction, Coordinate> neighbors = getAdjacentCoordinates(c);
         if (neighbors.get(Direction.LEFT) != null) {
-            if (t.sidesMatch(getTileAt(neighbors.get(Direction.LEFT)), Direction.LEFT)) {
+            if (t.fitsWith(getTileAt(neighbors.get(Direction.LEFT)), Direction.LEFT)) {
                 // Connects the side of the domino tile t with the domino tile to its left
                 // Useless in fact
                 t.getLeftSide().setNextSide((getTileAt(neighbors.get(Direction.LEFT))).getRightSide());
@@ -49,7 +49,7 @@ public class DominoesBoard extends Board<DominoTile> {
             }
         }
         if (neighbors.get(Direction.RIGHT) != null) {
-            if (t.sidesMatch(getTileAt(neighbors.get(Direction.RIGHT)), Direction.RIGHT)) {
+            if (t.fitsWith(getTileAt(neighbors.get(Direction.RIGHT)), Direction.RIGHT)) {
                 map.get(0).add(0, t);
                 leftEnd = c;
                 return true;

@@ -57,7 +57,7 @@ public class DominoTile extends AbstractTile<DominoSide> implements Comparable<D
      * @return true if the current domino tile and the domino tile t share the
      * same side
      */
-    public boolean sidesMatch(DominoTile t, Direction d) {
+    public boolean fitsWith(DominoTile t, Direction d) {
         if (t == null) return false;
         switch (d) {
             case LEFT:
