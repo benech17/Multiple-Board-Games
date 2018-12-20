@@ -14,7 +14,7 @@ import java.util.function.Function;
  *
  * @param <S>
  */
-public abstract class AbstractTile<S extends Side> extends Card implements Node, Turnable {
+public abstract class AbstractTile<S extends Side> extends Card implements Tile<S>, Node, Turnable {
     protected EnumMap<Direction, S> sides;
     protected EnumMap<Direction, Node> adjacentNodes;
 
@@ -40,18 +40,22 @@ public abstract class AbstractTile<S extends Side> extends Card implements Node,
         return sides;
     }
 
+    @Override
     public S getTopSide() {
         return sides.get(Direction.TOP);
     }
 
+    @Override
     public S getBottomSide() {
         return sides.get(Direction.BOTTOM);
     }
 
+    @Override
     public S getLeftSide() {
         return sides.get(Direction.LEFT);
     }
 
+    @Override
     public S getRightSide() {
         return sides.get(Direction.RIGHT);
     }
@@ -63,6 +67,22 @@ public abstract class AbstractTile<S extends Side> extends Card implements Node,
         Iterator<S> iterator = sideList.iterator();
         for (Direction d : sides.keySet())
             sides.put(d, iterator.next());
+    }
+
+    @Override
+    public boolean fitsWith(Tile t, Direction d) {
+        if (t == null) return false;
+        switch (d) {
+            case TOP:
+                return getTopSide().equals(t.getBottomSide());
+            case LEFT:
+                return getLeftSide().equals(t.getRightSide());
+            case RIGHT:
+                return getRightSide().equals(t.getLeftSide());
+            case BOTTOM:
+                return getBottomSide().equals(t.getTopSide());
+        }
+        return false;
     }
 
     @Override
