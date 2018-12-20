@@ -1,6 +1,7 @@
 package games.saboteur;
 
 import games.core.model.card.tile.AbstractTile;
+import games.core.model.card.tile.Tile;
 import games.core.model.enums.Direction;
 
 
@@ -20,6 +21,14 @@ public abstract class SaboteurTile extends AbstractTile<SaboteurSide> {
 
     public boolean isHasPath() {
         return hasPath;
+    }
+
+    @Override
+    public boolean fitsWith(Tile t, Direction d) {
+        // We can't put a card if the other has paths
+        // which don't connect
+        return super.fitsWith(t, d) && hasPath;
+
     }
 
     @Override
