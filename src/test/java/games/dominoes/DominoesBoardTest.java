@@ -1,4 +1,4 @@
-package org.model.dominoes;
+package games.dominoes;
 
 import org.junit.Test;
 import games.dominoes.DominoTile;

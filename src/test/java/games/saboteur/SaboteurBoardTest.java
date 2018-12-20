@@ -1,4 +1,4 @@
-package org.model.saboteur;
+package games.saboteur;
 
 import org.junit.Test;
 
