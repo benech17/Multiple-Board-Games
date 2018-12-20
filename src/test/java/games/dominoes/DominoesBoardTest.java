@@ -1,8 +1,6 @@
 package games.dominoes;
 
 import org.junit.Test;
-import games.dominoes.DominoTile;
-import games.dominoes.DominoesBoard;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
