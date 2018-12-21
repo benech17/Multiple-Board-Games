@@ -2,9 +2,6 @@ package games.dominoes;
 
 import games.core.model.board.AbstractBoard;
 import games.core.model.board.Coordinate;
-import games.core.model.enums.Direction;
-
-import java.util.HashMap;
 
 
 /**
@@ -30,7 +27,7 @@ public class DominoesBoard extends AbstractBoard<DominoTile> {
      * @param c the coordinate of the specified position
      * @return
      */
-    public boolean addDominoTile(DominoTile t, Coordinate c) {
+    /**public boolean addDominoTile(DominoTile t, Coordinate c) {
         System.out.println(t + " " + c);
         if (t == null)
             return false;
@@ -62,6 +59,7 @@ public class DominoesBoard extends AbstractBoard<DominoTile> {
     public boolean addToRightEnd(DominoTile t) {
         return addDominoTile(t, rightEnd.add(new Coordinate(0, 1)));
     }
+     */
 
     @Override
     public String toString() {

@@ -34,7 +34,7 @@ public class SaboteurBoard extends AbstractBoard<SaboteurTile> {
 
     // TODO
     public boolean putCardAt(Coordinate c) {
-        if (coordinateExists(c))
+        if (coordinateInsideBoard(c))
             return false;
         SaboteurTile saboteurTile = getTileAt(c);
         adjacentCoordinates = getAdjacentCoordinates(c);

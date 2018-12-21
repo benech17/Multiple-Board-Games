@@ -1,5 +1,8 @@
 package games.core.model.board;
 
+import games.core.model.enums.Direction;
+
+import java.util.HashMap;
 import java.util.Objects;
 
 public class Coordinate {
@@ -11,6 +14,27 @@ public class Coordinate {
         this.column = column;
     }
 
+    /**
+     * Returns the 4 adjacent coordinates to a given coordinate if they exist
+     *
+     * @param c
+     * @return a HashMap containing the adjacent coordinates as value and their
+     * position with respect to the given coordinate
+     */
+    public HashMap<Direction, Coordinate> getAdjacentCoordinates(Coordinate c) {
+        HashMap<Direction, Coordinate> adjacentCoordinates = new HashMap<>();
+        int column = c.getColumn();
+        int row = c.getRow();
+        Coordinate top = new Coordinate(row + 1, column);
+        Coordinate bottom = new Coordinate(row - 1, column);
+        Coordinate left = new Coordinate(row, column - 1);
+        Coordinate right = new Coordinate(row, column + 1);
+        adjacentCoordinates.put(Direction.TOP, top);
+        adjacentCoordinates.put(Direction.BOTTOM, bottom);
+        adjacentCoordinates.put(Direction.LEFT, left);
+        adjacentCoordinates.put(Direction.RIGHT, right);
+        return adjacentCoordinates;
+    }
 
     public int getRow() {
         return row;

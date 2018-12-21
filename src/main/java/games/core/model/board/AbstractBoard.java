@@ -27,55 +27,43 @@ public abstract class AbstractBoard<T> implements Board<T> {
         return board;
     }
 
-    @Override
-    public HashMap<Direction, Coordinate> getAdjacentCoordinates(Coordinate c) {
-        adjacentCoordinates = new HashMap<>();
-        int column = c.getColumn();
-        int row = c.getRow();
-        Coordinate top = new Coordinate(row + 1, column);
-        Coordinate bottom = new Coordinate(row - 1, column);
-        Coordinate left = new Coordinate(row, column - 1);
-        Coordinate right = new Coordinate(row, column + 1);
-        if (coordinateExists(top))
-            adjacentCoordinates.put(Direction.TOP, top);
-        if (coordinateExists(bottom))
-            adjacentCoordinates.put(Direction.BOTTOM, bottom);
-        if (coordinateExists(left))
-            adjacentCoordinates.put(Direction.LEFT, left);
-        if (coordinateExists(right))
-            adjacentCoordinates.put(Direction.RIGHT, right);
-        return adjacentCoordinates;
-    }
-
-    @Override
-    public boolean coordinateExists(Coordinate c) {
+    /**
+     * Tests if a coordinate corresponds to an actual coordinate in the board
+     *
+     * @param c
+     * @return true if the coordinate c is inside the board
+     */
+    protected boolean coordinateInsideBoard(Coordinate c) {
         int x = c.getColumn();
         int y = c.getRow();
         return (0 <= x && x < length && 0 <= y && y < height);
     }
 
-    /**
-     * Get the card at the given position if it exists
-     * and throws a NoSuchCoordinateException otherwise
-     *
-     * @param c coordinate in the board
-     * @return the card at the coordinate c
-     */
     @Override
-    public T getTileAt(Coordinate c) {
-        if (!coordinateExists(c))
+    public T getTileAt(Coordinate c) throws NoSuchCoordinateException {
+        if (!coordinateInsideBoard(c))
             throw new NoSuchCoordinateException();
         return board[c.getRow()][c.getColumn()];
     }
 
     @Override
-    public void putTileAt(Coordinate c, T tile) {
-        if (!coordinateExists(c))
+    public boolean putTileAt(Coordinate c, T tile) throws NoSuchCoordinateException {
+        if (!coordinateInsideBoard(c))
             throw new NoSuchCoordinateException();
+        if (board[c.getRow()][c.getColumn()] != null)
+            return false;
         board[c.getRow()][c.getColumn()] = tile;
+        return true;
     }
 
     @Override
+    public boolean removeTileAt(Coordinate c) throws NoSuchCoordinateException {
+        if (!coordinateInsideBoard(c))
+            throw new NoSuchCoordinateException();
+        board[c.getRow()][c.getColumn()] = null;
+        return true;
+    }
+
     public String toString() {
         String s = "";
         for (int i = 0; i < height; i++) {
