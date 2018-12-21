@@ -5,14 +5,15 @@ import games.core.model.enums.Direction;
 import java.util.HashMap;
 
 
-public abstract class AbstractBoard<T> implements Board<T> {
+// Should we keep it abstract?
+public abstract class DefaultBoardImpl<T> implements Board<T> {
 
     protected T[][] board;
     protected int height, length;
     protected HashMap<Direction, Coordinate> adjacentCoordinates;
 
     @SuppressWarnings("unchecked")
-    public AbstractBoard(int height, int length) {
+    public DefaultBoardImpl(int height, int length) {
         this.height = height;
         this.length = length;
         this.board = (T[][]) new Object[height][length];

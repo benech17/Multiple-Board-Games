@@ -1,6 +1,6 @@
 package games.saboteur;
 
-import games.core.model.card.tile.AbstractTile;
+import games.core.model.card.tile.DefaultTileImpl;
 import games.core.model.card.tile.Tile;
 import games.core.model.enums.Direction;
 
@@ -8,7 +8,7 @@ import games.core.model.enums.Direction;
 /**
  * TODO: Implement Iterable? in the abstract class AbstractTile?
  */
-public abstract class SaboteurTile extends AbstractTile<SaboteurSide> {
+public abstract class SaboteurTile extends DefaultTileImpl<SaboteurSide> {
     private final boolean hasPath;
 
     public SaboteurTile(boolean hasPath) {

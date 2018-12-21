@@ -1,11 +1,11 @@
 package games.puzzle;
 
 import games.core.model.board.Coordinate;
-import games.core.model.card.tile.AbstractTile;
+import games.core.model.card.tile.DefaultTileImpl;
 import games.core.model.enums.Direction;
 
 
-public class PuzzleTile extends AbstractTile<PuzzleSide> {
+public class PuzzleTile extends DefaultTileImpl<PuzzleSide> {
     public final Coordinate position;
 
     public PuzzleTile(Coordinate position, int topValue, int leftValue, int rightValue, int bottomValue) {

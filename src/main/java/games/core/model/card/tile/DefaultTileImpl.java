@@ -14,11 +14,11 @@ import java.util.function.Function;
  *
  * @param <S>
  */
-public abstract class AbstractTile<S extends Side> extends Card implements Tile<S>, Node, Turnable {
+public abstract class DefaultTileImpl<S extends Side> extends Card implements Tile<S>, Node, Turnable {
     protected EnumMap<Direction, S> sides;
     protected EnumMap<Direction, Node> adjacentNodes;
 
-    public AbstractTile() {
+    public DefaultTileImpl() {
         super("AbstractTile", true);
         sides = new EnumMap<>(Direction.class);
         adjacentNodes = new EnumMap<>(Direction.class);

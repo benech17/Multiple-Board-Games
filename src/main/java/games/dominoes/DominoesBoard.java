@@ -1,14 +1,14 @@
 package games.dominoes;
 
-import games.core.model.board.AbstractBoard;
 import games.core.model.board.Coordinate;
+import games.core.model.board.DefaultBoardImpl;
 
 
 /**
  * At the end this game of dominoes should be implemented as
  * a subset of the more general game of dominoes in 2d
  */
-public class DominoesBoard extends AbstractBoard<DominoTile> {
+public class DominoesBoard extends DefaultBoardImpl<DominoTile> {
     // These coordinates should be removed
     private Coordinate leftEnd, rightEnd; // left and right ends of the board
 

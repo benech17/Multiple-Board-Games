@@ -1,10 +1,10 @@
 package games.dominoes;
 
-import games.core.model.card.tile.AbstractTile;
+import games.core.model.card.tile.DefaultTileImpl;
 import games.core.model.enums.Direction;
 
 
-public class DominoTile extends AbstractTile<DominoSide> implements Comparable<DominoTile> {
+public class DominoTile extends DefaultTileImpl<DominoSide> implements Comparable<DominoTile> {
     private final int weight;
     public DominoTile(int leftValue, int rightValue) {
         sides.put(Direction.LEFT, new DominoSide(leftValue, this));

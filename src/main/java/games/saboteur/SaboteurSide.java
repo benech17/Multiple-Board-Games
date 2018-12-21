@@ -1,6 +1,5 @@
 package games.saboteur;
 
-import games.core.model.card.tile.AbstractTile;
 import games.core.model.card.tile.Side;
 
 import java.util.Objects;
@@ -8,7 +7,7 @@ import java.util.Objects;
 public class SaboteurSide extends Side {
     private final boolean hasPath;
 
-    public SaboteurSide(AbstractTile parent, boolean hasPath) {
+    public SaboteurSide(SaboteurTile parent, boolean hasPath) {
         super(parent, null);
         this.hasPath = hasPath;
     }

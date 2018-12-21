@@ -1,12 +1,12 @@
 package games.dominoeswithstickers;
 
-import games.core.model.board.AbstractBoard;
 import games.core.model.board.Coordinate;
+import games.core.model.board.DefaultBoardImpl;
 import games.core.model.enums.Color;
 import games.core.model.enums.Shape;
 
 
-public class DominoesStickerBoard extends AbstractBoard<DominoStickerSide> {
+public class DominoesStickerBoard extends DefaultBoardImpl<DominoStickerSide> {
 
     public DominoesStickerBoard(DominoStickerTile t) {
         // We put the first domino tile at the center of the board

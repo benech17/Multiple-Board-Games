@@ -1,13 +1,13 @@
 package games.saboteur;
 
-import games.core.model.board.AbstractBoard;
 import games.core.model.board.Coordinate;
+import games.core.model.board.DefaultBoardImpl;
 import games.core.model.enums.Direction;
 
 import java.util.ArrayList;
 
 
-public class SaboteurBoard extends AbstractBoard<SaboteurTile> {
+public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
     // Number of cards between the start card and goal card
     protected final int DISTANCE = 7;
     private StartCard startCard;
@@ -33,7 +33,7 @@ public class SaboteurBoard extends AbstractBoard<SaboteurTile> {
     }
 
     // TODO
-    public boolean putCardAt(Coordinate c) {
+    /*public boolean putCardAt(Coordinate c) {
         if (coordinateInsideBoard(c))
             return false;
         SaboteurTile saboteurTile = getTileAt(c);
@@ -41,15 +41,15 @@ public class SaboteurBoard extends AbstractBoard<SaboteurTile> {
         for (Coordinate coord : adjacentCoordinates.values()) {
             SaboteurTile t = getTileAt(coord);
             for (Direction d : t.getSides().keySet()) {
-                /*switch (d) {
+                *//*switch (d) {
                     case TOP:
                         if ((SaboteurTile) t.getSides().get(Direction.BOTTOM);
-                }*/
+                }*//*
             }
 
         }
         return true;
-    }
+    }*/
 
     /**
      * Puts the shuffled goal cards on the board

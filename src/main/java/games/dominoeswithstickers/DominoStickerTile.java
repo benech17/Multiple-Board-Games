@@ -1,6 +1,6 @@
 package games.dominoeswithstickers;
 
-import games.core.model.card.tile.AbstractTile;
+import games.core.model.card.tile.DefaultTileImpl;
 import games.core.model.enums.Color;
 import games.core.model.enums.Direction;
 import games.core.model.enums.Shape;
@@ -9,7 +9,7 @@ import java.util.EnumMap;
 import java.util.function.Supplier;
 
 
-public class DominoStickerTile extends AbstractTile<DominoStickerSide> {
+public class DominoStickerTile extends DefaultTileImpl<DominoStickerSide> {
     private boolean vertical;
 
     public DominoStickerTile(Shape leftShape, Color leftColor, Shape rightShape, Color rightColor) {
