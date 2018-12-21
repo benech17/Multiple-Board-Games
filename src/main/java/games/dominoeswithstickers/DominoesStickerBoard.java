@@ -1,19 +1,19 @@
 package games.dominoeswithstickers;
 
-import games.core.model.board.Board;
+import games.core.model.board.AbstractBoard;
 import games.core.model.board.Coordinate;
 import games.core.model.enums.Color;
 import games.core.model.enums.Shape;
 
 
-public class DominoesStickerBoard extends Board<DominoStickerSide> {
+public class DominoesStickerBoard extends AbstractBoard<DominoStickerSide> {
 
     public DominoesStickerBoard(DominoStickerTile t) {
-        // We put the first domino tile at the center of the map
+        // We put the first domino tile at the center of the board
         super(50, 50);
 
-        addTileToMap(new Coordinate(0, 0), t.getLeftSide());
-        addTileToMap(new Coordinate(0, 1), t.getRightSide());
+        putTileAt(new Coordinate(0, 0), t.getLeftSide());
+        putTileAt(new Coordinate(0, 1), t.getRightSide());
     }
 
     /**
@@ -31,13 +31,13 @@ public class DominoesStickerBoard extends Board<DominoStickerSide> {
                 // Connects the side of the domino tile t with the domino tile to its left
                 // Useless in fact
                 t.getLeftSide().setNextSide((getTileAt(neighbors.get(Direction.LEFT))).getRightSide());
-                map.get(0).add(t);
+                board.get(0).add(t);
                 return true;
             }
         }
         if (neighbors.get(Direction.RIGHT) != null) {
             if (t.sidesMatch(getTileAt(neighbors.get(Direction.RIGHT)), Direction.RIGHT)) {
-                map.get(0).add(0, t);
+                board.get(0).add(0, t);
                 return true;
             }
         }
@@ -50,7 +50,7 @@ public class DominoesStickerBoard extends Board<DominoStickerSide> {
         String s = "";
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < height; j++) {
-                s += ((map.get(i).get(j) == null)?"XX":map.get(i).get(j)) + " ";
+                s += ((board[i][j] == null) ? "XX" : board[i][j]) + " ";
             }
             s += "\n";
         }

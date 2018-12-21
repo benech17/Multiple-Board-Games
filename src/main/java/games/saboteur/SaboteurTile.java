@@ -28,7 +28,6 @@ public abstract class SaboteurTile extends AbstractTile<SaboteurSide> {
         // We can't put a card if the other has paths
         // which don't connect
         return super.fitsWith(t, d) && hasPath;
-
     }
 
     @Override

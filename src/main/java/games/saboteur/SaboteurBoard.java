@@ -1,13 +1,13 @@
 package games.saboteur;
 
-import games.core.model.board.Board;
+import games.core.model.board.AbstractBoard;
 import games.core.model.board.Coordinate;
 import games.core.model.enums.Direction;
 
 import java.util.ArrayList;
 
 
-public class SaboteurBoard extends Board<SaboteurTile> {
+public class SaboteurBoard extends AbstractBoard<SaboteurTile> {
     // Number of cards between the start card and goal card
     protected final int DISTANCE = 7;
     private StartCard startCard;
@@ -18,7 +18,7 @@ public class SaboteurBoard extends Board<SaboteurTile> {
         putStartCard();
         putGoalCards();
         TestCard c = new TestCard();
-        addTileToMap(new Coordinate(0, 1), c);
+        putTileAt(new Coordinate(0, 1), c);
         startCard.getSides().get(Direction.RIGHT).setNextSide(c.getSides().get(Direction.LEFT));
 
         c.getSides().get(Direction.LEFT).setNextSide(startCard.getSides().get(Direction.RIGHT));
@@ -29,7 +29,7 @@ public class SaboteurBoard extends Board<SaboteurTile> {
 
     private void putStartCard() {
         startCard = new StartCard();
-        addTileToMap(new Coordinate(0, 0), startCard);
+        putTileAt(new Coordinate(0, 0), startCard);
     }
 
     // TODO
@@ -67,7 +67,7 @@ public class SaboteurBoard extends Board<SaboteurTile> {
         */
         // For debugging
         treasureCard = new TreasureCard();
-        addTileToMap(new Coordinate(0, 2), treasureCard);
+        putTileAt(new Coordinate(0, 2), treasureCard);
     }
 
     private boolean treasureReached() {
@@ -77,7 +77,7 @@ public class SaboteurBoard extends Board<SaboteurTile> {
     @Override
     public String toString() {
         return "SaboteurBoard{" +
-                "map=" + map +
+                "board=" + board +
                 '}';
     }
 

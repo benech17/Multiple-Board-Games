@@ -1,7 +1,7 @@
 package games.core.model.card.tile;
 
-import games.core.model.enums.Direction;
 import games.core.model.card.Card;
+import games.core.model.enums.Direction;
 
 import java.util.*;
 import java.util.function.Function;
@@ -26,7 +26,7 @@ public abstract class AbstractTile<S extends Side> extends Card implements Tile<
 
     @Override
     public EnumMap<Direction, Node> getAdjacentNodes() {
-        // We build the map each time we call the function:
+        // We build the board each time we call the function:
         // we may update it each time we add a new connexion
         for (Direction d : sides.keySet()) {
             //System.out.println(sides.get(d));

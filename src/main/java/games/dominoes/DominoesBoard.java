@@ -1,29 +1,26 @@
 package games.dominoes;
 
-import games.core.model.board.Board;
+import games.core.model.board.AbstractBoard;
 import games.core.model.board.Coordinate;
 import games.core.model.enums.Direction;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 
 
 /**
  * At the end this game of dominoes should be implemented as
  * a subset of the more general game of dominoes in 2d
  */
-public class DominoesBoard extends Board<DominoTile> {
+public class DominoesBoard extends AbstractBoard<DominoTile> {
     // These coordinates should be removed
     private Coordinate leftEnd, rightEnd; // left and right ends of the board
 
     public DominoesBoard(DominoTile t) {
-        super(1, 10); // à revoir
-        map = new LinkedList<>();
-        map.add(new LinkedList<>());
+        super(10, 10);
         leftEnd = new Coordinate(0, 0);
         rightEnd = leftEnd;
-        // We put the first domino tile at the center of the map
-        map.get(0).add(t);
+        // We put the first domino tile at the center of the board
+        board[0][0] = t;
     }
 
     /**
@@ -43,14 +40,14 @@ public class DominoesBoard extends Board<DominoTile> {
                 // Connects the side of the domino tile t with the domino tile to its left
                 // Useless in fact
                 t.getLeftSide().setNextSide((getTileAt(neighbors.get(Direction.LEFT))).getRightSide());
-                map.get(0).add(t);
+                board[0][0] = t;
                 rightEnd = c;
                 return true;
             }
         }
         if (neighbors.get(Direction.RIGHT) != null) {
             if (t.fitsWith(getTileAt(neighbors.get(Direction.RIGHT)), Direction.RIGHT)) {
-                map.get(0).add(0, t);
+                board[0][0] = t;
                 leftEnd = c;
                 return true;
             }
@@ -68,10 +65,9 @@ public class DominoesBoard extends Board<DominoTile> {
 
     @Override
     public String toString() {
-        System.out.println(map.get(0).size());
         String s = "";
-        for (int j = 0; j < map.get(0).size(); j++) {
-            s += map.get(0).get(j);
+        for (int j = 0; j < height; j++) {
+            s += board[0][j];
         }
         return s;
     }

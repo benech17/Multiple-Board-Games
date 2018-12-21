@@ -21,4 +21,20 @@ public class DominoesDeckBuilder implements DeckBuilder {
             }
         }
     }
+
+    public static void main(String[] args) {
+        DominoesDeckBuilder b = new DominoesDeckBuilder();
+        b.buildCards();
+        System.out.println(b.getDeck());
+        System.out.println(b.getSize());
+
+    }
+
+    public int getSize() {
+        return deck.size();
+    }
+
+    public Queue<DominoTile> getDeck() {
+        return deck;
+    }
 }

@@ -3,7 +3,7 @@ package games.core.model.board;
 import java.util.Objects;
 
 public class Coordinate {
-    private final int row, column; // Immutable coordinates
+    private final int row, column;
 
 
     public Coordinate(int row, int column) {

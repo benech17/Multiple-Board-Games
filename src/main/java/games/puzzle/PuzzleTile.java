@@ -1,12 +1,15 @@
 package games.puzzle;
 
+import games.core.model.board.Coordinate;
 import games.core.model.card.tile.AbstractTile;
 import games.core.model.enums.Direction;
 
 
 public class PuzzleTile extends AbstractTile<PuzzleSide> {
+    public final Coordinate position;
 
-    public PuzzleTile(int topValue, int leftValue, int rightValue, int bottomValue) {
+    public PuzzleTile(Coordinate position, int topValue, int leftValue, int rightValue, int bottomValue) {
+        this.position = position;
         sides.put(Direction.TOP, new PuzzleSide(topValue, this));
         sides.put(Direction.LEFT, new PuzzleSide(leftValue, this));
         sides.put(Direction.RIGHT, new PuzzleSide(rightValue, this));
@@ -30,6 +33,7 @@ public class PuzzleTile extends AbstractTile<PuzzleSide> {
     @Override
     public String toString() {
         return "PuzzleTile{" +
+                "position=" + position +
                 "sides=" + sides +
                 '}';
     }
