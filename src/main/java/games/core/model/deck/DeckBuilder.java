@@ -1,5 +1,8 @@
 package games.core.model.deck;
 
-public interface DeckBuilder {
-    void buildCards();
+
+import java.util.Queue;
+
+public interface DeckBuilder<C> {
+    Queue<C> buildCards();
 }

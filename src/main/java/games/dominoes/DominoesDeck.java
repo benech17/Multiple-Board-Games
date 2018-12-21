@@ -1,25 +1,16 @@
 package games.dominoes;
 
-import games.core.model.deck.Deck;
 import games.core.model.deck.DeckBuilder;
+import games.core.model.deck.DeckImpl;
 
 import java.util.Queue;
 
-public class DominoesDeck implements Deck<DominoTile> {
+public abstract class DominoesDeck extends DeckImpl<DominoTile> {
 
     private DeckBuilder builder = new DominoesDeckBuilder();
 
     public DominoesDeck() {
-        builder.buildCards();
+        cards = builder.buildCards();
     }
 
-    @Override
-    public Queue<DominoTile> getCards() {
-        return null;
-    }
-
-    @Override
-    public void shuffle() {
-
-    }
 }
