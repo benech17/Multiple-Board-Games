@@ -41,6 +41,7 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
             if (!tile.fitsWith(adjacentTiles.get(d), d))
                 return false;
         }
+        // Make the connections
         // The tile fits with the surrounding tiles, let's put it in the board
         return super.putTileAt(c, tile);
     }
@@ -61,8 +62,9 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
 
     }
 
-    private boolean treasureReached() {
-        return startCard.treasureReached();
+    public boolean treasureReached() {
+        //return startCard.treasureReached();
+        return findGoal(new Coordinate(CENTER_ROW, 0), node -> node instanceof TreasureCard);
     }
 
     @Override

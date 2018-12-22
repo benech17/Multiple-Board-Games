@@ -4,7 +4,9 @@ import games.core.model.enums.Direction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.function.Function;
 
 
 // Should we keep it abstract?
@@ -37,6 +39,16 @@ public abstract class DefaultBoardImpl<T> implements Board<T> {
         for (Direction d : adjCoords.keySet()) {
             if (coordinateInsideBoard(adjCoords.get(d)) && getTileAt(adjCoords.get(d)) != null)
                 adjTiles.put(d, getTileAt(adjCoords.get(d)));
+        }
+        return adjTiles;
+    }
+
+    public HashMap<Coordinate, T> getAdjacentTilesWithCoordinates(Coordinate c) throws NoSuchCoordinateException {
+        HashMap<Direction, Coordinate> adjCoords = c.getAdjacentCoordinates();
+        HashMap<Coordinate, T> adjTiles = new HashMap<>();
+        for (Direction d : adjCoords.keySet()) {
+            if (coordinateInsideBoard(adjCoords.get(d)) && getTileAt(adjCoords.get(d)) != null)
+                adjTiles.put(adjCoords.get(d), getTileAt(adjCoords.get(d)));
         }
         return adjTiles;
     }
@@ -76,6 +88,45 @@ public abstract class DefaultBoardImpl<T> implements Board<T> {
             throw new NoSuchCoordinateException();
         board.get(c.getRow()).set(c.getColumn(), null);
         return true;
+    }
+
+    /**
+     * A bit complicated, maybe we should extend LinkedHashMap to
+     *
+     * @param start
+     * @param isGoal
+     * @return
+     */
+    public boolean findGoal(Coordinate start, Function<T, Boolean> isGoal) {
+        // Queue of tiles to visit
+        LinkedHashMap<Coordinate, T> toVisit = new LinkedHashMap<>();
+        // Queue of visited tiles
+        LinkedHashMap<Coordinate, T> visitedTiles = new LinkedHashMap<>();
+        toVisit.put(start, getTileAt(start)); // Push the current node to the queue
+        Coordinate currentCoord;
+        while (!toVisit.isEmpty()) {
+            if (toVisit.get(new ArrayList<>(toVisit.keySet()).get(0)) != null) {
+                // Pop the next tile to visit
+                T t = toVisit.get(new ArrayList<>(toVisit.keySet()).get(0));
+                currentCoord = new ArrayList<>(toVisit.keySet()).get(0);
+                toVisit.remove(new ArrayList<>(toVisit.keySet()).get(0));
+                // We've found the goal, the job is done
+                if (isGoal.apply(t))
+                    return true;
+                // This tile has already been visited, we skip it
+                if (visitedTiles.containsValue(t))
+                    continue;
+                visitedTiles.put(currentCoord, t);
+                for (Coordinate c : getAdjacentTilesWithCoordinates(currentCoord).keySet()) {
+                    if (getTileAt(c) != null)
+                        toVisit.put(c, getTileAt(c));
+                }
+            } else {
+                // Handle the case where the current tile is null
+                toVisit.remove(new ArrayList<>(toVisit.keySet()).get(0));
+            }
+        }
+        return false;
     }
 
     public String toString() {

@@ -5,7 +5,7 @@ import games.core.model.card.tile.Side;
 import java.util.Objects;
 
 public class SaboteurSide extends Side {
-    private final boolean hasPath;
+    private boolean hasPath;
 
     public SaboteurSide(SaboteurTile parent, boolean hasPath) {
         super(parent, null);
@@ -18,6 +18,10 @@ public class SaboteurSide extends Side {
         if (o == null || getClass() != o.getClass()) return false;
         SaboteurSide that = (SaboteurSide) o;
         return hasPath == that.hasPath;
+    }
+
+    public void setHasPath(boolean hasPath) {
+        this.hasPath = hasPath;
     }
 
     @Override
