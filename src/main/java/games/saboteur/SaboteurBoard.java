@@ -35,6 +35,7 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
         if (!coordinateInsideBoard(c))
             throw new NoSuchCoordinateException();
         HashMap<Direction, SaboteurTile> adjacentTiles = getAdjacentTiles(c);
+        System.out.println(adjacentTiles);
         // We check if the tile fits with each adjacent tile
         for (Direction d : adjacentTiles.keySet()) {
             if (!tile.fitsWith(adjacentTiles.get(d), d))
@@ -62,5 +63,17 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
 
     private boolean treasureReached() {
         return startCard.treasureReached();
+    }
+
+    @Override
+    public String toString() {
+        String s = "";
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < length; j++) {
+                s += board.get(i).get(j) == null ? "n" : "X";
+            }
+            s += "\n";
+        }
+        return s;
     }
 }

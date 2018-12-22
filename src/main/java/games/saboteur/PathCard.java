@@ -4,7 +4,7 @@ package games.saboteur;
 /**
  * Enumerates the different sorts of path cards
  */
-public enum PathCards {
+public enum PathCard {
     ONE(false, true, true, false, false),
     TWO(false, false, true, true, false),
     THREE(true, false, true, false, false),
@@ -32,7 +32,7 @@ public enum PathCards {
      * @param left true if there is a left connection
      * @param path true if the connections are connected by a path
      */
-    PathCards(boolean top, boolean right, boolean bottom, boolean left, boolean path) {
+    PathCard(boolean top, boolean right, boolean bottom, boolean left, boolean path) {
         this.paths = new Boolean[]{top, right, bottom, left, path};
     }
 

@@ -21,26 +21,26 @@ public class SaboteurDeckBuilderImpl implements SaboteurDeckBuilder {
      */
     @Override
     public void buildPathCards() {
-        deck.add(new SaboteurTile(PathCards.ONE));
-        deck.add(new SaboteurTile(PathCards.TWO));
-        deck.add(new SaboteurTile(PathCards.THREE));
-        deck.add(new SaboteurTile(PathCards.FOUR));
-        deck.add(new SaboteurTile(PathCards.FIVE));
-        deck.add(new SaboteurTile(PathCards.SIX));
-        deck.add(new SaboteurTile(PathCards.SEVEN));
-        deck.add(new SaboteurTile(PathCards.EIGHT));
-        deck.add(new SaboteurTile(PathCards.NINE));
+        deck.add(new SaboteurTile(PathCard.ONE));
+        deck.add(new SaboteurTile(PathCard.TWO));
+        deck.add(new SaboteurTile(PathCard.THREE));
+        deck.add(new SaboteurTile(PathCard.FOUR));
+        deck.add(new SaboteurTile(PathCard.FIVE));
+        deck.add(new SaboteurTile(PathCard.SIX));
+        deck.add(new SaboteurTile(PathCard.SEVEN));
+        deck.add(new SaboteurTile(PathCard.EIGHT));
+        deck.add(new SaboteurTile(PathCard.NINE));
         for (int i = 0; i < 3; i++)
-            deck.add(new SaboteurTile(PathCards.ELEVEN));
+            deck.add(new SaboteurTile(PathCard.ELEVEN));
         for (int i = 0; i < 4; i++) {
-            deck.add(new SaboteurTile(PathCards.THIRTEEN));
-            deck.add(new SaboteurTile(PathCards.FIFTEEN));
+            deck.add(new SaboteurTile(PathCard.THIRTEEN));
+            deck.add(new SaboteurTile(PathCard.FIFTEEN));
         }
         for (int i = 0; i < 5; i++) {
-            deck.add(new SaboteurTile(PathCards.TEN));
-            deck.add(new SaboteurTile(PathCards.TWELVE));
-            deck.add(new SaboteurTile(PathCards.FOURTEEN));
-            deck.add(new SaboteurTile(PathCards.SIXTEEN));
+            deck.add(new SaboteurTile(PathCard.TEN));
+            deck.add(new SaboteurTile(PathCard.TWELVE));
+            deck.add(new SaboteurTile(PathCard.FOURTEEN));
+            deck.add(new SaboteurTile(PathCard.SIXTEEN));
         }
     }
 

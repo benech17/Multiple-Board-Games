@@ -35,7 +35,7 @@ public abstract class DefaultBoardImpl<T> implements Board<T> {
         HashMap<Direction, Coordinate> adjCoords = c.getAdjacentCoordinates();
         HashMap<Direction, T> adjTiles = new HashMap<>();
         for (Direction d : adjCoords.keySet()) {
-            if (coordinateInsideBoard(adjCoords.get(d)))
+            if (coordinateInsideBoard(adjCoords.get(d)) && getTileAt(adjCoords.get(d)) != null)
                 adjTiles.put(d, getTileAt(adjCoords.get(d)));
         }
         return adjTiles;

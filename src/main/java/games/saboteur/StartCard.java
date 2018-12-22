@@ -3,7 +3,7 @@ package games.saboteur;
 
 public class StartCard extends SaboteurTile {
     public StartCard() {
-        super(PathCards.TEN);
+        super(PathCard.TEN);
         setName("Start Card");
         setHidden(false);
     }

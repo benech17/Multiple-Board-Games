@@ -8,7 +8,7 @@ import games.core.model.enums.Direction;
 public class SaboteurTile extends DefaultTileImpl<SaboteurSide> {
     private final boolean hasPath;
 
-    public SaboteurTile(PathCards pathCard) {
+    public SaboteurTile(PathCard pathCard) {
         sides.put(Direction.TOP, new SaboteurSide(this, pathCard.getPaths()[0]));
         sides.put(Direction.RIGHT, new SaboteurSide(this, pathCard.getPaths()[1]));
         sides.put(Direction.BOTTOM, new SaboteurSide(this, pathCard.getPaths()[2]));
@@ -28,7 +28,7 @@ public class SaboteurTile extends DefaultTileImpl<SaboteurSide> {
     public boolean fitsWith(Tile t, Direction d) {
         // We can't put a card if the other has paths
         // which don't connect
-        return super.fitsWith(t, d) && hasPath;
+        return super.fitsWith(t, d);
     }
 
     @Override
