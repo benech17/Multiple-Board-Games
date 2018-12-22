@@ -2,17 +2,20 @@ package games.saboteur;
 
 import games.core.model.board.Coordinate;
 import games.core.model.board.DefaultBoardImpl;
+import games.core.model.board.NoSuchCoordinateException;
+import games.core.model.enums.Direction;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 
 public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
     // Number of cards between the start card and goal card
-    private final static int DISTANCE = 7;
-    private final static int NB_ROWS = 5;
-    private final static int NB_COLS = 9;
-    private final static int CENTER_ROW = NB_ROWS / 2;
+    private static final int DISTANCE = 7;
+    private static final int NB_ROWS = 5;
+    private static final int NB_COLS = 9;
+    private static final int CENTER_ROW = NB_ROWS / 2;
     StartCard startCard;
 
 
@@ -20,39 +23,26 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
         super(NB_ROWS, NB_COLS);
         putStartCard();
         putGoalCards();
-        /*TestCard c = new TestCard();
-        putTileAt(new Coordinate(0, 1), c);
-        startCard.getSides().get(Direction.RIGHT).setNextSide(c.getSides().get(Direction.LEFT));
-        */
-        //c.getSides().get(Direction.LEFT).setNextSide(startCard.getSides().get(Direction.RIGHT));
-        //c.getSides().get(Direction.RIGHT).setNextSide(treasureCard.getSides().get(Direction.LEFT));
-
-        //treasureCard.getSides().get(Direction.LEFT).setNextSide(c.getSides().get(Direction.RIGHT));
     }
 
     private void putStartCard() {
         startCard = new StartCard();
-        putTileAt(new Coordinate(CENTER_ROW, 0), startCard);
+        super.putTileAt(new Coordinate(CENTER_ROW, 0), startCard);
     }
 
-    // TODO
-    /*public boolean putCardAt(Coordinate c) {
-        if (coordinateInsideBoard(c))
-            return false;
-        SaboteurTile saboteurTile = getTileAt(c);
-        adjacentCoordinates = getAdjacentCoordinates(c);
-        for (Coordinate coord : adjacentCoordinates.values()) {
-            SaboteurTile t = getTileAt(coord);
-            for (Direction d : t.getSides().keySet()) {
-                *//*switch (d) {
-                    case TOP:
-                        if ((SaboteurTile) t.getSides().get(Direction.BOTTOM);
-                }*//*
-            }
-
+    @Override
+    public boolean putTileAt(Coordinate c, SaboteurTile tile) {
+        if (!coordinateInsideBoard(c))
+            throw new NoSuchCoordinateException();
+        HashMap<Direction, SaboteurTile> adjacentTiles = getAdjacentTiles(c);
+        // We check if the tile fits with each adjacent tile
+        for (Direction d : adjacentTiles.keySet()) {
+            if (!tile.fitsWith(adjacentTiles.get(d), d))
+                return false;
         }
-        return true;
-    }*/
+        // The tile fits with the surrounding tiles, let's put it in the board
+        return super.putTileAt(c, tile);
+    }
 
     /**
      * Puts the shuffled goal cards on the board
@@ -64,18 +54,13 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
         goalCards.add(new StoneCard());
 
         Collections.shuffle(goalCards);
-        putTileAt(new Coordinate(CENTER_ROW - 2, DISTANCE + 1), goalCards.get(0));
-        putTileAt(new Coordinate(CENTER_ROW, DISTANCE + 1), goalCards.get(1));
-        putTileAt(new Coordinate(CENTER_ROW + 2, DISTANCE + 1), goalCards.get(2));
+        super.putTileAt(new Coordinate(CENTER_ROW - 2, DISTANCE + 1), goalCards.get(0));
+        super.putTileAt(new Coordinate(CENTER_ROW, DISTANCE + 1), goalCards.get(1));
+        super.putTileAt(new Coordinate(CENTER_ROW + 2, DISTANCE + 1), goalCards.get(2));
 
     }
 
     private boolean treasureReached() {
         return startCard.treasureReached();
-    }
-
-    public static void main(String[] args) {
-        SaboteurBoard board = new SaboteurBoard();
-        System.out.println(board);
     }
 }

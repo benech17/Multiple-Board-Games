@@ -11,6 +11,10 @@ public abstract class DeckImpl<C> implements Deck<C> {
         return cards;
     }
 
+    public void setCards(Queue<C> cards) {
+        this.cards = cards;
+    }
+
     @Override
     public void shuffle() {
         Collections.shuffle((List<?>) cards);

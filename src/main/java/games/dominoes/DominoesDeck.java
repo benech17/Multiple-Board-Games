@@ -2,15 +2,25 @@ package games.dominoes;
 
 import games.core.model.deck.DeckBuilder;
 import games.core.model.deck.DeckImpl;
+import games.core.model.hand.Hand;
 
 import java.util.Queue;
 
-public abstract class DominoesDeck extends DeckImpl<DominoTile> {
+public class DominoesDeck extends DeckImpl<DominoTile> {
 
     private DeckBuilder builder = new DominoesDeckBuilder();
 
     public DominoesDeck() {
-        cards = builder.buildCards();
+        cards = builder.build();
     }
 
+    @Override
+    public void deal(Hand hand) {
+
+    }
+
+    @Override
+    public void addCard(DominoTile card) {
+
+    }
 }

@@ -6,5 +6,4 @@ public class TreasureCard extends GoalCard {
         setName("Treasure Card");
         setHidden(true);
     }
-
 }

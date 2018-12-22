@@ -15,16 +15,12 @@ public class Coordinate {
     }
 
     /**
-     * Returns the 4 adjacent coordinates to a given coordinate if they exist
-     *
-     * @param c
+     * Returns the 4 adjacent coordinates
      * @return a HashMap containing the adjacent coordinates as value and their
-     * position with respect to the given coordinate
+     * position with respect to current instance
      */
-    public HashMap<Direction, Coordinate> getAdjacentCoordinates(Coordinate c) {
+    public HashMap<Direction, Coordinate> getAdjacentCoordinates() {
         HashMap<Direction, Coordinate> adjacentCoordinates = new HashMap<>();
-        int column = c.getColumn();
-        int row = c.getRow();
         Coordinate top = new Coordinate(row + 1, column);
         Coordinate bottom = new Coordinate(row - 1, column);
         Coordinate left = new Coordinate(row, column - 1);
@@ -69,4 +65,5 @@ public class Coordinate {
     public int hashCode() {
         return Objects.hash(row, column);
     }
+
 }

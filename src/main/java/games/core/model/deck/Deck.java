@@ -5,6 +5,13 @@ import games.core.model.hand.Hand;
 import java.util.Queue;
 
 public interface Deck<C> {
+
+    /**
+     * Get the cards available in the deck
+     * @return the cards in the deck
+     */
+    Queue<C> getCards();
+
     /**
      * Deal a card from the top of the deck to the player's hand
      * @param hand

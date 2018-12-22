@@ -14,7 +14,7 @@ public class DominoesDeckBuilder implements DeckBuilder<DominoTile> {
     }
 
     @Override
-    public Queue<DominoTile> buildCards() {
+    public Queue<DominoTile> build() {
         deck = new LinkedList<>();
         for (int i = 0; i < 7; i++) {
             for (int j = i; j < 7; j++) {
@@ -26,7 +26,7 @@ public class DominoesDeckBuilder implements DeckBuilder<DominoTile> {
 
     public static void main(String[] args) {
         DominoesDeckBuilder b = new DominoesDeckBuilder();
-        b.buildCards();
+        b.build();
         System.out.println(b.getDeck());
         System.out.println(b.getSize());
 

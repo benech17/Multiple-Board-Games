@@ -1,5 +1,9 @@
 package games.core.model.board;
 
+import games.core.model.enums.Direction;
+
+import java.util.HashMap;
+
 /**
  * Description of the Board type
  *
@@ -35,5 +39,13 @@ public interface Board<T> {
      * @throws NoSuchCoordinateException if the specified coordinate is outside of the board
      */
     boolean removeTileAt(Coordinate c) throws NoSuchCoordinateException;
+
+    /**
+     * Get the tiles adjacent to the given coordinate in the board
+     * @param c
+     * @return a HashMap of the tiles adjacent to the coordinate in the board
+     * @throws NoSuchCoordinateException if the specified coordinate is outside of the board
+     */
+    HashMap<Direction, T> getAdjacentTiles(Coordinate c) throws NoSuchCoordinateException;
 
 }

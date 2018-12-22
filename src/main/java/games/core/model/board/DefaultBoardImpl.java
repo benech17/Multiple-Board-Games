@@ -30,6 +30,17 @@ public abstract class DefaultBoardImpl<T> implements Board<T> {
         return board;
     }
 
+    @Override
+    public HashMap<Direction, T> getAdjacentTiles(Coordinate c) throws NoSuchCoordinateException {
+        HashMap<Direction, Coordinate> adjCoords = c.getAdjacentCoordinates();
+        HashMap<Direction, T> adjTiles = new HashMap<>();
+        for (Direction d : adjCoords.keySet()) {
+            if (coordinateInsideBoard(adjCoords.get(d)))
+                adjTiles.put(d, getTileAt(adjCoords.get(d)));
+        }
+        return adjTiles;
+    }
+
     /**
      * Tests if a coordinate corresponds to an actual coordinate in the board
      *
@@ -78,7 +89,4 @@ public abstract class DefaultBoardImpl<T> implements Board<T> {
         return s;
     }
 
-}
-
-class NoSuchCoordinateException extends RuntimeException {
 }

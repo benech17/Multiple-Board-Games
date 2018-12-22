@@ -2,6 +2,7 @@ package games.dominoeswithstickers;
 
 import games.core.model.board.Coordinate;
 import games.core.model.board.DefaultBoardImpl;
+import games.core.model.board.NoSuchCoordinateException;
 import games.core.model.enums.Color;
 import games.core.model.enums.Shape;
 

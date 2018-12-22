@@ -5,14 +5,15 @@ import games.core.model.card.tile.Tile;
 import games.core.model.enums.Direction;
 
 
-/**
- * TODO: Implement Iterable? in the abstract class AbstractTile?
- */
-public abstract class SaboteurTile extends DefaultTileImpl<SaboteurSide> {
+public class SaboteurTile extends DefaultTileImpl<SaboteurSide> {
     private final boolean hasPath;
 
-    public SaboteurTile(boolean hasPath) {
-        this.hasPath = hasPath;
+    public SaboteurTile(PathCards pathCard) {
+        sides.put(Direction.TOP, new SaboteurSide(this, pathCard.getPaths()[0]));
+        sides.put(Direction.RIGHT, new SaboteurSide(this, pathCard.getPaths()[1]));
+        sides.put(Direction.BOTTOM, new SaboteurSide(this, pathCard.getPaths()[2]));
+        sides.put(Direction.LEFT, new SaboteurSide(this, pathCard.getPaths()[3]));
+        this.hasPath = pathCard.getPaths()[4];
     }
 
     public boolean treasureReached() {
@@ -32,6 +33,6 @@ public abstract class SaboteurTile extends DefaultTileImpl<SaboteurSide> {
 
     @Override
     public String toString() {
-        return "X";
+        return super.toString();
     }
 }
