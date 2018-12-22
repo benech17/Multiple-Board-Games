@@ -1,13 +1,15 @@
 package games.dominoeswithstickers;
 
 import games.core.model.card.tile.Side;
+import games.core.model.card.tile.Tile;
 import games.core.model.enums.Color;
+import games.core.model.enums.Direction;
 import games.core.model.enums.Shape;
 
 import java.util.Objects;
 
 
-public class DominoStickerSide extends Side {
+public class DominoStickerSide extends Side implements Tile {
     private final Shape shape;
     private final Color color;
 
@@ -49,4 +51,28 @@ public class DominoStickerSide extends Side {
         return Objects.hash(shape, color);
     }
 
+    @Override
+    public Object getTopSide() {
+        return null;
+    }
+
+    @Override
+    public Object getLeftSide() {
+        return null;
+    }
+
+    @Override
+    public Object getRightSide() {
+        return null;
+    }
+
+    @Override
+    public Object getBottomSide() {
+        return null;
+    }
+
+    @Override
+    public boolean fitsWith(Tile t, Direction d) {
+        return false;
+    }
 }

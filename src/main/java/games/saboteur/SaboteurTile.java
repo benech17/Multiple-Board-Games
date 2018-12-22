@@ -32,6 +32,6 @@ public abstract class SaboteurTile extends DefaultTileImpl<SaboteurSide> {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "X";
     }
 }

@@ -2,29 +2,31 @@ package games.core.model.board;
 
 import games.core.model.enums.Direction;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 // Should we keep it abstract?
 public abstract class DefaultBoardImpl<T> implements Board<T> {
 
-    protected T[][] board;
+    protected List<List<T>> board;
     protected int height, length;
     protected HashMap<Direction, Coordinate> adjacentCoordinates;
 
-    @SuppressWarnings("unchecked")
     public DefaultBoardImpl(int height, int length) {
         this.height = height;
         this.length = length;
-        this.board = (T[][]) new Object[height][length];
+        this.board = new ArrayList<>(height);
         for (int i = 0; i < height; i++) {
+            board.add(new ArrayList<>(length));
             for (int j = 0; j < length; j++) {
-                board[i][j] = null;
+                board.get(i).add(null);
             }
         }
     }
 
-    public T[][] getBoard() {
+    public List<List<T>> getBoard() {
         return board;
     }
 
@@ -44,16 +46,16 @@ public abstract class DefaultBoardImpl<T> implements Board<T> {
     public T getTileAt(Coordinate c) throws NoSuchCoordinateException {
         if (!coordinateInsideBoard(c))
             throw new NoSuchCoordinateException();
-        return board[c.getRow()][c.getColumn()];
+        return board.get(c.getRow()).get(c.getColumn());
     }
 
     @Override
     public boolean putTileAt(Coordinate c, T tile) throws NoSuchCoordinateException {
         if (!coordinateInsideBoard(c))
             throw new NoSuchCoordinateException();
-        if (board[c.getRow()][c.getColumn()] != null)
+        if (board.get(c.getRow()).get(c.getColumn()) != null)
             return false;
-        board[c.getRow()][c.getColumn()] = tile;
+        board.get(c.getRow()).set(c.getColumn(), tile);
         return true;
     }
 
@@ -61,7 +63,7 @@ public abstract class DefaultBoardImpl<T> implements Board<T> {
     public boolean removeTileAt(Coordinate c) throws NoSuchCoordinateException {
         if (!coordinateInsideBoard(c))
             throw new NoSuchCoordinateException();
-        board[c.getRow()][c.getColumn()] = null;
+        board.get(c.getRow()).set(c.getColumn(), null);
         return true;
     }
 
@@ -69,9 +71,9 @@ public abstract class DefaultBoardImpl<T> implements Board<T> {
         String s = "";
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < length; j++) {
-                s += board[i][j];
+                s += board.get(i).get(j) == null ? "n" : board.get(i).get(j);
             }
-            s += "/n";
+            s += "\n";
         }
         return s;
     }

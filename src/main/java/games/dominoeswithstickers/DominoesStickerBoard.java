@@ -50,7 +50,7 @@ public class DominoesStickerBoard extends DefaultBoardImpl<DominoStickerSide> {
         String s = "";
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < height; j++) {
-                s += ((board[i][j] == null) ? "XX" : board[i][j]) + " ";
+                s += ((board.get(i).get(j) == null) ? "XX" : board.get(i).get(j)) + " ";
             }
             s += "\n";
         }

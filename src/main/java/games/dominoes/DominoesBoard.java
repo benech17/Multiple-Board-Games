@@ -17,7 +17,7 @@ public class DominoesBoard extends DefaultBoardImpl<DominoTile> {
         leftEnd = new Coordinate(0, 0);
         rightEnd = leftEnd;
         // We put the first domino tile at the center of the board
-        board[0][0] = t;
+        board.get(0).set(0, t);
     }
 
     /**
@@ -65,7 +65,7 @@ public class DominoesBoard extends DefaultBoardImpl<DominoTile> {
     public String toString() {
         String s = "";
         for (int j = 0; j < height; j++) {
-            s += board[0][j];
+            s += board.get(0).get(j);
         }
         return s;
     }
