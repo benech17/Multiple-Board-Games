@@ -1,6 +1,7 @@
 package games.saboteur;
 
 import games.core.model.board.Coordinate;
+import games.core.model.board.OutOfBoardBoundsException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -35,5 +36,11 @@ public class SaboteurBoardTest {
         System.out.println(board.getTileAt(new Coordinate(4, 8)).getClass());
         System.out.println(board.getTileAt(new Coordinate(2, 8)).getClass());
 
+    }
+
+    @Test(expected = OutOfBoardBoundsException.class)
+    public void outOfBounds() {
+        SaboteurBoard b = new SaboteurBoard();
+        b.putTileAt(new Coordinate(-1, 0), new SaboteurTile(PathCard.TEN));
     }
 }

@@ -2,15 +2,14 @@ package games.saboteur;
 
 import games.core.model.card.Card;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
+import java.util.Stack;
 
 public class SaboteurDeckBuilderImpl implements SaboteurDeckBuilder {
     private static final int NB_PATH_CARDS = 40;
-    private Queue<Card> deck;
+    private Stack<Card> deck;
 
     public SaboteurDeckBuilderImpl() {
-        this.deck = new ArrayDeque<>();
+        this.deck = new Stack<>();
     }
 
     /**
@@ -50,7 +49,7 @@ public class SaboteurDeckBuilderImpl implements SaboteurDeckBuilder {
     }
 
     @Override
-    public Queue<Card> build() {
+    public Stack<Card> build() {
         buildPathCards();
         return deck;
     }

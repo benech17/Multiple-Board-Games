@@ -18,9 +18,9 @@ public interface Board<T> {
      *
      * @param c coordinate in the board
      * @return the card at the coordinate c
-     * @throws NoSuchCoordinateException if the specified coordinate is outside of the board
+     * @throws OutOfBoardBoundsException if the specified coordinate is outside of the board
      */
-    T getTileAt(Coordinate c) throws NoSuchCoordinateException;
+    T getTileAt(Coordinate c) throws OutOfBoardBoundsException;
 
     /**
      * Puts a tile in the board at the given coordinate
@@ -29,48 +29,48 @@ public interface Board<T> {
      * @param tile
      * @return true if the tile was put at the given coordinate as a result of this call.
      * Returns false if a tile is already present
-     * @throws NoSuchCoordinateException if the specified coordinate is outside of the board
+     * @throws OutOfBoardBoundsException if the specified coordinate is outside of the board
      */
-    boolean putTileAt(Coordinate c, T tile) throws NoSuchCoordinateException;
+    boolean putTileAt(Coordinate c, T tile) throws OutOfBoardBoundsException;
 
     /**
      * Removes the tile at the given coordinate
      *
      * @param c coordinate of the tile to be removed
      * @return true if the tile at the given coordinate was removed as a result of this call
-     * @throws NoSuchCoordinateException if the specified coordinate is outside of the board
+     * @throws OutOfBoardBoundsException if the specified coordinate is outside of the board
      */
-    boolean removeTileAt(Coordinate c) throws NoSuchCoordinateException;
+    boolean removeTileAt(Coordinate c) throws OutOfBoardBoundsException;
 
     /**
      * Get the tiles adjacent to the given coordinate in the board
      * with their position with respect to the coordinate (TOP, RIGHT, LEFT, BOTTOM).
      * @param c
      * @return a HashMap of the tiles adjacent to the coordinate in the board
-     * @throws NoSuchCoordinateException if the specified coordinate is outside of the board
+     * @throws OutOfBoardBoundsException if the specified coordinate is outside of the board
      */
-    HashMap<Direction, T> getAdjacentTilesByDirection(Coordinate c) throws NoSuchCoordinateException;
+    HashMap<Direction, T> getAdjacentTilesByDirection(Coordinate c) throws OutOfBoardBoundsException;
 
     /**
      * Get the coordinates of the tiles adjacent to the given coordinate in the board
      *
      * @param c the specified coordinate
      * @return a LinkedList of the coordinates of the tiles adjacent to the coordinate in the board
-     * @throws NoSuchCoordinateException if the specified coordinate is outside of the board
+     * @throws OutOfBoardBoundsException if the specified coordinate is outside of the board
      */
-    LinkedList<Coordinate> getAdjacentTilesByCoordinates(Coordinate c) throws NoSuchCoordinateException;
+    LinkedList<Coordinate> getAdjacentTilesByCoordinates(Coordinate c) throws OutOfBoardBoundsException;
 
     /**
      * Returns true if there is a path from the start tile to a goal tile.
      * Performs a Breadth-First Search starting from the specified coordinate
      * start to a tile verifying the isGoal condition.
-     * Any visited coordinates must be unique to avoid looped paths.
+     * Any visited coordinate must be unique to avoid looped paths.
      *
      * @param start  coordinate of the tile to start the search
      * @param isGoal condition for a tile to be the goal of the search
      * @return true if we found a tile verifying a special condition given by
      * the function isGoal
-     * @throws NoTileAtCoordinate if there is not tile at the start coordinate
+     * @throws NoTileAtCoordinate if there is no tile at the start coordinate
      */
     boolean hasPathFromTo(Coordinate start, Function<T, Boolean> isGoal) throws NoTileAtCoordinate;
 

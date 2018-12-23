@@ -2,7 +2,7 @@ package games.saboteur;
 
 import games.core.model.board.Coordinate;
 import games.core.model.board.DefaultBoardImpl;
-import games.core.model.board.NoSuchCoordinateException;
+import games.core.model.board.OutOfBoardBoundsException;
 import games.core.model.enums.Direction;
 
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
     @Override
     public boolean putTileAt(Coordinate c, SaboteurTile tile) {
         if (!coordinateInsideBoard(c))
-            throw new NoSuchCoordinateException();
+            throw new OutOfBoardBoundsException(c.toString());
         HashMap<Direction, SaboteurTile> adjacentTiles = getAdjacentTilesByDirection(c);
         System.out.println(adjacentTiles);
         // We check if the tile fits with each adjacent tile

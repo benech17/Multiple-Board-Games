@@ -1,8 +1,8 @@
 package games.core.model.deck;
 
+import java.util.Stack;
 
-import java.util.Queue;
 
 public interface DeckBuilder<C> {
-    Queue<C> build();
+    Stack<C> build();
 }

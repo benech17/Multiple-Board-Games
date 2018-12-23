@@ -1,10 +1,15 @@
 package games.core.model.player;
 
+import games.core.model.board.Board;
+import games.core.model.board.Coordinate;
+
 public interface Player {
 
     String getName();
 
     int getAge();
+
+    boolean putTileAt(Coordinate c, Board b);
 
     /**
      *

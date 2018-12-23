@@ -4,15 +4,22 @@ public interface Hand<C> {
 
     /**
      * Adds a card to the player's hand
-     * There should be a limit to the number of cards that
-     * one player can hold
+     * @param card
      */
-    void addCard();
+    void addCard(C card);
 
     /**
      * Removes a card at the specified index from the player's hand
+     * @param index
      * @return the removed card
      */
-    C removeCard();
+    C removeCard(int index);
+
+    /**
+     * @param index
+     * @return true if the card was discarded as a result of this call
+     * @throws IndexOutOfBoundsException
+     */
+    boolean discardCard(int index) throws IndexOutOfBoundsException;
 
 }

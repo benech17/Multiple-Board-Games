@@ -1,21 +1,19 @@
 package games.dominoes;
 
-import games.core.model.deck.Deck;
 import games.core.model.deck.DeckBuilder;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.Stack;
 
 public class DominoesDeckBuilder implements DeckBuilder<DominoTile> {
-    private Queue<DominoTile> deck;
+    private Stack<DominoTile> deck;
 
     public DominoesDeckBuilder() {
-        this.deck = new LinkedList<>();
+        this.deck = new Stack<>();
     }
 
     @Override
-    public Queue<DominoTile> build() {
-        deck = new LinkedList<>();
+    public Stack<DominoTile> build() {
+        deck = new Stack<>();
         for (int i = 0; i < 7; i++) {
             for (int j = i; j < 7; j++) {
                 deck.add(new DominoTile(i, j));
@@ -36,7 +34,7 @@ public class DominoesDeckBuilder implements DeckBuilder<DominoTile> {
         return deck.size();
     }
 
-    public Queue<DominoTile> getDeck() {
+    public Stack<DominoTile> getDeck() {
         return deck;
     }
 }

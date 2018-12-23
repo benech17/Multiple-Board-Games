@@ -30,7 +30,7 @@ public abstract class DefaultBoardImpl<T> implements Board<T> {
     }
 
     @Override
-    public HashMap<Direction, T> getAdjacentTilesByDirection(Coordinate c) throws NoSuchCoordinateException {
+    public HashMap<Direction, T> getAdjacentTilesByDirection(Coordinate c) throws OutOfBoardBoundsException {
         HashMap<Direction, Coordinate> adjCoords = c.getAdjacentCoordinates();
         HashMap<Direction, T> adjTiles = new HashMap<>();
         for (Direction d : adjCoords.keySet()) {
@@ -40,7 +40,7 @@ public abstract class DefaultBoardImpl<T> implements Board<T> {
         return adjTiles;
     }
 
-    public LinkedList<Coordinate> getAdjacentTilesByCoordinates(Coordinate c) throws NoSuchCoordinateException {
+    public LinkedList<Coordinate> getAdjacentTilesByCoordinates(Coordinate c) throws OutOfBoardBoundsException {
         HashMap<Direction, Coordinate> adjCoords = c.getAdjacentCoordinates();
         LinkedList<Coordinate> adjTiles = new LinkedList<>();
         for (Direction d : adjCoords.keySet()) {
@@ -63,16 +63,16 @@ public abstract class DefaultBoardImpl<T> implements Board<T> {
     }
 
     @Override
-    public T getTileAt(Coordinate c) throws NoSuchCoordinateException {
+    public T getTileAt(Coordinate c) throws OutOfBoardBoundsException {
         if (!coordinateInsideBoard(c))
-            throw new NoSuchCoordinateException();
+            throw new OutOfBoardBoundsException(c.toString());
         return board.get(c.getRow()).get(c.getColumn());
     }
 
     @Override
-    public boolean putTileAt(Coordinate c, T tile) throws NoSuchCoordinateException {
+    public boolean putTileAt(Coordinate c, T tile) throws OutOfBoardBoundsException {
         if (!coordinateInsideBoard(c))
-            throw new NoSuchCoordinateException();
+            throw new OutOfBoardBoundsException(c.toString());
         if (board.get(c.getRow()).get(c.getColumn()) != null)
             return false;
         board.get(c.getRow()).set(c.getColumn(), tile);
@@ -80,9 +80,9 @@ public abstract class DefaultBoardImpl<T> implements Board<T> {
     }
 
     @Override
-    public boolean removeTileAt(Coordinate c) throws NoSuchCoordinateException {
+    public boolean removeTileAt(Coordinate c) throws OutOfBoardBoundsException {
         if (!coordinateInsideBoard(c))
-            throw new NoSuchCoordinateException();
+            throw new OutOfBoardBoundsException(c.toString());
         board.get(c.getRow()).set(c.getColumn(), null);
         return true;
     }

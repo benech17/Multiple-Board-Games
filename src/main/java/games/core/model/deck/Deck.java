@@ -2,7 +2,7 @@ package games.core.model.deck;
 
 import games.core.model.hand.Hand;
 
-import java.util.Queue;
+import java.util.Stack;
 
 public interface Deck<C> {
 
@@ -10,13 +10,14 @@ public interface Deck<C> {
      * Get the cards available in the deck
      * @return the cards in the deck
      */
-    Queue<C> getCards();
+    Stack<C> getCards();
 
     /**
      * Deal a card from the top of the deck to the player's hand
      * @param hand
+     * @throws EmptyDeckException if the deck is empty
      */
-    void deal(Hand hand);
+    void deal(Hand hand) throws EmptyDeckException;
 
     /**
      * Adds a card to the deck
