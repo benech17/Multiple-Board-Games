@@ -2,10 +2,7 @@ package games.core.model.board;
 
 import games.core.model.enums.Direction;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 import java.util.function.Function;
 
 
@@ -33,7 +30,7 @@ public abstract class DefaultBoardImpl<T> implements Board<T> {
     }
 
     @Override
-    public HashMap<Direction, T> getAdjacentTiles(Coordinate c) throws NoSuchCoordinateException {
+    public HashMap<Direction, T> getAdjacentTilesByDirection(Coordinate c) throws NoSuchCoordinateException {
         HashMap<Direction, Coordinate> adjCoords = c.getAdjacentCoordinates();
         HashMap<Direction, T> adjTiles = new HashMap<>();
         for (Direction d : adjCoords.keySet()) {
@@ -43,12 +40,12 @@ public abstract class DefaultBoardImpl<T> implements Board<T> {
         return adjTiles;
     }
 
-    public HashMap<Coordinate, T> getAdjacentTilesWithCoordinates(Coordinate c) throws NoSuchCoordinateException {
+    public LinkedList<Coordinate> getAdjacentTilesByCoordinates(Coordinate c) throws NoSuchCoordinateException {
         HashMap<Direction, Coordinate> adjCoords = c.getAdjacentCoordinates();
-        HashMap<Coordinate, T> adjTiles = new HashMap<>();
+        LinkedList<Coordinate> adjTiles = new LinkedList<>();
         for (Direction d : adjCoords.keySet()) {
             if (coordinateInsideBoard(adjCoords.get(d)) && getTileAt(adjCoords.get(d)) != null)
-                adjTiles.put(adjCoords.get(d), getTileAt(adjCoords.get(d)));
+                adjTiles.add(adjCoords.get(d));
         }
         return adjTiles;
     }
@@ -90,40 +87,30 @@ public abstract class DefaultBoardImpl<T> implements Board<T> {
         return true;
     }
 
-    /**
-     * A bit complicated, maybe we should extend LinkedHashMap to
-     *
-     * @param start
-     * @param isGoal
-     * @return
-     */
-    public boolean findGoal(Coordinate start, Function<T, Boolean> isGoal) {
-        // Queue of tiles to visit
-        LinkedHashMap<Coordinate, T> toVisit = new LinkedHashMap<>();
-        // Queue of visited tiles
-        LinkedHashMap<Coordinate, T> visitedTiles = new LinkedHashMap<>();
-        toVisit.put(start, getTileAt(start)); // Push the current node to the queue
-        Coordinate currentCoord;
+    @Override
+    public boolean hasPathFromTo(Coordinate start, Function<T, Boolean> isGoal)
+            throws NoTileAtCoordinate {
+        if (getTileAt(start) == null)
+            throw new NoTileAtCoordinate(start.toString());
+        // Queue of tiles to visit (we keep their coordinates)
+        Queue<Coordinate> toVisit = new LinkedList<>();
+        // Queue of visited tiles (we keep their coordinates)
+        Queue<Coordinate> visitedTiles = new LinkedList<>();
+        toVisit.add(start); // Push the current node to the queue
+        Coordinate currentCoordinate;
         while (!toVisit.isEmpty()) {
-            if (toVisit.get(new ArrayList<>(toVisit.keySet()).get(0)) != null) {
-                // Pop the next tile to visit
-                T t = toVisit.get(new ArrayList<>(toVisit.keySet()).get(0));
-                currentCoord = new ArrayList<>(toVisit.keySet()).get(0);
-                toVisit.remove(new ArrayList<>(toVisit.keySet()).get(0));
-                // We've found the goal, the job is done
-                if (isGoal.apply(t))
-                    return true;
-                // This tile has already been visited, we skip it
-                if (visitedTiles.containsValue(t))
-                    continue;
-                visitedTiles.put(currentCoord, t);
-                for (Coordinate c : getAdjacentTilesWithCoordinates(currentCoord).keySet()) {
-                    if (getTileAt(c) != null)
-                        toVisit.put(c, getTileAt(c));
-                }
-            } else {
-                // Handle the case where the current tile is null
-                toVisit.remove(new ArrayList<>(toVisit.keySet()).get(0));
+            // Pop the next tile to visit
+            currentCoordinate = toVisit.poll();
+            // We've found the goal, the job is done
+            if (isGoal.apply(getTileAt(currentCoordinate)))
+                return true;
+            // This tile has already been visited, we skip it
+            if (visitedTiles.contains(currentCoordinate))
+                continue;
+            visitedTiles.add(currentCoordinate);
+            for (Coordinate c : getAdjacentTilesByCoordinates(currentCoordinate)) {
+                // Adding the adjacent tiles to the queue
+                toVisit.add(c);
             }
         }
         return false;

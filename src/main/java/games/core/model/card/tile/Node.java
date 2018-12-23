@@ -8,6 +8,7 @@ import java.util.function.Function;
 
 /**
  * Interface for a tree data structure
+ * @deprecated use the method hasPathFromTo in Board instead
  */
 public interface Node {
     /**

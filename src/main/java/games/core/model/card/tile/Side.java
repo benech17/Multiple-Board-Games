@@ -3,7 +3,7 @@ package games.core.model.card.tile;
 
 public abstract class Side {
     private final DefaultTileImpl parent;
-    private Side nextSide;
+    private Side nextSide; // Unnecessary now
 
     public Side(DefaultTileImpl parent, Side nextSide) {
         this.parent = parent;

@@ -11,12 +11,25 @@ import java.util.HashMap;
 
 
 public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
-    // Number of cards between the start card and goal card
-    private static final int DISTANCE = 7;
+    // Distance between the start card and goal card
+    private static final int DISTANCE = 8;
+    // Dimensions of the board
     private static final int NB_ROWS = 5;
     private static final int NB_COLS = 9;
+    // Compute the center row (ideally the number of rows
+    // should be odd to have it actually centered)
     private static final int CENTER_ROW = NB_ROWS / 2;
-    StartCard startCard;
+    // Distance that separates the goal cards
+    private static final int OFFSET = 2;
+    // The start card
+    private static final StartCard START_CARD = new StartCard();
+    // Start and goal coordinates
+    private static final Coordinate START_COORDINATE = new Coordinate(CENTER_ROW, 0);
+    private static final Coordinate[] GOAL_COORDINATES = new Coordinate[]{
+            new Coordinate(CENTER_ROW - OFFSET, DISTANCE),
+            new Coordinate(CENTER_ROW, DISTANCE),
+            new Coordinate(CENTER_ROW + OFFSET, DISTANCE)
+    };
 
 
     public SaboteurBoard() {
@@ -26,22 +39,20 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
     }
 
     private void putStartCard() {
-        startCard = new StartCard();
-        super.putTileAt(new Coordinate(CENTER_ROW, 0), startCard);
+        super.putTileAt(START_COORDINATE, START_CARD);
     }
 
     @Override
     public boolean putTileAt(Coordinate c, SaboteurTile tile) {
         if (!coordinateInsideBoard(c))
             throw new NoSuchCoordinateException();
-        HashMap<Direction, SaboteurTile> adjacentTiles = getAdjacentTiles(c);
+        HashMap<Direction, SaboteurTile> adjacentTiles = getAdjacentTilesByDirection(c);
         System.out.println(adjacentTiles);
         // We check if the tile fits with each adjacent tile
         for (Direction d : adjacentTiles.keySet()) {
             if (!tile.fitsWith(adjacentTiles.get(d), d))
                 return false;
         }
-        // Make the connections
         // The tile fits with the surrounding tiles, let's put it in the board
         return super.putTileAt(c, tile);
     }
@@ -56,15 +67,14 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
         goalCards.add(new StoneCard());
 
         Collections.shuffle(goalCards);
-        super.putTileAt(new Coordinate(CENTER_ROW - 2, DISTANCE + 1), goalCards.get(0));
-        super.putTileAt(new Coordinate(CENTER_ROW, DISTANCE + 1), goalCards.get(1));
-        super.putTileAt(new Coordinate(CENTER_ROW + 2, DISTANCE + 1), goalCards.get(2));
+        super.putTileAt(GOAL_COORDINATES[0], goalCards.get(0));
+        super.putTileAt(GOAL_COORDINATES[1], goalCards.get(1));
+        super.putTileAt(GOAL_COORDINATES[2], goalCards.get(2));
 
     }
 
     public boolean treasureReached() {
-        //return startCard.treasureReached();
-        return findGoal(new Coordinate(CENTER_ROW, 0), node -> node instanceof TreasureCard);
+        return hasPathFromTo(START_COORDINATE, tile -> tile instanceof TreasureCard);
     }
 
     @Override
