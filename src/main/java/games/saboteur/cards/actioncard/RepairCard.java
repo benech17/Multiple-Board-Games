@@ -1,4 +1,5 @@
-package games.saboteur;
+package games.saboteur.cards.actioncard;
+
 
 public class RepairCard extends ActionCard {
     private int index;

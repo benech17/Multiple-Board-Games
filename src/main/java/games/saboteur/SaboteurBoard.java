@@ -4,6 +4,7 @@ import games.core.model.board.Coordinate;
 import games.core.model.board.DefaultBoardImpl;
 import games.core.model.board.OutOfBoardBoundsException;
 import games.core.model.enums.Direction;
+import games.saboteur.cards.pathcard.*;
 
 import java.util.ArrayList;
 import java.util.Collections;

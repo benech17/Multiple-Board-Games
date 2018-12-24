@@ -1,4 +1,4 @@
-package games.saboteur;
+package games.saboteur.cards.pathcard;
 
 import games.core.model.card.tile.DefaultTileImpl;
 import games.core.model.card.tile.Tile;

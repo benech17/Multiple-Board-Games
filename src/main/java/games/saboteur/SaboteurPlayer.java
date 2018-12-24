@@ -4,6 +4,9 @@ import games.core.model.board.Coordinate;
 import games.core.model.card.Card;
 import games.core.model.deck.Deck;
 import games.core.model.player.PlayerImpl;
+import games.saboteur.cards.WrongCardException;
+import games.saboteur.cards.actioncard.*;
+import games.saboteur.cards.pathcard.SaboteurTile;
 
 
 public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, Card> {

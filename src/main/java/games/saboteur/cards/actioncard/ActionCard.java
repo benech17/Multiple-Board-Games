@@ -1,4 +1,4 @@
-package games.saboteur;
+package games.saboteur.cards.actioncard;
 
 import games.core.model.card.Card;
 

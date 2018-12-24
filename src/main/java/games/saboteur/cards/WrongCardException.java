@@ -1,4 +1,4 @@
-package games.saboteur;
+package games.saboteur.cards;
 
 public class WrongCardException extends RuntimeException {
 }

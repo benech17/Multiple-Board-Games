@@ -1,4 +1,4 @@
-package games.saboteur;
+package games.saboteur.cards.pathcard;
 
 
 public class StartCard extends SaboteurTile {

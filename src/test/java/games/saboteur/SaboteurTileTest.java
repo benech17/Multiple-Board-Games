@@ -1,9 +1,9 @@
 package games.saboteur;
 
 import games.core.model.enums.Direction;
+import games.saboteur.cards.pathcard.PathCard;
+import games.saboteur.cards.pathcard.SaboteurTile;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class SaboteurTileTest {
 
