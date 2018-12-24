@@ -1,10 +1,9 @@
 package games.core.model.player;
 
-import games.core.model.board.Board;
 import games.core.model.board.Coordinate;
 
 
-public interface Player {
+public interface Player<B> {
 
     String getName();
 
@@ -28,5 +27,5 @@ public interface Player {
     /**
      * Play his turn
      */
-    void takeTurn(Board b, int handIndex, Coordinate c);
+    void takeTurn(B b, int handIndex, Coordinate c);
 }

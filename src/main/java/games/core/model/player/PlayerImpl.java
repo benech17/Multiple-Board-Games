@@ -1,9 +1,16 @@
 package games.core.model.player;
 
+import games.core.model.board.Coordinate;
 import games.core.model.hand.Hand;
 
 
-public abstract class PlayerImpl<C> implements Player {
+/**
+ * Should we keep generics here?
+ *
+ * @param <B>
+ * @param <C>
+ */
+public abstract class PlayerImpl<B, C> implements Player<B> {
     protected String name;
     protected int age;
     protected Hand<C> hand;
@@ -24,6 +31,13 @@ public abstract class PlayerImpl<C> implements Player {
     @Override
     public boolean isYoungerThan(Player p) {
         return age < p.getAge();
+    }
+
+    @Override
+    public void takeTurn(B b, int handIndex, Coordinate c) {
+        // Abstract or not?
+        // May add something if we find some common pattern in the games
+
     }
 
     @Override
