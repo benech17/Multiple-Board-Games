@@ -11,10 +11,12 @@ public class SaboteurScreen extends JFrame {
         this.setExtendedState(MAXIMIZED_BOTH | getExtendedState());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
+        this.setMinimumSize(new Dimension(600, 600));
 
 
         JPanel plateau = new JPanel();
         plateau.setBackground(Color.white);
+        plateau.setMinimumSize(new Dimension(600, 600));
         plateau.setPreferredSize(new Dimension(1500, 500));
 
         plateau.setLayout(new GridLayout(5, 9, 15, 15));
