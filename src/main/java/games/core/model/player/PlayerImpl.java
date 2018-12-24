@@ -1,8 +1,17 @@
 package games.core.model.player;
 
-public abstract class AbstractPlayer implements Player {
-    private String name;
-    private int age;
+import games.core.model.hand.Hand;
+
+
+public abstract class PlayerImpl<C> implements Player {
+    protected String name;
+    protected int age;
+    protected Hand<C> hand;
+
+    public PlayerImpl(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
 
     public String getName() {
         return name;

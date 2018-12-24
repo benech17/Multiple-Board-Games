@@ -1,5 +1,6 @@
 package games.core.model.board;
 
+import games.core.model.card.tile.Tile;
 import games.core.model.enums.Direction;
 
 import java.util.HashMap;
@@ -11,7 +12,7 @@ import java.util.function.Function;
  *
  * @param <T>
  */
-public interface Board<T> {
+public interface Board<T extends Tile> {
 
     /**
      * Get the card at the given position if it exists
@@ -70,8 +71,8 @@ public interface Board<T> {
      * @param isGoal condition for a tile to be the goal of the search
      * @return true if we found a tile verifying a special condition given by
      * the function isGoal
-     * @throws NoTileAtCoordinate if there is no tile at the start coordinate
+     * @throws NoTileAtCoordinateException if there is no tile at the start coordinate
      */
-    boolean hasPathFromTo(Coordinate start, Function<T, Boolean> isGoal) throws NoTileAtCoordinate;
+    boolean hasPathFromTo(Coordinate start, Function<T, Boolean> isGoal) throws NoTileAtCoordinateException;
 
 }

@@ -47,7 +47,6 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
         if (!coordinateInsideBoard(c))
             throw new OutOfBoardBoundsException(c.toString());
         HashMap<Direction, SaboteurTile> adjacentTiles = getAdjacentTilesByDirection(c);
-        System.out.println(adjacentTiles);
         // We check if the tile fits with each adjacent tile
         for (Direction d : adjacentTiles.keySet()) {
             if (!tile.fitsWith(adjacentTiles.get(d), d))

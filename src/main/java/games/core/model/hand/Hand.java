@@ -13,9 +13,10 @@ public interface Hand<C> {
      * @param index
      * @return the removed card
      */
-    C removeCard(int index);
+    C drawCard(int index);
 
     /**
+     *
      * @param index
      * @return true if the card was discarded as a result of this call
      * @throws IndexOutOfBoundsException

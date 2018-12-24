@@ -1,5 +1,6 @@
 package games.core.model.board;
 
+import games.core.model.card.tile.Tile;
 import games.core.model.enums.Direction;
 
 import java.util.*;
@@ -7,7 +8,7 @@ import java.util.function.Function;
 
 
 // Should we keep it abstract?
-public abstract class DefaultBoardImpl<T> implements Board<T> {
+public abstract class DefaultBoardImpl<T extends Tile> implements Board<T> {
 
     protected List<List<T>> board;
     protected int height, length;
@@ -89,9 +90,9 @@ public abstract class DefaultBoardImpl<T> implements Board<T> {
 
     @Override
     public boolean hasPathFromTo(Coordinate start, Function<T, Boolean> isGoal)
-            throws NoTileAtCoordinate {
+            throws NoTileAtCoordinateException {
         if (getTileAt(start) == null)
-            throw new NoTileAtCoordinate(start.toString());
+            throw new NoTileAtCoordinateException(start.toString());
         // Queue of tiles to visit (we keep their coordinates)
         Queue<Coordinate> toVisit = new LinkedList<>();
         // Queue of visited tiles (we keep their coordinates)
