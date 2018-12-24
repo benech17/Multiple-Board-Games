@@ -17,7 +17,9 @@ public interface Deck<C> {
      * @param hand
      * @throws EmptyDeckException if the deck is empty
      */
-    void deal(Hand hand) throws EmptyDeckException;
+    void deal(Hand<C> hand) throws EmptyDeckException;
+
+    void distributeCards();
 
     /**
      * Adds a card to the deck

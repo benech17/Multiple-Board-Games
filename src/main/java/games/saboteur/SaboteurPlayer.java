@@ -19,7 +19,19 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, Card> {
         blockCards = new BlockCard[ActionCardType.values().length];
     }
 
-    public void takeTurn(SaboteurBoard b, int handIndex, Coordinate c, Deck deck, Deck trash,
+    /**
+     * Returns true if the player found the treasure
+     *
+     * @param b
+     * @param handIndex
+     * @param c
+     * @param deck
+     * @param trash
+     * @param p
+     * @param discardCard
+     * @return
+     */
+    public boolean takeTurn(SaboteurBoard b, int handIndex, Coordinate c, Deck deck, Deck trash,
                          SaboteurPlayer p, boolean discardCard) {
         Card pickedCard = hand.drawCard(handIndex);
         if (discardCard) {
@@ -29,6 +41,9 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, Card> {
         if (pickedCard instanceof SaboteurTile) {
             // Put the tile in the board
             b.putTileAt(c, (SaboteurTile) pickedCard);
+            if (b.treasureReached()) {
+                return true; // The player won
+            }
         } else if (pickedCard instanceof ActionCard) {
             // Play an action card
             if (pickedCard instanceof BlockCard) {
@@ -49,6 +64,7 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, Card> {
             throw new WrongCardException(); // Really necessary?
         }
         deck.deal(hand); // Deal a card from the deck
+        return false;
     }
 
 
