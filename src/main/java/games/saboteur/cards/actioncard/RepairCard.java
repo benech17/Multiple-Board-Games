@@ -5,7 +5,7 @@ public class RepairCard extends ActionCard {
     private int index;
 
     public RepairCard(ActionCardType type) {
-        super(type.toString(), false);
+        super("Repair card of type " + type.toString().toLowerCase(), false);
         index = type.getIndex();
     }
 

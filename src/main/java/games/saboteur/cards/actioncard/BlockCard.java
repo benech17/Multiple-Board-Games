@@ -5,7 +5,7 @@ public class BlockCard extends ActionCard {
     private int index;
 
     public BlockCard(ActionCardType type) {
-        super(type.toString(), false);
+        super("Block card of type " + type.toString().toLowerCase(), false);
         index = type.getIndex();
     }
 
