@@ -5,7 +5,6 @@ import games.core.model.card.Card;
 import java.util.Stack;
 
 public class SaboteurDeckBuilderImpl implements SaboteurDeckBuilder {
-    private static final int NB_PATH_CARDS = 40;
     private Stack<Card> deck;
 
     public SaboteurDeckBuilderImpl() {
@@ -43,14 +42,23 @@ public class SaboteurDeckBuilderImpl implements SaboteurDeckBuilder {
         }
     }
 
+    /**
+     * Four copies of each action card
+     */
     @Override
     public void buildActionCards() {
-
+        for (ActionCardType type : ActionCardType.values()) {
+            for (int i = 0; i < 4; i++) {
+                deck.add(new BlockCard(type));
+                deck.add(new RepairCard(type));
+            }
+        }
     }
 
     @Override
     public Stack<Card> build() {
         buildPathCards();
+        buildActionCards();
         return deck;
     }
 }
