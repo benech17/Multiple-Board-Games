@@ -2,15 +2,15 @@ package games.core.model.card.tile;
 
 
 public abstract class Side {
-    private final DefaultTileImpl parent;
+    private final TileImpl parent;
     private Side nextSide; // Unnecessary now
 
-    public Side(DefaultTileImpl parent, Side nextSide) {
+    public Side(TileImpl parent, Side nextSide) {
         this.parent = parent;
         this.nextSide = nextSide;
     }
 
-    public DefaultTileImpl getParent() {
+    public TileImpl getParent() {
         return parent;
     }
 

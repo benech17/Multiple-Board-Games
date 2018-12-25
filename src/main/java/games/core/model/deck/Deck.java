@@ -19,7 +19,7 @@ public interface Deck<C> {
      */
     void deal(Hand<C> hand) throws EmptyDeckException;
 
-    void distributeCards();
+    void distributeCards(Hand<C>[] hands);
 
     /**
      * Adds a card to the deck

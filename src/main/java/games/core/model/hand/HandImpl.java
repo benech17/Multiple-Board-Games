@@ -9,11 +9,15 @@ import java.util.List;
  *
  * @param <C>
  */
-public class HandImpl<C> implements Hand<C> {
-    List<C> hand;
+public abstract class HandImpl<C> implements Hand<C> {
+    protected List<C> hand;
 
     public HandImpl() {
         hand = new ArrayList<>();
+    }
+
+    public List<C> getHand() {
+        return hand;
     }
 
     @Override
@@ -21,11 +25,18 @@ public class HandImpl<C> implements Hand<C> {
         hand.add(card);
     }
 
-    @Override
-    public C drawCard(int index) {
-        return null;
+    public C getCardAt(int index) {
+        return hand.get(index);
     }
 
+    @Override
+    public C drawCard(int index) {
+        C draw = hand.get(index);
+        hand.remove(index);
+        return draw;
+    }
+
+    // TODO
     @Override
     public boolean discardCard(int index) throws IndexOutOfBoundsException {
         return false;

@@ -15,6 +15,9 @@ public class SaboteurBoardTest {
     public void test() {
         SaboteurBoard board = new SaboteurBoard();
         System.out.println(board);
+        //assertTrue(board.putTileAt(new Coordinate(2, 1), new SaboteurTile(PathCard.EIGHT)));
+        System.out.println(board);
+        assertFalse(board.putTileAt(new Coordinate(2, 0), new SaboteurTile(PathCard.ONE)));
         assertFalse(board.putTileAt(new Coordinate(2, 1), new SaboteurTile(PathCard.ONE)));
         System.out.println(
                 new SaboteurTile(PathCard.TWO)

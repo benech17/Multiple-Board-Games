@@ -2,6 +2,16 @@ package games.core.model.hand;
 
 public interface Hand<C> {
 
+    C getCardAt(int index);
+
+    /**
+     * Get the number of cards to distribute to the hand
+     * at the start of the game
+     *
+     * @return
+     */
+    int getCardNumberAtStart();
+
     /**
      * Adds a card to the player's hand
      * @param card

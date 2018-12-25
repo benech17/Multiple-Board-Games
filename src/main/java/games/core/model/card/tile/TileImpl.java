@@ -1,6 +1,5 @@
 package games.core.model.card.tile;
 
-import games.core.model.card.Card;
 import games.core.model.enums.Direction;
 
 import java.util.*;
@@ -14,12 +13,11 @@ import java.util.function.Function;
  *
  * @param <S>
  */
-public abstract class DefaultTileImpl<S extends Side> extends Card implements Tile<S>, Node, Turnable {
+public abstract class TileImpl<S extends Side> implements Tile<S>, Node, Turnable {
     protected EnumMap<Direction, S> sides;
     protected EnumMap<Direction, Node> adjacentNodes;
 
-    public DefaultTileImpl() {
-        super("AbstractTile", true);
+    public TileImpl() {
         sides = new EnumMap<>(Direction.class);
         adjacentNodes = new EnumMap<>(Direction.class);
     }

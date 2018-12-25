@@ -1,11 +1,12 @@
 package games.dominoes;
 
-import games.core.model.card.tile.DefaultTileImpl;
+import games.core.model.card.tile.TileImpl;
 import games.core.model.enums.Direction;
 
 
-public class DominoTile extends DefaultTileImpl<DominoSide> implements Comparable<DominoTile> {
+public class DominoTile extends TileImpl<DominoSide> implements Comparable<DominoTile> {
     private final int weight;
+    private String name;
     public DominoTile(int leftValue, int rightValue) {
         sides.put(Direction.LEFT, new DominoSide(leftValue, this));
         sides.put(Direction.RIGHT, new DominoSide(rightValue, this));
@@ -32,12 +33,10 @@ public class DominoTile extends DefaultTileImpl<DominoSide> implements Comparabl
     }
 
     private void setName() {
-        String s;
         if (isDouble())
-            s = "double " + getLeftSide().getValue();
+            name = "double " + getLeftSide().getValue();
         else
-            s = getLeftSide().getValue() + "-" + getRightSide().getValue();
-        setName(s);
+            name = getLeftSide().getValue() + "-" + getRightSide().getValue();
     }
 
     /**

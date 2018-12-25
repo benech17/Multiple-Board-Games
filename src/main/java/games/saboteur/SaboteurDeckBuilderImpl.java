@@ -1,6 +1,6 @@
 package games.saboteur;
 
-import games.core.model.card.Card;
+import games.saboteur.cards.SaboteurCard;
 import games.saboteur.cards.actioncard.ActionCardType;
 import games.saboteur.cards.actioncard.BlockCard;
 import games.saboteur.cards.actioncard.RepairCard;
@@ -10,7 +10,7 @@ import games.saboteur.cards.pathcard.SaboteurTile;
 import java.util.Stack;
 
 public class SaboteurDeckBuilderImpl implements SaboteurDeckBuilder {
-    private Stack<Card> deck;
+    private Stack<SaboteurCard> deck;
 
     public SaboteurDeckBuilderImpl() {
         this.deck = new Stack<>();
@@ -61,7 +61,7 @@ public class SaboteurDeckBuilderImpl implements SaboteurDeckBuilder {
     }
 
     @Override
-    public Stack<Card> build() {
+    public Stack<SaboteurCard> build() {
         buildPathCards();
         buildActionCards();
         return deck;

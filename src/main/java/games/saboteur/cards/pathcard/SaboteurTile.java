@@ -1,11 +1,14 @@
 package games.saboteur.cards.pathcard;
 
-import games.core.model.card.tile.DefaultTileImpl;
 import games.core.model.card.tile.Tile;
+import games.core.model.card.tile.TileImpl;
 import games.core.model.enums.Direction;
+import games.saboteur.cards.SaboteurCard;
 
 
-public class SaboteurTile extends DefaultTileImpl<SaboteurSide> {
+public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard {
+    private String name;
+    private boolean hidden;
     private final boolean hasPath;
 
     public SaboteurTile(PathCard pathCard) {
@@ -14,6 +17,22 @@ public class SaboteurTile extends DefaultTileImpl<SaboteurSide> {
         sides.put(Direction.BOTTOM, new SaboteurSide(this, pathCard.getPaths()[2]));
         sides.put(Direction.LEFT, new SaboteurSide(this, pathCard.getPaths()[3]));
         this.hasPath = pathCard.getPaths()[4];
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
     }
 
     public boolean treasureReached() {

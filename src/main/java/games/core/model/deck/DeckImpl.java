@@ -35,8 +35,12 @@ public class DeckImpl<C> implements Deck<C> {
     }
 
     @Override
-    public void distributeCards() {
-
+    public void distributeCards(Hand<C>[] hands) {
+        // For the game of the saboteur
+        for (int i = 0; i < hands[0].getCardNumberAtStart(); i++) {
+            for (Hand<C> hand : hands)
+                deal(hand);
+        }
     }
 
     @Override
