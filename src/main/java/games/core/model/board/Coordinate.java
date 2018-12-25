@@ -21,14 +21,10 @@ public class Coordinate {
      */
     public HashMap<Direction, Coordinate> getAdjacentCoordinates() {
         HashMap<Direction, Coordinate> adjacentCoordinates = new HashMap<>();
-        Coordinate top = new Coordinate(row + 1, column);
-        Coordinate bottom = new Coordinate(row - 1, column);
-        Coordinate left = new Coordinate(row, column - 1);
-        Coordinate right = new Coordinate(row, column + 1);
-        adjacentCoordinates.put(Direction.TOP, top);
-        adjacentCoordinates.put(Direction.BOTTOM, bottom);
-        adjacentCoordinates.put(Direction.LEFT, left);
-        adjacentCoordinates.put(Direction.RIGHT, right);
+        adjacentCoordinates.put(Direction.TOP, this.add(Direction.TOP.getRelativeCoordinates()));
+        adjacentCoordinates.put(Direction.BOTTOM, this.add(Direction.BOTTOM.getRelativeCoordinates()));
+        adjacentCoordinates.put(Direction.LEFT, this.add(Direction.LEFT.getRelativeCoordinates()));
+        adjacentCoordinates.put(Direction.RIGHT, this.add(Direction.RIGHT.getRelativeCoordinates()));
         return adjacentCoordinates;
     }
 
