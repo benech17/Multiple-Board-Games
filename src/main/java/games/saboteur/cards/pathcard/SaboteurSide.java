@@ -31,6 +31,6 @@ public class SaboteurSide extends Side {
 
     @Override
     public String toString() {
-        return "SaboteurSide{" + hasPath + "}";
+        return String.valueOf(hasPath);
     }
 }

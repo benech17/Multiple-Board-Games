@@ -29,8 +29,6 @@ public abstract class ActionCard implements SaboteurCard {
 
     @Override
     public String toString() {
-        return "ActionCard{" +
-                "name='" + name + '\'' +
-                '}';
+        return name;
     }
 }

@@ -11,14 +11,21 @@ import java.util.List;
 
 
 public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
-    List<BlockCard> blockCards;
+    private List<BlockCard> blockCards;
 
     public SaboteurPlayer(String name, int age) {
         super(name, age);
         // Block cards applied to the player
         // There are at most three of the different types of block cards
-        blockCards = new ArrayList<>(ActionCardType.values().length);
+        int nbBlockCards = ActionCardType.values().length;
+        blockCards = new ArrayList<>(nbBlockCards);
+        for (int i = 0; i < nbBlockCards; i++)
+            blockCards.add(null);
         hand = new SaboteurHand();
+    }
+
+    public List<BlockCard> getBlockCards() {
+        return blockCards;
     }
 
     /**

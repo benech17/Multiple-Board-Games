@@ -48,4 +48,9 @@ public abstract class PlayerImpl<B, C> implements Player<B> {
     public boolean nameComesFirst(Player p) {
         return name.compareTo(p.getName()) < 0;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

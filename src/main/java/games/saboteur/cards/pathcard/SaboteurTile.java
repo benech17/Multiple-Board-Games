@@ -53,6 +53,6 @@ public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Path card with " + (hasPath ? "" : "un") + "connected sides : " + sides;
     }
 }

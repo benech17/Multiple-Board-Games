@@ -4,8 +4,10 @@ import games.core.model.board.Coordinate;
 import games.core.model.deck.Deck;
 import games.core.model.deck.DeckImpl;
 import games.saboteur.cards.SaboteurCard;
+import games.saboteur.cards.actioncard.BlockCard;
 import games.saboteur.cards.pathcard.SaboteurTile;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -82,19 +84,34 @@ public class SaboteurGameController {
     }
 
     public void printPlayers() {
-        System.out.println("Players : ");
+        System.out.print("Players : ");
         for (int i = 0; i < players.length; i++) {
-            System.out.print("Player " + i + " ");
+            System.out.print("Player " + i + ", ");
         }
         System.out.println();
     }
 
     public void printHand() {
+        System.out.println(currentPlayer + " hand (listed by index):");
         SaboteurHand hand = (SaboteurHand) currentPlayer.getHand();
         int i = 0;
         for (SaboteurCard c : hand.getHand()) {
-            System.out.println(i + " " + c.toString());
+            System.out.println(i + " - " + c.toString());
             i++;
+        }
+        System.out.println();
+    }
+
+    public void printCurrentPlayer() {
+        System.out.println("Current player : " + currentPlayer.toString());
+    }
+
+    public void printBlockCards() {
+        System.out.print("Block cards applied to " + currentPlayer + " : ");
+        List<BlockCard> blockCards = currentPlayer.getBlockCards();
+        for (BlockCard blockCard : blockCards) {
+            if (blockCard == null) continue;
+            System.out.print(blockCard + ", ");
         }
         System.out.println();
     }
@@ -105,7 +122,9 @@ public class SaboteurGameController {
             for (int i = 0; i < players.length; i++) {
                 currentPlayer = players[i];
                 printPlayers();
+                printCurrentPlayer();
                 printHand();
+                printBlockCards();
                 System.out.println(board);
                 Scanner sc = new Scanner(System.in);
                 System.out.println("Choose your action (0 : pass, 1 : play a path card, 2 : play an action card) : ");
@@ -130,7 +149,11 @@ public class SaboteurGameController {
                         System.out.println("Column : ");
                         int column = sc.nextInt();
                         selectedCoordinate = new Coordinate(row, column);
-                        currentPlayer.takeTurn(Action.PLAY_PATH_CARD, this);
+                        boolean win = currentPlayer.takeTurn(Action.PLAY_PATH_CARD, this);
+                        if (win) {
+                            System.out.println(currentPlayer + "won");
+                            gameEnds = true;
+                        }
                         break;
                     case 2:
                         System.out.println("Index of the action card to play : ");
