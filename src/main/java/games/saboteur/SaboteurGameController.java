@@ -103,7 +103,7 @@ public class SaboteurGameController {
     }
 
     public void printCurrentPlayer() {
-        System.out.println("Current player : " + currentPlayer.toString());
+        System.out.println("Current player : " + currentPlayer.toString() + "\n");
     }
 
     public void printBlockCards() {
@@ -113,7 +113,12 @@ public class SaboteurGameController {
             if (blockCard == null) continue;
             System.out.print(blockCard + ", ");
         }
-        System.out.println();
+        System.out.println("\n");
+    }
+
+    public void printBoard() {
+        System.out.println("The board (indices for rows and columns start at 0) : \n");
+        System.out.println(board);
     }
 
     public void play() {
@@ -125,7 +130,7 @@ public class SaboteurGameController {
                 printCurrentPlayer();
                 printHand();
                 printBlockCards();
-                System.out.println(board);
+                printBoard();
                 Scanner sc = new Scanner(System.in);
                 System.out.println("Choose your action (0 : pass, 1 : play a path card, 2 : play an action card) : ");
                 int action = sc.nextInt();
@@ -135,7 +140,8 @@ public class SaboteurGameController {
                         selectedHandIndex = sc.nextInt();
                         System.out.println(currentPlayer.getHand().getCardAt(selectedHandIndex));
                         currentPlayer.takeTurn(Action.PASS, this);
-                        System.out.println("Player " + currentPlayer + "passed");
+                        System.out.println("Player " + currentPlayer + " has passed their turn");
+                        printHand();
                         break;
                     case 1:
                         System.out.println("Index of the path card to play : ");
