@@ -36,18 +36,14 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
     public boolean takeTurn(SaboteurGameController.Action action, SaboteurGameController game)
             throws BlockedPlayerException, BlockCardAlreadyAppliedException,
             NoMatchingBlockCardAppliedException, WrongCardException {
-        System.out.println("hello");
         SaboteurCard pickedCard = hand.drawCard(game.getSelectedHandIndex());
         switch (action) {
             case PASS:
-                System.out.println("pass");
                 game.getTrash().add(pickedCard);
                 break;
             case PLAY_PATH_CARD:
                 System.out.println(pickedCard);
-                System.out.println("play path card");
                 if (pickedCard instanceof SaboteurTile) {
-                    System.out.println("hey !!!!!");
                     if (!blockCards.isEmpty())
                         throw new BlockedPlayerException();
                     // Put the tile in the board
@@ -58,7 +54,6 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
                 }
                 break;
             case PLAY_ACTION_CARD:
-                System.out.println("play action card");
                 // Play an action card
                 if (pickedCard instanceof BlockCard) {
                     BlockCard blockCard = (BlockCard) pickedCard;
@@ -78,7 +73,6 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
             default:
                 throw new WrongCardException(); // Really necessary?
         }
-        System.out.println("passé switch");
         game.getDeck().deal(hand); // Deal a card from the deck
         return false;
     }
