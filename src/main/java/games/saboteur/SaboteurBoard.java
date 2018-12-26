@@ -24,6 +24,8 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
     private static final int OFFSET = 2;
     // The start card
     private static final StartCard START_CARD = new StartCard();
+    // The treasure card
+    private static final TreasureCard TREASURE_CARD = new TreasureCard();
     // Start and goal coordinates
     private static final Coordinate START_COORDINATE = new Coordinate(CENTER_ROW, 0);
     private static final Coordinate[] GOAL_COORDINATES = new Coordinate[]{
@@ -62,7 +64,7 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
      */
     private void putGoalCards() {
         ArrayList<GoalCard> goalCards = new ArrayList<>();
-        goalCards.add(new TreasureCard());
+        goalCards.add(TREASURE_CARD);
         goalCards.add(new StoneCard());
         goalCards.add(new StoneCard());
 
@@ -79,8 +81,12 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
 
     @Override
     public String toString() {
-        String s = "";
+        String s = "  ";
+        for (int i = 0; i < length; i++)
+            s += i;
+        s += "\n";
         for (int i = 0; i < height; i++) {
+            s += i + " ";
             for (int j = 0; j < length; j++) {
                 s += board.get(i).get(j) == null ? "n" : "X";
             }

@@ -6,25 +6,22 @@ import games.saboteur.cards.WrongCardException;
 import games.saboteur.cards.actioncard.*;
 import games.saboteur.cards.pathcard.SaboteurTile;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 
 public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
-    private List<BlockCard> blockCards;
+    private HashMap<ActionCardType, BlockCard> blockCards;
 
     public SaboteurPlayer(String name, int age) {
         super(name, age);
         // Block cards applied to the player
         // There are at most three of the different types of block cards
         int nbBlockCards = ActionCardType.values().length;
-        blockCards = new ArrayList<>(nbBlockCards);
-        for (int i = 0; i < nbBlockCards; i++)
-            blockCards.add(null);
+        blockCards = new HashMap<>();
         hand = new SaboteurHand();
     }
 
-    public List<BlockCard> getBlockCards() {
+    public HashMap<ActionCardType, BlockCard> getBlockCards() {
         return blockCards;
     }
 
@@ -57,17 +54,17 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
                 // Play an action card
                 if (pickedCard instanceof BlockCard) {
                     BlockCard blockCard = (BlockCard) pickedCard;
-                    int index = blockCard.getIndex();
-                    if (blockCards.get(index) != null)
+                    ActionCardType type = blockCard.getType();
+                    if (blockCards.containsKey(type))
                         throw new BlockCardAlreadyAppliedException();
-                    game.getSelectedPlayer().blockCards.add(index, blockCard);
+                    game.getSelectedPlayer().blockCards.put(type, blockCard);
                 }
                 if (pickedCard instanceof RepairCard) {
                     RepairCard repairCard = (RepairCard) pickedCard;
-                    int index = repairCard.getIndex();
-                    if (blockCards.get(index) == null)
+                    ActionCardType type = repairCard.getType();
+                    if (blockCards.containsKey(type))
                         throw new NoMatchingBlockCardAppliedException();
-                    game.getSelectedPlayer().blockCards.set(index, null);
+                    game.getSelectedPlayer().blockCards.remove(type);
                 }
                 break;
             default:

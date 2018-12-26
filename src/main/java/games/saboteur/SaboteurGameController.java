@@ -4,10 +4,11 @@ import games.core.model.board.Coordinate;
 import games.core.model.deck.Deck;
 import games.core.model.deck.DeckImpl;
 import games.saboteur.cards.SaboteurCard;
+import games.saboteur.cards.actioncard.ActionCardType;
 import games.saboteur.cards.actioncard.BlockCard;
 import games.saboteur.cards.pathcard.SaboteurTile;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -108,9 +109,8 @@ public class SaboteurGameController {
 
     public void printBlockCards() {
         System.out.print("Block cards applied to " + currentPlayer + " : ");
-        List<BlockCard> blockCards = currentPlayer.getBlockCards();
-        for (BlockCard blockCard : blockCards) {
-            if (blockCard == null) continue;
+        HashMap<ActionCardType, BlockCard> blockCards = currentPlayer.getBlockCards();
+        for (BlockCard blockCard : blockCards.values()) {
             System.out.print(blockCard + ", ");
         }
         System.out.println("\n");
