@@ -87,7 +87,7 @@ public class SaboteurGameController {
     public void printPlayers() {
         System.out.print("Players : ");
         for (int i = 0; i < players.length; i++) {
-            System.out.print("Player " + i + ", ");
+            System.out.print("Player " + i + " has score " + players[i].getScore() + ", ");
         }
         System.out.println();
     }

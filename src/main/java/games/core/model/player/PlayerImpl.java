@@ -13,11 +13,13 @@ import games.core.model.hand.Hand;
 public abstract class PlayerImpl<B, C> implements Player<B> {
     protected String name;
     protected int age;
+    protected int score;
     protected Hand<C> hand;
 
     public PlayerImpl(String name, int age) {
         this.name = name;
         this.age = age;
+        score = 0;
     }
 
     public String getName() {
@@ -26,6 +28,14 @@ public abstract class PlayerImpl<B, C> implements Player<B> {
 
     public int getAge() {
         return age;
+    }
+
+    public void increaseScore(int amount) {
+        score += amount;
+    }
+
+    public int getScore() {
+        return score;
     }
 
     public Hand<C> getHand() {

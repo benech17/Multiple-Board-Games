@@ -23,9 +23,9 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
     // Distance that separates the goal cards
     private static final int OFFSET = 2;
     // The start card
-    private static final StartCard START_CARD = new StartCard();
+    private final StartCard startCard = new StartCard();
     // The treasure card
-    private static final TreasureCard TREASURE_CARD = new TreasureCard();
+    private final TreasureCard treasureCard = new TreasureCard();
     // Start and goal coordinates
     private static final Coordinate START_COORDINATE = new Coordinate(CENTER_ROW, 0);
     private static final Coordinate[] GOAL_COORDINATES = new Coordinate[]{
@@ -42,9 +42,12 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
     }
 
     private void putStartCard() {
-        super.putTileAt(START_COORDINATE, START_CARD);
+        super.putTileAt(START_COORDINATE, startCard);
     }
 
+    public TreasureCard getTreasureCard() {
+        return treasureCard;
+    }
 
     @Override
     public boolean putTileAt(Coordinate c, SaboteurTile tile) {
@@ -67,7 +70,7 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
      */
     private void putGoalCards() {
         ArrayList<GoalCard> goalCards = new ArrayList<>();
-        goalCards.add(TREASURE_CARD);
+        goalCards.add(treasureCard);
         goalCards.add(new StoneCard());
         goalCards.add(new StoneCard());
 

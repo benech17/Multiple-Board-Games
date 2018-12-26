@@ -26,7 +26,7 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
     }
 
     /**
-     * Make a turn based on an action and the game state
+     * Take a turn based on an action and the game state
      * @param action the action to do in the turn
      * @param game the game manager
      * @return true if the player found the treasure
@@ -48,13 +48,14 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
                 game.getTrash().add(pickedCard);
                 break;
             case PLAY_PATH_CARD:
-                System.out.println(pickedCard);
                 if (pickedCard instanceof SaboteurTile) {
                     if (!blockCards.isEmpty())
                         throw new BlockedPlayerException();
                     // Put the tile in the board
                     game.getBoard().putTileAt(game.getSelectedCoordinate(), (SaboteurTile) pickedCard);
                     if (game.getBoard().treasureReached()) {
+                        // Collect treasure, update score
+                        increaseScore(game.getBoard().getTreasureCard().getAmountPoints());
                         return true; // The player won
                     }
                 } else throw new WrongCardException("Got " + pickedCard + " but expected a path card");
@@ -77,7 +78,7 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
                 } else throw new WrongCardException("Got " + pickedCard + " but expected an action card");
                 break;
             default:
-                throw new UnsupportedActionException(); // Really necessary?
+                throw new UnsupportedActionException();
         }
         game.getDeck().deal(hand); // Deal a card from the deck
         return false;
