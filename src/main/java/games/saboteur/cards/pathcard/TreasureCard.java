@@ -2,8 +2,15 @@ package games.saboteur.cards.pathcard;
 
 
 public class TreasureCard extends GoalCard {
-    public static final int AMOUNT_POINTS = 100;
+    private static final int AMOUNT_POINTS = 100;
+
     public TreasureCard() {
         setName("Treasure Card");
+    }
+
+    public int getAmountPoints() {
+        if (isHidden())
+            throw new CantRevealHiddenCardException();
+        return AMOUNT_POINTS;
     }
 }

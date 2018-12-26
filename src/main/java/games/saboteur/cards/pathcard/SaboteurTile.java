@@ -8,7 +8,7 @@ import games.saboteur.cards.SaboteurCard;
 
 public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard {
     private String name;
-    private boolean hidden;
+    protected boolean hidden;
     private final boolean hasPath;
 
     public SaboteurTile(PathCard pathCard) {
@@ -17,6 +17,11 @@ public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard
         sides.put(Direction.BOTTOM, new SaboteurSide(this, pathCard.getPaths()[2]));
         sides.put(Direction.LEFT, new SaboteurSide(this, pathCard.getPaths()[3]));
         this.hasPath = pathCard.getPaths()[4];
+    }
+
+    public SaboteurTile(PathCard pathCard, boolean hidden) {
+        this(pathCard);
+        this.hidden = hidden;
     }
 
     public String getName() {
@@ -31,8 +36,10 @@ public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard
         return hidden;
     }
 
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
+    public void reveal() {
+        if (hidden)
+            hidden = false;
+        throw new CantRevealHiddenCardException();
     }
 
     public boolean treasureReached() {

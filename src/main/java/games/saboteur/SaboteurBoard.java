@@ -45,6 +45,7 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
         super.putTileAt(START_COORDINATE, START_CARD);
     }
 
+
     @Override
     public boolean putTileAt(Coordinate c, SaboteurTile tile) {
         if (!coordinateInsideBoard(c))
@@ -52,6 +53,8 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
         HashMap<Direction, SaboteurTile> adjacentTiles = getAdjacentTilesByDirection(c);
         // We check if the tile fits with each adjacent tile
         for (Direction d : adjacentTiles.keySet()) {
+            if (adjacentTiles.get(d).isHidden())
+                adjacentTiles.get(d).reveal(); // Reveal card if hidden
             if (!tile.fitsWith(adjacentTiles.get(d), d))
                 return false;
         }

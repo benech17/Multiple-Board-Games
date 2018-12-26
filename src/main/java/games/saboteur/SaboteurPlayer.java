@@ -26,13 +26,22 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
     }
 
     /**
-     * Returns true if the player found the treasure
-     *
-     * @return
+     * Make a turn based on an action and the game state
+     * @param action the action to do in the turn
+     * @param game the game manager
+     * @return true if the player found the treasure
+     * @throws BlockedPlayerException if a blocked player attempts to play a path card
+     * @throws BlockCardAlreadyAppliedException if a player plays an already applied action card
+     * @throws NoMatchingBlockCardAppliedException if a player plays a repair card that don't match a block card
+     * @throws WrongCardException if the picked card don't correspond to the specified action
+     * @throws UnsupportedActionException if the action provided is not handled
      */
     public boolean takeTurn(SaboteurGameController.Action action, SaboteurGameController game)
-            throws BlockedPlayerException, BlockCardAlreadyAppliedException,
-            NoMatchingBlockCardAppliedException, WrongCardException {
+            throws BlockedPlayerException,
+            BlockCardAlreadyAppliedException,
+            NoMatchingBlockCardAppliedException,
+            WrongCardException,
+            UnsupportedActionException {
         SaboteurCard pickedCard = hand.drawCard(game.getSelectedHandIndex());
         switch (action) {
             case PASS:
@@ -68,7 +77,7 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
                 } else throw new WrongCardException("Got " + pickedCard + " but expected an action card");
                 break;
             default:
-                throw new WrongCardException(pickedCard.toString()); // Really necessary?
+                throw new UnsupportedActionException(); // Really necessary?
         }
         game.getDeck().deal(hand); // Deal a card from the deck
         return false;
