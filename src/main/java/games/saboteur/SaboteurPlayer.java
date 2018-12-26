@@ -48,7 +48,7 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
                     if (game.getBoard().treasureReached()) {
                         return true; // The player won
                     }
-                }
+                } else throw new WrongCardException("Got " + pickedCard + " but expected a path card");
                 break;
             case PLAY_ACTION_CARD:
                 // Play an action card
@@ -65,7 +65,7 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
                     if (!blockCards.containsKey(type))
                         throw new NoMatchingBlockCardAppliedException();
                     game.getSelectedPlayer().blockCards.remove(type);
-                } else throw new WrongCardException("Got " + pickedCard.toString() + " but expected an action card");
+                } else throw new WrongCardException("Got " + pickedCard + " but expected an action card");
                 break;
             default:
                 throw new WrongCardException(pickedCard.toString()); // Really necessary?
