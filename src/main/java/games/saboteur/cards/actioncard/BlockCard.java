@@ -2,15 +2,9 @@ package games.saboteur.cards.actioncard;
 
 
 public class BlockCard extends ActionCard {
-    private ActionCardType type;
 
     public BlockCard(ActionCardType type) {
-        super("Block card of type " + type.toString().toLowerCase(), false);
-        this.type = type;
-    }
-
-    public ActionCardType getType() {
-        return type;
+        super(type);
     }
 
     @Override
@@ -19,5 +13,10 @@ public class BlockCard extends ActionCard {
         if (obj == null || getClass() != obj.getClass()) return false;
         BlockCard that = (BlockCard) obj;
         return type.equals(that.type);
+    }
+
+    @Override
+    public String toString() {
+        return "Block card of type " + type;
     }
 }

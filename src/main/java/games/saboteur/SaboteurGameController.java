@@ -117,7 +117,7 @@ public class SaboteurGameController {
     }
 
     public void printBoard() {
-        System.out.println("The board (indices for rows and columns start at 0) : \n");
+        System.out.println("The board : \n");
         System.out.println(board);
     }
 

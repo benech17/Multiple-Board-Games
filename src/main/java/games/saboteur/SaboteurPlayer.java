@@ -62,13 +62,13 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
                 if (pickedCard instanceof RepairCard) {
                     RepairCard repairCard = (RepairCard) pickedCard;
                     ActionCardType type = repairCard.getType();
-                    if (blockCards.containsKey(type))
+                    if (!blockCards.containsKey(type))
                         throw new NoMatchingBlockCardAppliedException();
                     game.getSelectedPlayer().blockCards.remove(type);
-                }
+                } else throw new WrongCardException("Got " + pickedCard.toString() + " but expected an action card");
                 break;
             default:
-                throw new WrongCardException(); // Really necessary?
+                throw new WrongCardException(pickedCard.toString()); // Really necessary?
         }
         game.getDeck().deal(hand); // Deal a card from the deck
         return false;

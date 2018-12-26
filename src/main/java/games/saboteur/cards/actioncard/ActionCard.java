@@ -3,32 +3,18 @@ package games.saboteur.cards.actioncard;
 import games.saboteur.cards.SaboteurCard;
 
 public abstract class ActionCard implements SaboteurCard {
-    private String name;
-    private boolean hidden;
+    protected final ActionCardType type;
 
-    public ActionCard(String name, boolean hidden) {
-        this.name = name;
-        this.hidden = hidden;
+    public ActionCard(ActionCardType type) {
+        this.type = type;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isHidden() {
-        return hidden;
-    }
-
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
+    public ActionCardType getType() {
+        return type;
     }
 
     @Override
     public String toString() {
-        return name;
+        return type.toString();
     }
 }
