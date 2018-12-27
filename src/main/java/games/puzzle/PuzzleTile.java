@@ -8,7 +8,7 @@ import games.core.model.enums.Direction;
 public class PuzzleTile extends TileImpl<PuzzleSide> {
     public final Coordinate position;
 
-    public PuzzleTile(Coordinate position, int topValue, int leftValue, int rightValue, int bottomValue) {
+    public PuzzleTile(Coordinate position, int topValue, int rightValue, int bottomValue, int leftValue) {
         this.position = position;
         sides.put(Direction.TOP, new PuzzleSide(topValue, this));
         sides.put(Direction.LEFT, new PuzzleSide(leftValue, this));

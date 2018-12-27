@@ -34,8 +34,11 @@ public class PuzzleDeckBuilder implements DeckBuilder<PuzzleTile> {
                 Coordinate currentCoord = new Coordinate(i, j);
                 for (Direction d : Direction.values()) {
                     // If the adjacent coordinate is inside the board
-                    if (board.coordinateInsideBoard(currentCoord.add(d.getRelativeCoordinates()))) {
-                        PuzzleTile adjTile = board.getTileAt(currentCoord.add(d.getRelativeCoordinates()));
+                    System.out.println(d + " " + board.coordinateInsideBoard(currentCoord.plus(d.getRelativeCoordinates()))
+                            + " " + currentCoord.plus(d.getRelativeCoordinates()));
+                    if (board.coordinateInsideBoard(currentCoord.plus(d.getRelativeCoordinates()))) {
+                        //protected EnumMap<Direction, Node> adjacentNodes;
+                        PuzzleTile adjTile = board.getTileAt(currentCoord.plus(d.getRelativeCoordinates()));
                         if (adjTile == null) {
                             connections.add(id++);
                         } else {

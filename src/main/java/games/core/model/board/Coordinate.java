@@ -21,10 +21,8 @@ public class Coordinate {
      */
     public EnumMap<Direction, Coordinate> getAdjacentCoordinates() {
         EnumMap<Direction, Coordinate> adjacentCoordinates = new EnumMap<>(Direction.class);
-        adjacentCoordinates.put(Direction.TOP, this.add(Direction.TOP.getRelativeCoordinates()));
-        adjacentCoordinates.put(Direction.BOTTOM, this.add(Direction.BOTTOM.getRelativeCoordinates()));
-        adjacentCoordinates.put(Direction.LEFT, this.add(Direction.LEFT.getRelativeCoordinates()));
-        adjacentCoordinates.put(Direction.RIGHT, this.add(Direction.RIGHT.getRelativeCoordinates()));
+        for (Direction d : Direction.values())
+            adjacentCoordinates.put(d, this.plus(d.getRelativeCoordinates()));
         return adjacentCoordinates;
     }
 
@@ -36,8 +34,12 @@ public class Coordinate {
         return column;
     }
 
-    public Coordinate add(Coordinate c) {
+    public Coordinate plus(Coordinate c) {
         return new Coordinate(row + c.getRow(), column + c.getColumn());
+    }
+
+    public Coordinate minus(Coordinate c) {
+        return new Coordinate(row - c.getRow(), column - c.getColumn());
     }
 
     @Override

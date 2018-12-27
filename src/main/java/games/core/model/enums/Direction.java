@@ -4,9 +4,12 @@ import games.core.model.board.Coordinate;
 
 // Directions put in clock-wise order
 public enum Direction {
-    TOP(1, 0),
+    // The origin is at the top-left corner
+    // The row axis is oriented to the bottom
+    // and the column axis to the right
+    TOP(-1, 0),
     RIGHT(0, 1),
-    BOTTOM(-1, 0),
+    BOTTOM(1, 0),
     LEFT(0, -1);
 
     private Coordinate relativeCoordinates;

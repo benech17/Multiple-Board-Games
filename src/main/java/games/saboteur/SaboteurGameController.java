@@ -50,7 +50,7 @@ public class SaboteurGameController {
         SaboteurGameController gameController = new SaboteurGameController(3);
         SaboteurBoard b = gameController.getBoard();
         for (int i = 1; i < 8; i++) {
-            b.putTileAt(new Coordinate(2, i), new SaboteurTile(PathCard.ELEVEN));
+            b.putTileAt(new Coordinate(2, i), new SaboteurTile(PathCard.TWELVE));
         }
         gameController.play();
     }
