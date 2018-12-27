@@ -1,0 +1,63 @@
+\documentclass[a4paper, 11pt, DIV=9]{scrartcl}
+
+\usepackage[french]{babel}
+\usepackage[autostyle, french=guillemets]{csquotes}
+
+\usepackage[protrusion=true]{microtype}
+
+\linespread{1.03}
+
+\usepackage{minted}
+
+\usepackage{fontspec}
+\setmainfont{STIX Two Text}
+\setsansfont{Roboto Medium}
+\setmonofont[Scale=.89]{Iosevka Term}
+
+\title{Projet de programmation orientée objet \\ et d'interfaces graphiques}
+\author{Julien \textsc{Coolen} \and Yaniv \textsc{Benichou}}
+\date{Année 2018 - 3\textsuperscript{e} semestre L2}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Nous abordons dans ce rapport nos choix de modélisation et
+les difficultés rencontrées au cours de ce projet pour le cours de
+programmation orientée objet et d’interfaces graphiques.
+
+Le but de ce projet consiste à implémenter plusieurs jeux de
+plateau en regroupant les fonctionnalités communes. Pour cela
+nous avons développé une plateforme logicielle (en anglais \textit{framework}) à partir
+de laquelle nous avons codé chaque jeu.
+
+%Tip : Penser à comment tu veux agencer tes pièces, quelles structures
+%de données ça implique, ce que tu veux pouvoir faire, dans quelles
+%conditions, quel impact ça aurait sur le reste, etc.
+
+\section{Modélisation}
+
+Nous avons remarqué que chaque jeu utilise toujours les mêmes composants:
+un plateau, une pièce, une pioche, des joueurs et leur main.
+
+\section{Difficultés rencontrées}
+
+
+Lors du développement nous avons réécrit à plusieurs reprises certaines
+méthodes, ce qui introduisait quelques fois de nouveaux bugs. C'est pourquoi
+nous avons écrit des tests unitaires à l'aide de la librairie jUnit que l'on lance à
+chaque modification pour identifier toute régression dans le code.
+
+Plus git pour sauvegarder des états de l'avancement en cas de problème
+\section{Pistes d'amélioration}
+\section{Conclusion}
+
+\end{document}
+
+%%% Local Variables: 
+%%% coding: utf-8
+%%% mode: latex
+%%% TeX-engine: luatex
+%%% End: 

@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZlt{}?php}
+\PYG{k}{function} \PYG{n+nf}{queryDb}\PYG{p}{(}\PYG{n+nv}{\PYGZdl{}query}\PYG{p}{,} \PYG{o}{...}\PYG{n+nv}{\PYGZdl{}args}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n+nv}{\PYGZdl{}stmt} \PYG{o}{=} \PYG{n+nv}{\PYGZdl{}GLOBALS}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}connexion\PYGZsq{}}\PYG{p}{]}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{prepare}\PYG{p}{(}\PYG{n+nv}{\PYGZdl{}query}\PYG{p}{);}
+    \PYG{n+nv}{\PYGZdl{}stmt}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{execute}\PYG{p}{(}\PYG{n+nv}{\PYGZdl{}args}\PYG{p}{);}
+    \PYG{k}{return} \PYG{n+nv}{\PYGZdl{}stmt}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{c+cp}{?\PYGZgt{}}
+\end{Verbatim}
