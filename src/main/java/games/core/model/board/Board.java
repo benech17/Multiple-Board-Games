@@ -26,13 +26,15 @@ public interface Board<T extends Tile> {
     /**
      * Puts a tile in the board at the given coordinate
      *
-     * @param c
-     * @param tile
-     * @return true if the tile was put at the given coordinate as a result of this call.
-     * Returns false if a tile is already present
+     * @param c the coordinate of the board to put the tile
+     * @param tile the tile to put on the board
+     * @return true if the tile was put at the given coordinate as a result of this call
      * @throws OutOfBoardBoundsException if the specified coordinate is outside of the board
+     * @throws CannotAddTileAtException if a tile is already on the board at the given coordinate
      */
-    boolean putTileAt(Coordinate c, T tile) throws OutOfBoardBoundsException;
+    boolean putTileAt(Coordinate c, T tile)
+            throws OutOfBoardBoundsException,
+            CannotAddTileAtException;
 
     /**
      * Removes the tile at the given coordinate

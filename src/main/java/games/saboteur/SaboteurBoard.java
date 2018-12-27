@@ -49,17 +49,25 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
         return treasureCard;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws UnconnectedPathException if the path card don't connect with adjacent path cards
+     */
     @Override
-    public boolean putTileAt(Coordinate c, SaboteurTile tile) {
+    public boolean putTileAt(Coordinate c, SaboteurTile tile) throws UnconnectedPathException {
         if (!coordinateInsideBoard(c))
             throw new OutOfBoardBoundsException(c.toString());
         HashMap<Direction, SaboteurTile> adjacentTiles = getAdjacentTilesByDirection(c);
+        // If there are no adjacent tiles to connect to
+        if (adjacentTiles.isEmpty())
+            throw new UnconnectedPathException("No adjacent path card to connect to!");
         // We check if the tile fits with each adjacent tile
         for (Direction d : adjacentTiles.keySet()) {
             if (adjacentTiles.get(d).isHidden())
                 adjacentTiles.get(d).reveal(); // Reveal card if hidden
             if (!tile.fitsWith(adjacentTiles.get(d), d))
-                return false;
+                throw new UnconnectedPathException("Illegal move: tunnels must connect!");
         }
         // The tile fits with the surrounding tiles, let's put it in the board
         return super.putTileAt(c, tile);
@@ -87,17 +95,17 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
 
     @Override
     public String toString() {
-        String s = "  ";
+        StringBuilder s = new StringBuilder("  ");
         for (int i = 0; i < length; i++)
-            s += i;
-        s += "\n";
+            s.append(i);
+        s.append("\n");
         for (int i = 0; i < height; i++) {
-            s += i + " ";
+            s.append(i).append(" ");
             for (int j = 0; j < length; j++) {
-                s += board.get(i).get(j) == null ? "n" : "X";
+                s.append(board.get(i).get(j) == null ? "n" : "X");
             }
-            s += "\n";
+            s.append("\n");
         }
-        return s;
+        return s.toString();
     }
 }

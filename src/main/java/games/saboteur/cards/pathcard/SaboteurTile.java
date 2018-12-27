@@ -8,7 +8,7 @@ import games.saboteur.cards.SaboteurCard;
 
 public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard {
     private String name;
-    protected boolean hidden;
+    protected boolean hidden = false;
     private final boolean hasPath;
 
     public SaboteurTile(PathCard pathCard) {
@@ -54,6 +54,8 @@ public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard
     public boolean fitsWith(Tile t, Direction d) {
         // We can't put a card if the other has paths
         // which don't connect
+        System.out.println(super.fitsWith(t, d));
+        System.out.println(((SaboteurTile) t).hasPath);
         return super.fitsWith(t, d) && ((SaboteurTile) t).hasPath;
         // How could we avoid that cast? can it raise errors?
     }

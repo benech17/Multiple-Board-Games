@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Bouton extends JButton {
     private String name;
@@ -26,7 +27,7 @@ public class Bouton extends JButton {
                 }
             });
 
-            if (file == "start") {
+            if (Objects.equals(file, "start")) {
                 img = ImageIO.read(getClass().getResourceAsStream("/images/saboteur/" + file + ".png"));
             } else {
                 if (file.equals("goal")) {
@@ -36,12 +37,12 @@ public class Bouton extends JButton {
 
                 } else {
 
-                    if (file == "path") {
+                    if (Objects.equals(file, "path")) {
                         n++;
                         img = ImageIO.read(getClass().getResourceAsStream("/images/saboteur/path" + n + ".png"));
                     } else {
 
-                        if (file == "menu") {
+                        if (Objects.equals(file, "menu")) {
 
                             img = ImageIO.read(getClass().getResourceAsStream("/images/menuJeu" + i + ".jpeg"));
                             i++;

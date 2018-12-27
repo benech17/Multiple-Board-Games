@@ -71,11 +71,13 @@ public abstract class DefaultBoardImpl<T extends Tile> implements Board<T> {
     }
 
     @Override
-    public boolean putTileAt(Coordinate c, T tile) throws OutOfBoardBoundsException {
+    public boolean putTileAt(Coordinate c, T tile)
+            throws OutOfBoardBoundsException,
+            CannotAddTileAtException {
         if (!coordinateInsideBoard(c))
             throw new OutOfBoardBoundsException(c.toString());
         if (board.get(c.getRow()).get(c.getColumn()) != null)
-            return false;
+            throw new CannotAddTileAtException("A tile is already on the board at " + c);
         board.get(c.getRow()).set(c.getColumn(), tile);
         return true;
     }
@@ -109,23 +111,21 @@ public abstract class DefaultBoardImpl<T extends Tile> implements Board<T> {
             if (visitedTiles.contains(currentCoordinate))
                 continue;
             visitedTiles.add(currentCoordinate);
-            for (Coordinate c : getAdjacentTilesByCoordinates(currentCoordinate)) {
-                // Adding the adjacent tiles to the queue
-                toVisit.add(c);
-            }
+            // Adding the adjacent tiles to the queue
+            toVisit.addAll(getAdjacentTilesByCoordinates(currentCoordinate));
         }
         return false;
     }
 
     public String toString() {
-        String s = "";
+        StringBuilder s = new StringBuilder();
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < length; j++) {
-                s += board.get(i).get(j) == null ? "n" : board.get(i).get(j);
+                s.append(board.get(i).get(j) == null ? "n" : board.get(i).get(j));
             }
-            s += "\n";
+            s.append("\n");
         }
-        return s;
+        return s.toString();
     }
 
 }

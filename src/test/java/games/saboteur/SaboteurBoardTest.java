@@ -48,4 +48,14 @@ public class SaboteurBoardTest {
         SaboteurBoard b = new SaboteurBoard();
         b.putTileAt(new Coordinate(-1, 0), new SaboteurTile(PathCard.TEN));
     }
+
+    @Test
+    public void testFitsWith() {
+        SaboteurBoard b = new SaboteurBoard();
+        System.out.println(b);
+        assertTrue(b.putTileAt(new Coordinate(2, 1), new SaboteurTile(PathCard.TEN)));
+        assertTrue(b.putTileAt(new Coordinate(2, 2), new SaboteurTile(PathCard.TEN)));
+        assertTrue(b.putTileAt(new Coordinate(3, 2), new SaboteurTile(PathCard.TEN)));
+        System.out.println(b);
+    }
 }

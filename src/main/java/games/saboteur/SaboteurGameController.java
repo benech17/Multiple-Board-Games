@@ -121,61 +121,80 @@ public class SaboteurGameController {
         System.out.println(board);
     }
 
+    public boolean takeTurn() {
+        printPlayers();
+        printCurrentPlayer();
+        printHand();
+        printBlockCards();
+        printBoard();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Choose your action (0 : pass, 1 : play a path card, 2 : play an action card) : ");
+        int action = sc.nextInt();
+        switch (action) {
+            case 0:
+                System.out.println("Index of the card to put to the trash : ");
+                selectedHandIndex = sc.nextInt();
+                System.out.println(currentPlayer.getHand().getCardAt(selectedHandIndex));
+                try {
+                    currentPlayer.takeTurn(Action.PASS, this);
+                } catch (Throwable t) {
+                    System.out.println(t.getMessage());
+                    return false;
+                }
+                System.out.println("Player " + currentPlayer + " has passed their turn");
+                printHand();
+                break;
+            case 1:
+                System.out.println("Index of the path card to play : ");
+                selectedHandIndex = sc.nextInt();
+                SaboteurCard c = currentPlayer.getHand().getCardAt(selectedHandIndex);
+                System.out.println(c);
+                System.out.println(c instanceof SaboteurTile);
+                System.out.println("Coordinates of the destination in the board : ");
+                System.out.println("Row : ");
+                int row = sc.nextInt();
+                System.out.println("Column : ");
+                int column = sc.nextInt();
+                selectedCoordinate = new Coordinate(row, column);
+                try {
+                    currentPlayer.takeTurn(Action.PLAY_PATH_CARD, this);
+                } catch (Throwable t) {
+                    System.out.println(t.getMessage());
+                    return false;
+                }
+
+                break;
+            case 2:
+                System.out.println("Index of the action card to play : ");
+                selectedHandIndex = sc.nextInt();
+                System.out.println(currentPlayer.getHand().getCardAt(selectedHandIndex));
+                System.out.println("Index of the player to put the card in front of : ");
+                int selectedPlayerIndex = sc.nextInt();
+                selectedPlayer = players[selectedPlayerIndex];
+                try {
+                    currentPlayer.takeTurn(Action.PLAY_ACTION_CARD, this);
+                } catch (Throwable t) {
+                    System.out.println(t.toString() + " " + t.getMessage());
+                    return false;
+                }
+                break;
+        }
+        return true;
+    }
+
     public void play() {
         boolean gameEnds = false;
         while (!gameEnds) {
             for (int i = 0; i < players.length; i++) {
                 currentPlayer = players[i];
-                printPlayers();
-                printCurrentPlayer();
-                printHand();
-                printBlockCards();
-                printBoard();
-                Scanner sc = new Scanner(System.in);
-                System.out.println("Choose your action (0 : pass, 1 : play a path card, 2 : play an action card) : ");
-                int action = sc.nextInt();
-                switch (action) {
-                    case 0:
-                        System.out.println("Index of the card to put to the trash : ");
-                        selectedHandIndex = sc.nextInt();
-                        System.out.println(currentPlayer.getHand().getCardAt(selectedHandIndex));
-                        currentPlayer.takeTurn(Action.PASS, this);
-                        System.out.println("Player " + currentPlayer + " has passed their turn");
-                        printHand();
-                        break;
-                    case 1:
-                        System.out.println("Index of the path card to play : ");
-                        selectedHandIndex = sc.nextInt();
-                        SaboteurCard c = currentPlayer.getHand().getCardAt(selectedHandIndex);
-                        System.out.println(c);
-                        System.out.println(c instanceof SaboteurTile);
-                        System.out.println("Coordinates of the destination in the board : ");
-                        System.out.println("Row : ");
-                        int row = sc.nextInt();
-                        System.out.println("Column : ");
-                        int column = sc.nextInt();
-                        selectedCoordinate = new Coordinate(row, column);
-                        boolean win = currentPlayer.takeTurn(Action.PLAY_PATH_CARD, this);
-                        if (win) {
-                            System.out.println(currentPlayer + "won");
-                            gameEnds = true;
-                        }
-                        break;
-                    case 2:
-                        System.out.println("Index of the action card to play : ");
-                        selectedHandIndex = sc.nextInt();
-                        System.out.println(currentPlayer.getHand().getCardAt(selectedHandIndex));
-                        System.out.println("Index of the player to put the card in front of : ");
-                        int selectedPlayerIndex = sc.nextInt();
-                        selectedPlayer = players[selectedPlayerIndex];
-                        currentPlayer.takeTurn(Action.PLAY_ACTION_CARD, this);
-                        break;
-                }
+                boolean validPlay = false;
+                while (!validPlay)
+                    if (takeTurn())
+                        validPlay = true;
+                if (currentPlayer.hasWon())
+                    gameEnds = true;
             }
         }
     }
 
-    enum Action {
-        PLAY_ACTION_CARD, PLAY_PATH_CARD, PASS
-    }
 }

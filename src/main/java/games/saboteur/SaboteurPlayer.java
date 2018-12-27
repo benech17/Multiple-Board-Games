@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
     private HashMap<ActionCardType, BlockCard> blockCards;
+    private boolean hasWon = false;
 
     public SaboteurPlayer(String name, int age) {
         super(name, age);
@@ -25,24 +26,27 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
         return blockCards;
     }
 
+    public boolean hasWon() {
+        return hasWon;
+    }
+
     /**
      * Take a turn based on an action and the game state
      * @param action the action to do in the turn
      * @param game the game manager
-     * @return true if the player found the treasure
      * @throws BlockedPlayerException if a blocked player attempts to play a path card
      * @throws BlockCardAlreadyAppliedException if a player plays an already applied action card
      * @throws NoMatchingBlockCardAppliedException if a player plays a repair card that don't match a block card
      * @throws WrongCardException if the picked card don't correspond to the specified action
      * @throws UnsupportedActionException if the action provided is not handled
      */
-    public boolean takeTurn(SaboteurGameController.Action action, SaboteurGameController game)
+    public void takeTurn(Action action, SaboteurGameController game)
             throws BlockedPlayerException,
             BlockCardAlreadyAppliedException,
             NoMatchingBlockCardAppliedException,
             WrongCardException,
             UnsupportedActionException {
-        SaboteurCard pickedCard = hand.drawCard(game.getSelectedHandIndex());
+        SaboteurCard pickedCard = hand.getCardAt(game.getSelectedHandIndex());
         switch (action) {
             case PASS:
                 game.getTrash().add(pickedCard);
@@ -52,37 +56,35 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
                     if (!blockCards.isEmpty())
                         throw new BlockedPlayerException();
                     // Put the tile in the board
-                    game.getBoard().putTileAt(game.getSelectedCoordinate(), (SaboteurTile) pickedCard);
+                    game.getBoard().putTileAt(game.getSelectedCoordinate(), (SaboteurTile) hand.drawCard(game.getSelectedHandIndex()));
                     if (game.getBoard().treasureReached()) {
                         // Collect treasure, update score
                         increaseScore(game.getBoard().getTreasureCard().getAmountPoints());
-                        return true; // The player won
+                        hasWon = true; // The player won
                     }
-                } else throw new WrongCardException("Got " + pickedCard + " but expected a path card");
+                } else
+                    throw new WrongCardException("Got " + pickedCard + " but expected a path card");
                 break;
             case PLAY_ACTION_CARD:
                 // Play an action card
                 if (pickedCard instanceof BlockCard) {
-                    BlockCard blockCard = (BlockCard) pickedCard;
-                    ActionCardType type = blockCard.getType();
+                    ActionCardType type = ((BlockCard) pickedCard).getType();
                     if (blockCards.containsKey(type))
                         throw new BlockCardAlreadyAppliedException();
-                    game.getSelectedPlayer().blockCards.put(type, blockCard);
+                    game.getSelectedPlayer().blockCards.put(type, (BlockCard) hand.drawCard(game.getSelectedHandIndex()));
                 }
                 if (pickedCard instanceof RepairCard) {
-                    RepairCard repairCard = (RepairCard) pickedCard;
-                    ActionCardType type = repairCard.getType();
+                    ActionCardType type = ((RepairCard) pickedCard).getType();
                     if (!blockCards.containsKey(type))
                         throw new NoMatchingBlockCardAppliedException();
+                    hand.drawCard(game.getSelectedHandIndex());
                     game.getSelectedPlayer().blockCards.remove(type);
-                } else throw new WrongCardException("Got " + pickedCard + " but expected an action card");
+                } else
+                    throw new WrongCardException("Got " + pickedCard + " but expected an action card");
                 break;
             default:
-                throw new UnsupportedActionException();
+                throw new UnsupportedActionException("Action " + action.toString() + " is not supported");
         }
         game.getDeck().deal(hand); // Deal a card from the deck
-        return false;
     }
-
-
 }
