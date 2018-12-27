@@ -3,6 +3,7 @@ package games.core.model.deck;
 import games.core.model.hand.Hand;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Stack;
 
 
@@ -35,9 +36,9 @@ public class DeckImpl<C> implements Deck<C> {
     }
 
     @Override
-    public void distributeCards(Hand<C>[] hands) {
+    public void distributeCards(List<? extends Hand<C>> hands) {
         // For the game of the saboteur
-        for (int i = 0; i < hands[0].getCardNumberAtStart(); i++) {
+        for (int i = 0; i < hands.get(0).getCardNumberAtStart(); i++) {
             for (Hand<C> hand : hands)
                 deal(hand);
         }

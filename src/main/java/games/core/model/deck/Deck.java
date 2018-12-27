@@ -2,6 +2,7 @@ package games.core.model.deck;
 
 import games.core.model.hand.Hand;
 
+import java.util.List;
 import java.util.Stack;
 
 public interface Deck<C> {
@@ -19,7 +20,7 @@ public interface Deck<C> {
      */
     void deal(Hand<C> hand) throws EmptyDeckException;
 
-    void distributeCards(Hand<C>[] hands);
+    void distributeCards(List<? extends Hand<C>> hands);
 
     /**
      * Adds a card to the deck

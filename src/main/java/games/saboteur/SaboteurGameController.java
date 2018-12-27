@@ -3,20 +3,19 @@ package games.saboteur;
 import games.core.model.board.Coordinate;
 import games.core.model.deck.Deck;
 import games.core.model.deck.DeckImpl;
+import games.core.model.player.Player;
 import games.saboteur.cards.SaboteurCard;
 import games.saboteur.cards.actioncard.ActionCardType;
 import games.saboteur.cards.actioncard.BlockCard;
 import games.saboteur.cards.pathcard.PathCard;
 import games.saboteur.cards.pathcard.SaboteurTile;
 
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 
 public class SaboteurGameController {
     private SaboteurBoard board;
-    private SaboteurPlayer[] players;
+    private List<SaboteurPlayer> players;
     private Deck<SaboteurCard> deck;
     private Stack<SaboteurCard> trash;
 
@@ -31,16 +30,16 @@ public class SaboteurGameController {
 
         this.board = new SaboteurBoard();
 
-        this.players = new SaboteurPlayer[nbPlayers];
+        this.players = new ArrayList<>(nbPlayers);
         for (int i = 0; i < nbPlayers; i++)
-            players[i] = new SaboteurPlayer("Player " + i, 0);
+            players.add(new SaboteurPlayer("Player " + i, 0));
 
         SaboteurDeckBuilder deckBuilder = new SaboteurDeckBuilderImpl();
         this.deck = new DeckImpl<>(deckBuilder);
 
-        SaboteurHand[] hands = new SaboteurHand[nbPlayers];
+        List<SaboteurHand> hands = new ArrayList<>(nbPlayers);
         for (int i = 0; i < nbPlayers; i++)
-            hands[i] = (SaboteurHand) players[i].getHand(); // pb
+            hands.add((SaboteurHand) players.get(i).getHand()); // pb
         deck.shuffle();
         deck.distributeCards(hands);
 
@@ -60,7 +59,7 @@ public class SaboteurGameController {
         return board;
     }
 
-    public SaboteurPlayer[] getPlayers() {
+    public List<SaboteurPlayer> getPlayers() {
         return players;
     }
 
@@ -90,9 +89,8 @@ public class SaboteurGameController {
 
     public void printPlayers() {
         System.out.print("Players : ");
-        for (int i = 0; i < players.length; i++) {
-            System.out.print("Player " + i + " has score " + players[i].getScore() + ", ");
-        }
+        for (Player p : players)
+            System.out.println(p);
         System.out.println();
     }
 
@@ -174,7 +172,7 @@ public class SaboteurGameController {
                 System.out.println(currentPlayer.getHand().getCardAt(selectedHandIndex));
                 System.out.println("Index of the player to put the card in front of : ");
                 int selectedPlayerIndex = sc.nextInt();
-                selectedPlayer = players[selectedPlayerIndex];
+                selectedPlayer = players.get(selectedPlayerIndex);
                 try {
                     currentPlayer.takeTurn(Action.PLAY_ACTION_CARD, this);
                 } catch (Throwable t) {

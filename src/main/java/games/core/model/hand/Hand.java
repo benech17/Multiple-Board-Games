@@ -25,12 +25,4 @@ public interface Hand<C> {
      */
     C drawCard(int index);
 
-    /**
-     *
-     * @param index
-     * @return true if the card was discarded as a result of this call
-     * @throws IndexOutOfBoundsException
-     */
-    boolean discardCard(int index) throws IndexOutOfBoundsException;
-
 }

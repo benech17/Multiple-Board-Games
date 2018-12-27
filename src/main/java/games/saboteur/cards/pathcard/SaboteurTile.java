@@ -43,9 +43,9 @@ public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard
             throw new CantRevealHiddenCardException();
     }
 
-    public boolean treasureReached() {
+    /*public boolean treasureReached() {
         return findGoal(node -> (node instanceof TreasureCard));
-    }
+    }*/
 
     public boolean isHasPath() {
         return hasPath;

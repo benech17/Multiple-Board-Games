@@ -35,10 +35,4 @@ public abstract class HandImpl<C> implements Hand<C> {
         hand.remove(index);
         return draw;
     }
-
-    // TODO
-    @Override
-    public boolean discardCard(int index) throws IndexOutOfBoundsException {
-        return false;
-    }
 }
