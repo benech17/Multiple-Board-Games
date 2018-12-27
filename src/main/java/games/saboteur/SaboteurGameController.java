@@ -6,6 +6,7 @@ import games.core.model.deck.DeckImpl;
 import games.saboteur.cards.SaboteurCard;
 import games.saboteur.cards.actioncard.ActionCardType;
 import games.saboteur.cards.actioncard.BlockCard;
+import games.saboteur.cards.pathcard.PathCard;
 import games.saboteur.cards.pathcard.SaboteurTile;
 
 import java.util.HashMap;
@@ -48,6 +49,10 @@ public class SaboteurGameController {
 
     public static void main(String[] args) {
         SaboteurGameController gameController = new SaboteurGameController(3);
+        SaboteurBoard b = gameController.getBoard();
+        for (int i = 1; i < 8; i++) {
+            b.putTileAt(new Coordinate(2, i), new SaboteurTile(PathCard.ELEVEN));
+        }
         gameController.play();
     }
 
@@ -137,7 +142,7 @@ public class SaboteurGameController {
                 try {
                     currentPlayer.takeTurn(Action.PASS, this);
                 } catch (Throwable t) {
-                    System.out.println(t.getMessage());
+                    System.out.println(t.toString());
                     return false;
                 }
                 System.out.println("Player " + currentPlayer + " has passed their turn");
@@ -158,7 +163,7 @@ public class SaboteurGameController {
                 try {
                     currentPlayer.takeTurn(Action.PLAY_PATH_CARD, this);
                 } catch (Throwable t) {
-                    System.out.println(t.getMessage());
+                    System.out.println(t.toString());
                     return false;
                 }
 
@@ -173,7 +178,7 @@ public class SaboteurGameController {
                 try {
                     currentPlayer.takeTurn(Action.PLAY_ACTION_CARD, this);
                 } catch (Throwable t) {
-                    System.out.println(t.toString() + " " + t.getMessage());
+                    System.out.println(t.toString());
                     return false;
                 }
                 break;
@@ -182,16 +187,18 @@ public class SaboteurGameController {
     }
 
     public void play() {
-        boolean gameEnds = false;
-        while (!gameEnds) {
+        while (true) {
             for (SaboteurPlayer player : players) {
                 currentPlayer = player;
                 boolean validPlay = false;
                 while (!validPlay)
                     if (takeTurn())
                         validPlay = true;
-                if (currentPlayer.hasWon())
-                    gameEnds = true;
+                if (currentPlayer.hasWon()) {
+                    System.out.println(currentPlayer + " has won");
+                    printPlayers();
+                    return; // Ends the game
+                }
             }
         }
     }

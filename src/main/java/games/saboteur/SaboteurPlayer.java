@@ -50,13 +50,15 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
         switch (action) {
             case PASS:
                 game.getTrash().add(pickedCard);
+                hand.drawCard(game.getSelectedHandIndex());
                 break;
             case PLAY_PATH_CARD:
                 if (pickedCard instanceof SaboteurTile) {
                     if (!blockCards.isEmpty())
-                        throw new BlockedPlayerException();
+                        throw new BlockedPlayerException("You can't play a path card until you have no blocked card in front of you");
                     // Put the tile in the board
-                    game.getBoard().putTileAt(game.getSelectedCoordinate(), (SaboteurTile) hand.drawCard(game.getSelectedHandIndex()));
+                    game.getBoard().putTileAt(game.getSelectedCoordinate(), (SaboteurTile) pickedCard);
+                    hand.drawCard(game.getSelectedHandIndex());
                     if (game.getBoard().treasureReached()) {
                         // Collect treasure, update score
                         increaseScore(game.getBoard().getTreasureCard().getAmountPoints());
@@ -72,8 +74,7 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
                     if (blockCards.containsKey(type))
                         throw new BlockCardAlreadyAppliedException();
                     game.getSelectedPlayer().blockCards.put(type, (BlockCard) hand.drawCard(game.getSelectedHandIndex()));
-                }
-                if (pickedCard instanceof RepairCard) {
+                } else if (pickedCard instanceof RepairCard) {
                     ActionCardType type = ((RepairCard) pickedCard).getType();
                     if (!blockCards.containsKey(type))
                         throw new NoMatchingBlockCardAppliedException();

@@ -39,7 +39,8 @@ public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard
     public void reveal() {
         if (hidden)
             hidden = false;
-        throw new CantRevealHiddenCardException();
+        else
+            throw new CantRevealHiddenCardException();
     }
 
     public boolean treasureReached() {
