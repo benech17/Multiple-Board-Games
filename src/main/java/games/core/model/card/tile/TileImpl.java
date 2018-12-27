@@ -2,8 +2,10 @@ package games.core.model.card.tile;
 
 import games.core.model.enums.Direction;
 
-import java.util.*;
-import java.util.function.Function;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.Iterator;
 
 
 /**
@@ -13,16 +15,16 @@ import java.util.function.Function;
  *
  * @param <S>
  */
-public abstract class TileImpl<S extends Side> implements Tile<S>, Node, Turnable {
+public abstract class TileImpl<S extends Side> implements Tile<S>, Turnable { // implements Node
     protected EnumMap<Direction, S> sides;
-    protected EnumMap<Direction, Node> adjacentNodes;
+    //protected EnumMap<Direction, Node> adjacentNodes;
 
     public TileImpl() {
         sides = new EnumMap<>(Direction.class);
-        adjacentNodes = new EnumMap<>(Direction.class);
+        //adjacentNodes = new EnumMap<>(Direction.class);
     }
 
-    @Override
+    /*@Override
     public EnumMap<Direction, Node> getAdjacentNodes() {
         // We build the board each time we call the function:
         // we may update it each time we add a new connexion
@@ -32,7 +34,7 @@ public abstract class TileImpl<S extends Side> implements Tile<S>, Node, Turnabl
                 adjacentNodes.put(d, sides.get(d).getNextSide().getParent());
         }
         return adjacentNodes;
-    }
+    }*/
 
     public EnumMap<Direction, S> getSides() {
         return sides;
@@ -83,7 +85,7 @@ public abstract class TileImpl<S extends Side> implements Tile<S>, Node, Turnabl
         return false;
     }
 
-    @Override
+    /*@Override
     public boolean findGoal(Function<Node, Boolean> isGoal) {
         // Queue of tiles to visit
         Queue<Node> toVisit = new LinkedList<>();
@@ -111,21 +113,21 @@ public abstract class TileImpl<S extends Side> implements Tile<S>, Node, Turnabl
             }
         }
         return false;
-    }
+    }*/
 
     /**
      * Checks if the current node is a leaf or not
      * @return true if and only if all the adjacent nodes
      * (child nodes) are null
      */
-    @Override
+    /*@Override
     public boolean isLeaf() {
-        /* If the current node is a leaf then it has only one adjacent
-            node which isn't null */
+        *//* If the current node is a leaf then it has only one adjacent
+            node which isn't null *//*
         // Is that true for all the games ? Might be overrided
         // Moreover the puzzle doesn't need a tree
         return getAdjacentNodes().size() == 1;
-    }
+    }*/
 
     @Override
     public String toString() {

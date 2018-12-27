@@ -19,6 +19,5 @@ public class Dominoes extends GameManager {
 
     @Override
     public void play() {
-        return;
     }
 }
