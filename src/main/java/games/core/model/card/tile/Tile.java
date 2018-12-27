@@ -9,6 +9,8 @@ import games.core.model.enums.Direction;
  */
 public interface Tile<S> {
 
+    S getSide(Direction d);
+
     S getTopSide();
 
     S getLeftSide();

@@ -8,7 +8,7 @@ import games.saboteur.cards.pathcard.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.EnumMap;
 
 
 public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
@@ -58,7 +58,7 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
     public boolean putTileAt(Coordinate c, SaboteurTile tile) throws PathCardException.UnconnectedPathException {
         if (!coordinateInsideBoard(c))
             throw new OutOfBoardBoundsException(c.toString());
-        HashMap<Direction, SaboteurTile> adjacentTiles = getAdjacentTilesByDirection(c);
+        EnumMap<Direction, SaboteurTile> adjacentTiles = getAdjacentTilesByDirection(c);
         // If there are no adjacent tiles to connect to
         if (adjacentTiles.isEmpty())
             throw new PathCardException.UnconnectedPathException("No adjacent path card to connect to!");

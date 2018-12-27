@@ -41,23 +41,28 @@ public abstract class TileImpl<S extends Side> implements Tile<S>, Turnable { //
     }
 
     @Override
+    public S getSide(Direction d) {
+        return sides.get(d);
+    }
+
+    @Override
     public S getTopSide() {
-        return sides.get(Direction.TOP);
+        return getSide(Direction.TOP);
     }
 
     @Override
     public S getBottomSide() {
-        return sides.get(Direction.BOTTOM);
+        return getSide(Direction.BOTTOM);
     }
 
     @Override
     public S getLeftSide() {
-        return sides.get(Direction.LEFT);
+        return getSide(Direction.LEFT);
     }
 
     @Override
     public S getRightSide() {
-        return sides.get(Direction.RIGHT);
+        return getSide(Direction.RIGHT);
     }
 
     @Override
@@ -71,18 +76,7 @@ public abstract class TileImpl<S extends Side> implements Tile<S>, Turnable { //
 
     @Override
     public boolean fitsWith(Tile t, Direction d) {
-        if (t == null) return false;
-        switch (d) {
-            case TOP:
-                return getTopSide().equals(t.getBottomSide());
-            case LEFT:
-                return getLeftSide().equals(t.getRightSide());
-            case RIGHT:
-                return getRightSide().equals(t.getLeftSide());
-            case BOTTOM:
-                return getBottomSide().equals(t.getTopSide());
-        }
-        return false;
+        return (t != null) && getSide(d).equals(t.getSide(d.getOppositeDirection()));
     }
 
     /*@Override

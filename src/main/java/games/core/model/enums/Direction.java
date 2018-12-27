@@ -11,11 +11,25 @@ public enum Direction {
 
     private Coordinate relativeCoordinates;
 
+    // see https://stackoverflow.com/questions/5678309/illegal-forward-reference-and-enums
+    static {
+        TOP.oppositeDirection = BOTTOM;
+        BOTTOM.oppositeDirection = TOP;
+        LEFT.oppositeDirection = RIGHT;
+        RIGHT.oppositeDirection = LEFT;
+    }
+
+    private Direction oppositeDirection;
+
     Direction(int row, int column) {
         relativeCoordinates = new Coordinate(row, column);
     }
 
     public Coordinate getRelativeCoordinates() {
         return relativeCoordinates;
+    }
+
+    public Direction getOppositeDirection() {
+        return oppositeDirection;
     }
 }

@@ -3,7 +3,7 @@ package games.core.model.board;
 import games.core.model.card.tile.Tile;
 import games.core.model.enums.Direction;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.LinkedList;
 import java.util.function.Function;
 
@@ -13,6 +13,14 @@ import java.util.function.Function;
  * @param <T>
  */
 public interface Board<T extends Tile> {
+
+    /**
+     * Tests if a coordinate corresponds to an actual coordinate in the board
+     *
+     * @param c
+     * @return true if the coordinate c is inside the board
+     */
+    boolean coordinateInsideBoard(Coordinate c);
 
     /**
      * Get the card at the given position if it exists
@@ -52,7 +60,7 @@ public interface Board<T extends Tile> {
      * @return a HashMap of the tiles adjacent to the coordinate in the board
      * @throws OutOfBoardBoundsException if the specified coordinate is outside of the board
      */
-    HashMap<Direction, T> getAdjacentTilesByDirection(Coordinate c) throws OutOfBoardBoundsException;
+    EnumMap<Direction, T> getAdjacentTilesByDirection(Coordinate c) throws OutOfBoardBoundsException;
 
     /**
      * Get the coordinates of the tiles adjacent to the given coordinate in the board

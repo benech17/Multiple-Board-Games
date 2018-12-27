@@ -7,8 +7,7 @@ import java.util.*;
 import java.util.function.Function;
 
 
-// Should we keep it abstract?
-public abstract class DefaultBoardImpl<T extends Tile> implements Board<T> {
+public class DefaultBoardImpl<T extends Tile> implements Board<T> {
 
     protected List<List<T>> board;
     protected int height, length;
@@ -31,9 +30,9 @@ public abstract class DefaultBoardImpl<T extends Tile> implements Board<T> {
     }
 
     @Override
-    public HashMap<Direction, T> getAdjacentTilesByDirection(Coordinate c) throws OutOfBoardBoundsException {
-        HashMap<Direction, Coordinate> adjCoords = c.getAdjacentCoordinates();
-        HashMap<Direction, T> adjTiles = new HashMap<>();
+    public EnumMap<Direction, T> getAdjacentTilesByDirection(Coordinate c) throws OutOfBoardBoundsException {
+        EnumMap<Direction, Coordinate> adjCoords = c.getAdjacentCoordinates();
+        EnumMap<Direction, T> adjTiles = new EnumMap<>(Direction.class);
         for (Direction d : adjCoords.keySet()) {
             if (coordinateInsideBoard(adjCoords.get(d)) && getTileAt(adjCoords.get(d)) != null)
                 adjTiles.put(d, getTileAt(adjCoords.get(d)));
@@ -42,7 +41,7 @@ public abstract class DefaultBoardImpl<T extends Tile> implements Board<T> {
     }
 
     public LinkedList<Coordinate> getAdjacentTilesByCoordinates(Coordinate c) throws OutOfBoardBoundsException {
-        HashMap<Direction, Coordinate> adjCoords = c.getAdjacentCoordinates();
+        EnumMap<Direction, Coordinate> adjCoords = c.getAdjacentCoordinates();
         LinkedList<Coordinate> adjTiles = new LinkedList<>();
         for (Direction d : adjCoords.keySet()) {
             if (coordinateInsideBoard(adjCoords.get(d)) && getTileAt(adjCoords.get(d)) != null)
@@ -51,13 +50,7 @@ public abstract class DefaultBoardImpl<T extends Tile> implements Board<T> {
         return adjTiles;
     }
 
-    /**
-     * Tests if a coordinate corresponds to an actual coordinate in the board
-     *
-     * @param c
-     * @return true if the coordinate c is inside the board
-     */
-    protected boolean coordinateInsideBoard(Coordinate c) {
+    public boolean coordinateInsideBoard(Coordinate c) {
         int x = c.getColumn();
         int y = c.getRow();
         return (0 <= x && x < length && 0 <= y && y < height);

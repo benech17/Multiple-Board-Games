@@ -52,6 +52,11 @@ public class DominoStickerSide extends Side implements Tile {
     }
 
     @Override
+    public Object getSide(Direction d) {
+        return null;
+    }
+
+    @Override
     public Object getTopSide() {
         return null;
     }

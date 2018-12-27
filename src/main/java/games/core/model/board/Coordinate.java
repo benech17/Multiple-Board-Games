@@ -2,7 +2,7 @@ package games.core.model.board;
 
 import games.core.model.enums.Direction;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Objects;
 
 public class Coordinate {
@@ -19,8 +19,8 @@ public class Coordinate {
      * @return a HashMap containing the adjacent coordinates as value and their
      * position with respect to current instance
      */
-    public HashMap<Direction, Coordinate> getAdjacentCoordinates() {
-        HashMap<Direction, Coordinate> adjacentCoordinates = new HashMap<>();
+    public EnumMap<Direction, Coordinate> getAdjacentCoordinates() {
+        EnumMap<Direction, Coordinate> adjacentCoordinates = new EnumMap<>(Direction.class);
         adjacentCoordinates.put(Direction.TOP, this.add(Direction.TOP.getRelativeCoordinates()));
         adjacentCoordinates.put(Direction.BOTTOM, this.add(Direction.BOTTOM.getRelativeCoordinates()));
         adjacentCoordinates.put(Direction.LEFT, this.add(Direction.LEFT.getRelativeCoordinates()));
