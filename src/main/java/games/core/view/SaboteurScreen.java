@@ -262,15 +262,12 @@ public class SaboteurScreen extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    SaboteurScreen frame = new SaboteurScreen();
+        SwingUtilities.invokeLater(() -> {
+            try {
+                SaboteurScreen frame = new SaboteurScreen();
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }

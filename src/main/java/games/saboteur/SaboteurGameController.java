@@ -18,7 +18,6 @@ public class SaboteurGameController {
     private SaboteurPlayer[] players;
     private Deck<SaboteurCard> deck;
     private Stack<SaboteurCard> trash;
-    private SaboteurDeckBuilder deckBuilder;
 
     private SaboteurPlayer currentPlayer;
     private int selectedHandIndex;
@@ -35,7 +34,7 @@ public class SaboteurGameController {
         for (int i = 0; i < nbPlayers; i++)
             players[i] = new SaboteurPlayer("Player " + i, 0);
 
-        deckBuilder = new SaboteurDeckBuilderImpl();
+        SaboteurDeckBuilder deckBuilder = new SaboteurDeckBuilderImpl();
         this.deck = new DeckImpl<>(deckBuilder);
 
         SaboteurHand[] hands = new SaboteurHand[nbPlayers];
@@ -185,8 +184,8 @@ public class SaboteurGameController {
     public void play() {
         boolean gameEnds = false;
         while (!gameEnds) {
-            for (int i = 0; i < players.length; i++) {
-                currentPlayer = players[i];
+            for (SaboteurPlayer player : players) {
+                currentPlayer = player;
                 boolean validPlay = false;
                 while (!validPlay)
                     if (takeTurn())
