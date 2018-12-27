@@ -3,13 +3,16 @@ package games.saboteur;
 import games.core.model.player.PlayerImpl;
 import games.saboteur.cards.SaboteurCard;
 import games.saboteur.cards.WrongCardException;
-import games.saboteur.cards.actioncard.*;
+import games.saboteur.cards.actioncard.ActionCardException;
+import games.saboteur.cards.actioncard.ActionCardType;
+import games.saboteur.cards.actioncard.BlockCard;
+import games.saboteur.cards.actioncard.RepairCard;
 import games.saboteur.cards.pathcard.SaboteurTile;
 
 import java.util.HashMap;
 
 
-public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
+public class SaboteurPlayer extends PlayerImpl<SaboteurCard> {
     private HashMap<ActionCardType, BlockCard> blockCards;
     private boolean hasWon = false;
 
@@ -35,17 +38,17 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
      * @param action the action to do in the turn
      * @param game the game manager
      * @throws BlockedPlayerException if a blocked player attempts to play a path card
-     * @throws BlockCardAlreadyAppliedException if a player plays an already applied action card
-     * @throws NoMatchingBlockCardAppliedException if a player plays a repair card that don't match a block card
+     * @throws ActionCardException.BlockCardAlreadyAppliedException if a player plays an already applied action card
+     * @throws ActionCardException.NoMatchingBlockCardAppliedException if a player plays a repair card that don't match a block card
      * @throws WrongCardException if the picked card don't correspond to the specified action
-     * @throws UnsupportedActionException if the action provided is not handled
+     * @throws ActionCardException.UnsupportedActionException if the action provided is not handled
      */
     public void takeTurn(Action action, SaboteurGameController game)
             throws BlockedPlayerException,
-            BlockCardAlreadyAppliedException,
-            NoMatchingBlockCardAppliedException,
+            ActionCardException.BlockCardAlreadyAppliedException,
+            ActionCardException.NoMatchingBlockCardAppliedException,
             WrongCardException,
-            UnsupportedActionException {
+            ActionCardException.UnsupportedActionException {
         SaboteurCard pickedCard = hand.getCardAt(game.getSelectedHandIndex());
         switch (action) {
             case PASS:
@@ -72,19 +75,19 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurBoard, SaboteurCard> {
                 if (pickedCard instanceof BlockCard) {
                     ActionCardType type = ((BlockCard) pickedCard).getType();
                     if (blockCards.containsKey(type))
-                        throw new BlockCardAlreadyAppliedException();
+                        throw new ActionCardException.BlockCardAlreadyAppliedException();
                     game.getSelectedPlayer().blockCards.put(type, (BlockCard) hand.drawCard(game.getSelectedHandIndex()));
                 } else if (pickedCard instanceof RepairCard) {
                     ActionCardType type = ((RepairCard) pickedCard).getType();
                     if (!blockCards.containsKey(type))
-                        throw new NoMatchingBlockCardAppliedException();
+                        throw new ActionCardException.NoMatchingBlockCardAppliedException();
                     hand.drawCard(game.getSelectedHandIndex());
                     game.getSelectedPlayer().blockCards.remove(type);
                 } else
                     throw new WrongCardException("Got " + pickedCard + " but expected an action card");
                 break;
             default:
-                throw new UnsupportedActionException("Action " + action.toString() + " is not supported");
+                throw new ActionCardException.UnsupportedActionException("Action " + action.toString() + " is not supported");
         }
         game.getDeck().deal(hand); // Deal a card from the deck
     }

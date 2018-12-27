@@ -6,6 +6,7 @@ import games.core.model.enums.Direction;
 import games.saboteur.cards.SaboteurCard;
 
 
+// TODO: review rotations: there are only two possible orientations
 public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard {
     private String name;
     protected boolean hidden = false;
@@ -40,7 +41,7 @@ public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard
         if (hidden)
             hidden = false;
         else
-            throw new CantRevealHiddenCardException();
+            throw new PathCardException.CantRevealHiddenCardException();
     }
 
     /*public boolean treasureReached() {

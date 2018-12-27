@@ -52,22 +52,22 @@ public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
     /**
      * {@inheritDoc}
      *
-     * @throws UnconnectedPathException if the path card don't connect with adjacent path cards
+     * @throws PathCardException.UnconnectedPathException if the path card don't connect with adjacent path cards
      */
     @Override
-    public boolean putTileAt(Coordinate c, SaboteurTile tile) throws UnconnectedPathException {
+    public boolean putTileAt(Coordinate c, SaboteurTile tile) throws PathCardException.UnconnectedPathException {
         if (!coordinateInsideBoard(c))
             throw new OutOfBoardBoundsException(c.toString());
         HashMap<Direction, SaboteurTile> adjacentTiles = getAdjacentTilesByDirection(c);
         // If there are no adjacent tiles to connect to
         if (adjacentTiles.isEmpty())
-            throw new UnconnectedPathException("No adjacent path card to connect to!");
+            throw new PathCardException.UnconnectedPathException("No adjacent path card to connect to!");
         // We check if the tile fits with each adjacent tile
         for (Direction d : adjacentTiles.keySet()) {
             if (adjacentTiles.get(d).isHidden())
                 adjacentTiles.get(d).reveal(); // Reveal card if hidden
             if (!tile.fitsWith(adjacentTiles.get(d), d))
-                throw new UnconnectedPathException("Illegal move: tunnels must connect!");
+                throw new PathCardException.UnconnectedPathException("Illegal move: tunnels must connect!");
         }
         // The tile fits with the surrounding tiles, let's put it in the board
         return super.putTileAt(c, tile);

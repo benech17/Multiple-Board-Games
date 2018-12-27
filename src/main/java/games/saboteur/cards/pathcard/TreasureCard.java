@@ -10,7 +10,7 @@ public class TreasureCard extends GoalCard {
 
     public int getAmountPoints() {
         if (isHidden())
-            throw new CantRevealHiddenCardException();
+            throw new PathCardException.CantRevealHiddenCardException();
         return AMOUNT_POINTS;
     }
 }
