@@ -47,14 +47,14 @@ public class DominoesStickerBoard extends DefaultBoardImpl<DominoStickerSide> {
 
     @Override
     public String toString() {
-        String s = "";
+        StringBuilder s = new StringBuilder();
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < height; j++) {
-                s += ((board.get(i).get(j) == null) ? "XX" : board.get(i).get(j)) + " ";
+                s.append((board.get(i).get(j) == null) ? "XX" : board.get(i).get(j)).append(" ");
             }
-            s += "\n";
+            s.append("\n");
         }
-        return s;
+        return s.toString();
     }
 
     public static void main(String[] args) {
