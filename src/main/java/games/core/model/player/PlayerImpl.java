@@ -1,16 +1,13 @@
 package games.core.model.player;
 
-import games.core.model.board.Coordinate;
 import games.core.model.hand.Hand;
 
 
 /**
- * Should we keep generics here?
- *
- * @param <B>
- * @param <C>
+ * Default implementation of a player
+ * @param <C> the type of cards a player holds in his hand
  */
-public abstract class PlayerImpl<B, C> implements Player<B> {
+public abstract class PlayerImpl<C> implements Player {
     protected String name;
     protected int age;
     protected int score;
@@ -47,12 +44,12 @@ public abstract class PlayerImpl<B, C> implements Player<B> {
         return age < p.getAge();
     }
 
-    @Override
+    /*@Override
     public void takeTurn(B b, int handIndex, Coordinate c) {
         // Abstract or not?
         // May add something if we find some common pattern in the games
 
-    }
+    }*/
 
     @Override
     public boolean nameComesFirst(Player p) {

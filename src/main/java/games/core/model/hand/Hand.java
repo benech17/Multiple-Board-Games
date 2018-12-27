@@ -1,7 +1,18 @@
 package games.core.model.hand;
 
+
+/**
+ * The hand of a player
+ *
+ * @param <C> the type of cards contained in the hand
+ */
 public interface Hand<C> {
 
+    /**
+     * Get a card from the hand at the specified index
+     * @param index
+     * @return
+     */
     C getCardAt(int index);
 
     /**

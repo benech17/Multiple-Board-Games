@@ -36,8 +36,7 @@ public class DeckImpl<C> implements Deck<C> {
     }
 
     @Override
-    public void distributeCards(List<? extends Hand<C>> hands) {
-        // For the game of the saboteur
+    public void distributeCards(List<? extends Hand<C>> hands) throws EmptyDeckException {
         for (int i = 0; i < hands.get(0).getCardNumberAtStart(); i++) {
             for (Hand<C> hand : hands)
                 deal(hand);
