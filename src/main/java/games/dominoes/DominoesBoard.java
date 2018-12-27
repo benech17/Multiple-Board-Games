@@ -63,10 +63,10 @@ public class DominoesBoard extends DefaultBoardImpl<DominoTile> {
 
     @Override
     public String toString() {
-        String s = "";
+        StringBuilder s = new StringBuilder();
         for (int j = 0; j < height; j++) {
-            s += board.get(0).get(j);
+            s.append(board.get(0).get(j));
         }
-        return s;
+        return s.toString();
     }
 }
