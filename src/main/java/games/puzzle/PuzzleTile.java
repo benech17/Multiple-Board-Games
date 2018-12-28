@@ -16,6 +16,10 @@ public class PuzzleTile extends TileImpl<PuzzleSide> {
         sides.put(Direction.BOTTOM, new PuzzleSide(bottomValue, this));
     }
 
+    public Coordinate getPosition() {
+        return position;
+    }
+
     /**
      * Rotates by 90° clockwise the tile
      */

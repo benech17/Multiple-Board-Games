@@ -16,6 +16,7 @@ public abstract class HandImpl<C> implements Hand<C> {
         hand = new ArrayList<>();
     }
 
+    @Override
     public List<C> getHand() {
         return hand;
     }

@@ -1,5 +1,6 @@
 package games.dominoeswithstickers;
 
+import games.core.model.card.tile.Tile;
 import games.core.model.card.tile.TileImpl;
 import games.core.model.enums.Color;
 import games.core.model.enums.Direction;
@@ -86,6 +87,11 @@ public class DominoStickerTile extends TileImpl<DominoStickerSide> {
         return false;
     }
 
+    @Override
+    public boolean fitsWith(Tile t, Direction d) {
+        return super.fitsWith(t, d);
+    }
+
     /**
      * Returns true if the current instance of DominoTile and the domino
      * tile t have a side in common. Flips or rotate the current instance
@@ -96,7 +102,7 @@ public class DominoStickerTile extends TileImpl<DominoStickerSide> {
      * @return true if the current domino tile and the domino tile t share the
      * same side
      */
-    public boolean fitsWith(DominoStickerTile t, Direction d) {
+    /*public boolean fitsWith(DominoStickerTile t, Direction d) {
         if (t == null) return false;
         switch (d) {
             case TOP:
@@ -109,7 +115,9 @@ public class DominoStickerTile extends TileImpl<DominoStickerSide> {
                 return aux(this::getRightSide, this::getLeftSide, t::getLeftSide);
         }
         return false;
-    }
+    }*/
+
+
 
     public void connectTile(DominoStickerTile tile) {
 

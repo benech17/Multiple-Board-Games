@@ -1,12 +1,16 @@
 package games.core.model.hand;
 
 
+import java.util.List;
+
 /**
  * The hand of a player
  *
  * @param <C> the type of cards contained in the hand
  */
 public interface Hand<C> {
+
+    List<C> getHand();
 
     /**
      * Get a card from the hand at the specified index

@@ -3,6 +3,7 @@ package games.saboteur;
 import games.core.model.board.Coordinate;
 import games.core.model.deck.Deck;
 import games.core.model.deck.DeckImpl;
+import games.core.model.hand.Hand;
 import games.core.model.player.Player;
 import games.saboteur.cards.SaboteurCard;
 import games.saboteur.cards.actioncard.ActionCardType;
@@ -37,9 +38,9 @@ public class SaboteurGameController {
         SaboteurDeckBuilder deckBuilder = new SaboteurDeckBuilderImpl();
         this.deck = new DeckImpl<>(deckBuilder);
 
-        List<SaboteurHand> hands = new ArrayList<>(nbPlayers);
+        List<Hand<SaboteurCard>> hands = new ArrayList<>(nbPlayers);
         for (int i = 0; i < nbPlayers; i++)
-            hands.add((SaboteurHand) players.get(i).getHand()); // pb
+            hands.add(players.get(i).getHand()); // pb
         deck.shuffle();
         deck.distributeCards(hands);
 
