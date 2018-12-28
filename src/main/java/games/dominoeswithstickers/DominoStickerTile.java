@@ -111,5 +111,8 @@ public class DominoStickerTile extends TileImpl<DominoStickerSide> {
     public boolean fitsWith(Tile t, Direction d) {
         return super.fitsWith(t, d);
     }*/
-
+    @Override
+    public String toString() {
+        return getSide(Direction.TOP).toString();
+    }
 }

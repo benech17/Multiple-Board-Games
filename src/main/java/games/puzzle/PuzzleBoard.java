@@ -17,6 +17,9 @@ public class PuzzleBoard extends DefaultBoardImpl<PuzzleTile> {
     @Override
     public boolean putTileAt(Coordinate c, PuzzleTile tile) throws OutOfBoardBoundsException, CannotAddTileAtException {
         EnumMap<Direction, PuzzleTile> adjacentTiles = getAdjacentTilesByDirection(c);
+        // No adjacent tiles to connect to
+        if (adjacentTiles.isEmpty())
+            return false;
         // We check if the tile fits with each adjacent tile
         for (Direction d : adjacentTiles.keySet()) {
             // We could move the unconnectedPathException in core

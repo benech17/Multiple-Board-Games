@@ -7,8 +7,7 @@ import games.core.model.enums.Shape;
 
 
 /**
- * A domino sticker piece is made of two domino sticker tiles that implement
- * the Tile interface.
+ * A domino sticker piece is made of two domino sticker tiles.
  * <p>
  * The orientation of the domino sticker piece is determined by the position of
  * the second tile with respect to the first tile (TOP, RIGHT, BOTTOM, LEFT).
@@ -19,10 +18,23 @@ public class DominoStickerPiece {
     private Direction side2Direction;
     private Coordinate side2Position;
 
+    /**
+     * By default the piece is oriented to the top
+     *
+     * @param shape1
+     * @param color1
+     * @param shape2
+     * @param color2
+     */
     public DominoStickerPiece(Shape shape1, Color color1, Shape shape2, Color color2) {
+        this(shape1, color1, shape2, color2, Direction.TOP);
+
+    }
+
+    public DominoStickerPiece(Shape shape1, Color color1, Shape shape2, Color color2, Direction orientation) {
         tile1 = new DominoStickerTile(shape1, color1, this);
         tile2 = new DominoStickerTile(shape2, color2, this);
-        side2Direction = Direction.TOP;
+        this.side2Direction = orientation;
         side2Position = side2Direction.getRelativeCoordinates();
     }
 
