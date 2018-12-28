@@ -1,8 +1,8 @@
 package games.puzzle;
 
-import games.core.model.board.Coordinate;
-import games.core.model.card.tile.TileImpl;
-import games.core.model.enums.Direction;
+import games.common.model.board.Coordinate;
+import games.common.model.card.tile.TileImpl;
+import games.common.model.enums.Direction;
 
 
 public class PuzzleTile extends TileImpl<PuzzleSide> {

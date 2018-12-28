@@ -1,7 +1,7 @@
 package games.dominoes;
 
-import games.core.model.deck.DeckImpl;
-import games.core.model.hand.Hand;
+import games.common.model.deck.DeckImpl;
+import games.common.model.hand.Hand;
 
 
 public class DominoesDeck extends DeckImpl<DominoTile> {

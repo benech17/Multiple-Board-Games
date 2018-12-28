@@ -1,10 +1,10 @@
 package games.dominoeswithstickers;
 
-import games.core.model.board.CannotAddTileAtException;
-import games.core.model.board.Coordinate;
-import games.core.model.board.DefaultBoardImpl;
-import games.core.model.board.OutOfBoardBoundsException;
-import games.core.model.enums.Direction;
+import games.common.model.board.CannotAddTileAtException;
+import games.common.model.board.Coordinate;
+import games.common.model.board.DefaultBoardImpl;
+import games.common.model.board.OutOfBoardBoundsException;
+import games.common.model.enums.Direction;
 
 import java.util.EnumMap;
 
@@ -49,14 +49,11 @@ public class DominoesStickerBoard extends DefaultBoardImpl<DominoStickerTile> {
         }
 
         // We check if the tile fits with the adjacent tile
-        System.out.println("check");
         for (Direction d : adjTiles.keySet()) {
             if (tile.fitsWith(adjTiles.get(d), d)) {
-                System.out.println("checked");
                 return putTileAt(c, tile1) && putTileAt(cTile2, tile2);
             }
         }
-        System.out.println("oops");
         return false;
     }
 

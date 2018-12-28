@@ -1,7 +1,7 @@
 package games.dominoes;
 
-import games.core.model.card.tile.TileImpl;
-import games.core.model.enums.Direction;
+import games.common.model.card.tile.TileImpl;
+import games.common.model.enums.Direction;
 
 
 public class DominoTile extends TileImpl<DominoSide> implements Comparable<DominoTile> {

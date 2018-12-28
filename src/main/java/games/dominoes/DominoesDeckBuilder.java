@@ -1,6 +1,6 @@
 package games.dominoes;
 
-import games.core.model.deck.DeckBuilder;
+import games.common.model.deck.DeckBuilder;
 
 import java.util.Stack;
 

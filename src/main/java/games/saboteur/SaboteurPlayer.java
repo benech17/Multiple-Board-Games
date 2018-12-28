@@ -1,6 +1,6 @@
 package games.saboteur;
 
-import games.core.model.player.PlayerImpl;
+import games.common.model.player.PlayerImpl;
 import games.saboteur.cards.SaboteurCard;
 import games.saboteur.cards.WrongCardException;
 import games.saboteur.cards.actioncard.ActionCardException;

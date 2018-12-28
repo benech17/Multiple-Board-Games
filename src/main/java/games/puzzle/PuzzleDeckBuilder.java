@@ -1,10 +1,10 @@
 package games.puzzle;
 
-import games.core.model.board.Board;
-import games.core.model.board.Coordinate;
-import games.core.model.board.DefaultBoardImpl;
-import games.core.model.deck.DeckBuilder;
-import games.core.model.enums.Direction;
+import games.common.model.board.Board;
+import games.common.model.board.Coordinate;
+import games.common.model.board.DefaultBoardImpl;
+import games.common.model.deck.DeckBuilder;
+import games.common.model.enums.Direction;
 
 import java.util.ArrayList;
 import java.util.HashMap;

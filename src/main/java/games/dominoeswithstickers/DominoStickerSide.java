@@ -1,8 +1,8 @@
 package games.dominoeswithstickers;
 
-import games.core.model.card.tile.Side;
-import games.core.model.enums.Color;
-import games.core.model.enums.Shape;
+import games.common.model.card.tile.Side;
+import games.common.model.enums.Color;
+import games.common.model.enums.Shape;
 
 import java.util.Objects;
 

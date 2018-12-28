@@ -1,6 +1,6 @@
 package games.dominoes;
 
-import games.core.model.card.tile.Side;
+import games.common.model.card.tile.Side;
 
 import java.util.Objects;
 

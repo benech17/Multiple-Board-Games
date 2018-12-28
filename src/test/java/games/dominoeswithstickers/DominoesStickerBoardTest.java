@@ -1,9 +1,9 @@
 package games.dominoeswithstickers;
 
-import games.core.model.board.Coordinate;
-import games.core.model.enums.Color;
-import games.core.model.enums.Direction;
-import games.core.model.enums.Shape;
+import games.common.model.board.Coordinate;
+import games.common.model.enums.Color;
+import games.common.model.enums.Direction;
+import games.common.model.enums.Shape;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -31,5 +31,15 @@ public class DominoesStickerBoardTest {
                                 Shape.CRESCENT, Color.GREEN, Direction.TOP))
         );
         System.out.println(b);
+        assertFalse(
+                b.putTileAt(new Coordinate(1, 0),
+                        new DominoStickerPiece(Shape.STAR, Color.YELLOW,
+                                Shape.DISK, Color.RED, Direction.TOP))
+        );
+        assertFalse(
+                b.putTileAt(new Coordinate(-1, 3),
+                        new DominoStickerPiece(Shape.STAR, Color.YELLOW,
+                                Shape.DISK, Color.RED, Direction.BOTTOM))
+        );
     }
 }

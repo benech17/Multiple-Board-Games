@@ -1,6 +1,6 @@
 package games.dominoes;
 
-import games.core.model.player.PlayerImpl;
+import games.common.model.player.PlayerImpl;
 
 public abstract class DominoesPlayer extends PlayerImpl {
     public DominoesPlayer(String name, int age) {

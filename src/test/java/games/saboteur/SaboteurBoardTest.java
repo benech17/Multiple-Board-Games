@@ -1,7 +1,7 @@
 package games.saboteur;
 
-import games.core.model.board.Coordinate;
-import games.core.model.board.OutOfBoardBoundsException;
+import games.common.model.board.Coordinate;
+import games.common.model.board.OutOfBoardBoundsException;
 import games.saboteur.cards.pathcard.PathCard;
 import games.saboteur.cards.pathcard.SaboteurTile;
 import org.junit.Test;

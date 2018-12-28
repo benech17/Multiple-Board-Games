@@ -1,8 +1,8 @@
 package games.saboteur.cards.pathcard;
 
-import games.core.model.card.tile.Tile;
-import games.core.model.card.tile.TileImpl;
-import games.core.model.enums.Direction;
+import games.common.model.card.tile.Tile;
+import games.common.model.card.tile.TileImpl;
+import games.common.model.enums.Direction;
 import games.saboteur.cards.SaboteurCard;
 
 

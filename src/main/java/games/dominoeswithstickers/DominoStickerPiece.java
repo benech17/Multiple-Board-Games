@@ -1,9 +1,9 @@
 package games.dominoeswithstickers;
 
-import games.core.model.board.Coordinate;
-import games.core.model.enums.Color;
-import games.core.model.enums.Direction;
-import games.core.model.enums.Shape;
+import games.common.model.board.Coordinate;
+import games.common.model.enums.Color;
+import games.common.model.enums.Direction;
+import games.common.model.enums.Shape;
 
 
 /**

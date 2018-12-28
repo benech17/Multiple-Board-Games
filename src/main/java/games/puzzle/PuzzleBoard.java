@@ -1,10 +1,10 @@
 package games.puzzle;
 
-import games.core.model.board.CannotAddTileAtException;
-import games.core.model.board.Coordinate;
-import games.core.model.board.DefaultBoardImpl;
-import games.core.model.board.OutOfBoardBoundsException;
-import games.core.model.enums.Direction;
+import games.common.model.board.CannotAddTileAtException;
+import games.common.model.board.Coordinate;
+import games.common.model.board.DefaultBoardImpl;
+import games.common.model.board.OutOfBoardBoundsException;
+import games.common.model.enums.Direction;
 import games.saboteur.cards.pathcard.PathCardException;
 
 import java.util.EnumMap;
@@ -22,7 +22,7 @@ public class PuzzleBoard extends DefaultBoardImpl<PuzzleTile> {
             return false;
         // We check if the tile fits with each adjacent tile
         for (Direction d : adjacentTiles.keySet()) {
-            // We could move the unconnectedPathException in core
+            // We could move the unconnectedPathException in common
             if (!tile.fitsWith(adjacentTiles.get(d), d))
                 throw new PathCardException.UnconnectedPathException("Illegal move: tunnels must connect!");
         }

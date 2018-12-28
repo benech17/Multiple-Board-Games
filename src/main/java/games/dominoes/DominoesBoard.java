@@ -1,7 +1,7 @@
 package games.dominoes;
 
-import games.core.model.board.Coordinate;
-import games.core.model.board.DefaultBoardImpl;
+import games.common.model.board.Coordinate;
+import games.common.model.board.DefaultBoardImpl;
 
 
 /**

@@ -1,12 +1,12 @@
 package games.puzzle;
 
-import games.core.model.board.Coordinate;
-import games.core.model.deck.Deck;
-import games.core.model.deck.DeckImpl;
-import games.core.model.hand.Hand;
-import games.core.model.hand.HandImpl;
-import games.core.model.player.Player;
-import games.core.model.player.PlayerImpl;
+import games.common.model.board.Coordinate;
+import games.common.model.deck.Deck;
+import games.common.model.deck.DeckImpl;
+import games.common.model.hand.Hand;
+import games.common.model.hand.HandImpl;
+import games.common.model.player.Player;
+import games.common.model.player.PlayerImpl;
 import games.saboteur.InvalidNumberOfPlayersException;
 
 import java.util.ArrayList;

@@ -1,10 +1,10 @@
 package games.saboteur;
 
-import games.core.model.board.Coordinate;
-import games.core.model.deck.Deck;
-import games.core.model.deck.DeckImpl;
-import games.core.model.hand.Hand;
-import games.core.model.player.Player;
+import games.common.model.board.Coordinate;
+import games.common.model.deck.Deck;
+import games.common.model.deck.DeckImpl;
+import games.common.model.hand.Hand;
+import games.common.model.player.Player;
 import games.saboteur.cards.SaboteurCard;
 import games.saboteur.cards.actioncard.ActionCardType;
 import games.saboteur.cards.actioncard.BlockCard;
@@ -193,9 +193,10 @@ public class SaboteurGameController {
             for (SaboteurPlayer player : players) {
                 currentPlayer = player;
                 boolean validPlay = false;
-                while (!validPlay)
+                while (!validPlay) {
                     if (takeTurn())
                         validPlay = true;
+                }
                 if (currentPlayer.hasWon()) {
                     System.out.println(currentPlayer + " has won");
                     printPlayers();

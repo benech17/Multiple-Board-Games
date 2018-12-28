@@ -1,6 +1,6 @@
 package games.saboteur;
 
-import games.core.model.hand.HandImpl;
+import games.common.model.hand.HandImpl;
 import games.saboteur.cards.SaboteurCard;
 
 public class SaboteurHand extends HandImpl<SaboteurCard> {
