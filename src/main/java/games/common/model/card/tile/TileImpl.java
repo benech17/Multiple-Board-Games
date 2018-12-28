@@ -2,10 +2,7 @@ package games.common.model.card.tile;
 
 import games.common.model.enums.Direction;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.Iterator;
+import java.util.*;
 
 
 /**
@@ -79,7 +76,13 @@ public abstract class TileImpl<S extends Side<? extends Tile<S>>> implements Til
 
     @Override
     public boolean fitsWith(Tile t, Direction d) {
-        return (t != null) && getSide(d).equals(t.getSide(d.getOppositeDirection()));
+        //return (t != null) && getSide(d).equals(t.getSide(d.getOppositeDirection()));
+        return fitsWith(t, d, Objects::equals);
+    }
+
+    @Override
+    public boolean fitsWith(Tile<S> t, Direction d, SidesMatch<S> matchRule) {
+        return (t != null) && matchRule.apply(getSide(d), t.getSide(d.getOppositeDirection()));
     }
 
     /*@Override

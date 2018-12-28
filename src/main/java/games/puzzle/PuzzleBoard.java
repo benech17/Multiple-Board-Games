@@ -9,6 +9,7 @@ import games.saboteur.cards.pathcard.PathCardException;
 
 import java.util.EnumMap;
 
+
 public class PuzzleBoard extends DefaultBoardImpl<PuzzleTile> {
     public PuzzleBoard(int height, int length) {
         super(height, length);
