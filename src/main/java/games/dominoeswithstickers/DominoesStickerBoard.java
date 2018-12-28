@@ -4,28 +4,21 @@ import games.core.model.board.CannotAddTileAtException;
 import games.core.model.board.Coordinate;
 import games.core.model.board.DefaultBoardImpl;
 import games.core.model.board.OutOfBoardBoundsException;
-import games.core.model.enums.Color;
 import games.core.model.enums.Direction;
-import games.core.model.enums.Shape;
 
 import java.util.EnumMap;
 
 
 public class DominoesStickerBoard extends DefaultBoardImpl<DominoStickerTile> {
 
-    public DominoesStickerBoard(DominoStickerTile t) {
-        // We put the first domino tile at the center of the board
-        super(50, 50);
-
-        putTileAt(new Coordinate(0, 0), t.getLeftSide());
-        putTileAt(new Coordinate(0, 1), t.getRightSide());
+    public DominoesStickerBoard(int height, int length) {
+        super(height, length);
     }
 
-
-    public boolean putTileAt(Coordinate c, DominoStickerTile tile) throws OutOfBoardBoundsException,
+    public boolean putTileAt(Coordinate c, DominoStickerPiece tile) throws OutOfBoardBoundsException,
             CannotAddTileAtException {
-        DominoStickerSide side1 = tile.getSide1();
-        DominoStickerSide side2 = tile.getSide2();
+        DominoStickerTile side1 = tile.getTile1();
+        DominoStickerTile side2 = tile.getTile2();
         Coordinate position = tile.getSide2Position();
 
         EnumMap<Direction, DominoStickerTile> adjacentTiles = getAdjacentTilesByDirection(c);
@@ -51,10 +44,4 @@ public class DominoesStickerBoard extends DefaultBoardImpl<DominoStickerTile> {
         return s.toString();
     }
 
-    public static void main(String[] args) {
-        DominoesStickerBoard b = new DominoesStickerBoard(new DominoStickerTile(Shape.HEART, Color.BLUE, Shape.STAR,
-                Color.YELLOW));
-        System.out.println(b.toString());
-
-    }
 }
