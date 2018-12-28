@@ -17,8 +17,8 @@ public class DominoesStickerBoard extends DefaultBoardImpl<DominoStickerTile> {
         // We put the first domino tile at the center of the board
         super(50, 50);
 
-        //putTileAt(new Coordinate(0, 0), t.getLeftSide());
-        //putTileAt(new Coordinate(0, 1), t.getRightSide());
+        putTileAt(new Coordinate(0, 0), t.getLeftSide());
+        putTileAt(new Coordinate(0, 1), t.getRightSide());
     }
 
 

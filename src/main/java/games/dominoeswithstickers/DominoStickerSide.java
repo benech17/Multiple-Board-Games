@@ -48,35 +48,4 @@ public class DominoStickerSide extends Side<DominoStickerTile> {
     public int hashCode() {
         return Objects.hash(shape, color);
     }
-
-    /*@Override
-    public DominoStickerSide getSide(Direction d) {
-        return this;
-    }
-
-    @Override
-    public DominoStickerSide getTopSide() {
-        return this;
-    }
-
-    @Override
-    public DominoStickerSide getLeftSide() {
-        return this;
-    }
-
-    @Override
-    public DominoStickerSide getRightSide() {
-        return this;
-    }
-
-    @Override
-    public DominoStickerSide getBottomSide() {
-        return this;
-    }
-
-    @Override
-    public boolean fitsWith(Tile<DominoStickerSide> t, Direction d) {
-        return false;
-    }
-    */
 }

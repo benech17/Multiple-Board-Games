@@ -1,6 +1,5 @@
 package games.dominoeswithstickers;
 
-import games.core.model.board.Coordinate;
 import games.core.model.card.tile.TileImpl;
 import games.core.model.enums.Color;
 import games.core.model.enums.Direction;
@@ -15,16 +14,13 @@ import games.core.model.enums.Shape;
  * the second side with respect to the first side (TOP, RIGHT, BOTTOM, LEFT).
  */
 public class DominoStickerTile extends TileImpl<DominoStickerSide> {
-    private DominoStickerSide side1;
-    private DominoStickerSide side2;
-    private Direction side2Direction;
-    private Coordinate side2Position;
+    private DominoStickerPiece parentPiece;
 
-    public DominoStickerTile(Shape shape1, Color color1, Shape shape2, Color color2) {
-        side1 = new DominoStickerSide(shape1, color1, this);
-        side2 = new DominoStickerSide(shape2, color2, this);
-        side2Direction = Direction.TOP;
-        side2Position = side2Direction.getRelativeCoordinates();
+
+    public DominoStickerTile(Shape shape, Color color, DominoStickerPiece parentPiece) {
+        for (Direction d : Direction.values())
+            sides.put(d, new DominoStickerSide(shape, color, this));
+        this.parentPiece = parentPiece;
     }
 
     /**
@@ -62,33 +58,7 @@ public class DominoStickerTile extends TileImpl<DominoStickerSide> {
         else
             return  getTopSide() + "\n" + getBottomSide();
     }*/
-    public static void main(String[] args) {
-        DominoStickerTile d1 = new DominoStickerTile(Shape.HEART, Color.RED, Shape.CRESCENT, Color.GREEN);
-        //d1.rotate90();
-        DominoStickerTile d2 = new DominoStickerTile(Shape.HEART, Color.BLUE, Shape.HEART, Color.RED);
-        System.out.println(d1);
-        System.out.println(d2);
-        //System.out.println(d1.fitsWith(d2, Direction.LEFT));
-        //System.out.println(d1.getTopSide());
-        //System.out.println(d2.getRightSide().equals(d1.getTopSide()));
-    }
 
-    public void rotate(Direction d) {
-        side2Direction = d;
-        side2Position = side2Direction.getRelativeCoordinates();
-    }
-
-    public DominoStickerSide getSide1() {
-        return side1;
-    }
-
-    public DominoStickerSide getSide2() {
-        return side2;
-    }
-
-    public Direction getSide2Direction() {
-        return side2Direction;
-    }
 
     // write public void rotate(int distance) ?
 
@@ -141,9 +111,5 @@ public class DominoStickerTile extends TileImpl<DominoStickerSide> {
     public boolean fitsWith(Tile t, Direction d) {
         return super.fitsWith(t, d);
     }*/
-    public Coordinate getSide2Position() {
-        return side2Position;
-    }
-
 
 }

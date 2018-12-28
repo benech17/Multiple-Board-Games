@@ -15,6 +15,7 @@ import java.util.Iterator;
  *
  * @param <S>
  */
+// Got help from StackOverflow https://stackoverflow.com/questions/53958810/two-generic-interfaces-referencing-each-other
 public abstract class TileImpl<S extends Side<? extends Tile<S>>> implements Tile<S>, Turnable { //
     // implement
     // Node
