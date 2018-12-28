@@ -5,13 +5,6 @@ import games.common.model.enums.Direction;
 import games.common.model.enums.Shape;
 
 
-/**
- * A domino sticker tile is made of two domino sticker sides that implement
- * the Tile interface.
- * <p>
- * The orientation of the domino sticker side is determined by the position of
- * the second side with respect to the first side (TOP, RIGHT, BOTTOM, LEFT).
- */
 public class DominoStickerTile extends DominoTile<DominoStickerSide> {
 
     public DominoStickerTile(Shape shape, Color color) {

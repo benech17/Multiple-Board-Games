@@ -1,4 +1,4 @@
-PWD /home/jco/rapportprojetpoo
+PWD /home/jco/IdeaProjects/pooigproject/report
 INPUT /var/lib/texmf/web2c/luatex/lualatex.fmt
 INPUT ./rapport.tex
 OUTPUT rapport.log

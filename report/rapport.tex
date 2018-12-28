@@ -31,7 +31,14 @@ programmation orientée objet et d’interfaces graphiques.
 Le but de ce projet consiste à implémenter plusieurs jeux de
 plateau en regroupant les fonctionnalités communes. Pour cela
 nous avons développé une plateforme logicielle (en anglais \textit{framework}) à partir
-de laquelle nous avons codé chaque jeu.
+de laquelle nous avons codé chaque jeu: un ensemble d'objets qui intéragissent
+entre eux et permettent de développer des jeux de plateau dans la plus grande
+généralité. Ce framework devait être facilement étendu pour implémenter un
+nouveau jeu.
+
+Nous avons codé tous les jeux demandés: dominos que l'on assemble pour former
+une chaîne, dominos gomettes que l'on assemble pour former une chaîne avec des
+branches, un puzzle ainsi que le jeu du saboteur.
 
 %Tip : Penser à comment tu veux agencer tes pièces, quelles structures
 %de données ça implique, ce que tu veux pouvoir faire, dans quelles
@@ -39,18 +46,28 @@ de laquelle nous avons codé chaque jeu.
 
 \section{Modélisation}
 
-Nous avons remarqué que chaque jeu utilise toujours les mêmes composants:
-un plateau, une pièce, une pioche, des joueurs et leur main.
+Nous avons tout d'abord remarqué que chaque jeu s'articule toujours autours des mêmes objets:
+un plateau, des pièces, des cartes, une pioche, des joueurs et leur main.
+Ce sont les composant de base de notre framework. Chacun de ces objets est
+éventuellement étendu pour ajouter ou redéfinir des comportements.
+
 
 \section{Difficultés rencontrées}
 
+Nous avons développé le projet itérativement en travaillant à plusieurs niveaux
+d'abstraction: sur chaque jeu et le framework. Le développement du framework
+était guidé par les besoins de chaque jeu et réciproquement le développement
+d'un jeu dépendait directement de l'organisation du framework. Ainsi, si une
+extension du code était compliquée à écrire, nous revoyions le modèle. 
+Cet aspect du projet à été de loin le plus intéressant et enrichissant.
 
 Lors du développement nous avons réécrit à plusieurs reprises certaines
 méthodes, ce qui introduisait quelques fois de nouveaux bugs. C'est pourquoi
 nous avons écrit des tests unitaires à l'aide de la librairie jUnit que l'on lance à
 chaque modification pour identifier toute régression dans le code.
 
-Plus git pour sauvegarder des états de l'avancement en cas de problème
+Nous nous sommes également servi du gestionnaire de version git pour sauvegarder
+des états du projet au fur et à mesure et collaborer à deux.
 \section{Pistes d'amélioration}
 \section{Conclusion}
 
