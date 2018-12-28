@@ -1,24 +1,29 @@
 package games.core.model.card.tile;
 
 
-public abstract class Side {
-    private final TileImpl parent;
-    private Side nextSide; // Unnecessary now
+/**
+ * A side of a tile referencing the tile
+ *
+ * @param <T> the type of tile
+ */
+public abstract class Side<T extends Tile<? extends Side<T>>> {
+    private final T parent;
+    //private Side nextSide; // Unnecessary now
 
-    public Side(TileImpl parent, Side nextSide) {
+    public Side(T parent) {
         this.parent = parent;
-        this.nextSide = nextSide;
+        //this.nextSide = nextSide;
     }
 
-    public TileImpl getParent() {
+    public T getParent() {
         return parent;
     }
 
-    public Side getNextSide() {
+    /*public Side getNextSide() {
         return nextSide;
-    }
+    }*/
 
-    public void setNextSide(Side nextSide) {
+    /*public void setNextSide(Side nextSide) {
         this.nextSide = nextSide;
-    }
+    }*/
 }

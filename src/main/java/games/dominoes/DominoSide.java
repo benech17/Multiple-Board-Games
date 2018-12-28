@@ -5,11 +5,11 @@ import games.core.model.card.tile.Side;
 import java.util.Objects;
 
 
-public class DominoSide extends Side {
+public class DominoSide extends Side<DominoTile> {
     private final int value;
 
     public DominoSide(int value, DominoTile parent) {
-        super(parent, null);
+        super(parent);
         this.value = value;
     }
 

@@ -15,7 +15,9 @@ import java.util.Iterator;
  *
  * @param <S>
  */
-public abstract class TileImpl<S extends Side> implements Tile<S>, Turnable { // implements Node
+public abstract class TileImpl<S extends Side<? extends Tile<S>>> implements Tile<S>, Turnable { //
+    // implement
+    // Node
     protected EnumMap<Direction, S> sides;
     //protected EnumMap<Direction, Node> adjacentNodes;
 

@@ -8,7 +8,7 @@ import games.saboteur.cards.SaboteurCard;
 
 // TODO: review rotations: there are only two possible orientations
 public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard {
-    private String name;
+    protected String name;
     protected boolean hidden = false;
     private final boolean hasPath;
 
@@ -18,6 +18,7 @@ public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard
         sides.put(Direction.BOTTOM, new SaboteurSide(this, pathCard.getPaths()[2]));
         sides.put(Direction.LEFT, new SaboteurSide(this, pathCard.getPaths()[3]));
         this.hasPath = pathCard.getPaths()[4];
+        name = "Path card with " + (hasPath ? "" : "un") + "connected sides : " + sides;
     }
 
     public SaboteurTile(PathCard pathCard, boolean hidden) {
@@ -27,10 +28,6 @@ public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public boolean isHidden() {
@@ -64,6 +61,6 @@ public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard
 
     @Override
     public String toString() {
-        return "Path card with " + (hasPath ? "" : "un") + "connected sides : " + sides;
+        return name;
     }
 }

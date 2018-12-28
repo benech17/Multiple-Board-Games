@@ -5,7 +5,7 @@ public class TreasureCard extends GoalCard {
     private static final int AMOUNT_POINTS = 100;
 
     public TreasureCard() {
-        setName("Treasure Card");
+        name = "Treasure Card" + name;
     }
 
     public int getAmountPoints() {

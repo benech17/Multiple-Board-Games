@@ -181,6 +181,9 @@ public class SaboteurGameController {
                     return false;
                 }
                 break;
+            default:
+                System.out.println("Please enter a valid integer (either 0, 1 or 2)");
+                return false;
         }
         return true;
     }

@@ -1,48 +1,42 @@
 package games.dominoeswithstickers;
 
+import games.core.model.board.CannotAddTileAtException;
 import games.core.model.board.Coordinate;
 import games.core.model.board.DefaultBoardImpl;
+import games.core.model.board.OutOfBoardBoundsException;
 import games.core.model.enums.Color;
+import games.core.model.enums.Direction;
 import games.core.model.enums.Shape;
 
+import java.util.EnumMap;
 
-public class DominoesStickerBoard extends DefaultBoardImpl<DominoStickerSide> {
+
+public class DominoesStickerBoard extends DefaultBoardImpl<DominoStickerTile> {
 
     public DominoesStickerBoard(DominoStickerTile t) {
         // We put the first domino tile at the center of the board
         super(50, 50);
 
-        putTileAt(new Coordinate(0, 0), t.getLeftSide());
-        putTileAt(new Coordinate(0, 1), t.getRightSide());
+        //putTileAt(new Coordinate(0, 0), t.getLeftSide());
+        //putTileAt(new Coordinate(0, 1), t.getRightSide());
     }
 
-    /**
-     * Adds the domino tile in the board at the specified position
-     * @param t the domino tile to put in the board
-     * @param c the coordinate of the specified position
-     * @return
-     */
-    public boolean addDominoTile(DominoStickerTile t, Coordinate c) {
-        /*if (t == null)
-            return false;
-        HashMap<Direction, Coordinate> neighbors = getAdjacentCoordinates(c);
-        if (neighbors.get(Direction.LEFT) != null) {
-            if(t.sidesMatch(getTileAt(neighbors.get(Direction.LEFT)), Direction.LEFT)) {
-                // Connects the side of the domino tile t with the domino tile to its left
-                // Useless in fact
-                t.getLeftSide().setNextSide((getTileAt(neighbors.get(Direction.LEFT))).getRightSide());
-                board.get(0).add(t);
-                return true;
-            }
+
+    public boolean putTileAt(Coordinate c, DominoStickerTile tile) throws OutOfBoardBoundsException,
+            CannotAddTileAtException {
+        DominoStickerSide side1 = tile.getSide1();
+        DominoStickerSide side2 = tile.getSide2();
+        Coordinate position = tile.getSide2Position();
+
+        EnumMap<Direction, DominoStickerTile> adjacentTiles = getAdjacentTilesByDirection(c);
+        // We check if the tile fits with each adjacent tile
+        for (Direction d : adjacentTiles.keySet()) {
+            // We could move the unconnectedPathException in core
+            /*if (!tile.fitsWith(adjacentTiles.get(d), d))
+                throw new PathCardException.UnconnectedPathException("Illegal move: tunnels must connect!");
+        }*/
         }
-        if (neighbors.get(Direction.RIGHT) != null) {
-            if (t.sidesMatch(getTileAt(neighbors.get(Direction.RIGHT)), Direction.RIGHT)) {
-                board.get(0).add(0, t);
-                return true;
-            }
-        }
-        */
-        return false;
+        return true;
     }
 
     @Override
