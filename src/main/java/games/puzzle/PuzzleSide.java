@@ -9,11 +9,10 @@ import java.util.Objects;
  * The puzzle side holds a unique value shared with the adjacent side
  * This value is used to check if a side connects to an other one
  */
-public class PuzzleSide extends Side<PuzzleTile> {
+public class PuzzleSide extends Side {
     private final int value;
 
-    public PuzzleSide(int value, PuzzleTile parent) {
-        super(parent);
+    public PuzzleSide(int value) {
         this.value = value;
     }
 

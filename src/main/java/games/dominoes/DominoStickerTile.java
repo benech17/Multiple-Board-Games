@@ -1,6 +1,5 @@
-package games.dominoeswithstickers;
+package games.dominoes;
 
-import games.common.model.card.tile.TileImpl;
 import games.common.model.enums.Color;
 import games.common.model.enums.Direction;
 import games.common.model.enums.Shape;
@@ -13,14 +12,11 @@ import games.common.model.enums.Shape;
  * The orientation of the domino sticker side is determined by the position of
  * the second side with respect to the first side (TOP, RIGHT, BOTTOM, LEFT).
  */
-public class DominoStickerTile extends TileImpl<DominoStickerSide> {
-    private DominoStickerPiece parentPiece;
+public class DominoStickerTile extends DominoTile<DominoStickerSide> {
 
-
-    public DominoStickerTile(Shape shape, Color color, DominoStickerPiece parentPiece) {
+    public DominoStickerTile(Shape shape, Color color) {
         for (Direction d : Direction.values())
-            sides.put(d, new DominoStickerSide(shape, color, this));
-        this.parentPiece = parentPiece;
+            sides.put(d, new DominoStickerSide(shape, color));
     }
 
     @Override

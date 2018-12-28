@@ -13,7 +13,8 @@ import java.util.*;
  * @param <S>
  */
 // Got help from StackOverflow https://stackoverflow.com/questions/53958810/two-generic-interfaces-referencing-each-other
-public abstract class TileImpl<S extends Side<? extends Tile<S>>> implements Tile<S>, Turnable { //
+//public abstract class TileImpl<S extends Side<? extends Tile<S>>> implements Tile<S>, Turnable { //
+public abstract class TileImpl<S> implements Tile<S>, Turnable {
     // implement
     // Node
     protected EnumMap<Direction, S> sides;
@@ -76,7 +77,6 @@ public abstract class TileImpl<S extends Side<? extends Tile<S>>> implements Til
 
     @Override
     public boolean fitsWith(Tile t, Direction d) {
-        //return (t != null) && getSide(d).equals(t.getSide(d.getOppositeDirection()));
         return fitsWith(t, d, Objects::equals);
     }
 

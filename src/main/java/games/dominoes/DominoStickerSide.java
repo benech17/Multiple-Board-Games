@@ -1,4 +1,4 @@
-package games.dominoeswithstickers;
+package games.dominoes;
 
 import games.common.model.card.tile.Side;
 import games.common.model.enums.Color;
@@ -7,12 +7,11 @@ import games.common.model.enums.Shape;
 import java.util.Objects;
 
 
-public class DominoStickerSide extends Side<DominoStickerTile> {
+public class DominoStickerSide extends Side {
     private final Shape shape;
     private final Color color;
 
-    public DominoStickerSide(Shape shape, Color color, DominoStickerTile parent) {
-        super(parent);
+    public DominoStickerSide(Shape shape, Color color) {
         this.shape = shape;
         this.color = color;
     }

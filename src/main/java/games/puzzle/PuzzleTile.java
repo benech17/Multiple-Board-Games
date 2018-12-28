@@ -10,10 +10,10 @@ public class PuzzleTile extends TileImpl<PuzzleSide> {
 
     public PuzzleTile(Coordinate position, int topValue, int rightValue, int bottomValue, int leftValue) {
         this.position = position;
-        sides.put(Direction.TOP, new PuzzleSide(topValue, this));
-        sides.put(Direction.LEFT, new PuzzleSide(leftValue, this));
-        sides.put(Direction.RIGHT, new PuzzleSide(rightValue, this));
-        sides.put(Direction.BOTTOM, new PuzzleSide(bottomValue, this));
+        sides.put(Direction.TOP, new PuzzleSide(topValue));
+        sides.put(Direction.LEFT, new PuzzleSide(leftValue));
+        sides.put(Direction.RIGHT, new PuzzleSide(rightValue));
+        sides.put(Direction.BOTTOM, new PuzzleSide(bottomValue));
     }
 
     public Coordinate getPosition() {

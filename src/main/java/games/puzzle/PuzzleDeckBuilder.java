@@ -7,7 +7,6 @@ import games.common.model.deck.DeckBuilder;
 import games.common.model.enums.Direction;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
@@ -15,7 +14,6 @@ import java.util.Stack;
 public class PuzzleDeckBuilder implements DeckBuilder<PuzzleTile> {
     private final int height, length;
     private Board<PuzzleTile> board;
-    private HashMap<Coordinate, PuzzleTile> map;
     private Stack<PuzzleTile> deck;
 
     public PuzzleDeckBuilder(int height, int length) {

@@ -13,10 +13,10 @@ public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard
     private final boolean hasPath;
 
     public SaboteurTile(PathCard pathCard) {
-        sides.put(Direction.TOP, new SaboteurSide(this, pathCard.getPaths()[0]));
-        sides.put(Direction.RIGHT, new SaboteurSide(this, pathCard.getPaths()[1]));
-        sides.put(Direction.BOTTOM, new SaboteurSide(this, pathCard.getPaths()[2]));
-        sides.put(Direction.LEFT, new SaboteurSide(this, pathCard.getPaths()[3]));
+        sides.put(Direction.TOP, new SaboteurSide(pathCard.getPaths()[0]));
+        sides.put(Direction.RIGHT, new SaboteurSide(pathCard.getPaths()[1]));
+        sides.put(Direction.BOTTOM, new SaboteurSide(pathCard.getPaths()[2]));
+        sides.put(Direction.LEFT, new SaboteurSide(pathCard.getPaths()[3]));
         this.hasPath = pathCard.getPaths()[4];
         name = "Path card with " + (hasPath ? "" : "un") + "connected sides : " + sides;
     }

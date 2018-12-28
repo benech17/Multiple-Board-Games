@@ -1,72 +1,76 @@
 package games.dominoes;
 
+import games.common.model.board.CannotAddTileAtException;
 import games.common.model.board.Coordinate;
 import games.common.model.board.DefaultBoardImpl;
+import games.common.model.board.OutOfBoardBoundsException;
+import games.common.model.enums.Direction;
+
+import java.util.EnumMap;
 
 
-/**
- * At the end this game of dominoes should be implemented as
- * a subset of the more general game of dominoes in 2d
- */
 public class DominoesBoard extends DefaultBoardImpl<DominoTile> {
-    // These coordinates should be removed
-    private Coordinate leftEnd, rightEnd; // left and right ends of the board
 
-    public DominoesBoard(DominoTile t) {
-        super(10, 10);
-        leftEnd = new Coordinate(0, 0);
-        rightEnd = leftEnd;
-        // We put the first domino tile at the center of the board
-        board.get(0).set(0, t);
+    public DominoesBoard(int height, int length, Coordinate c, DominoPiece piece) {
+        super(height, length);
+        putTileAt(c, piece.getTile1());
+        putTileAt(c.plus(piece.getSide2Position()), piece.getTile2());
     }
 
-    /**
-     * Adds the domino tile in the board at the specified position
-     *
-     * @param t the domino tile to put in the board
-     * @param c the coordinate of the specified position
-     * @return
-     */
-    /**public boolean addDominoTile(DominoTile t, Coordinate c) {
-        System.out.println(t + " " + c);
-        if (t == null)
+    public boolean putTileAt(Coordinate c, DominoPiece piece) throws OutOfBoardBoundsException,
+            CannotAddTileAtException {
+
+        DominoTile tile1 = piece.getTile1();
+        DominoTile tile2 = piece.getTile2();
+        Coordinate position = piece.getSide2Position();
+        Direction orientation = piece.getOrientation();
+
+        EnumMap<Direction, DominoTile> adjTilesTile1 = getAdjacentTilesByDirection(c);
+        Coordinate cTile2 = c.plus(position); // Coordinate on the board of the second tile
+        EnumMap<Direction, DominoTile> adjTilesTile2 = getAdjacentTilesByDirection(cTile2);
+
+        // Removes the tiles of the piece from the adjacent tiles of tile1 and tile2
+        adjTilesTile2.remove(orientation.getOppositeDirection());
+        adjTilesTile1.remove(orientation);
+
+        // If there are more than 1 adjacent tile, the piece can't be put on the board
+        if (adjTilesTile1.keySet().size() + adjTilesTile2.keySet().size() > 1)
             return false;
-        HashMap<Direction, Coordinate> neighbors = getAdjacentCoordinates(c);
-        if (neighbors.get(Direction.LEFT) != null) {
-            if (t.fitsWith(getTileAt(neighbors.get(Direction.LEFT)), Direction.LEFT)) {
-                // Connects the side of the domino tile t with the domino tile to its left
-                // Useless in fact
-                t.getLeftSide().setNextSide((getTileAt(neighbors.get(Direction.LEFT))).getRightSide());
-                board[0][0] = t;
-                rightEnd = c;
-                return true;
-            }
+
+        EnumMap<Direction, DominoTile> adjTiles;
+        DominoTile tile;
+
+        if (adjTilesTile1.keySet().size() == 0) {
+            adjTiles = adjTilesTile2;
+            tile = tile2;
+        } else {
+            adjTiles = adjTilesTile1;
+            tile = tile1;
         }
-        if (neighbors.get(Direction.RIGHT) != null) {
-            if (t.fitsWith(getTileAt(neighbors.get(Direction.RIGHT)), Direction.RIGHT)) {
-                board[0][0] = t;
-                leftEnd = c;
-                return true;
+
+        // We check if the tile fits with the adjacent tile
+        for (Direction d : adjTiles.keySet()) {
+            if (tile.fitsWith(adjTiles.get(d), d)) {
+                return putTileAt(c, tile1) && putTileAt(cTile2, tile2);
             }
         }
         return false;
     }
 
-    public boolean addToLeftEnd(DominoTile t) {
-        return addDominoTile(t, leftEnd.add(new Coordinate(0, -1)));
-    }
-
-    public boolean addToRightEnd(DominoTile t) {
-        return addDominoTile(t, rightEnd.add(new Coordinate(0, 1)));
-    }
-     */
-
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder();
-        for (int j = 0; j < height; j++) {
-            s.append(board.get(0).get(j));
+        StringBuilder s = new StringBuilder("   ");
+        for (int i = 0; i < length; i++)
+            s.append(i + "  ");
+        s.append("\n");
+        for (int i = 0; i < length; i++) {
+            s.append(i).append(" ");
+            for (int j = 0; j < height; j++) {
+                s.append((board.get(i).get(j) == null) ? "XX" : board.get(i).get(j)).append(" ");
+            }
+            s.append("\n");
         }
         return s.toString();
     }
+
 }

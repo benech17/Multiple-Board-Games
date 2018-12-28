@@ -1,4 +1,4 @@
-package games.dominoeswithstickers;
+package games.dominoes;
 
 public class DominoStickerTileTest {
 

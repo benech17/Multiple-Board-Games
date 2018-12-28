@@ -1,4 +1,4 @@
-package games.dominoes;
+package games.dominoesold;
 
 public class DominoesTest {
 

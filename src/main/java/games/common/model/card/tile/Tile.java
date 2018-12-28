@@ -7,7 +7,8 @@ import games.common.model.enums.Direction;
  * Abstract data type for a tile
  * @param <S> the type of side of the tile
  */
-public interface Tile<S extends Side<? extends Tile<S>>> {
+//public interface Tile<S extends Side<? extends Tile<S>>> {
+public interface Tile<S> {
 
     S getSide(Direction d);
 

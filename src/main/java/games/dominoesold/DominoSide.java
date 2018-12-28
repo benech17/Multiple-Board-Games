@@ -1,16 +1,14 @@
-package games.dominoeswithstickers;
+package games.dominoesold;
 
 import games.common.model.card.tile.Side;
-import games.dominoes.DominoTile;
 
 import java.util.Objects;
 
 
-public class DominoSide extends Side<DominoTile> {
+public class DominoSide extends Side {
     private final int value;
 
-    public DominoSide(int value, DominoTile parent) {
-        super(parent);
+    public DominoSide(int value) {
         this.value = value;
     }
 

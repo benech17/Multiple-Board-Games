@@ -1,4 +1,4 @@
-package games.dominoes;
+package games.dominoesold;
 
 import games.common.model.deck.DeckImpl;
 import games.common.model.hand.Hand;
