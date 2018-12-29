@@ -30,7 +30,7 @@ programmation orientée objet et d’interfaces graphiques.
 
 Le but de ce projet consiste à implémenter plusieurs jeux de
 plateau en regroupant les fonctionnalités communes. Pour cela
-nous avons développé une plateforme logicielle (en anglais \textit{framework}) à partir
+nous avons développé une plateforme logicielle \footnote{En anglais \textit{framework}.} à partir
 de laquelle nous avons codé chaque jeu: un ensemble d'objets qui intéragissent
 entre eux et permettent de développer des jeux de plateau dans la plus grande
 généralité. Ce framework devait être facilement étendu pour implémenter un
@@ -46,20 +46,51 @@ branches, un puzzle ainsi que le jeu du saboteur.
 
 \section{Modélisation}
 
-Nous avons tout d'abord remarqué que chaque jeu s'articule toujours autours des mêmes objets:
+Nous avons tout d'abord remarqué que chaque jeu s'articule toujours autour des mêmes objets:
 un plateau, des pièces, des cartes, une pioche, des joueurs et leur main.
-Ce sont les composant de base de notre framework. Chacun de ces objets est
+Ce sont les composants de base de notre framework. Chacun de ces objets est
 éventuellement étendu pour ajouter ou redéfinir des comportements.
+
+Chaque jeu adopte la structure imposée par le framework.
+
+\subsection{Présentation du framework}
+
+%%Ajouter diagramme de classes du framework
+
+\subsection{Dominos simples et avec gommettes}
+Nous avons commencé par implémenter le jeu des dominos simples à l'aide d'une
+\texttt{ArrayList}, les pièces étaient ajoutées aux extrémitées de la liste. Une
+méthode vérifiait si une pièce pouvait se poser à gauche ou à droite d'une autre
+pièce. Lorsque nous avons implémenté le placement des pièces pour le jeu du
+saboteur, nous avons fait évoluer notre modèle en introduisant les types \texttt{Tile<S
+extends Side>} pour les pièces que l'on pose sur un plateau et \texttt{Side}
+pour les côtés des pièces, ce dernier type servant à regrouper les variables qui
+définissent un côté. Plusieurs évolutions successives de notre framework ont
+finalement cassé le code qui devait être repris.
+
+Nous avons en revanche constaté que le jeu des dominos simples peut être vu
+comme un sous-ensemble des dominos gommettes, dans le sens où les dominos
+simples s'assemblent pour former une seule chaîne contrairement aux dominos
+gommettes avec lesquels on peut en plus former des branches.
+
+C'est pouquoi nous avons implémenté le jeu des dominos simples et dominos
+gommettes en étendant une classe plus générale qui permet de placer côte à côte
+des pièces rectangulaires sur un plateau si leurs côtés se correspondent.
+
+%
+
+
+\subsection{Saboteur et puzzle}
+
+Après avoir codé le jeu des dominos simples nous avons réalisé qu'il serait plus
+intéressant d'implémenter le jeu du saboteur car une fois écrit nous pourrions
+réutiliser beaucoup de code. C'est au cours du développement de ce jeu que nous
+avons développé une base de code commune réutilisable et facilement extensible
+pour chaque jeu.
+
 
 
 \section{Difficultés rencontrées}
-
-Nous avons développé le projet itérativement en travaillant à plusieurs niveaux
-d'abstraction: sur chaque jeu et le framework. Le développement du framework
-était guidé par les besoins de chaque jeu et réciproquement le développement
-d'un jeu dépendait directement de l'organisation du framework. Ainsi, si une
-extension du code était compliquée à écrire, nous revoyions le modèle. 
-Cet aspect du projet à été de loin le plus intéressant et enrichissant.
 
 Lors du développement nous avons réécrit à plusieurs reprises certaines
 méthodes, ce qui introduisait quelques fois de nouveaux bugs. C'est pourquoi
@@ -68,8 +99,24 @@ chaque modification pour identifier toute régression dans le code.
 
 Nous nous sommes également servi du gestionnaire de version git pour sauvegarder
 des états du projet au fur et à mesure et collaborer à deux.
+
 \section{Pistes d'amélioration}
+
+
 \section{Conclusion}
+
+Nous avons développé le projet itérativement en travaillant à plusieurs niveaux
+d'abstraction: sur chaque jeu et le framework. Le développement du framework
+était guidé par les besoins de chaque jeu et réciproquement le développement
+d'un jeu dépendait directement de l'organisation du framework. Ainsi, si une
+extension du code était compliquée à écrire, nous revoyions le modèle. 
+Cet aspect du projet à été de loin le plus intéressant et enrichissant.
+
+Il était de plus très plaisant de remarquer que beaucoup de concepts se
+retrouvaient dans les jeux à implémenter, ce qui nous a conduit à introduire de
+nouveaux types qui ont grandement facilité le développement des jeux.
+
+
 
 \end{document}
 

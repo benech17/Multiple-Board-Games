@@ -51,4 +51,14 @@ public class DominoPiece<T extends DominoTile> {
     public Coordinate getTile2Position() {
         return tile2Position;
     }
+
+    @Override
+    public String toString() {
+        return "DominoPiece{" +
+                "tile1=" + tile1 +
+                ", tile2=" + tile2 +
+                ", orientation=" + orientation +
+                ", tile2Position=" + tile2Position +
+                '}';
+    }
 }
