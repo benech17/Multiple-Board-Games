@@ -1,8 +1,8 @@
-package games.dominoes;
+package games.dominoes.stickersdominoes;
 
 import games.common.model.enums.Color;
 import games.common.model.enums.Direction;
-import games.common.model.enums.Shape;
+import games.dominoes.DominoPiece;
 
 
 public class DominoStickerPiece extends DominoPiece<DominoStickerTile> {

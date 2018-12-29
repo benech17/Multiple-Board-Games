@@ -1,12 +1,15 @@
 package games.dominoesold;
 
+import games.common.model.deck.DeckBuilder;
 import games.common.model.deck.DeckImpl;
-import games.common.model.hand.Hand;
 
 
-public class DominoesDeck extends DeckImpl<DominoTile> {
+public abstract class DominoesDeck extends DeckImpl<DominoTile> {
+    public DominoesDeck(DeckBuilder<DominoTile> deckBuilder) {
+        super(deckBuilder);
+    }
 
-    public DominoesDeck(DominoesDeckBuilder builder) {
+    /*public DominoesDeck(LinearDominoesDeckBuilder builder) {
         super(builder);
         cards = builder.build();
     }
@@ -19,5 +22,5 @@ public class DominoesDeck extends DeckImpl<DominoTile> {
     @Override
     public void addCard(DominoTile card) {
 
-    }
+    }*/
 }

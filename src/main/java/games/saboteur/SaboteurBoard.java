@@ -1,7 +1,7 @@
 package games.saboteur;
 
+import games.common.model.board.BoardImpl;
 import games.common.model.board.Coordinate;
-import games.common.model.board.DefaultBoardImpl;
 import games.common.model.board.OutOfBoardBoundsException;
 import games.common.model.enums.Direction;
 import games.saboteur.cards.pathcard.*;
@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 
 
-public class SaboteurBoard extends DefaultBoardImpl<SaboteurTile> {
+public class SaboteurBoard extends BoardImpl<SaboteurTile> {
     // Distance between the start card and goal card
     private static final int DISTANCE = 8;
     // Dimensions of the board

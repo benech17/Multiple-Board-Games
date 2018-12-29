@@ -14,7 +14,7 @@ public class DominoPiece<T extends DominoTile> {
     private T tile1;
     private T tile2;
     private Direction orientation;
-    private Coordinate side2Position;
+    private Coordinate tile2Position;
 
     /**
      * By default the piece is oriented to the top
@@ -28,12 +28,12 @@ public class DominoPiece<T extends DominoTile> {
         this.tile1 = tile1;
         this.tile2 = tile2;
         this.orientation = orientation;
-        side2Position = orientation.getRelativeCoordinates();
+        tile2Position = orientation.getRelativeCoordinates();
     }
 
     public void rotate(Direction d) {
         orientation = d;
-        this.side2Position = orientation.getRelativeCoordinates();
+        this.tile2Position = orientation.getRelativeCoordinates();
     }
 
     public T getTile1() {
@@ -48,7 +48,7 @@ public class DominoPiece<T extends DominoTile> {
         return orientation;
     }
 
-    public Coordinate getSide2Position() {
-        return side2Position;
+    public Coordinate getTile2Position() {
+        return tile2Position;
     }
 }

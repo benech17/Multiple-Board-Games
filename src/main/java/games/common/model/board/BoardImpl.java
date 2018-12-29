@@ -7,13 +7,18 @@ import java.util.*;
 import java.util.function.Function;
 
 
-public class DefaultBoardImpl<T extends Tile> implements Board<T> {
+/**
+ * Default implementation of the board type provided by the framework
+ *
+ * @param <T>
+ */
+public class BoardImpl<T extends Tile> implements Board<T> {
 
     protected List<List<T>> board;
     protected int height, length;
     protected HashMap<Direction, Coordinate> adjacentCoordinates;
 
-    public DefaultBoardImpl(int height, int length) {
+    public BoardImpl(int height, int length) {
         this.height = height;
         this.length = length;
         this.board = new ArrayList<>(height);

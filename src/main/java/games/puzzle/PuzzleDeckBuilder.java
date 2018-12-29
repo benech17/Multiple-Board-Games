@@ -1,8 +1,8 @@
 package games.puzzle;
 
 import games.common.model.board.Board;
+import games.common.model.board.BoardImpl;
 import games.common.model.board.Coordinate;
-import games.common.model.board.DefaultBoardImpl;
 import games.common.model.deck.DeckBuilder;
 import games.common.model.enums.Direction;
 
@@ -20,7 +20,7 @@ public class PuzzleDeckBuilder implements DeckBuilder<PuzzleTile> {
         this.height = height;
         this.length = length;
         this.deck = new Stack<>();
-        this.board = new DefaultBoardImpl<>(height, length);
+        this.board = new BoardImpl<>(height, length);
     }
 
     @Override

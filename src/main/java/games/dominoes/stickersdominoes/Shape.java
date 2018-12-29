@@ -1,4 +1,4 @@
-package games.common.model.enums;
+package games.dominoes.stickersdominoes;
 
 public enum Shape {
     HEART, CRESCENT, DISK, STAR
