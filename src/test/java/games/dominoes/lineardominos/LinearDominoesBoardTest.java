@@ -17,27 +17,6 @@ public class LinearDominoesBoardTest {
                 b.putTileAt(new Coordinate(2, 5),
                         new LinearDominoPiece(4, 6, Direction.RIGHT)));
         System.out.println("head : " + b.getHead() + ", tail : " + b.getTail());
-        /**assertFalse(
-         b.putTileAt(new Coordinate(5, 4),
-         new DominoStickerPiece(Shape.DISK, Color.YELLOW,
-         Shape.HEART, Color.BLUE, Direction.LEFT))
-         );
-         assertTrue(
-         b.putTileAt(new Coordinate(6, 4),
-         new DominoStickerPiece(Shape.DISK, Color.GREEN,
-         Shape.CRESCENT, Color.GREEN, Direction.TOP))
-         );
-         System.out.println(b);
-         assertFalse(
-         b.putTileAt(new Coordinate(1, 0),
-         new DominoStickerPiece(Shape.STAR, Color.YELLOW,
-         Shape.DISK, Color.RED, Direction.TOP))
-         );
-         assertFalse(
-         b.putTileAt(new Coordinate(-1, 3),
-         new DominoStickerPiece(Shape.STAR, Color.YELLOW,
-         Shape.DISK, Color.RED, Direction.BOTTOM))
-         );*/
         assertTrue(
                 b.putTileAt(new Coordinate(5, 4),
                         new LinearDominoPiece(4, 6, Direction.RIGHT)));

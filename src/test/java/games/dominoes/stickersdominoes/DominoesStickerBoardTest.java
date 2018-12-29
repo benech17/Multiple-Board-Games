@@ -27,7 +27,7 @@ public class DominoesStickerBoardTest {
         assertTrue(
                 b.putTileAt(new Coordinate(6, 4),
                         new DominoStickerPiece(Shape.DISK, Color.GREEN,
-                                Shape.CRESCENT, Color.GREEN, Direction.TOP))
+                                Shape.CRESCENT, Color.RED, Direction.TOP))
         );
         System.out.println(b);
         assertFalse(

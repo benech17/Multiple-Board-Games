@@ -5,7 +5,8 @@ import games.common.model.board.Coordinate;
 import games.common.model.board.OutOfBoardBoundsException;
 import games.dominoes.DominoesBoard;
 
-public class LinearDominoesBoard extends DominoesBoard<LinearDominoPiece, LinearDominoTile> {
+
+public class LinearDominoesBoard extends DominoesBoard<LinearDominoPiece, LinearDominoTile, LinearDominoSide> {
     private Coordinate head, tail;
 
     public LinearDominoesBoard(int height, int length, Coordinate c, LinearDominoPiece piece) {

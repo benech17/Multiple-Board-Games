@@ -4,12 +4,15 @@ import games.common.model.board.BoardImpl;
 import games.common.model.board.CannotAddTileAtException;
 import games.common.model.board.Coordinate;
 import games.common.model.board.OutOfBoardBoundsException;
+import games.common.model.card.tile.Side;
+import games.common.model.card.tile.SidesMatch;
 import games.common.model.enums.Direction;
 
 import java.util.EnumMap;
+import java.util.Objects;
 
 
-public class DominoesBoard<P extends DominoPiece<T>, T extends DominoTile> extends BoardImpl<T> {
+public class DominoesBoard<P extends DominoPiece<T>, T extends DominoTile<S>, S extends Side> extends BoardImpl<T> {
 
     public DominoesBoard(int height, int length, Coordinate c, P piece) {
         super(height, length);
@@ -28,16 +31,22 @@ public class DominoesBoard<P extends DominoPiece<T>, T extends DominoTile> exten
                 && putTileAt(c.plus(piece.getTile2Position()), piece.getTile2());
     }
 
+    public boolean putTileAt(Coordinate c, P piece) throws OutOfBoardBoundsException,
+            CannotAddTileAtException {
+        return putTileAt(c, piece, Objects::equals);
+    }
+
     /**
      * Puts a domino piece on the board
      *
      * @param c
      * @param piece
+     * @param matchRule
      * @return
      * @throws OutOfBoardBoundsException
      * @throws CannotAddTileAtException
      */
-    public boolean putTileAt(Coordinate c, P piece) throws OutOfBoardBoundsException,
+    public boolean putTileAt(Coordinate c, P piece, SidesMatch<S> matchRule) throws OutOfBoardBoundsException,
             CannotAddTileAtException {
 
         T tile1 = piece.getTile1();
@@ -70,7 +79,7 @@ public class DominoesBoard<P extends DominoPiece<T>, T extends DominoTile> exten
 
         // We check if the tile fits with the adjacent tile
         for (Direction d : adjTiles.keySet()) {
-            if (tile.fitsWith(adjTiles.get(d), d)) {
+            if (tile.fitsWith(adjTiles.get(d), d, matchRule)) {
                 return putTileAt(c, tile1) && putTileAt(cTile2, tile2);
             }
         }

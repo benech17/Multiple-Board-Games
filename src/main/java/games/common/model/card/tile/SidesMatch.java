@@ -7,7 +7,7 @@ package games.common.model.card.tile;
  * @param <S> the type of the side
  */
 @FunctionalInterface
-public interface SidesMatch<S> {
+public interface SidesMatch<S extends Side> {
     /**
      * Checks if the two given sides fit together
      *

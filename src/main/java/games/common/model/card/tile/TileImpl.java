@@ -14,7 +14,7 @@ import java.util.*;
  */
 // Got help from StackOverflow https://stackoverflow.com/questions/53958810/two-generic-interfaces-referencing-each-other
 //public abstract class TileImpl<S extends Side<? extends Tile<S>>> implements Tile<S>, Turnable { //
-public abstract class TileImpl<S> implements Tile<S>, Turnable {
+public abstract class TileImpl<S extends Side> implements Tile<S>, Turnable {
     // implement
     // Node
     protected EnumMap<Direction, S> sides;
