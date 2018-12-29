@@ -1,3 +1,14 @@
 target/
 .idea/
 .directory
+
+# latex & emacs
+auto/
+_minted-*/
+*.aux
+*.fdb*
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
