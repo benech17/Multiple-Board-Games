@@ -4,9 +4,7 @@ import games.common.model.board.Coordinate;
 import games.common.model.deck.Deck;
 import games.common.model.deck.DeckImpl;
 import games.common.model.hand.Hand;
-import games.common.model.hand.HandImpl;
 import games.common.model.player.Player;
-import games.common.model.player.PlayerImpl;
 import games.saboteur.InvalidNumberOfPlayersException;
 
 import java.util.ArrayList;
@@ -16,7 +14,7 @@ import java.util.Scanner;
 
 public class PuzzleGameController {
     private PuzzleBoard board;
-    private List<Player> players;
+    private List<PuzzlePlayer> players;
     private Deck<PuzzleTile> deck;
     private int selectedHandIndex;
     private PuzzlePlayer currentPlayer;
@@ -34,25 +32,23 @@ public class PuzzleGameController {
         PuzzleDeckBuilder deckBuilder = new PuzzleDeckBuilder(height, length);
         this.deck = new DeckImpl<>(deckBuilder);
 
-        Hand<PuzzleTile> hand = new HandImpl<>() {
-            @Override
-            public int getCardNumberAtStart() {
-                // Distribute all cards to the hand
-                return height * length;
-            }
-        };
         players = new ArrayList<>();
-        players.add(new PlayerImpl<>("Player", 0) {
+        players.add(new PuzzlePlayer("Player", 0, height * length) {
         });
         List<Hand<PuzzleTile>> hands = new ArrayList<>(1);
-        hands.add(hand);
+        hands.add(players.get(0).getHand()); // one player
+        System.out.println(hands.size());
         deck.shuffle();
+        System.out.println(deck.getCards());
         deck.distributeCards(hands);
+        System.out.println(deck.getCards());
+        System.out.println(hands.get(0).getHand());
+        //System.out.println(((PuzzlePlayer) players.get(0)).getHand());
 
     }
 
     public static void main(String[] args) {
-        PuzzleGameController gameController = new PuzzleGameController(6, 6);
+        PuzzleGameController gameController = new PuzzleGameController(2, 2);
         gameController.play();
     }
 
@@ -60,7 +56,7 @@ public class PuzzleGameController {
         return board;
     }
 
-    public List<Player> getPlayers() {
+    public List<PuzzlePlayer> getPlayers() {
         return players;
     }
 
@@ -114,29 +110,22 @@ public class PuzzleGameController {
         printHand();
         printBoard();
         Scanner sc = new Scanner(System.in);
-        System.out.println("Choose your action (0 : pass, 1 : play a path card, 2 : play an action card) : ");
-        int action = sc.nextInt();
-        switch (action) {
-            case 1:
-                System.out.println("Index of the puzzle card to play : ");
-                selectedHandIndex = sc.nextInt();
-                PuzzleTile c = currentPlayer.getHand().getCardAt(selectedHandIndex);
-                System.out.println(c);
-                System.out.println(c instanceof PuzzleTile);
-                System.out.println("Coordinates of the destination in the board : ");
-                System.out.println("Row : ");
-                int row = sc.nextInt();
-                System.out.println("Column : ");
-                int column = sc.nextInt();
-                selectedCoordinate = new Coordinate(row, column);
-                try {
-                    // TODO
-                    //currentPlayer.takeTurn(Action.PLAY_PATH_CARD, this);
-                } catch (Throwable t) {
-                    System.out.println(t.toString());
-                    return false;
-                }
-                break;
+        System.out.println("Index of the puzzle card to play : ");
+        selectedHandIndex = sc.nextInt();
+        PuzzleTile c = currentPlayer.getHand().getCardAt(selectedHandIndex);
+        System.out.println(c);
+        System.out.println(c instanceof PuzzleTile);
+        System.out.println("Coordinates of the destination in the board : ");
+        System.out.println("Row : ");
+        int row = sc.nextInt();
+        System.out.println("Column : ");
+        int column = sc.nextInt();
+        selectedCoordinate = new Coordinate(row, column);
+        try {
+            currentPlayer.takeTurn(this);
+        } catch (Throwable t) {
+            System.out.println(t.toString());
+            return false;
         }
         return true;
     }
@@ -150,11 +139,10 @@ public class PuzzleGameController {
                     if (takeTurn())
                         validPlay = true;
                 // TODO
-                /*if (currentPlayer.hasWon()) {
+                if (currentPlayer.hasWon()) {
                     System.out.println(currentPlayer + " has won");
-                    printPlayers();
                     return; // Ends the game
-                }*/
+                }
             }
         }
     }

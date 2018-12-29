@@ -36,4 +36,9 @@ public abstract class HandImpl<C> implements Hand<C> {
         hand.remove(index);
         return draw;
     }
+
+    @Override
+    public boolean isEmpty() {
+        return hand.isEmpty();
+    }
 }

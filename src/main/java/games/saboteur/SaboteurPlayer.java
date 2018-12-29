@@ -14,7 +14,6 @@ import java.util.HashMap;
 
 public class SaboteurPlayer extends PlayerImpl<SaboteurCard> {
     private HashMap<ActionCardType, BlockCard> blockCards;
-    private boolean hasWon = false;
 
     public SaboteurPlayer(String name, int age) {
         super(name, age);
@@ -27,10 +26,6 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurCard> {
 
     public HashMap<ActionCardType, BlockCard> getBlockCards() {
         return blockCards;
-    }
-
-    public boolean hasWon() {
-        return hasWon;
     }
 
     /**

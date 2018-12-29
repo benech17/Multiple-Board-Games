@@ -6,6 +6,8 @@ package games.common.model.player;
  */
 public interface Player {
 
+    boolean hasWon();
+
     String getName();
 
     int getAge();

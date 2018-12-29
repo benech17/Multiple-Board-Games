@@ -40,4 +40,6 @@ public interface Hand<C> {
      */
     C drawCard(int index);
 
+    boolean isEmpty();
+
 }

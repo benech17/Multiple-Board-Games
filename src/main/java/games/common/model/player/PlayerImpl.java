@@ -12,11 +12,17 @@ public abstract class PlayerImpl<C> implements Player {
     protected int age;
     protected int score;
     protected Hand<C> hand;
+    protected boolean hasWon;
 
     public PlayerImpl(String name, int age) {
         this.name = name;
         this.age = age;
         score = 0;
+        hasWon = false;
+    }
+
+    public boolean hasWon() {
+        return hasWon;
     }
 
     public String getName() {

@@ -56,4 +56,5 @@ public class PuzzleDeckBuilder implements DeckBuilder<PuzzleTile> {
         }
         return deck;
     }
+
 }
