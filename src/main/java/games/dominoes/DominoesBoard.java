@@ -11,7 +11,7 @@ import java.util.EnumMap;
 
 public class DominoesBoard<T extends DominoTile> extends BoardImpl<T> {
 
-    public DominoesBoard(int height, int length, Coordinate c, DominoPiece piece) {
+    public DominoesBoard(int height, int length, Coordinate c, DominoPiece<T> piece) {
         super(height, length);
         putFirstTileAt(c, piece);
     }
@@ -81,7 +81,7 @@ public class DominoesBoard<T extends DominoTile> extends BoardImpl<T> {
     public String toString() {
         StringBuilder s = new StringBuilder("   ");
         for (int i = 0; i < length; i++)
-            s.append(i + "  ");
+            s.append(i).append("  ");
         s.append("\n");
         for (int i = 0; i < length; i++) {
             s.append(i).append(" ");
