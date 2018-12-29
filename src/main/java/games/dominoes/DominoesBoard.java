@@ -9,9 +9,9 @@ import games.common.model.enums.Direction;
 import java.util.EnumMap;
 
 
-public class DominoesBoard<T extends DominoTile> extends BoardImpl<T> {
+public class DominoesBoard<P extends DominoPiece<T>, T extends DominoTile> extends BoardImpl<T> {
 
-    public DominoesBoard(int height, int length, Coordinate c, DominoPiece<T> piece) {
+    public DominoesBoard(int height, int length, Coordinate c, P piece) {
         super(height, length);
         putFirstTileAt(c, piece);
     }
@@ -23,7 +23,7 @@ public class DominoesBoard<T extends DominoTile> extends BoardImpl<T> {
      * @param piece the domino piece to put on the board
      * @return true if the tile was effectively put on the board as a result of this call
      */
-    private boolean putFirstTileAt(Coordinate c, DominoPiece<T> piece) {
+    private boolean putFirstTileAt(Coordinate c, P piece) {
         return putTileAt(c, piece.getTile1())
                 && putTileAt(c.plus(piece.getTile2Position()), piece.getTile2());
     }
@@ -37,7 +37,7 @@ public class DominoesBoard<T extends DominoTile> extends BoardImpl<T> {
      * @throws OutOfBoardBoundsException
      * @throws CannotAddTileAtException
      */
-    public boolean putTileAt(Coordinate c, DominoPiece<T> piece) throws OutOfBoardBoundsException,
+    public boolean putTileAt(Coordinate c, P piece) throws OutOfBoardBoundsException,
             CannotAddTileAtException {
 
         T tile1 = piece.getTile1();
