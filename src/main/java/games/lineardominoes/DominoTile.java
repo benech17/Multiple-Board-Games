@@ -1,4 +1,4 @@
-package games.dominoesold;
+package games.lineardominoes;
 
 import games.common.model.card.tile.TileImpl;
 import games.common.model.enums.Direction;

@@ -1,4 +1,4 @@
-package games.dominoesold;
+package games.lineardominoes;
 
 import games.common.controller.GameManager;
 

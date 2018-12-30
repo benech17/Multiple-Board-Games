@@ -1,4 +1,4 @@
-package games.dominoesold;
+package games.lineardominoes;
 
 public class DominoesTest {
 
