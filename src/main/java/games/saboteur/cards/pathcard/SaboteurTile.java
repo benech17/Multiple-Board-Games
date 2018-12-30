@@ -11,6 +11,7 @@ public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard
     protected String name;
     protected boolean hidden = false;
     private final boolean hasPath;
+    private final PathCard type;
 
     public SaboteurTile(PathCard pathCard) {
         sides.put(Direction.TOP, new SaboteurSide(pathCard.getPaths()[0]));
@@ -19,6 +20,7 @@ public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard
         sides.put(Direction.LEFT, new SaboteurSide(pathCard.getPaths()[3]));
         this.hasPath = pathCard.getPaths()[4];
         name = "Path card with " + (hasPath ? "" : "un") + "connected sides : " + sides;
+        type = pathCard;
     }
 
     public SaboteurTile(PathCard pathCard, boolean hidden) {

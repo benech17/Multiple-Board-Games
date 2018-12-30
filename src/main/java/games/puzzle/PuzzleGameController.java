@@ -48,7 +48,7 @@ public class PuzzleGameController {
     }
 
     public static void main(String[] args) {
-        PuzzleGameController gameController = new PuzzleGameController(2, 2);
+        PuzzleGameController gameController = new PuzzleGameController(6, 6);
         gameController.play();
     }
 

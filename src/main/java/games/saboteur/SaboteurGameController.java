@@ -5,9 +5,11 @@ import games.common.model.deck.Deck;
 import games.common.model.deck.DeckImpl;
 import games.common.model.hand.Hand;
 import games.common.model.player.Player;
+import games.saboteur.cards.BombCard;
 import games.saboteur.cards.SaboteurCard;
 import games.saboteur.cards.actioncard.ActionCardType;
 import games.saboteur.cards.actioncard.BlockCard;
+import games.saboteur.cards.actioncard.RepairCard;
 import games.saboteur.cards.pathcard.PathCard;
 import games.saboteur.cards.pathcard.SaboteurTile;
 
@@ -131,13 +133,18 @@ public class SaboteurGameController {
         printBlockCards();
         printBoard();
         Scanner sc = new Scanner(System.in);
-        System.out.println("Choose your action (0 : pass, 1 : play a path card, 2 : play an action card) : ");
+        System.out.println("Choose your action (0 : pass, 1 : play a card) : ");
         int action = sc.nextInt();
         switch (action) {
             case 0:
                 System.out.println("Index of the card to put to the trash : ");
                 selectedHandIndex = sc.nextInt();
-                System.out.println(currentPlayer.getHand().getCardAt(selectedHandIndex));
+                try {
+                    currentPlayer.getHand().getCardAt(selectedHandIndex);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Wrong index, please retry");
+                    return false;
+                }
                 try {
                     currentPlayer.takeTurn(Action.PASS, this);
                 } catch (Throwable t) {
@@ -148,41 +155,53 @@ public class SaboteurGameController {
                 printHand();
                 break;
             case 1:
-                System.out.println("Index of the path card to play : ");
+                System.out.println("Index of the card to play : ");
                 selectedHandIndex = sc.nextInt();
-                SaboteurCard c = currentPlayer.getHand().getCardAt(selectedHandIndex);
-                System.out.println(c);
-                System.out.println(c instanceof SaboteurTile);
-                System.out.println("Coordinates of the destination in the board : ");
-                System.out.println("Row : ");
-                int row = sc.nextInt();
-                System.out.println("Column : ");
-                int column = sc.nextInt();
-                selectedCoordinate = new Coordinate(row, column);
+                SaboteurCard c;
                 try {
-                    currentPlayer.takeTurn(Action.PLAY_PATH_CARD, this);
-                } catch (Throwable t) {
-                    System.out.println(t.toString());
+                    c = currentPlayer.getHand().getCardAt(selectedHandIndex);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Wrong index, please retry");
                     return false;
                 }
-
-                break;
-            case 2:
-                System.out.println("Index of the action card to play : ");
-                selectedHandIndex = sc.nextInt();
-                System.out.println(currentPlayer.getHand().getCardAt(selectedHandIndex));
-                System.out.println("Index of the player to put the card in front of : ");
-                int selectedPlayerIndex = sc.nextInt();
-                selectedPlayer = players.get(selectedPlayerIndex);
-                try {
-                    currentPlayer.takeTurn(Action.PLAY_ACTION_CARD, this);
-                } catch (Throwable t) {
-                    System.out.println(t.toString());
-                    return false;
+                if (c instanceof SaboteurTile || c instanceof BombCard) {
+                    System.out.println("Coordinates of the destination in the board : ");
+                    System.out.println("Row : ");
+                    int row = sc.nextInt();
+                    System.out.println("Column : ");
+                    int column = sc.nextInt();
+                    selectedCoordinate = new Coordinate(row, column);
+                    try {
+                        currentPlayer.takeTurn(
+                                c instanceof SaboteurTile ? Action.PLAY_PATH_CARD : Action.PLAY_BOMB_CARD,
+                                this);
+                    } catch (Throwable t) {
+                        System.out.println(t.toString());
+                        return false;
+                    }
+                }
+                if (c instanceof BlockCard || c instanceof RepairCard) {
+                    System.out.println(currentPlayer.getHand().getCardAt(selectedHandIndex));
+                    System.out.println("Index of the player to put the card in front of : ");
+                    int selectedPlayerIndex = sc.nextInt();
+                    try {
+                        selectedPlayer = players.get(selectedPlayerIndex);
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Wrong index, please retry");
+                        return false;
+                    }
+                    try {
+                        currentPlayer.takeTurn(
+                                c instanceof BlockCard ? Action.PLAY_BLOCK_CARD : Action.PLAY_REPAIR_CARD,
+                                this);
+                    } catch (Throwable t) {
+                        System.out.println(t.toString());
+                        return false;
+                    }
                 }
                 break;
             default:
-                System.out.println("Please enter a valid integer (either 0, 1 or 2)");
+                System.out.println("Please enter a valid integer (either 0 or 1)");
                 return false;
         }
         return true;

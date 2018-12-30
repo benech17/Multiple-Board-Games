@@ -1,5 +1,6 @@
 package games.saboteur;
 
+import games.saboteur.cards.BombCard;
 import games.saboteur.cards.SaboteurCard;
 import games.saboteur.cards.actioncard.ActionCardType;
 import games.saboteur.cards.actioncard.BlockCard;
@@ -57,6 +58,10 @@ public class SaboteurDeckBuilderImpl implements SaboteurDeckBuilder {
                 deck.add(new BlockCard(type));
                 deck.add(new RepairCard(type));
             }
+        }
+        // 5 bomb cards !
+        for (int i = 0; i < 5; i++) {
+            deck.add(new BombCard());
         }
     }
 
