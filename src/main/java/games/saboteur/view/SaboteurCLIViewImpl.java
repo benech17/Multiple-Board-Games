@@ -2,7 +2,7 @@ package games.saboteur.view;
 
 import games.common.model.board.Coordinate;
 import games.common.model.player.Player;
-import games.saboteur.SaboteurGameController;
+import games.saboteur.SaboteurGameState;
 import games.saboteur.SaboteurHand;
 import games.saboteur.cards.SaboteurCard;
 import games.saboteur.cards.actioncard.ActionCardType;
@@ -11,15 +11,18 @@ import games.saboteur.cards.actioncard.BlockCard;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class SaboteurCLIViewImpl implements SaboteurCLIView {
-    private SaboteurGameController gameController;
+public class SaboteurCLIViewImpl implements SaboteurView {
+    private SaboteurGameState gameState;
 
-    public SaboteurCLIViewImpl(SaboteurGameController gameController) {
-        this.gameController = gameController;
+    public SaboteurCLIViewImpl() {
+    }
+
+    public void setGameState(SaboteurGameState gameState) {
+        this.gameState = gameState;
     }
 
     public void printPassTurn() {
-        System.out.println("Player " + gameController.getCurrentPlayer() + " has passed their turn");
+        System.out.println("Player " + gameState.getCurrentPlayer() + " has passed their turn");
     }
 
     public void printError(Throwable t) {
@@ -37,7 +40,7 @@ public class SaboteurCLIViewImpl implements SaboteurCLIView {
     }
 
     public void printPlayerWon() {
-        System.out.println(gameController.getCurrentPlayer() + " has won");
+        System.out.println(gameState.getCurrentPlayer() + " has won");
     }
 
     public int selectPlayer() {
@@ -74,14 +77,14 @@ public class SaboteurCLIViewImpl implements SaboteurCLIView {
 
     public void printPlayers() {
         System.out.print("Players : ");
-        for (Player p : gameController.getPlayers())
+        for (Player p : gameState.getPlayers())
             System.out.println(p);
         System.out.println();
     }
 
     public void printHand() {
-        System.out.println(gameController.getCurrentPlayer() + " hand (listed by index):");
-        SaboteurHand hand = (SaboteurHand) gameController.getCurrentPlayer().getHand();
+        System.out.println(gameState.getCurrentPlayer() + " hand (listed by index):");
+        SaboteurHand hand = (SaboteurHand) gameState.getCurrentPlayer().getHand();
         int i = 0;
         for (SaboteurCard c : hand.getHand()) {
             System.out.println(i + " - " + c.toString());
@@ -91,12 +94,12 @@ public class SaboteurCLIViewImpl implements SaboteurCLIView {
     }
 
     public void printCurrentPlayer() {
-        System.out.println("Current player : " + gameController.getCurrentPlayer().toString() + "\n");
+        System.out.println("Current player : " + gameState.getCurrentPlayer().toString() + "\n");
     }
 
     public void printBlockCards() {
-        System.out.print("Block cards applied to " + gameController.getCurrentPlayer() + " : ");
-        HashMap<ActionCardType, BlockCard> blockCards = gameController.getCurrentPlayer().getBlockCards();
+        System.out.print("Block cards applied to " + gameState.getCurrentPlayer() + " : ");
+        HashMap<ActionCardType, BlockCard> blockCards = gameState.getCurrentPlayer().getBlockCards();
         for (BlockCard blockCard : blockCards.values()) {
             System.out.print(blockCard + ", ");
         }
@@ -105,6 +108,13 @@ public class SaboteurCLIViewImpl implements SaboteurCLIView {
 
     public void printBoard() {
         System.out.println("The board : \n");
-        System.out.println(gameController.getBoard());
+        System.out.println(gameState.getBoard());
+    }
+
+    @Override
+    public int getNbPlayers() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the desired number of players : ");
+        return sc.nextInt();
     }
 }

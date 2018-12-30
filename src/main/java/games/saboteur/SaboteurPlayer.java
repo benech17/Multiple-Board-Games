@@ -42,7 +42,7 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurCard> {
      * @throws WrongCardException                                      if the picked card don't correspond to the specified action
      * @throws ActionCardException.UnsupportedActionException          if the action provided is not handled
      */
-    public void takeTurn(Action action, SaboteurGameController game)
+    public void takeTurn(Action action, SaboteurGameState game)
             throws BlockedPlayerException,
             ActionCardException.BlockCardAlreadyAppliedException,
             ActionCardException.NoMatchingBlockCardAppliedException,

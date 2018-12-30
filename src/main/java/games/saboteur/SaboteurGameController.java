@@ -1,168 +1,107 @@
 package games.saboteur;
 
 import games.common.model.board.Coordinate;
-import games.common.model.deck.Deck;
-import games.common.model.deck.DeckImpl;
-import games.common.model.hand.Hand;
 import games.saboteur.cards.BombCard;
 import games.saboteur.cards.SaboteurCard;
 import games.saboteur.cards.actioncard.BlockCard;
 import games.saboteur.cards.actioncard.RepairCard;
 import games.saboteur.cards.pathcard.PathCard;
 import games.saboteur.cards.pathcard.SaboteurTile;
-import games.saboteur.view.SaboteurCLIView;
 import games.saboteur.view.SaboteurCLIViewImpl;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import games.saboteur.view.SaboteurView;
 
 
+/**
+ * The controller provides the "view logic": it responds to user input
+ * from the view and updates the model as a result.
+ * Reciprocally it refreshes the view as a result of a change of the model
+ */
 public class SaboteurGameController {
-    private SaboteurBoard board;
-    private List<SaboteurPlayer> players;
-    private Deck<SaboteurCard> deck;
-    private Stack<SaboteurCard> trash;
+    private SaboteurGameState gameState; // Game model
+    private SaboteurView saboteurView; // Game view
 
-    private SaboteurPlayer currentPlayer;
-    private int selectedHandIndex;
-    private SaboteurPlayer selectedPlayer;
-    private Coordinate selectedCoordinate;
+    public SaboteurGameController(SaboteurView saboteurView) throws InvalidNumberOfPlayersException {
 
-    private SaboteurCLIView saboteurCLIView;
+        this.saboteurView = saboteurView;
+        gameState = new SaboteurGameState(saboteurView.getNbPlayers());
+        this.saboteurView.setGameState(gameState);
 
-    public SaboteurGameController(int nbPlayers) throws InvalidNumberOfPlayersException {
-        if (nbPlayers <= 1)
-            throw new InvalidNumberOfPlayersException();
-
-        this.board = new SaboteurBoard();
-
-        this.players = new ArrayList<>(nbPlayers);
-        for (int i = 0; i < nbPlayers; i++)
-            players.add(new SaboteurPlayer("Player " + i, 0));
-
-        SaboteurDeckBuilder deckBuilder = new SaboteurDeckBuilderImpl();
-        this.deck = new DeckImpl<>(deckBuilder);
-
-        List<Hand<SaboteurCard>> hands = new ArrayList<>(nbPlayers);
-        for (int i = 0; i < nbPlayers; i++)
-            hands.add(players.get(i).getHand()); // pb
-        deck.shuffle();
-        deck.distributeCards(hands);
-
-        trash = new Stack<>();
-
-        saboteurCLIView = new SaboteurCLIViewImpl(this);
     }
 
     public static void main(String[] args) {
         // Testing
-        SaboteurGameController gameController = new SaboteurGameController(3);
-        SaboteurBoard b = gameController.getBoard();
+        SaboteurGameController gameController = new SaboteurGameController(new SaboteurCLIViewImpl());
+        SaboteurBoard b = gameController.getGameState().getBoard();
         for (int i = 1; i < 8; i++) {
             b.putTileAt(new Coordinate(2, i), new SaboteurTile(PathCard.TWELVE));
         }
         gameController.play();
     }
 
-    public SaboteurBoard getBoard() {
-        return board;
+    public SaboteurGameState getGameState() {
+        return gameState;
     }
 
-    public List<SaboteurPlayer> getPlayers() {
-        return players;
+    public SaboteurView getSaboteurView() {
+        return saboteurView;
     }
-
-    public Deck<SaboteurCard> getDeck() {
-        return deck;
-    }
-
-    public Stack<SaboteurCard> getTrash() {
-        return trash;
-    }
-
-    public SaboteurPlayer getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    public int getSelectedHandIndex() {
-        return selectedHandIndex;
-    }
-
-    public SaboteurPlayer getSelectedPlayer() {
-        return selectedPlayer;
-    }
-
-    public Coordinate getSelectedCoordinate() {
-        return selectedCoordinate;
-    }
-
 
     public boolean takeTurn() {
-        saboteurCLIView.printPlayers();
-        saboteurCLIView.printCurrentPlayer();
-        saboteurCLIView.printHand();
-        saboteurCLIView.printBlockCards();
-        saboteurCLIView.printBoard();
-        int action = saboteurCLIView.chooseAction();
+        saboteurView.printPlayers();
+        saboteurView.printCurrentPlayer();
+        saboteurView.printHand();
+        saboteurView.printBlockCards();
+        saboteurView.printBoard();
+        int action = saboteurView.chooseAction();
         switch (action) {
             case 0:
-                selectedHandIndex = saboteurCLIView.selectCardToPutToTrash();
-                try {
-                    currentPlayer.getHand().getCardAt(selectedHandIndex);
-                } catch (IndexOutOfBoundsException e) {
-                    saboteurCLIView.printWrongIndex();
+                if (!gameState.setSelectedHandIndex(saboteurView.selectCardToPutToTrash())) {
+                    saboteurView.printWrongIndex();
                     return false;
                 }
                 try {
-                    currentPlayer.takeTurn(Action.PASS, this);
+                    gameState.getCurrentPlayer().takeTurn(Action.PASS, gameState);
                 } catch (Throwable t) {
-                    saboteurCLIView.printError(t);
+                    saboteurView.printError(t);
                     return false;
                 }
-                saboteurCLIView.printPassTurn();
-                saboteurCLIView.printHand();
+                saboteurView.printPassTurn();
+                saboteurView.printHand();
                 break;
             case 1:
-                selectedHandIndex = saboteurCLIView.selectCardToPlay();
-                SaboteurCard c;
-                try {
-                    c = currentPlayer.getHand().getCardAt(selectedHandIndex);
-                } catch (IndexOutOfBoundsException e) {
-                    saboteurCLIView.printWrongIndex();
+                if (!gameState.setSelectedHandIndex(saboteurView.selectCardToPutToTrash())) {
+                    saboteurView.printWrongIndex();
                     return false;
                 }
+                SaboteurCard c = gameState.getCurrentPlayer().getHand().getCardAt(gameState.getSelectedHandIndex());
                 if (c instanceof SaboteurTile || c instanceof BombCard) {
-                    selectedCoordinate = saboteurCLIView.selectCoordinate();
+                    gameState.setSelectedCoordinate(saboteurView.selectCoordinate());
                     try {
-                        currentPlayer.takeTurn(
+                        gameState.getCurrentPlayer().takeTurn(
                                 c instanceof SaboteurTile ? Action.PLAY_PATH_CARD : Action.PLAY_BOMB_CARD,
-                                this);
+                                gameState);
                     } catch (Throwable t) {
-                        saboteurCLIView.printError(t);
+                        saboteurView.printError(t);
                         return false;
                     }
                 }
                 if (c instanceof BlockCard || c instanceof RepairCard) {
-                    int selectedPlayerIndex = saboteurCLIView.selectPlayer();
-                    try {
-                        selectedPlayer = players.get(selectedPlayerIndex);
-                    } catch (IndexOutOfBoundsException e) {
-                        saboteurCLIView.printWrongIndex();
+                    if (!gameState.setSelectedPlayer(saboteurView.selectPlayer())) {
+                        saboteurView.printWrongIndex();
                         return false;
                     }
                     try {
-                        currentPlayer.takeTurn(
+                        gameState.getCurrentPlayer().takeTurn(
                                 c instanceof BlockCard ? Action.PLAY_BLOCK_CARD : Action.PLAY_REPAIR_CARD,
-                                this);
+                                gameState);
                     } catch (Throwable t) {
-                        saboteurCLIView.printError(t);
+                        saboteurView.printError(t);
                         return false;
                     }
                 }
                 break;
             default:
-                saboteurCLIView.printWrongAction();
+                saboteurView.printWrongAction();
                 return false;
         }
         return true;
@@ -170,16 +109,16 @@ public class SaboteurGameController {
 
     public void play() {
         while (true) {
-            for (SaboteurPlayer player : players) {
-                currentPlayer = player;
+            for (SaboteurPlayer player : gameState.getPlayers()) {
+                gameState.setCurrentPlayer(player);
                 boolean validPlay = false;
                 while (!validPlay) {
                     if (takeTurn())
                         validPlay = true;
                 }
-                if (currentPlayer.hasWon()) {
-                    saboteurCLIView.printPlayerWon();
-                    saboteurCLIView.printPlayers();
+                if (gameState.getCurrentPlayer().hasWon()) {
+                    saboteurView.printPlayerWon();
+                    saboteurView.printPlayers();
                     return; // Ends the game
                 }
             }

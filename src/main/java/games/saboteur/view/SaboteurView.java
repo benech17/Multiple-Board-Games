@@ -1,8 +1,11 @@
 package games.saboteur.view;
 
 import games.common.model.board.Coordinate;
+import games.saboteur.SaboteurGameState;
 
-public interface SaboteurCLIView {
+public interface SaboteurView {
+    void setGameState(SaboteurGameState gameState);
+
     void printPassTurn();
 
     void printError(Throwable t);
@@ -32,4 +35,6 @@ public interface SaboteurCLIView {
     void printBlockCards();
 
     void printBoard();
+
+    int getNbPlayers();
 }
