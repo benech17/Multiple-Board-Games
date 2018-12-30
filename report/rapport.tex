@@ -36,9 +36,13 @@ entre eux et permettent de développer des jeux de plateau dans la plus grande
 généralité. Ce framework devait être facilement étendu pour implémenter un
 nouveau jeu.
 
+Aussitot le projet entamé, il nous a paru evident de mettre en place un gitlab afin de collaborer 
+au mieux à deux , en ayant un accès aux dernieres versions de codes mises à jour par l'un d'entre nous,
+mais aussi avoir une sauvegarde des états du projet au fur et à mesure de notre avancée.
 Nous avons codé tous les jeux demandés: dominos que l'on assemble pour former
-une chaîne, dominos gomettes que l'on assemble pour former une chaîne avec des
-branches, un puzzle ainsi que le jeu du saboteur.
+une chaîne linéaire, dominos gomettes que l'on assemble pour former une chaîne avec des
+branches(dans le plan), un puzzle ainsi que le jeu du saboteur qui est un veritable jeu de 
+société demandant plus de strategie de la part des joueurs.
 
 %Tip : Penser à comment tu veux agencer tes pièces, quelles structures
 %de données ça implique, ce que tu veux pouvoir faire, dans quelles
@@ -52,11 +56,14 @@ Ce sont les composants de base de notre framework. Chacun de ces objets est
 éventuellement étendu pour ajouter ou redéfinir des comportements.
 
 Chaque jeu adopte la structure imposée par le framework.
+Nous avons essaye d'exploiter au maximum les concepts étudiés ainsi que des evenements
+pour interagir avec la vue.
+
 
 \subsection{Présentation du framework}
 
-%%Ajouter diagramme de classes du framework
 
+%%Ajouter diagramme de classes du framework
 \subsection{Dominos simples et avec gommettes}
 Nous avons commencé par implémenter le jeu des dominos simples à l'aide d'une
 \texttt{ArrayList}, les pièces étaient ajoutées aux extrémitées de la liste. Une
@@ -79,33 +86,76 @@ des pièces rectangulaires sur un plateau si leurs côtés se correspondent.
 
 %
 
-
 \subsection{Saboteur et puzzle}
 
 Après avoir codé le jeu des dominos simples nous avons réalisé qu'il serait plus
-intéressant d'implémenter le jeu du saboteur car une fois écrit nous pourrions
-réutiliser beaucoup de code. C'est au cours du développement de ce jeu que nous
+intéressant d'implémenter le jeu du saboteur car son implementation representait l'implementation demandant le plus 
+de reflexion et donc de temps de part sa complexité de jeu (verifier quatres cotés d'une carte ainsi que la connexion 
+de ces chemins, plusieurs types de cartes permettant de bloquer/debloquer un autre joueur).
+Une fois écrit nous avons pu 
+réutiliser beaucoup de code. 
+C'est au cours du développement de ce jeu que nous
 avons développé une base de code commune réutilisable et facilement extensible
-pour chaque jeu.
+pour chaque jeu. Les autres jeux etant toujours des jeux de plateaux, mais en  une version
+simplifiée.
+
 
 \subsection{Pattern MVC}
 
 L'architecture modèle-vue-contrôleur à été implémentée pour les dominos simples
-et le jeu du saboteur.
+et le jeu du saboteur.C'est cette architecture qui nous a paru la plus judicieuse et la plus efficace,
+comme vue en cours puisqu'il permet une implementation plus simple,séparée et épurée.
+Le code est d'autant plus compréhensible et lisible.
 
 \section{Difficultés rencontrées}
 
 Lors du développement nous avons réécrit à plusieurs reprises certaines
-méthodes, ce qui introduisait quelques fois de nouveaux bugs. C'est pourquoi
+méthodes ainsi que certains aspects de notre modélisation,
+ce qui introduisait quelques fois de nouveaux bugs. C'est pourquoi
 nous avons écrit des tests unitaires à l'aide de la librairie jUnit que l'on lance à
 chaque modification pour identifier toute régression dans le code.
 
-Nous nous sommes également servi du gestionnaire de version git pour sauvegarder
-des états du projet au fur et à mesure et collaborer à deux.
+l'implementation du jeu du saboteur nous a demande un certain temps avant de parvenir
+au resultat exigé .L'utilisation d'Enums pour les cartes Path ainsi que l'utilisation de 
+classes abstraites, d'interfaces et d'heritages ,nous a finalement permit de surmonter
+ces quelques (mais legers) obstacles.
+
+Cependant, nous sommes d'accord pour admettre que la tache qui nous a paru la plus compliquée a été 
+de mettre en place une interface graphique. En effet, malgrè que nous soyons habitués à utiliser les concepts 
+d'heritage,d'interfaces,de classes abstraites,de programmation orientée objet,d'exceptions ou encore de généricité, 
+nous n'avions que peu de connaissances en Interface graphiques.Finalement, la documentation
+Java et de nombreuses heures de tests successifs et de discussions dans des Forums,
+nous ont permit de vous presenter cette interface-ci, qui peut etre largement ameliorée.
+
+Malgrès tout, il est evident que ces difficultés rencontrées n'ont été que bénéfique pour nous,
+nous ont permit d'en apprendre d'avantage sur l'utilisation de l'intégralité des concepts étudiées ce semestre 
+en cours de Programmation Orientée Objet(et bien plus encore), et surtout sur l'implementation d'une interface Graphique.
+
 
 \section{Pistes d'amélioration}
 
+Pour ce qui est de l'interface graphique, nous avons essayé de permettre aux joueurs d'effectuer n'importe quelle
+action , en les laissant dans un premier temps ,cliquer sur la carte de leur main à jouer , puis dans un second,
+à cliquer sur la case ou joueur où effectuer l'action , ces derniers rémarqués par un changement de bordures (rouge).
+Tout ceci evidemment gerer par des ActionListeners.
+Malheureusement, après plusieurs essaies et tirages de cheveux pour bien limiter à 2 clicks (le premier dans la main et le second ailleurs),
+ainsi que de recuperer la carte au click associé, nous avons préféré une solution "plus simple" qui est de recuperer les valeurs à partir de pop-up, 
+lancées par des fonctions display(), grace à l'utilisation de JOptionPane.
+Il est evident que cet echec est une grande frustation pour nous,et nous savons qu'avec un peu plus de temps, nous aurions trouvées le bon moyen
+d'y parvenir.
+Nous comptons chercher ce moyen après la date de rendue de ce projet pour notre apprentissage personnel.
 
+
+\section{Pistes supplementaires}
+  Nous aurions apprecié implementer bien d'autres options supplémentaires comme par exemple ,
+  permettre à l'utilisateur d'effectuer des sauvegardes de parties puis de les charger,
+  ou encore mettre en place des petites animations dans un background (gifs)
+  mais faute de temps, nous nous sommes vue obligés de nous concentrer principalement,
+  sur ce ce qui été exigé.
+ 
+  Nous avons pu tout de meme ajouter une piste audio (en boucle) lors de l'ouverture de l'interface graphique.
+  
+  
 \section{Conclusion}
 
 Nous avons développé le projet itérativement en travaillant à plusieurs niveaux
@@ -113,7 +163,8 @@ d'abstraction: sur chaque jeu et le framework. Le développement du framework
 était guidé par les besoins de chaque jeu et réciproquement le développement
 d'un jeu dépendait directement de l'organisation du framework. Ainsi, si une
 extension du code était compliquée à écrire, nous revoyions le modèle. 
-Cet aspect du projet à été de loin le plus intéressant et enrichissant.
+Cet aspect du projet à été de loin le plus intéressant et enrichissant puisqu'il
+nous a permit remettre questions nos choix, de les rectifier et perseverer.
 
 Il était de plus très plaisant de remarquer que beaucoup de concepts se
 retrouvaient dans les jeux à implémenter, ce qui nous a conduit à introduire de
@@ -121,6 +172,10 @@ nouveaux types qui ont grandement facilité le développement des jeux.
 
 Nous avons également apprécié la liberté qui nous a été donnée au cours de ce projet
 quant aux choix de l'implémentation, les consignes laissant parfois beaucoup de choix.
+
+Nous avons pris ce projet très à coeur et y avons consacré de nombreux jours et malgrè que 
+nous savons qu'il est criticable et imparfait en certains points, nous sommes fier de 
+vous presenter le fruit de notre travail.
 
 
 \end{document}
