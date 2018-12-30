@@ -11,6 +11,7 @@ import games.saboteur.cards.actioncard.RepairCard;
 import games.saboteur.cards.pathcard.PathCard;
 import games.saboteur.cards.pathcard.SaboteurTile;
 import games.saboteur.view.SaboteurCLIView;
+import games.saboteur.view.SaboteurCLIViewImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,7 @@ public class SaboteurGameController {
 
         trash = new Stack<>();
 
-        saboteurCLIView = new SaboteurCLIView(this);
+        saboteurCLIView = new SaboteurCLIViewImpl(this);
     }
 
     public static void main(String[] args) {
