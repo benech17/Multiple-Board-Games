@@ -1,6 +1,4 @@
-package games.core.view;
-
-import games.saboteur.SaboteurGameController;
+package games.common.view;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,8 +7,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import static java.awt.Color.*;
-import static java.awt.GridBagConstraints.*;
+import static java.awt.Color.white;
+import static java.awt.GridBagConstraints.LAST_LINE_END;
+import static java.awt.GridBagConstraints.RELATIVE;
 
 public class ChoicePlayers extends JFrame {
         private Container content;

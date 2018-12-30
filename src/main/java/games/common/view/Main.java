@@ -1,12 +1,9 @@
-package games.core.view;
+package games.common.view;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.*;
-import java.io.*;
-import javax.imageio.*;
 
 
 

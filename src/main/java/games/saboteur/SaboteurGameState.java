@@ -10,6 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+
+/**
+ * The model which provides access to the data
+ * (may provide mechanisms for registering listeners for notification of
+ * changes to the data)
+ * <p>
+ * Has no knowledge of the presentation of the data
+ * It knows nothing at all about the view and the controller
+ */
 public class SaboteurGameState {
     private SaboteurBoard board;
     private int nbPlayers;

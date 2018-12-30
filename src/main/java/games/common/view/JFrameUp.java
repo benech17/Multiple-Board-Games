@@ -1,10 +1,7 @@
-package games.core.view;
+package games.common.view;
 
 import javax.swing.*;
-import javax.imageio.*;
 import java.awt.*;
-import java.awt.image.*;
-import java.io.*;
 
 public class JFrameUp extends JFrame {
      String image="landscape.png";
