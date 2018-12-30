@@ -306,7 +306,49 @@ public class SaboteurScreen extends JFrame {
 //        });
 //    }
 //
-//    public void display(String s) {
-//        javax.swing.SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(null, s, "Attention", JOptionPane.INFORMATION_MESSAGE));
-//    }
+
+private SaboteurGameState gameState;
+
+
+    public void display(String s) {
+        javax.swing.SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(null, s, "Attention", JOptionPane.INFORMATION_MESSAGE));
+    }
+    public String displayInput(String message,String initialSelectionValue){
+        String res =(String) JOptionPane.showInputDialog(null,message,initialSelectionValue);
+        if(res!=null) {
+            return res ;
+        } else {
+            display("Cannot affect null value, please enter a correct input");
+            return displayInput(message, initialSelectionValue);
+        }
+        //public String displayChoice(String message,String initialValue,String[] possibilities){
+          //  String res=(String)JOptionPane.showInputDialog(null,message,titre,possibilities,initialValue)
+        //}
+    }
+
+    @Override
+    public void printWrongAction() {
+       display("Please enter a valid integer (either 0 or 1)");
+    }
+    @Override
+    public int chooseAction(){
+        String res=displayInput("Choose your action (0 : pass, 1 : play a card) : ","0");
+        return  Integer.parseInt(res);
+    }
+    @Override
+    public void printWrongIndex() {
+        display("Wrong index, please retry");
+    }
+
+    @Override
+    public void printError(Throwable t){
+     display(t.toString());
+    }
+
+    
+
+    @Override
+    public  void printPlayerWon(){
+     display(gameState.getCurrentPlayer()+" has won !");
+    }
 }
