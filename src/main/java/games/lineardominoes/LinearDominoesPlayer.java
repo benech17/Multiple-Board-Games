@@ -26,6 +26,7 @@ public class LinearDominoesPlayer extends PlayerImpl<LinearDominoTile> {
                 throw new DominoesDontFitException("Dominoes don't fit together, please try again");
         }
         hand.drawCard(game.getSelectedHandIndex());
+        if (hand.getHand().isEmpty()) hasWon = true;
     }
 
     public boolean isBlocked(LinearDominoesGameState game) {

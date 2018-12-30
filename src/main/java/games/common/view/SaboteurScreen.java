@@ -1,5 +1,7 @@
 package games.common.view;
 
+import games.saboteur.SaboteurGameState;
+
 import javax.swing.*;
 
 
@@ -326,28 +328,23 @@ private SaboteurGameState gameState;
         //}
     }
 
-    @Override
     public void printWrongAction() {
        display("Please enter a valid integer (either 0 or 1)");
     }
-    @Override
     public int chooseAction(){
         String res=displayInput("Choose your action (0 : pass, 1 : play a card) : ","0");
         return  Integer.parseInt(res);
     }
-    @Override
     public void printWrongIndex() {
         display("Wrong index, please retry");
     }
 
-    @Override
     public void printError(Throwable t){
      display(t.toString());
     }
 
     
 
-    @Override
     public  void printPlayerWon(){
      display(gameState.getCurrentPlayer()+" has won !");
     }

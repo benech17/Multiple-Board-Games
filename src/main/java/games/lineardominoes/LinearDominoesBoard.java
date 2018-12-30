@@ -14,7 +14,7 @@ public class LinearDominoesBoard {
     private List<LinearDominoTile> tiles;
 
     public LinearDominoesBoard(LinearDominoTile t) {
-        super();
+        this();
         tiles.add(t);
     }
 
@@ -61,7 +61,7 @@ public class LinearDominoesBoard {
             return false;
         } else {
             if (t.fitsWith(getRightEnd(), Direction.LEFT)) {
-                tiles.add(tiles.size() - 1, t);
+                tiles.add(t);
                 return true;
             }
             return false;

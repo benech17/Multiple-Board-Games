@@ -39,4 +39,8 @@ public class LinearDominoesBoardTest {
         );
     }
 
+    @Test
+    public void test2() {
+
+    }
 }

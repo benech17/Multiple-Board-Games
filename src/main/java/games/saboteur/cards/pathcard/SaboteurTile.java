@@ -55,8 +55,6 @@ public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard
     public boolean fitsWith(Tile t, Direction d) {
         // We can't put a card if the other has paths
         // which don't connect
-        System.out.println(super.fitsWith(t, d));
-        System.out.println(((SaboteurTile) t).hasPath);
         return super.fitsWith(t, d) && ((SaboteurTile) t).hasPath;
         // How could we avoid that cast? can it raise errors?
     }
