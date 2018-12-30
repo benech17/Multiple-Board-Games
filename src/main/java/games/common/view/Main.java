@@ -1,21 +1,23 @@
-package games.common.view;
+package games.core.view;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.*;
+import java.io.*;
+import javax.imageio.*;
 
 
-public class Main extends JFrame {
-    private JFrame mainMenu;
 
+public class Main extends JFrameUp {
+    private JFrameUp mainMenu;
 
     public Main() {
 
-        mainMenu = new JFrame();
+        mainMenu = new JFrameUp();
+        //mainMenu.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("./landscape.png")))));
         mainMenu.setTitle("Plateforme de Jeux");
-        mainMenu.setBackground(Color.BLACK);
-        //setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()-80, (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight());
         mainMenu.setExtendedState(MAXIMIZED_BOTH | getExtendedState());
         mainMenu.setResizable(false);
         mainMenu.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -23,7 +25,7 @@ public class Main extends JFrame {
         mainMenu.setLocationRelativeTo(null);  //centrer
 
         Bouton DominoButton = new Bouton("Domino", "menu");
-        DominoButton.setBounds(200, 200, 400, 150);
+        DominoButton.setBounds(0,0,400, 150);
         DominoButton.setLocation(700, 150);
         mainMenu.getContentPane().add(DominoButton);
 
@@ -50,15 +52,22 @@ public class Main extends JFrame {
         welcome.setBounds(100, 50, 800, 80);
         mainMenu.getContentPane().add(welcome);
 
-
         SaboteurButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                SaboteurScreen saboteur = new SaboteurScreen();
+                ChoicePlayers choicePlayers =new ChoicePlayers();
                 mainMenu.setVisible(false);
-
             }
         });
+
+        //SaboteurButton.addMouseListener(new MouseAdapter() {
+            //@Override
+            //public void mouseClicked(MouseEvent e) {
+          //      SaboteurScreen saboteur = new SaboteurScreen();
+              //  mainMenu.setVisible(false);
+//
+  ///          }
+     //   });
 
     }
 

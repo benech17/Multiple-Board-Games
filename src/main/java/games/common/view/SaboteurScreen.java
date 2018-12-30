@@ -1,21 +1,34 @@
-package games.common.view;
+package games.core.view;
+
+import games.saboteur.Action;
+import games.saboteur.SaboteurGameController;
+import games.saboteur.SaboteurHand;
+import games.saboteur.cards.SaboteurCard;
+import games.saboteur.cards.actioncard.ActionCard;
+import games.saboteur.cards.actioncard.BlockCard;
+import games.saboteur.cards.actioncard.RepairCard;
+import games.saboteur.cards.pathcard.PathCard;
+import games.saboteur.cards.pathcard.SaboteurTile;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 
 public class SaboteurScreen extends JFrame {
-    public SaboteurScreen() {
-        this.setTitle("Saboteur");
+    private int nbPlayers;
 
+    public SaboteurScreen() {
+        System.out.println(nbPlayers);
+        this.setTitle("Saboteur");
         this.setExtendedState(MAXIMIZED_BOTH | getExtendedState());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setMinimumSize(new Dimension(600, 600));
 
 
-        JPanel plateau = new JPanel();
-        plateau.setBackground(Color.white);
+        JPanelUp plateau = new JPanelUp("/images/saboteur/background.jpg/");
+
         plateau.setMinimumSize(new Dimension(600, 600));
         plateau.setPreferredSize(new Dimension(1500, 500));
 
@@ -48,7 +61,7 @@ public class SaboteurScreen extends JFrame {
         Bouton n5 = new Bouton("test", "default");
         plateau.add(n5);
 
-        Bouton n6 = new Bouton("test", "default");
+        Bouton n6 = new Bouton("default");
         plateau.add(n6);
 
         Bouton n7 = new Bouton("test", "default");
@@ -197,49 +210,78 @@ public class SaboteurScreen extends JFrame {
         cell2.setBackground(Color.red);
         cell2.setPreferredSize(new Dimension(200, 500));
 
-        JPanel main = new JPanel();
+        JPanelUp main = new JPanelUp("/images/saboteur/background.png/");
         main.setLayout(new GridBagLayout());
         GridBagConstraints gb = new GridBagConstraints();
         gb.insets = new Insets(10, 10, 10, 10);
         gb.gridx = 0;
         gb.gridy = 0;
 
-        Bouton test = new Bouton("test", "path");
-        test.setPreferredSize(new Dimension(100, 100));
-        main.add(test, gb);
-        gb.gridx = 1;
+        SaboteurGameController sb = new SaboteurGameController(3);
+        sb.printPlayers();
+        sb.play();
+        sb.printHand();
 
-        Bouton test1 = new Bouton("test", "path");
-        test1.setPreferredSize(new Dimension(100, 100));
-        main.add(test1, gb);
 
-        gb.gridx = 2;
-        Bouton test2 = new Bouton("test", "path");
-        test2.setPreferredSize(new Dimension(100, 100));
+        SaboteurHand hand = (SaboteurHand) sb.getCurrentPlayer().getHand();
+        int i = 0;
+        for (SaboteurCard c : hand.getHand()) {
+            System.out.println(i + " - " + c.toString());
+            //System.out.println(c instanceof  RepairCard);
+            //System.out.println(c instanceof BlockCard);;
+            //System.out.println(c instanceof SaboteurTile);
+        }
+        for (SaboteurCard c : hand.getHand()) {
+            if (c instanceof RepairCard) {
+                Bouton handC = new Bouton("", "pass");
 
-        main.add(test2, gb);
-        Bouton test3 = new Bouton("test", "path");
-        test3.setPreferredSize(new Dimension(100, 100));
-        gb.gridx = 3;
-        main.add(test3, gb);
+                handC.setPreferredSize(new Dimension(100, 100));
+                gb.gridx = i;
+                main.add(handC, gb);
+                System.out.println("rep");
+                i++;
+            } else {
+                if (c instanceof BlockCard) {
+                    Bouton handC = new Bouton("", "start");
+                    System.out.println(((BlockCard) c).getType());
+                    handC.setPreferredSize(new Dimension(100, 100));
+                    gb.gridx = i;
+                    main.add(handC, gb);
+                    System.out.println("bl");
+                    i++;
+                } else {
+                    if (c instanceof SaboteurTile) {
+                        Bouton handC = new Bouton("", "path");
+                        handC.setPreferredSize(new Dimension(100, 100));
+                        gb.gridx = i;
+                        main.add(handC, gb);
+                        System.out.println("ti");
+                        i++;
+                    }
+                }
+            }
+        }
 
-        Bouton test4 = new Bouton("test", "default");
-        test4.setPreferredSize(new Dimension(100, 100));
-        gb.gridx = 4;
-        main.add(test4, gb);
+
+        gb.gridx=5;gb.insets=new Insets(0,50,0,10);
+        JLabel current = new JLabel("Current Player : ");
+        current.setFont(new Font(Font.DIALOG_INPUT,Font.ITALIC,15));
+        main.add(current,gb);
         main.setBackground(Color.green);
         main.setPreferredSize(new Dimension(1500, 200));
 
 
-        JPanel cell4 = new JPanel();
-        cell4.setBackground(Color.pink);
-        cell4.setPreferredSize(new Dimension(200, 200));
+        JPanel trash = new JPanel();
+        trash.setPreferredSize(new Dimension(200, 200));
+        Bouton pass=new Bouton("","pass");
+        pass.setPreferredSize(new Dimension(180,170));
+        pass.setBorder(null);
+        trash.add(pass);
 
 
         //Le conteneur principal,penser a tout mettre dans un conteneur principal
-        JPanel content = new JPanel();
-        this.setLayout(new GridBagLayout());
 
+        this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(15, 15, 15, 15);
 
@@ -256,18 +298,22 @@ public class SaboteurScreen extends JFrame {
 
         gbc.gridy = 1;
         gbc.gridx = 0;
-        add(cell4, gbc);
+        add(trash, gbc);
 
         this.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            try {
-                SaboteurScreen frame = new SaboteurScreen();
 
-            } catch (Exception e) {
-                e.printStackTrace();
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    SaboteurScreen frame = new SaboteurScreen();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
