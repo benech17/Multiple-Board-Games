@@ -1,5 +1,6 @@
 package games.saboteur;
 
+import games.common.controller.GameController;
 import games.common.model.board.Coordinate;
 import games.saboteur.cards.BombCard;
 import games.saboteur.cards.SaboteurCard;
@@ -16,7 +17,7 @@ import games.saboteur.view.SaboteurView;
  * from the view and updates the model as a result.
  * Reciprocally it refreshes the view as a result of a change of the model
  */
-public class SaboteurGameController {
+public class SaboteurGameController extends GameController {
     private SaboteurGameState gameState; // Game model
     private SaboteurView saboteurView; // Game view
 

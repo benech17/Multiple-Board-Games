@@ -2,7 +2,6 @@ package games.saboteur;
 
 import games.common.model.player.PlayerImpl;
 import games.saboteur.cards.SaboteurCard;
-import games.saboteur.cards.WrongCardException;
 import games.saboteur.cards.actioncard.ActionCardException;
 import games.saboteur.cards.actioncard.ActionCardType;
 import games.saboteur.cards.actioncard.BlockCard;
@@ -34,13 +33,6 @@ public class SaboteurPlayer extends PlayerImpl<SaboteurCard> {
     /**
      * Take a turn based on an action and the game state
      *
-     * @param action the action to do in the turn
-     * @param game   the game manager
-     * @throws BlockedPlayerException                                  if a blocked player attempts to play a path card
-     * @throws ActionCardException.BlockCardAlreadyAppliedException    if a player plays an already applied action card
-     * @throws ActionCardException.NoMatchingBlockCardAppliedException if a player plays a repair card that don't match a block card
-     * @throws WrongCardException                                      if the picked card don't correspond to the specified action
-     * @throws ActionCardException.UnsupportedActionException          if the action provided is not handled
      */
     public void takeTurn(Action action, SaboteurGameState game)
             throws BlockedPlayerException,

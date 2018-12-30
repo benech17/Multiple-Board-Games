@@ -4,13 +4,13 @@ import games.common.model.card.tile.TileImpl;
 import games.common.model.enums.Direction;
 
 
-public class DominoTile extends TileImpl<DominoSide> implements Comparable<DominoTile> {
+public class LinearDominoTile extends TileImpl<LinearDominoSide> implements Comparable<LinearDominoTile> {
     private final int weight;
     private String name;
 
-    public DominoTile(int leftValue, int rightValue) {
-        sides.put(Direction.LEFT, new DominoSide(leftValue));
-        sides.put(Direction.RIGHT, new DominoSide(rightValue));
+    public LinearDominoTile(int leftValue, int rightValue) {
+        sides.put(Direction.LEFT, new LinearDominoSide(leftValue));
+        sides.put(Direction.RIGHT, new LinearDominoSide(rightValue));
         weight = rightValue + leftValue;
         setName();
     }
@@ -26,7 +26,7 @@ public class DominoTile extends TileImpl<DominoSide> implements Comparable<Domin
         return weight;
     }
 
-    public int compareTo(DominoTile o) {
+    public int compareTo(LinearDominoTile o) {
         if (o == null)
             throw new NullPointerException();
         return Integer.compare(weight, o.weight);
@@ -47,7 +47,7 @@ public class DominoTile extends TileImpl<DominoSide> implements Comparable<Domin
     }
 
     /**
-     * Returns true if the current instance of DominoTile and the domino
+     * Returns true if the current instance of LinearDominoTile and the domino
      * tile t have a side in common. Flips the current instance if necessary
      * according to the direction d.
      *
@@ -57,7 +57,7 @@ public class DominoTile extends TileImpl<DominoSide> implements Comparable<Domin
      * @return true if the current domino tile and the domino tile t share the
      * same side
      */
-    public boolean fitsWith(DominoTile t, Direction d) {
+    public boolean fitsWith(LinearDominoTile t, Direction d) {
         if (t == null) return false;
         switch (d) {
             case LEFT:

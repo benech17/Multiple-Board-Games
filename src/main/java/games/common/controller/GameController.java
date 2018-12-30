@@ -1,6 +1,6 @@
 package games.common.controller;
 
-public abstract class GameManager {
+public abstract class GameController {
 
     public abstract void play();
 

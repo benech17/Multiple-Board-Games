@@ -5,10 +5,10 @@ import games.common.model.card.tile.Side;
 import java.util.Objects;
 
 
-public class DominoSide extends Side {
+public class LinearDominoSide extends Side {
     private final int value;
 
-    public DominoSide(int value) {
+    public LinearDominoSide(int value) {
         this.value = value;
     }
 
@@ -31,7 +31,7 @@ public class DominoSide extends Side {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DominoSide that = (DominoSide) o;
+        LinearDominoSide that = (LinearDominoSide) o;
         return value == that.value;
     }
 

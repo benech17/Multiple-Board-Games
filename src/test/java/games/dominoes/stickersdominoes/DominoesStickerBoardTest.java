@@ -40,6 +40,35 @@ public class DominoesStickerBoardTest {
                         new DominoStickerPiece(Shape.STAR, Color.YELLOW,
                                 Shape.DISK, Color.RED, Direction.BOTTOM))
         );
+
+        assertTrue(
+                b.putTileAt(new Coordinate(5, 5),
+                        new DominoStickerPiece(Shape.STAR, Color.RED,
+                                Shape.DISK, Color.RED, Direction.RIGHT))
+        );
+        System.out.println(b);
+        assertTrue(
+                b.putTileAt(new Coordinate(5, 7),
+                        new DominoStickerPiece(Shape.DISK, Color.YELLOW,
+                                Shape.DISK, Color.RED, Direction.BOTTOM))
+        );
+        System.out.println(b);
+        assertTrue(
+                b.putTileAt(new Coordinate(3, 3),
+                        new DominoStickerPiece(Shape.HEART, Color.YELLOW,
+                                Shape.DISK, Color.RED, Direction.TOP))
+        );
+        assertTrue(
+                b.putTileAt(new Coordinate(4, 6),
+                        new DominoStickerPiece(Shape.DISK, Color.YELLOW,
+                                Shape.DISK, Color.RED, Direction.TOP))
+        );
+        System.out.println(b);
+        assertFalse(
+                b.putTileAt(new Coordinate(6, 6),
+                        new DominoStickerPiece(Shape.DISK, Color.YELLOW,
+                                Shape.DISK, Color.RED, Direction.BOTTOM))
+        );
     }
 
 }
