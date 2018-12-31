@@ -30,6 +30,14 @@ public class BoardImpl<T extends Tile> implements Board<T> {
         }
     }
 
+    public int getHeight() {
+        return height;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
     public List<List<T>> getBoard() {
         return board;
     }

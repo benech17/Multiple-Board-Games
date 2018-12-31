@@ -1,11 +1,16 @@
 package games.common.view;
 
+import games.common.model.board.Coordinate;
+import games.saboteur.SaboteurBoard;
 import games.saboteur.SaboteurGameState;
 import games.saboteur.SaboteurHand;
 import games.saboteur.cards.SaboteurCard;
 import games.saboteur.cards.actioncard.BlockCard;
 import games.saboteur.cards.actioncard.RepairCard;
+import games.saboteur.cards.pathcard.GoalCard;
 import games.saboteur.cards.pathcard.SaboteurTile;
+import games.saboteur.cards.pathcard.StoneCard;
+import games.saboteur.cards.pathcard.TreasureCard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,6 +22,9 @@ public class SaboteurScreen extends JFrame {
 
 
     public SaboteurScreen() {
+
+        gameState = new SaboteurGameState(3);
+
         System.out.println(nbPlayers);
         this.setTitle("Saboteur");
         this.setExtendedState(MAXIMIZED_BOTH | getExtendedState());
@@ -33,7 +41,23 @@ public class SaboteurScreen extends JFrame {
         plateau.setLayout(new GridLayout(5, 9, 15, 15));
 
 
-        //plateau.add(new Bouton("a","start") ,19) ;
+        SaboteurBoard board = gameState.getBoard();
+
+        SaboteurTile t;
+        for (int i = 0; i < board.getHeight(); i++) {
+            for (int j = 0; j < board.getLength(); j++) {
+                t = board.getTileAt(new Coordinate(i, j));
+                if (t instanceof GoalCard) {
+                    if (t instanceof TreasureCard) {
+                        plateau.add(new Bouton("a", "goal"), i);
+                    }
+                    if (t instanceof StoneCard) {
+                        plateau.add(new Bouton("a", "goal"), i);
+                    }
+                }
+                plateau.add(new Bouton("a", "default"));
+            }
+        }
 
         //for(int i=1;i<19;i++){
 
@@ -43,165 +67,6 @@ public class SaboteurScreen extends JFrame {
         //else{
         //   plateau.add(new Bouton("a","d"),i);
 
-
-        Bouton n1 = new Bouton("test", "default");
-        plateau.add(n1);
-
-        Bouton n2 = new Bouton("test", "default");
-        plateau.add(n2);
-
-        Bouton n3 = new Bouton("test", "default");
-        plateau.add(n3);
-
-        Bouton n4 = new Bouton("test", "default");
-        plateau.add(n4);
-
-        Bouton n5 = new Bouton("test", "default");
-        plateau.add(n5);
-
-        Bouton n6 = new Bouton("default");
-        plateau.add(n6);
-
-        Bouton n7 = new Bouton("test", "default");
-        plateau.add(n7);
-
-
-        Bouton n8 = new Bouton("test", "default");
-        plateau.add(n8);
-
-        Bouton n9 = new Bouton("test", "goal");
-        plateau.add(n9);
-
-
-        Bouton n10 = new Bouton("test", "default");
-        plateau.add(n10);
-
-        Bouton n11 = new Bouton("test", "default");
-        plateau.add(n11);
-
-        Bouton n12 = new Bouton("test", "default");
-        plateau.add(n12);
-
-        Bouton n13 = new Bouton("test", "default");
-        plateau.add(n13);
-
-
-        Bouton n14 = new Bouton("test", "default");
-        plateau.add(n14);
-
-        Bouton n15 = new Bouton("test", "default");
-        plateau.add(n15);
-
-        Bouton n16 = new Bouton("test", "default");
-        plateau.add(n16);
-
-        Bouton n17 = new Bouton("test", "default");
-        plateau.add(n17);
-
-        Bouton n18 = new Bouton("test", "default");
-        plateau.add(n18);
-
-
-        Bouton n19 = new Bouton("test", "start");
-        plateau.add(n19);
-
-        Bouton n20 = new Bouton("test", "default");
-        plateau.add(n20);
-
-
-        Bouton n21 = new Bouton("test", "default");
-        plateau.add(n21);
-
-        Bouton n22 = new Bouton("test", "default");
-        plateau.add(n22);
-
-        Bouton n23 = new Bouton("test", "default");
-        plateau.add(n23);
-
-
-        Bouton n24 = new Bouton("test", "default");
-        plateau.add(n24);
-
-
-        Bouton n25 = new Bouton("test", "default");
-        plateau.add(n25);
-
-
-        Bouton n26 = new Bouton("test", "default");
-        plateau.add(n26);
-
-
-        Bouton n27 = new Bouton("test", "goal");
-        plateau.add(n27);
-
-
-        Bouton n28 = new Bouton("test", "default");
-        plateau.add(n28);
-
-        Bouton n29 = new Bouton("test", "default");
-        plateau.add(n29);
-
-
-        Bouton n30 = new Bouton("test", "default");
-        plateau.add(n30);
-
-
-        Bouton n31 = new Bouton("test", "default");
-        plateau.add(n31);
-
-
-        Bouton n32 = new Bouton("test", "default");
-        plateau.add(n32);
-
-
-        Bouton n33 = new Bouton("test", "default");
-        plateau.add(n33);
-
-
-        Bouton n34 = new Bouton("test", "default");
-        plateau.add(n34);
-
-
-        Bouton n35 = new Bouton("test", "default");
-        plateau.add(n35);
-
-
-        Bouton n36 = new Bouton("test", "default");
-        plateau.add(n36);
-
-
-        Bouton n37 = new Bouton("test", "default");
-        plateau.add(n37);
-
-
-        Bouton n38 = new Bouton("test", "default");
-        plateau.add(n38);
-
-        Bouton n39 = new Bouton("test", "default");
-        plateau.add(n39);
-
-
-        Bouton n40 = new Bouton("test", "default");
-        plateau.add(n40);
-
-
-        Bouton n41 = new Bouton("test", "default");
-        plateau.add(n41);
-
-
-        Bouton n42 = new Bouton("test", "default");
-        plateau.add(n42);
-
-
-        Bouton n43 = new Bouton("test", "default");
-        plateau.add(n43);
-
-
-        Bouton n44 = new Bouton("test", "default");
-        plateau.add(n44);
-
-        Bouton n45 = new Bouton("test", "goal");
-        plateau.add(n45);
 
 
         JPanel cell2 = new JPanel();
@@ -220,7 +85,7 @@ public class SaboteurScreen extends JFrame {
         //printHand();
 
 
-        SaboteurHand hand = (SaboteurHand) gameState.getCurrentPlayer().getHand();
+        SaboteurHand hand = (SaboteurHand) gameState.getPlayers().get(0).getHand();
         int i = 0;
         for (SaboteurCard c : hand.getHand()) {
             System.out.println(i + " - " + c.toString());
@@ -237,25 +102,23 @@ public class SaboteurScreen extends JFrame {
                 main.add(handC, gb);
                 System.out.println("rep");
                 i++;
-            } else {
-                if (c instanceof BlockCard) {
-                    Bouton handC = new Bouton("", "start");
-                    System.out.println(((BlockCard) c).getType());
-                    handC.setPreferredSize(new Dimension(100, 100));
-                    gb.gridx = i;
-                    main.add(handC, gb);
-                    System.out.println("bl");
-                    i++;
-                } else {
-                    if (c instanceof SaboteurTile) {
-                        Bouton handC = new Bouton("", "path");
-                        handC.setPreferredSize(new Dimension(100, 100));
-                        gb.gridx = i;
-                        main.add(handC, gb);
-                        System.out.println("ti");
-                        i++;
-                    }
-                }
+            }
+            if (c instanceof BlockCard) {
+                Bouton handC = new Bouton("", "start");
+                System.out.println(((BlockCard) c).getType());
+                handC.setPreferredSize(new Dimension(100, 100));
+                gb.gridx = i;
+                main.add(handC, gb);
+                System.out.println("bl");
+                i++;
+            }
+            if (c instanceof SaboteurTile) {
+                Bouton handC = new Bouton("", "path");
+                handC.setPreferredSize(new Dimension(100, 100));
+                gb.gridx = i;
+                main.add(handC, gb);
+                System.out.println("ti");
+                i++;
             }
         }
 
