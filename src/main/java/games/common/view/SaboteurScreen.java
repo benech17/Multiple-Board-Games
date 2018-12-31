@@ -9,7 +9,7 @@ import games.saboteur.cards.actioncard.BlockCard;
 import games.saboteur.cards.actioncard.RepairCard;
 import games.saboteur.cards.pathcard.GoalCard;
 import games.saboteur.cards.pathcard.SaboteurTile;
-import games.saboteur.cards.pathcard.StoneCard;
+import games.saboteur.cards.pathcard.StartCard;
 import games.saboteur.cards.pathcard.TreasureCard;
 
 import javax.swing.*;
@@ -44,20 +44,29 @@ public class SaboteurScreen extends JFrame {
         SaboteurBoard board = gameState.getBoard();
 
         SaboteurTile t;
+        System.out.println(board.getHeight() + " " + board.getLength());
+        int id = 0;
         for (int i = 0; i < board.getHeight(); i++) {
             for (int j = 0; j < board.getLength(); j++) {
                 t = board.getTileAt(new Coordinate(i, j));
-                if (t instanceof GoalCard) {
+                System.out.println(t);
+                if (t == null) {
+                    plateau.add(new Bouton("a", "default"));
+                } else if (t instanceof StartCard) {
+                    plateau.add(new Bouton("a", "start"));
+                } else if (t instanceof GoalCard) {
                     if (t instanceof TreasureCard) {
-                        plateau.add(new Bouton("a", "goal"), i);
+                        plateau.add(new Bouton("", "goal"));
+                    } else {
+                        plateau.add(new Bouton("", "goal"));
                     }
-                    if (t instanceof StoneCard) {
-                        plateau.add(new Bouton("a", "goal"), i);
-                    }
+                } else {
+                    plateau.add(new Bouton("test", "default"));
                 }
-                plateau.add(new Bouton("a", "default"));
+                id++;
             }
         }
+        System.out.println(id);
 
         //for(int i=1;i<19;i++){
 
@@ -80,7 +89,6 @@ public class SaboteurScreen extends JFrame {
         gb.gridx = 0;
         gb.gridy = 0;
 
-        gameState = new SaboteurGameState(3);
         //printPlayers();
         //printHand();
 

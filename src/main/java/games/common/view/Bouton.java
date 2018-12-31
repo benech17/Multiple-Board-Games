@@ -41,7 +41,6 @@ public class Bouton extends JButton {
                 img = ImageIO.read(getClass().getResourceAsStream("/images/saboteur/" + file + ".png"));
             } else {
                 if (file.equals("goal")) {
-                    m++;
                     System.out.println(m);
                     img = ImageIO.read(getClass().getResourceAsStream("/images/saboteur/goal" + m + ".png"));
 
