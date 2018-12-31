@@ -183,11 +183,11 @@ public class SaboteurScreen extends JFrame implements SaboteurView {
         });
     }
 
-    public void display(String s) {
+      public void display(String s) {
         javax.swing.SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(null, s, "Attention", JOptionPane.INFORMATION_MESSAGE));
     }
 
-    public String displayInput(String message, String initialSelectionValue) {
+    public String displayInput(String message,String initialSelectionValue) {
         String res = (String) JOptionPane.showInputDialog(null, message, initialSelectionValue);
         if (res != null) {
             return res;
@@ -195,98 +195,196 @@ public class SaboteurScreen extends JFrame implements SaboteurView {
             display("Cannot affect null value, please enter a correct input");
             return displayInput(message, initialSelectionValue);
         }
-        //public String displayChoice(String message,String initialValue,String[] possibilities){
-        //  String res=(String)JOptionPane.showInputDialog(null,message,titre,possibilities,initialValue)
-        //}
     }
 
+
+
+
+
+    public String[] display2Inputs(String message){
+
+        JTextField xField = new JTextField(1);
+        JTextField yField = new JTextField(1);
+
+        JPanel myPanel = new JPanel();
+        myPanel.add(new JLabel("x:"));
+        myPanel.add(xField);
+        myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+        myPanel.add(new JLabel("y:"));
+        myPanel.add(yField);
+
+        String[] res = JOptionPane.showConfirmDialog(null,myPanel, "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+        if(res[0]==null || res[1]==null || res[0].length()=0 || res[1].length()=0){
+            display("Cannot affect null value");
+            return display2Inputs();
+        }else{
+            res[0]=xField.getText());
+            res[1]=yField.getText());
+            System.out.println(res);
+        }
+    }
+
+
+    public String displayChoice(String message,String initialValue,String[] pz,String titre){
+            String s=(String)JOptionPane.showInputDialog(null,message,titre,JOptionPane.QUESTION_MESSAGE, null, pz, "t");
+        if (s != null && s.length() > 0){
+            return s;
+        }else{
+            display("Cannot affect null value, please enter a correct input");
+            return displayChoice(message,pz,titre);
+        }
+    }
+
+    @Override
+    public void setGameState(SaboteurGameState gameState){
+        this.gameState=gameState;
+    }
+
+    @Override
+    public void printPassTurn(){
+        display("Player " + gameState.getCurrentPlayer() + " has passed their turn");
+    }
+
+    @Override
+    public void printError(Throwable t){
+        display(t.toString());
+    }
+
+    @Override
     public void printWrongAction() {
-        display("Please enter a valid integer (either 0 or 1)");
+       display("Please enter a valid integer (either 0 or 1)");
     }
 
+    String[] handChoice={0,1,2,3,4}; //constant
+
     @Override
-    public int selectCardToPutToTrash() {
-        String res = displayInput("Index of the card to put to the trash : ", "0");
+    public int selectCardToPutToTrash(){
+        String res =displayChoice("Index of the card to put to the trash : ","0",handChoice,"Which card");
         return Integer.parseInt(res);
     }
 
-    public int chooseAction() {
-        String res = displayInput("Choose your action (0 : pass, 1 : play a card) : ", "0");
+    @Override
+    public  void printPlayerWon(){
+        display(gameState.getCurrentPlayer()+" has won !");
+    }
+
+    @Override
+    public int selectPlayer(){
+        String res=displayChoice("Index of the player to put the card in front of : ","0",gameState.getPlayers(),"Which Player");
         return Integer.parseInt(res);
     }
 
     @Override
-    public void printPlayers() {
-
-    }
-
-    @Override
-    public void printHand() {
-
-    }
+   // public Coordinate selectCoordinate(){
+      //  String res = display2Inputs()
+    //}
 
     @Override
-    public void printCurrentPlayer() {
-
-    }
-
-    @Override
-    public void printBlockCards() {
-
-    }
-
-    @Override
-    public void printBoard() {
-
-    }
-
-    @Override
-    public int getNbPlayers() {
-        String res = displayInput("Enter the number of players : ", "0");
+    public int selectCardToPlay(){ //isVerify? wrongCardException
+        String res =displayChoice("Index of the card to play","0",handChoice,"Which card");
         return Integer.parseInt(res);
     }
 
+    @Override
     public void printWrongIndex() {
         display("Wrong index, please retry");
     }
 
     @Override
-    public void setGameState(SaboteurGameState gameState) {
-        this.gameState = gameState;
+    public int chooseAction(){
+        String res=displayInput("Choose your action (0 : pass, 1 : play a card) : ","0");
+        return  Integer.parseInt(res);
     }
 
     @Override
-    public void printPassTurn() {
-        display("Player " + gameState.getCurrentPlayer() + " has passed their turn");
+    public void printPlayers() {
+        JPanel infos = new JPanel();
+        infos.setPreferredSize(new Dimension(200, 500));
+        infos.setLayout(new GridBagLayout());
+        GridBagConstraints constraints=new GridBagConstraints();
+        constraints.gridx=GridBagConstraints.RELATIVE;
+        JLabel titre=new JLabel("Players :");
+        titre.setFont(new Font(Font.SANS_SERIF,Font.BOLD,25));
+        constraints.insets=new Insets(10,0,30,10);
+        infos.add(titre,constraints);
+        for(int i=0;i<gameState.getPlayers().size();i++){
+            constraints.gridy=i+1;
+            constraints.insets=new Insets(20,0,20,0);
+            JLabel p = new JLabel (i+" : "+gameState.getPlayers().get(i).toString());
+            p.setFont(new Font(Font.SANS_SERIF,Font.CENTER_BASELINE,20));
+            p.setForeground(Color.red);
+            infos.add(p,constraints);
+            if(gameState.getPlayers().get(i).getBlockCards().size()!=0) {
+                constraints.insets=new Insets(10,0,10,0);
+                JLabel blockC = new JLabel(gameState.getPlayers().get(i).getBlockCards().toString());
+                blockC.setFont(new Font(Font.SERIF, Font.ITALIC, 12));
+                blockC.setForeground(Color.darkGray);
+                infos.add(blockC, constraints);
+            }
+        }
+
+
     }
 
-    public void printError(Throwable t) {
-        display(t.toString());
-    }
+    public void printHand() {
+        System.out.println(gameState.getCurrentPlayer() + " hand (listed by index):");
+        SaboteurHand hand = (SaboteurHand) gameState.getCurrentPlayer().getHand();
+        int i = 0;
+        for (SaboteurCard c : hand.getHand()) {
+            if (c instanceof RepairCard) {
+                Bouton handC = new Bouton("", "pass");
 
-
-    public void printPlayerWon() {
-        display(gameState.getCurrentPlayer() + " has won !");
+                handC.setPreferredSize(new Dimension(100, 100));
+                gb.gridx = i;
+                main.add(handC, gb);
+                i++;
+            } else {
+                if (c instanceof BlockCard) {
+                    Bouton handC = new Bouton("", "start");
+                    handC.setPreferredSize(new Dimension(100, 100));
+                    gb.gridx = i;
+                    main.add(handC, gb);
+                    i++;
+                } else {
+                    if (c instanceof SaboteurTile) {
+                        Bouton handC = new Bouton("", "path");
+                        handC.setPreferredSize(new Dimension(100, 100));
+                        gb.gridx = i;
+                        main.add(handC, gb);
+                        i++;
+                    }
+                }
+            }
+        }
     }
 
     @Override
-    public int selectPlayer() {
-        String res = displayInput("Index of the player to put the card in front of : ", "0");
-        return Integer.parseInt(res);
+    public void printCurrentPlayer() {
+        gb.insets=new Insets(0,45,0,0);
+        gb.gridx=6;
+        JLabel currentP =gameState.getCurrentPlayer().toString();
+        currentP.setFont(new Font(Font.SANS_SERIF,Font.BOLD,25));
+        main.add(currentP,gb);
     }
 
-    @Override
-    public Coordinate selectCoordinate() {
-        String res = displayInput("Index of the player to put the card in front of : ", "0");
-        int row = Integer.parseInt(res);
-        String res2 = displayInput("Index of the player to put the card in front of : ", "0");
-        int column = Integer.parseInt(res2);
-        return new Coordinate(row, column);
+    /*
+    public void printBlockCards() {
+        System.out.print("Block cards applied to " + gameState.getCurrentPlayer() + " : ");
+        HashMap<ActionCardType, BlockCard> blockCards = gameState.getCurrentPlayer().getBlockCards();
+        for (BlockCard blockCard : blockCards.values()) {
+            System.out.print(blockCard + ", ");
+        }
+        System.out.println("\n");
     }
 
+    public void printBoard() {
+        System.out.println("The board : \n");
+        System.out.println(gameState.getBoard());
+    }*/
+
+
     @Override
-    public int selectCardToPlay() {
-        String res = displayInput("Index of the card to play : ", "0");
-        return Integer.parseInt(res);
+    public int getNbPlayers(){  //recuperer dans la fenetre choiceplayers
+        return nbPlayers;
     }
 }
