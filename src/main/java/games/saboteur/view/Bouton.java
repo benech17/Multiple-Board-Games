@@ -1,10 +1,9 @@
-package games.common.view;
+package games.saboteur.view;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.util.Objects;
 
 public class Bouton extends JButton {
     private String name;
@@ -37,37 +36,52 @@ public class Bouton extends JButton {
                 }
             });
                 //todo : reorganiser avec switch et toutes les images
-            if (Objects.equals(file, "start")) {
-                img = ImageIO.read(getClass().getResourceAsStream("/images/saboteur/" + file + ".png"));
-            } else {
-                if (file.equals("goal")) {
-                    System.out.println(m);
-                    img = ImageIO.read(getClass().getResourceAsStream("/images/saboteur/goal" + m + ".png"));
-
-                } else {
-                    if (Objects.equals(file, "pass")) {
-                        n++;
-                        img = ImageIO.read(getClass().getResourceAsStream("/images/saboteur/pass.png"));
-                    } else {
-
-                        if (Objects.equals(file, "path")) {
-                            n++;
-                            img = ImageIO.read(getClass().getResourceAsStream("/images/saboteur/path" + n + ".png"));
-                        } else {
-
-                            if (Objects.equals(file, "menu")) {
-
-                                img = ImageIO.read(getClass().getResourceAsStream("/images/menuJeu" + i + ".jpeg"));
-                                i++;
-
-                            } else {
-                                img = ImageIO.read(getClass().getResourceAsStream("/images/saboteur/default.png"));
-                                //img = ImageIO.read(new File("src/main/java/resources/images/saboteur/default.png"));
-                            }
-                        }
-                    }
-                }
+            switch (file) {
+                case "start":
+                    img = ImageIO.read(getClass().getResourceAsStream("/images/saboteur/" + file + ".png"));
+                    break;
+                case "treasure":
+                    img = ImageIO.read(getClass().getResourceAsStream("/images/saboteur/goal1.png"));
+                    break;
+                case "goal":
+                    img = ImageIO.read(getClass().getResourceAsStream("/images/saboteur/goal2.png"));
+                    break;
+                case "pass":
+                    img = ImageIO.read(getClass().getResourceAsStream("/images/saboteur/pass.png"));
+                    break;
             }
+            //img = ImageIO.read(getClass().getResourceAsStream(file));
+//            if (Objects.equals(file, "start")) {
+//                img = ImageIO.read(getClass().getResourceAsStream("/images/saboteur/" + file + ".png"));
+//            } else {
+//                if (file.equals("goal")) {
+//                    System.out.println(m);
+//                    img = ImageIO.read(getClass().getResourceAsStream("/images/saboteur/goal" + m + ".png"));
+//
+//                } else {
+//                    if (Objects.equals(file, "pass")) {
+//                        n++;
+//                        img = ImageIO.read(getClass().getResourceAsStream("/images/saboteur/pass.png"));
+//                    } else {
+//
+//                        if (Objects.equals(file, "path")) {
+//                            n++;
+//                            img = ImageIO.read(getClass().getResourceAsStream("/images/saboteur/path" + n + ".png"));
+//                        } else {
+//
+//                            if (Objects.equals(file, "menu")) {
+//
+//                                img = ImageIO.read(getClass().getResourceAsStream("/images/menuJeu" + i + ".jpeg"));
+//                                i++;
+//
+//                            } else {
+//                                img = ImageIO.read(getClass().getResourceAsStream("/images/saboteur/default.png"));
+//                                //img = ImageIO.read(new File("src/main/java/resources/images/saboteur/default.png"));
+//                            }
+//                        }
+//                    }
+//                }
+//            }
 
         } catch (IOException e) {
             e.printStackTrace();

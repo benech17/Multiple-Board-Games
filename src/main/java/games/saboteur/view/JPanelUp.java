@@ -1,4 +1,4 @@
-package games.common.view;
+package games.saboteur.view;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

@@ -1,4 +1,4 @@
-package games.common.view;
+package games.saboteur.view;
 
 import games.common.model.board.Coordinate;
 import games.saboteur.SaboteurBoard;
@@ -16,7 +16,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class SaboteurScreen extends JFrame {
+public class SaboteurScreen extends JFrame implements SaboteurView {
     private int nbPlayers;
     private SaboteurGameState gameState;
 
@@ -56,7 +56,7 @@ public class SaboteurScreen extends JFrame {
                     plateau.add(new Bouton("a", "start"));
                 } else if (t instanceof GoalCard) {
                     if (t instanceof TreasureCard) {
-                        plateau.add(new Bouton("", "goal"));
+                        plateau.add(new Bouton("", "treasure"));
                     } else {
                         plateau.add(new Bouton("", "goal"));
                     }
@@ -204,13 +204,60 @@ public class SaboteurScreen extends JFrame {
         display("Please enter a valid integer (either 0 or 1)");
     }
 
+    @Override
+    public int selectCardToPutToTrash() {
+        String res = displayInput("Index of the card to put to the trash : ", "0");
+        return Integer.parseInt(res);
+    }
+
     public int chooseAction() {
         String res = displayInput("Choose your action (0 : pass, 1 : play a card) : ", "0");
         return Integer.parseInt(res);
     }
 
+    @Override
+    public void printPlayers() {
+
+    }
+
+    @Override
+    public void printHand() {
+
+    }
+
+    @Override
+    public void printCurrentPlayer() {
+
+    }
+
+    @Override
+    public void printBlockCards() {
+
+    }
+
+    @Override
+    public void printBoard() {
+
+    }
+
+    @Override
+    public int getNbPlayers() {
+        String res = displayInput("Enter the number of players : ", "0");
+        return Integer.parseInt(res);
+    }
+
     public void printWrongIndex() {
         display("Wrong index, please retry");
+    }
+
+    @Override
+    public void setGameState(SaboteurGameState gameState) {
+        this.gameState = gameState;
+    }
+
+    @Override
+    public void printPassTurn() {
+        display("Player " + gameState.getCurrentPlayer() + " has passed their turn");
     }
 
     public void printError(Throwable t) {
@@ -220,5 +267,26 @@ public class SaboteurScreen extends JFrame {
 
     public void printPlayerWon() {
         display(gameState.getCurrentPlayer() + " has won !");
+    }
+
+    @Override
+    public int selectPlayer() {
+        String res = displayInput("Index of the player to put the card in front of : ", "0");
+        return Integer.parseInt(res);
+    }
+
+    @Override
+    public Coordinate selectCoordinate() {
+        String res = displayInput("Index of the player to put the card in front of : ", "0");
+        int row = Integer.parseInt(res);
+        String res2 = displayInput("Index of the player to put the card in front of : ", "0");
+        int column = Integer.parseInt(res2);
+        return new Coordinate(row, column);
+    }
+
+    @Override
+    public int selectCardToPlay() {
+        String res = displayInput("Index of the card to play : ", "0");
+        return Integer.parseInt(res);
     }
 }
