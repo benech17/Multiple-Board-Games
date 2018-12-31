@@ -31,7 +31,7 @@ public interface Tile<S extends Side> {
 
     /**
      * Returns true if the current instance of Tile and the Tile t
-     * fir together according to a rule.
+     * fit together according to a rule.
      *
      * @param t         a tile adjacent to the current tile
      * @param d         the position of the tile t with respect to the current tile

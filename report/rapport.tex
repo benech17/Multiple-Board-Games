@@ -36,17 +36,13 @@ entre eux et permettent de développer des jeux de plateau dans la plus grande
 généralité. Ce framework devait être facilement étendu pour implémenter un
 nouveau jeu.
 
-Aussitot le projet entamé, il nous a paru evident de mettre en place un gitlab afin de collaborer 
+Aussitot le projet entamé, nous avons mis en place un dépot gitlab afin de collaborer 
 au mieux à deux , en ayant un accès aux dernieres versions de codes mises à jour par l'un d'entre nous,
 mais aussi avoir une sauvegarde des états du projet au fur et à mesure de notre avancée.
 Nous avons codé tous les jeux demandés: dominos que l'on assemble pour former
 une chaîne linéaire, dominos gomettes que l'on assemble pour former une chaîne avec des
-branches(dans le plan), un puzzle ainsi que le jeu du saboteur qui est un veritable jeu de 
+branches (dans le plan), un puzzle ainsi que le jeu du saboteur qui est un veritable jeu de 
 société demandant plus de strategie de la part des joueurs.
-
-%Tip : Penser à comment tu veux agencer tes pièces, quelles structures
-%de données ça implique, ce que tu veux pouvoir faire, dans quelles
-%conditions, quel impact ça aurait sur le reste, etc.
 
 \section{Modélisation}
 
@@ -56,33 +52,83 @@ Ce sont les composants de base de notre framework. Chacun de ces objets est
 éventuellement étendu pour ajouter ou redéfinir des comportements.
 
 Chaque jeu adopte la structure imposée par le framework.
-Nous avons essaye d'exploiter au maximum les concepts étudiés ainsi que des evenements
-pour interagir avec la vue.
 
+Nous nous sommes toujours questionné sur la manière dont on souhaite agencer les
+pièces, les données que ça implique, ce que l'on souhaite pouvoir faire, dans
+quelles conditions, quel impact ça aurait sur le reste, etc.
+
+Nous avons de plus essaye d'exploiter au maximum les concepts étudiés ainsi que des evenements
+pour interagir avec la vue.
 
 \subsection{Présentation du framework}
 
+Le framework définit les types de base ainsi que leurs interactions que chaque
+nouveau jeu peut composer.
+Nous avons une interface générique plateau \texttt{Board<T extends Tile>} qui
+manipule des pièces posables (interface \texttt{Tile<S extends Side>}). Des
+méthodes très générales permettent de déposer des pièces sur le plateau,
+récupérer une pièce à une coordonnée précise (en introduisant une classe
+\texttt{Coordinate} qui permet de manipuler des coordonnées, en les
+additionnant, etc... et des exceptions si l'on donne une coordonnée en dehors du
+plateau que l'on capture à un plus haut niveau d'abstraction, dans la boucle
+des jeux) ou encore une méthode de parcours en largeur de graphe
+\texttt{hasPathFromTo(Coordinate start, Function<T, Boolean> isGoal)} qui
+parcours les pièces adjacentes jusqu'à une pièce vérifiant une certaine
+condition \texttt{isGoal} utilisée par le jeu du saboteur.
+
+Ces interfaces sont accompagnées d'une implémentation par défaut, par exemple
+l'interface tuile \texttt{Tile<S extends Side>} possède une méthode très
+générale \texttt{boolean fitsWith(Tile<S> t, Direction d, SidesMatch<S>
+  matchRule)} qui retourne vrai si deux tuiles s'assemblent en fonction d'une
+règle définie par l'interface fonctionnelle \texttt{SidesMatch<S extends Side>} qui vérifie si deux côtés
+peuvent s'assembler:
+
+\begin{minted}{java}
+@Override
+public boolean fitsWith(Tile<S> t, Direction d, SidesMatch<S> matchRule) {
+    return (t != null) && matchRule.apply(getSide(d), t.getSide(d.getOppositeDirection()));
+}
+\end{minted}
+
+Nous avons également définit les types \texttt{Deck<C>} et \texttt{Hand<C>} pour
+la pioche et la main d'un joueur avec une implémentation par défaut de leurs
+méthodes comme par exemple \texttt{void distributeCards(List<? extends Hand<C>>
+  hands) throws EmptyDeckException} pour distribuer des cartes à plusieurs mains
+ou encore \texttt{void deal(Hand<C> hand) throws EmptyDeckException} pour
+piocher une carte depuis le haut de la pile de la pioche.
+
+Nous avons fait en grand usage de la généricité en ajoutant des bornes pour les
+types pour pouvoir s'assurer que l'on ne puisse pas déposer n'importe quel types
+d'objets sur une plateau par exemple. On implémente l'interface \texttt{Board}
+pour le jeu du saboteur comme suit : \texttt{class SaboteurBoard extends BoardImpl<SaboteurTile>}. De cette façon l'implémentation garanti que le
+plateau ne peut contenir qu'un seul type d'objet, les tuiles du saboteur et pas
+des tuiles des dominos ou autre, ce qui permet d'éviter ce type de bugs qui sont
+levés à la compilation et non à l'exécution.
+
+Ainsi que quelques types énumérés pour les directions et les coordonnées
+relatives selon la direction (cf. package \texttt{common.enums}) pour un code
+plus robuste.
 
 %%Ajouter diagramme de classes du framework
 \subsection{Dominos simples et avec gommettes}
 Nous avons commencé par implémenter le jeu des dominos simples à l'aide d'une
 \texttt{ArrayList}, les pièces étaient ajoutées aux extrémitées de la liste. Une
-méthode vérifiait si une pièce pouvait se poser à gauche ou à droite d'une autre
+méthode vérifie si une pièce peut se poser à gauche ou à droite d'une autre
 pièce. Lorsque nous avons implémenté le placement des pièces pour le jeu du
 saboteur, nous avons fait évoluer notre modèle en introduisant les types \texttt{Tile<S
 extends Side>} pour les pièces que l'on pose sur un plateau et \texttt{Side}
 pour les côtés des pièces, ce dernier type servant à regrouper les variables qui
-définissent un côté. Plusieurs évolutions successives de notre framework ont
-finalement cassé le code qui devait être repris.
+définissent un côté. 
 
 Nous avons en revanche constaté que le jeu des dominos simples peut être vu
 comme un sous-ensemble des dominos gommettes, dans le sens où les dominos
 simples s'assemblent pour former une seule chaîne contrairement aux dominos
 gommettes avec lesquels on peut en plus former des branches.
 
-C'est pouquoi nous avons implémenté le jeu des dominos simples et dominos
+C'est pouquoi nous avons en plus implémenté le jeu des dominos simples et dominos
 gommettes en étendant une classe plus générale qui permet de placer côte à côte
 des pièces rectangulaires sur un plateau si leurs côtés se correspondent.
+Nous trouvons cette petite expérimentation intéressante.
 
 %
 
@@ -103,10 +149,7 @@ simplifiée.
 \subsection{Pattern MVC}
 
 L'architecture modèle-vue-contrôleur à été implémentée pour les dominos simples
-et le jeu du saboteur.C'est cette architecture qui nous a paru la plus judicieuse et la plus efficace,
-comme vue en cours puisqu'il permet une implementation plus simple,séparée et épurée.
-Le code est d'autant plus compréhensible et lisible.
-
+et le jeu du saboteur. Pour cela nous avons introduit une 
 \section{Difficultés rencontrées}
 
 Lors du développement nous avons réécrit à plusieurs reprises certaines
@@ -171,11 +214,10 @@ retrouvaient dans les jeux à implémenter, ce qui nous a conduit à introduire 
 nouveaux types qui ont grandement facilité le développement des jeux.
 
 Nous avons également apprécié la liberté qui nous a été donnée au cours de ce projet
-quant aux choix de l'implémentation, les consignes laissant parfois beaucoup de choix.
+quant aux choix de l'implémentation.
 
-Nous avons pris ce projet très à coeur et y avons consacré de nombreux jours et malgrè que 
-nous savons qu'il est criticable et imparfait en certains points, nous sommes fier de 
-vous presenter le fruit de notre travail.
+Le projet était long, la modélisation très intéressante, cependant par manque de
+temps nous n'avons pas pu consacrer autant de temps que nous aurions voulu aux interfaces graphiques.
 
 
 \end{document}

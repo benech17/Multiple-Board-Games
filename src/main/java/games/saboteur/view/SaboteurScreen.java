@@ -214,12 +214,12 @@ public class SaboteurScreen extends JFrame implements SaboteurView {
         myPanel.add(yField);
 
         String[] res = JOptionPane.showConfirmDialog(null,myPanel, "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
-        if(res[0]==null || res[1]==null || res[0].length()=0 || res[1].length()=0){
+        if(res[0]==null || res[1]==null || res[0].length()==0 || res[1].length()==0){
             display("Cannot affect null value");
-            return display2Inputs();
+            return display2Inputs("");
         }else{
-            res[0]=xField.getText());
-            res[1]=yField.getText());
+            res[0]=xField.getText();
+            res[1]=yField.getText();
             System.out.println(res);
         }
     }
@@ -231,7 +231,7 @@ public class SaboteurScreen extends JFrame implements SaboteurView {
             return s;
         }else{
             display("Cannot affect null value, please enter a correct input");
-            return displayChoice(message,pz,titre);
+            return displayChoice(message,"0",pz,titre);
         }
     }
 
@@ -255,7 +255,7 @@ public class SaboteurScreen extends JFrame implements SaboteurView {
        display("Please enter a valid integer (either 0 or 1)");
     }
 
-    String[] handChoice={0,1,2,3,4}; //constant
+    String[] handChoice={"0","1","2","3","4"}; //constant
 
     @Override
     public int selectCardToPutToTrash(){
@@ -274,7 +274,6 @@ public class SaboteurScreen extends JFrame implements SaboteurView {
         return Integer.parseInt(res);
     }
 
-    @Override
    // public Coordinate selectCoordinate(){
       //  String res = display2Inputs()
     //}
