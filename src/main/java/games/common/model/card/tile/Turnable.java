@@ -4,9 +4,8 @@ public interface Turnable {
 
     /**
      * Rotates the sides of the card
-     * TODO: be more explicit, what is distance?
-     * @param distance
+     * @param nbRotations number of rotation to perform
      */
-    void rotate(int distance);
+    void rotate(int nbRotations);
 
 }

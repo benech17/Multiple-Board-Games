@@ -67,9 +67,9 @@ public abstract class TileImpl<S extends Side> implements Tile<S>, Turnable {
     }
 
     @Override
-    public void rotate(int distance) {
+    public void rotate(int nbRotations) {
         ArrayList<S> sideList = new ArrayList<>(sides.values());
-        Collections.rotate(sideList, distance);
+        Collections.rotate(sideList, nbRotations);
         Iterator<S> iterator = sideList.iterator();
         for (Direction d : sides.keySet())
             sides.put(d, iterator.next());

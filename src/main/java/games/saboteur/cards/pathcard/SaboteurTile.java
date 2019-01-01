@@ -12,6 +12,7 @@ public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard
     protected boolean hidden = false;
     private final boolean hasPath;
     private final PathCard type;
+    private boolean flipped;
 
     public SaboteurTile(PathCard pathCard) {
         sides.put(Direction.TOP, new SaboteurSide(pathCard.getPaths()[0]));
@@ -21,6 +22,7 @@ public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard
         this.hasPath = pathCard.getPaths()[4];
         name = "Path card with " + (hasPath ? "" : "un") + "connected sides : " + sides;
         type = pathCard;
+        flipped = false;
     }
 
     public SaboteurTile(PathCard pathCard, boolean hidden) {
@@ -41,6 +43,17 @@ public class SaboteurTile extends TileImpl<SaboteurSide> implements SaboteurCard
             hidden = false;
         else
             throw new PathCardException.CantRevealHiddenCardException();
+    }
+
+    @Override
+    public void rotate(int nbRotations) {
+        if (nbRotations % 2 == 1)
+            flipped = !flipped;
+        super.rotate(2 * nbRotations);
+    }
+
+    public void rotate() {
+        rotate(1);
     }
 
     /*public boolean treasureReached() {
