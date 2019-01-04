@@ -8,7 +8,7 @@ import java.io.IOException;
 public class Bouton extends JButton {
     private String name;
     private Image img;
-    static int m, n, i, k = 0;
+    // inutile static int m, n, i, k = 0;
 
     public Bouton(String str, String file) {
         super(str);
@@ -18,6 +18,8 @@ public class Bouton extends JButton {
 
         try {
             this.addActionListener(event -> {  //test pour recuperer les donnees du click
+            //et voir comment pouvoir recuperer l'indice du composant clicker dans le background
+            //manque de temps.... 
                 System.out.println(event.toString());System.out.println();
                 System.out.println(event.getActionCommand());System.out.println();
                 System.out.println(event.getSource());
@@ -100,6 +102,7 @@ public class Bouton extends JButton {
         g2d.drawString(this.name, this.getWidth() / 2 - (this.getWidth() / 8) - 40, (this.getHeight() / 3));
     }
 
+    //methodes utiles pour les box pour le panel infos joueurs
     public void addToBox(Box box, boolean vertical,int w,int h) {
         Box box1;
         if (vertical)
