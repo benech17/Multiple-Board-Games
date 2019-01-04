@@ -76,12 +76,11 @@ public class ChoicePlayers extends JFrame {
             start.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    System.out.println("nbPlayers : "+nbPlayers);
+                    // test : System.out.println("nbPlayers : "+nbPlayers);
                     SaboteurScreen s=new SaboteurScreen();
                     content.setVisible(false);
 
-
-                    //getContentPane().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// tout mettre dans un panel ,
+                    //penser a tout mettre dans des panels pour eviter les non fermetures
                 }
             });
 
