@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class JPanelUp extends JPanel {
+    //JPanel with an image background 
     private BufferedImage img;
 
     public JPanelUp(String file) {
